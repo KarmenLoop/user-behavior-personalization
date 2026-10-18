@@ -1,0 +1,6 @@
+interface:
+  display_name: "User Behavior Personalization"
+  short_description: "Learn preferences through evidence and daily reflection"
+  default_prompt: "Use $user-behavior-personalization to review authorized feedback and update the current user's communication guide."
+policy:
+  allow_implicit_invocation: true

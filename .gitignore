@@ -1,0 +1,18 @@
+# Private memory must live outside this checkout. These patterns are a fallback.
+/profiles/
+/private-memory/
+/user-data/
+/memory/
+**/reflections/
+**/versions/
+**/state.json
+!assets/templates/state.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
+__pycache__/
+*.py[cod]
+/.validation/

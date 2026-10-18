@@ -1,0 +1,27 @@
+name: "Bug report"
+description: "Report a reproducible issue using synthetic data."
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include real profiles, private conversations, credentials, or vulnerability details. Use SECURITY.md for private reporting."
+  - type: input
+    id: version
+    attributes:
+      label: "Package version and host"
+      description: "Include the package revision and agent host version."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: "Synthetic reproduction"
+      description: "Provide fictional inputs and the enabled host capabilities."
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: "Expected and actual behavior"
+    validations:
+      required: true

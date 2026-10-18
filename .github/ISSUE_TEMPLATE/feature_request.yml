@@ -1,0 +1,18 @@
+name: "Feature request"
+description: "Suggest a focused improvement to personalization behavior."
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem and use case"
+      description: "Use fictional examples without private user data."
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: "Proposed observable behavior"
+      description: "Explain how someone could verify the improvement."
+    validations:
+      required: true
