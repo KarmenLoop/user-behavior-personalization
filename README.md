@@ -1,10 +1,10 @@
 # User Behavior Personalization
 
-**An evolving personalization skill for agents that learn how to work with each user.**
+This skill helps an agent remember how you like to work. It keeps preferences in a small guide you can inspect and correct, with a source for each change.
+
+For example, a request for a short answer on one task should not make every future answer short. An explicit correction should replace an old preference. The skill describes how to handle both.
 
 Built by [KarmenLoop](https://github.com/KarmenLoop).
-
-Turn authorized conversations into evidence-backed preferences, daily reflections, and a reusable `USER_SKILL.md`. Help an agent communicate more naturally, respect corrections, and adapt its working style over time.
 
 [Download](https://github.com/KarmenLoop/user-behavior-personalization/releases) · [Quick Start](docs/quickstart.md) · [Documentation](#documentation) · [Contributing](CONTRIBUTING.md) · [License](LICENSE) · [Contact](#contact)
 
@@ -14,11 +14,9 @@ Turn authorized conversations into evidence-backed preferences, daily reflection
 
 ## Overview
 
-An agent can remember a conversation and still misunderstand how its user wants to work. A request for a short answer today can become an incorrect permanent preference. A preference established months ago can survive an explicit correction. Repeatedly loading full chat histories can consume the context window without improving the next response.
+The agent keeps a per-user `USER_SKILL.md` and reads the relevant preferences before responding. Explicit requests are kept separate from tentative observations, and task-specific instructions stay scoped to the task.
 
-User Behavior Personalization maintains a compact, revisable guide to the current user. It separates explicit preferences from tentative observations, keeps task-specific requests scoped, and connects each change to its source. The next conversation reads the current guide and applies only the relevant rules.
-
-Here, **self-evolution means improving persisted preferences and observable agent behavior through feedback**. Model weights, system instructions, execution permissions, and tool access are outside this skill's update scope.
+The guide can change as you give feedback. Those changes update saved preferences, not model weights, system instructions, tool permissions, or account access. The host needs to provide storage and the hooks that load and update the guide.
 
 ## Capabilities
 
