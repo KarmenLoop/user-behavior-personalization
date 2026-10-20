@@ -82,6 +82,16 @@ cd user-behavior-personalization
 
 The checkout must contain `SKILL.md`, `references/`, and `assets/` together.
 
+### Install a portable copy
+
+Copy the validated package to a new directory selected for your agent host:
+
+```sh
+python3 scripts/install_skill.py --destination ../installed-skills/user-behavior-personalization
+```
+
+The installer preserves the blank templates and refuses an existing destination. It does not create a private user profile, schedule reflection, or change host permissions. Run `python3 -B -m unittest discover -s tests -v` to check the installation behavior locally.
+
 ### 2. Load the Skill
 
 Use your agent host's skill installation or loading mechanism. When it expects a directory named after the skill, use `user-behavior-personalization` as that directory name.
