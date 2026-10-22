@@ -1,0 +1,13 @@
+{
+  "version": "0.1.1",
+  "documents": [
+    "README.md",
+    "README.zh-CN.md",
+    "docs/tutorial.en.md",
+    "docs/tutorial.zh-CN.md"
+  ],
+  "media_files": {
+    "docs/images/workflow-v0.1.1.svg": "4a3f2b45afd64cee03e2f019ba7122c02586f5829b430f04a4c2b0bfb902236e"
+  },
+  "source_files": {}
+}
