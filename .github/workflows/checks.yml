@@ -23,3 +23,4 @@ jobs:
           python-version: '3.12'
       - run: python -B scripts/check_package.py
       - run: python -B -m unittest discover -s tests -v
+      - run: python -B scripts/check_publication.py

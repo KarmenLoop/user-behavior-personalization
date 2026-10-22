@@ -67,7 +67,7 @@ def check():
         except (UnicodeError, OSError) as exc:
             errors.append(f"Cannot read release text {relative}: {exc}")
             continue
-        if CJK.search(content):
+        if path.suffix not in {".md", ".svg"} and CJK.search(content):
             errors.append(f"CJK text found in English-only package: {relative}")
         if path.name == "state.json" and relative.as_posix() != "assets/templates/state.json":
             errors.append(f"Unexpected live state file: {relative}")

@@ -6,7 +6,7 @@ Thank you for improving User Behavior Personalization. Focused changes to instru
 
 Search existing issues and read the relevant workflow. For a substantial change, describe the concrete behavior and expected result in an issue before implementing a broad redesign. Small corrections can go directly to a pull request.
 
-Use English for repository documentation, templates, issue reports, and pull request descriptions. Examples should be synthetic and clearly labeled.
+Provide matching English and Simplified Chinese entry pages and user guides. Keep code, templates, issue reports, and pull request descriptions in English. Examples should be synthetic and clearly labeled.
 
 ## Scope
 
@@ -40,3 +40,7 @@ No separate contributor license agreement is required by this package.
 ## Community Conduct
 
 Keep discussion respectful, specific, and relevant to the work. Critique behavior and evidence rather than people. Do not publish another person's private information. Maintainers may moderate content that violates these expectations.
+
+## Documentation and release changes
+
+Keep the English and Simplified Chinese entry pages and guides aligned. Explain the reader’s actual task with project-specific examples. Use concrete English commit subjects. New ordinary filenames and versioned release assets use lowercase kebab-case without spaces; conventional README, LICENSE, SKILL and metadata names remain unchanged. Before release, compare each package, version label, command, and current image with the documented behavior. Label diagrams, synthetic data, historical evidence, and unverified integrations accurately.
