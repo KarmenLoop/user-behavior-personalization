@@ -1,37 +1,40 @@
-# User Behavior Personalization · 用户偏好记录: 使用指南
+# User Behavior Personalization v0.2.0 教程
 
-[English](tutorial.en.md) | 简体中文 · [项目首页](../README.zh-CN.md)
+[English](tutorial.en.md) · [中文](tutorial.zh-CN.md)
 
-本指南对应 **v0.1.1**.
+## 安装并绑定用户
 
-## 1. 下载与校验
+解压当前版本，使用 Python 3.11+，将私有数据目录放在 Git 之外。由本地账号所有者把目标用户映射为稳定的 `--subject` ID；本版本不自动识别 ChatGPT/Cursor 账号。不要让会话自由选择其他用户，也不要向不可信的本地用户开放共享数据目录。
 
-从发行页下载 [`user-behavior-personalization-v0.1.1.zip`](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.1.1)，同时保留校验文件或 manifest。比较完整 SHA-256 后再解压：macOS 使用 shasum -a 256，Linux 使用 sha256sum，PowerShell 使用 Get-FileHash -Algorithm SHA256。校验只能证明字节一致，预期哈希本身也需要可信来源。
+```sh
+python /path/to/scripts/host.py --root /private/profiles --workspace /path/to/project --subject owner --install-host codex install
+python /path/to/scripts/host.py --root /private/profiles --workspace /path/to/project --subject owner --install-host cursor install
+```
 
-## 2. 安装与加载
+重载并批准特定服务，确认发现五个档案工具。用户标识在服务器配置中绑定，不在工具参数里传递。
 
-解压 ZIP，在顶层目录运行 python3 scripts/install_skill.py --destination ../installed-skills/user-behavior-personalization。目标必须是源目录外的新目录，再通过宿主支持的加载方式选择它。
+## 保存纠正并核对
 
-刷新宿主发现或开启新会话，明确读取已安装的 SKILL.md，并核对上面版本。不需要为技能另开模型账号；宿主使用自己的模型、工具与权限。
+先使用任务上下文调用 `profile_read`。用返回的当前版本调用 `profile_correct`。规则需要 `id`、`statement`、`scope`（`*` 表示所有上下文）、新 `source_id`、`source_summary` 和 `kind`（`explicit` 或 `correction`）。可选 `expires_at` 必须带时区。仅保存用户授权的偏好；适配器不会从文本推定同意。
 
-## 3. 配置与第一项任务
+在另一宿主用匹配上下文读取，应得到同一规则；无关上下文不返回它，其他绑定用户读取自己的档案。纠正规则时保留 ID、使用真正的新来源 ID 和当前版本。旧版本写入会被拒绝，重复来源会去重。
 
-由宿主明确 PROFILE_ROOT、USER_ID、USER_TIMEZONE、MEMORY_ENABLED、CONVERSATION_SOURCE、REFLECTION_TRIGGER。这些是集成约定字段，不是附带程序会读取的环境变量。使用私有用户目录里的空白模板开始。
+无需模型也可用 JSON 参数文件调用：`python /path/to/scripts/host.py --root /private/profiles --workspace /path/to/project --subject owner call profile_read --input request.json`。
 
-使用含明确更正的合成对话，让宿主提出对应范围的偏好并展示来源，只通过现有且已授权的操作保存，再从已保存记录验证后续读取。
+## 在新任务前加载偏好
 
-## 4. 进一步实践
+将任务写入私有提示文件，运行：
 
-检查一次冲突更正，再通过真实宿主测试导出或删除。仓库检查确保模板空白及包内容规范，不代表已通过真实用户或跨设备全链路认证。
+```sh
+python /path/to/scripts/run_host.py --root /private/profiles --subject owner --context writing --host codex --workspace /path/to/project --prompt /private/task.txt
+```
 
-保留当前版本、真实命令、退出码、结果与未验证限制。使用合成数据做首次检查。
+Cursor CLI 使用 `--host cursor`。每个宿主仍需自己的登录与模型权限。包装入口先读取当前适用偏好，再启动宿主，把使用版本、规则 ID、实际退出码及输出保存到 `host-runs`。它不创建周期任务，也不安装全局生命周期钩子。超时时会终止它所拥有的进程组，重试前需检查外部影响。
 
-## 5. 排错、升级与移除
+## 暂停、导出与遗忘
 
-宿主找不到技能时，先检查配置的技能根目录和 SKILL.md 可读性。哈希不一致时停止使用该包并重新核对下载；不要跳过错误。
+用当前版本调用 `profile_pause`。暂停时普通读取不返回偏好，纠正需要先恢复；`profile_export` 仍可用。`profile_forget` 移除指定规则及其历史内容、删除适配器控制的导出，仅保留防重放所需来源哈希。外部导出、备份与物理存储残留是独立副本；SQLite 启用 secure-delete，但不承诺 SSD 物理抹除。
 
-升级前完成当前写入，分别备份技能与私人任务数据。将新版本解压到新目录，核对后再切换；回退时恢复旧技能，保留较新的用户数据与证据。卸载只移除对应技能目录或发现入口；如曾另行注册调度，应在真实宿主中取消并确认。
+不要将私有存储加入发布包。备份前停止写入。读取失败时包装入口会失败，不会声称已应用偏好。
 
-## 6. 许可证
-
-[Apache-2.0](../LICENSE). 此处提供简明用户指南；具体使用和再分发条件以许可证原文为准。
+验收使用了真实 Codex 回合并保存收条。Cursor 工具发现已通过，模型回合及 Windows/Linux 原生使用尚未验收。反思定时器、自动历史采集和身份提供方仍需明确的宿主接入，不能只靠说明文档宣称可用。

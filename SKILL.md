@@ -6,6 +6,11 @@ license: Apache-2.0
 
 # User Behavior Personalization
 
+## Executable local adapter
+
+Read [the current host tutorial](docs/tutorial.en.md) to configure the bundled Python 3.11+ CLI/MCP adapter. Verify real calls and saved state before claiming a connection. The tutorial distinguishes implemented local operations from scheduling, identity providers, and remote execution that require an authorized host.
+
+
 ## Purpose
 
 Improve how the agent collaborates with the current user through a cycle of observation, reflection, profile updates, application, and real feedback.

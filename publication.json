@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.2.0",
   "documents": [
     "README.md",
     "README.zh-CN.md",
@@ -7,7 +7,11 @@
     "docs/tutorial.zh-CN.md"
   ],
   "media_files": {
-    "docs/images/workflow-v0.1.1.svg": "4a3f2b45afd64cee03e2f019ba7122c02586f5829b430f04a4c2b0bfb902236e"
+    "docs/images/workflow-v0.2.0.svg": "e80c958e605a2b652c409d470d26bd6d5ce682af2dee0766d15ed82cf20e75b5"
   },
-  "source_files": {}
+  "source_files": {
+    "scripts/host_support.py": "9930321db57fb3427bd98e65d44a920bc8634046b125e7fc0f117ccfb7c1a36e",
+    "scripts/host.py": "65bef078caa374d5af864b446f134a6dcc29452ee4156e703195186d335dbcd2",
+    "scripts/run_host.py": "8c9b9d02dbfc6da213067c244f2dc11c70d9c67840d9b8172127578be130facf"
+  }
 }

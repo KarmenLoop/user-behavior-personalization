@@ -1,37 +1,15 @@
 # User Behavior Personalization
 
-English | [简体中文](README.zh-CN.md)
+[English](README.md) · [中文](README.zh-CN.md) · **v0.2.0**
 
-Keep useful preferences in a profile the user can inspect and correct. This skill describes how an agent should turn explicit feedback into scoped guidance without quietly treating a guess as a personal fact.
+Save an explicit preference once, correct it when it changes, and load the relevant version before the next task. The Python adapter provides subject-bound profiles, transactional corrections, pause/export/forget controls, and a wrapper that reads the profile before starting Codex or Cursor.
 
-[Download v0.1.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.1.1) · [Guide](docs/tutorial.en.md) · [Issues](https://github.com/KarmenLoop/user-behavior-personalization/issues)
+![Profile workflow](docs/images/workflow-v0.2.0.svg)
 
-## What it does
+Each rule has a source, scope, revision, and optional expiry. A forgotten source cannot recreate a deleted rule by replay. Separate subjects use separate records; the subject is bound in local host configuration, not chosen by a model's tool arguments.
 
-An instruction package with blank templates and synthetic examples. The host supplies verified identity, private storage, loading, deletion/export, and any scheduling or synchronization.
+Download [v0.2.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.2.0), use Python 3.11+, and follow the [tutorial](docs/tutorial.en.md). No model-training step or hosted account is needed to store profiles. Calling a CLI model still requires that host's own access.
 
-![User Behavior Personalization workflow illustration](docs/images/workflow-v0.1.1.svg)
+A live Codex run loaded the saved profile before invocation, called the tools, and followed its output preference. Cursor discovered all profile tools; its model conversation was blocked by local login/usage limits. Automatic chat identity mapping, daily reflection scheduling, ingestion of conversation history, and guaranteed per-turn hooks in already-running desktop chats are not supplied. Use the wrapper when profile loading must happen before a new CLI invocation.
 
-*Workflow illustration for v0.1.1; not an application screenshot or runtime acceptance.*
-
-## Start here
-
-Extract the ZIP, then run python3 scripts/install_skill.py --destination ../installed-skills/user-behavior-personalization from its top-level directory. The destination must be new and outside the source. Select that directory with your host’s supported loader.
-
-Have the host establish PROFILE_ROOT, USER_ID, USER_TIMEZONE, MEMORY_ENABLED, CONVERSATION_SOURCE, and REFLECTION_TRIGGER. These are integration contract fields, not environment variables consumed by bundled code. Start with blank templates in a private user directory.
-
-## A first useful task
-
-Use a synthetic conversation containing an explicit correction. Ask the host to propose the corresponding scoped preference, show its source, and save it only through available authorized operations. Verify later recall from that saved record.
-
-Review a conflicting correction and test export or deletion through the real host. Repository checks preserve blank templates and package hygiene; no end-to-end live-user or device-continuity certification is claimed.
-
-## Questions
-
-**Will installing it remember every conversation?** No. The host must explicitly provide authorized conversations, storage, and loading. The package starts no service and registers no timer.
-
-## Documentation and license
-
-[Download, setup, practice, and updates](docs/tutorial.en.md) · [LICENSE](LICENSE)
-
-Apache-2.0. The original license terms govern use and redistribution; retain the included legal files. [KarmenLoop](https://karmenloop.com).
+[Apache-2.0](LICENSE). [Privacy controls](docs/privacy-and-memory-control.md). [KarmenLoop](https://karmenloop.com).
