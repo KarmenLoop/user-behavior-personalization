@@ -1,37 +1,15 @@
-# User Behavior Personalization · 用户偏好记录
+# User Behavior Personalization
 
-[English](README.md) | 简体中文
+[English](README.md) · [中文](README.zh-CN.md) · **v0.2.0**
 
-把有用偏好写进用户能检查和更正的资料中。这个技能规定如何将明确反馈整理为有范围的使用指导，避免把猜测悄悄记成个人事实。
+明确偏好保存一次，变化时及时纠正，在下一次任务前读取适用版本。Python 适配器提供绑定用户的档案、事务式纠正、暂停/导出/遗忘控制，以及在启动 Codex、Cursor 前读取档案的包装入口。
 
-[下载 v0.1.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.1.1) · [教程](docs/tutorial.zh-CN.md) · [反馈问题](https://github.com/KarmenLoop/user-behavior-personalization/issues)
+![偏好档案流程](docs/images/workflow-v0.2.0.svg)
 
-## 用途与范围
+每条规则保留来源、适用范围、版本和可选有效期。已遗忘来源不能通过重放恢复删除规则。不同用户使用不同记录；用户标识来自本地宿主配置，不能由模型工具参数切换。
 
-包内是技能说明、空白模板和合成样例。身份核实、私有存储、加载、删除导出，以及调度和同步均由宿主提供。
+下载 [v0.2.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.2.0)，使用 Python 3.11+，按[中文教程](docs/tutorial.zh-CN.md)配置。保存档案无需训练模型或托管账号；调用 CLI 模型仍需宿主自己的权限。
 
-![用户偏好记录流程示意](docs/images/workflow-v0.1.1.svg)
+真实 Codex 回合已在启动前加载偏好、调用工具并按偏好输出。Cursor 已发现全部档案工具，但模型回合受本机登录与额度限制。自动聊天账号映射、每日反思调度、会话历史采集以及已运行桌面聊天的逐轮钩子均未内置；需要保证新 CLI 调用前加载档案时，应使用包装入口。
 
-*v0.1.1 的流程示意，非应用截图或运行验收。*
-
-## 开始使用
-
-解压 ZIP，在顶层目录运行 python3 scripts/install_skill.py --destination ../installed-skills/user-behavior-personalization。目标必须是源目录外的新目录，再通过宿主支持的加载方式选择它。
-
-由宿主明确 PROFILE_ROOT、USER_ID、USER_TIMEZONE、MEMORY_ENABLED、CONVERSATION_SOURCE、REFLECTION_TRIGGER。这些是集成约定字段，不是附带程序会读取的环境变量。使用私有用户目录里的空白模板开始。
-
-## 第一次有用的任务
-
-使用含明确更正的合成对话，让宿主提出对应范围的偏好并展示来源，只通过现有且已授权的操作保存，再从已保存记录验证后续读取。
-
-检查一次冲突更正，再通过真实宿主测试导出或删除。仓库检查确保模板空白及包内容规范，不代表已通过真实用户或跨设备全链路认证。
-
-## 常见问题
-
-**装好后会记住所有对话吗？** 不会。宿主必须明确提供已授权的对话、存储和加载。本包不会启动服务或注册定时器。
-
-## 文档与许可证
-
-[下载到实践的使用指南](docs/tutorial.zh-CN.md) · [LICENSE](LICENSE)
-
-Apache-2.0. 许可证条件以原文为准，再分发时保留包内法律文件。 [KarmenLoop](https://karmenloop.com).
+[Apache-2.0](LICENSE) · [隐私控制](docs/privacy-and-memory-control.md) · [KarmenLoop](https://karmenloop.com)

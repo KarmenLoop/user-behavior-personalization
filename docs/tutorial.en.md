@@ -1,37 +1,40 @@
-# User Behavior Personalization: user guide
+# User Behavior Personalization v0.2.0 tutorial
 
-English | [简体中文](tutorial.zh-CN.md) · [Project](../README.md)
+[English](tutorial.en.md) · [中文](tutorial.zh-CN.md)
 
-This guide matches **v0.1.1**.
+## Install and bind a subject
 
-## 1. Download and verify
+Extract the release and use Python 3.11+. Choose a private data directory outside Git. A local account owner must map the intended person to a stable `--subject` ID; this release does not discover ChatGPT/Cursor account identities automatically. Do not let a conversation select another subject or expose the shared data root to an untrusted local user.
 
-From the release, download [`user-behavior-personalization-v0.1.1.zip`](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.1.1) and its checksum file or manifest. Compare the complete SHA-256 before extracting: use shasum -a 256 on macOS, sha256sum on Linux, or Get-FileHash -Algorithm SHA256 in PowerShell. Byte consistency relies on obtaining the expected hash from a trusted source.
+```sh
+python /path/to/scripts/host.py --root /private/profiles --workspace /path/to/project --subject owner --install-host codex install
+python /path/to/scripts/host.py --root /private/profiles --workspace /path/to/project --subject owner --install-host cursor install
+```
 
-## 2. Install and load
+Reload and approve this specific server. Verify the five profile tools. The server entry binds its subject outside tool arguments.
 
-Extract the ZIP, then run python3 scripts/install_skill.py --destination ../installed-skills/user-behavior-personalization from its top-level directory. The destination must be new and outside the source. Select that directory with your host’s supported loader.
+## Save a correction and verify it
 
-Refresh host discovery or open a new session, explicitly read the installed SKILL.md, and check the version above. The skill needs no separate model account; the host supplies its own model, tools, and permissions.
+Call `profile_read` with the task context. Use its current revision in `profile_correct`. A rule needs `id`, `statement`, `scope` (`*` for all contexts), a new `source_id`, `source_summary`, and `kind` (`explicit` or `correction`). Optional `expires_at` must include a timezone. Save only preferences the user authorized; the adapter does not infer consent from text.
 
-## 3. Configure and try one task
+Read in the other configured host using the matching context. An unrelated context returns no rule. A different bound subject returns its own profile. To correct a rule, keep its ID, provide a genuinely new source ID, and use the current revision. Stale writes are rejected; repeating an unchanged source is deduplicated.
 
-Have the host establish PROFILE_ROOT, USER_ID, USER_TIMEZONE, MEMORY_ENABLED, CONVERSATION_SOURCE, and REFLECTION_TRIGGER. These are integration contract fields, not environment variables consumed by bundled code. Start with blank templates in a private user directory.
+For a model-free call, pass the same tool arguments in a JSON file to `python /path/to/scripts/host.py --root /private/profiles --workspace /path/to/project --subject owner call profile_read --input request.json`.
 
-Use a synthetic conversation containing an explicit correction. Ask the host to propose the corresponding scoped preference, show its source, and save it only through available authorized operations. Verify later recall from that saved record.
+## Load before a new host task
 
-## 4. Develop a repeatable workflow
+Write the task into a private prompt file. Run:
 
-Review a conflicting correction and test export or deletion through the real host. Repository checks preserve blank templates and package hygiene; no end-to-end live-user or device-continuity certification is claimed.
+```sh
+python /path/to/scripts/run_host.py --root /private/profiles --subject owner --context writing --host codex --workspace /path/to/project --prompt /private/task.txt
+```
 
-Keep the version, actual command, exit code, resulting files, and unverified limits together. Use synthetic data for the first check.
+Use `--host cursor` for Cursor CLI. Each host needs its own login and model access. The wrapper loads the current relevant profile before invocation and saves the used revision, rule IDs, actual exit, and host output in `host-runs`. It creates no recurring task and installs no global lifecycle hook. A timeout kills the process group it owns; inspect external effects before a retry.
 
-## 5. Troubleshoot, update, and remove
+## Pause, export, and forget
 
-If the host cannot find the skill, check its configured discovery root and SKILL.md readability. A checksum mismatch needs a fresh verified download; do not skip it.
+Use the current revision in `profile_pause`. Paused recall returns no ordinary preferences; correction is blocked until resume. `profile_export` remains available. `profile_forget` removes the chosen rule and its retained historical content, deletes the controlled export, and keeps only source hashes needed to suppress replay. External exports, backups, and physical storage remnants are separate copies. Secure-delete mode is enabled for SQLite, but no SSD-erasure guarantee is made.
 
-Finish active writes and back up the skill and private task data separately. Extract updates into a new directory and verify before switching. For rollback, restore the older skill while retaining newer user records and evidence. Uninstall only its exact skill directory or discovery entry; separately registered schedules must be cancelled and confirmed in their host.
+Keep private stores out of release archives. Stop writers before backing up. If a profile cannot be read, the wrapper fails instead of silently pretending it applied preferences.
 
-## 6. License
-
-[Apache-2.0](../LICENSE). This is concise user guidance; consult the original license for use and redistribution terms.
+The acceptance exercise used an actual Codex turn and saved receipts. Cursor tool discovery passed; its model turn and native Windows/Linux behavior remain unverified. Reflection timers, automatic conversation ingestion, and identity providers need an explicit host integration rather than documentation alone.
