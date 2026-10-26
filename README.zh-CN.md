@@ -14,10 +14,6 @@ User Behavior Personalization 是一套 **Agent Skill**，外加精简的 **Pyth
 
 由 [KarmenLoop](https://github.com/KarmenLoop) / [KARMENLOOP](https://karmenloop.com) 维护。当前版本：**[v0.2.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.2.0)**。许可：**Apache-2.0**。
 
-<!-- 有真实截图后再补：
-![本地宿主中五个 profile_* 工具](docs/images/hero-mcp-tools.png)
-![纠正 → 限定检索 → 遗忘演示](docs/images/profile-demo.gif)
--->
 
 ![v0.2.0 偏好档案流程总览](docs/images/workflow-v0.2.0.svg)
 

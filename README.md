@@ -14,10 +14,6 @@ User Behavior Personalization is an **agent skill** plus a small **Python 3.11+ 
 
 Built and maintained by [KarmenLoop](https://github.com/KarmenLoop) / [KARMENLOOP](https://karmenloop.com). Current release: **[v0.2.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.2.0)**. License: **Apache-2.0**.
 
-<!-- Optional hero assets — add when you have real screenshots:
-![Local host showing the five profile_* MCP tools](docs/images/hero-mcp-tools.png)
-![Correction → scoped recall → forget flow](docs/images/profile-demo.gif)
--->
 
 ![v0.2.0 profile workflow overview](docs/images/workflow-v0.2.0.svg)
 
