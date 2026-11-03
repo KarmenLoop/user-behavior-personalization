@@ -5,6 +5,8 @@ import json
 
 from host_support import Database, need, identifier, content, stamp, atomic, schema, string, integer, main, validate
 from learning import DIMENSIONS, STATEMENTS, active, blank_profile, check_source, context_key, digest, insights, matching_rules, normalize_event, purge, timestamp, typed_value, upgrade
+from conversation_store import import_conversation, review_proposal, portrait, model_context, import_model_proposals
+from forecast import forecast
 
 RULE = schema({
     'id': string(80), 'statement': string(1000), 'scope': string(200),
@@ -17,6 +19,15 @@ EVENT = schema({
     'context': string(200), 'dimension': {'type': 'string', 'enum': list(DIMENSIONS)},
     'value': string(80), 'signal': {'type': 'string', 'enum': ['positive', 'negative']}, 'occurred_at': string(50),
 }, ['id', 'source_id', 'session_id', 'context', 'dimension', 'value', 'signal', 'occurred_at'])
+MESSAGE = schema({'id': string(80), 'role': {'type': 'string', 'enum': ['user', 'assistant', 'system', 'tool']},
+                  'text': string(4000), 'at': string(50)}, ['id', 'role', 'text', 'at'])
+CONVERSATION = schema({'session_id': string(80), 'context': string(200),
+    'messages': {'type': 'array', 'items': MESSAGE, 'minItems': 1, 'maxItems': 100}}, ['session_id', 'context', 'messages'])
+MODEL_PROPOSAL = schema({'statement': string(500), 'scope': string(200),
+    'category': {'type': 'string', 'enum': ['communication', 'workflow', 'goal', 'constraint']},
+    'evidence': {'type': 'array', 'minItems': 1, 'maxItems': 3,
+        'items': schema({'source_key': string(80), 'quote': string(240)}, ['source_key', 'quote'])}},
+    ['statement', 'scope', 'category', 'evidence'])
 
 
 def tool(name, description, fields, required=(), read_only=False):
@@ -37,6 +48,14 @@ TOOLS = [
     tool('profile_review', 'Record the user acceptance or rejection of a current candidate. The host must obtain the user response first.', {'expected_revision': integer(), 'candidate_id': string(80), 'decision': {'type': 'string', 'enum': ['accept', 'reject']}, 'source_id': string(200)}, ['expected_revision', 'candidate_id', 'decision', 'source_id']),
     tool('profile_forget_observations', 'Purge selected observations and dependent active or historical rules.', {'expected_revision': integer(), 'observation_ids': {'type': 'array', 'items': string(80), 'minItems': 1, 'maxItems': 200}}, ['expected_revision', 'observation_ids']),
     tool('profile_reset', 'Forget all profile content, retain replay suppression hashes, and pause personalization.', {'expected_revision': integer()}, ['expected_revision']),
+    tool('conversation_import', 'Import authorized conversation excerpts, extract open-text proposals and preserve original request transitions. Requires host conversation opt-in.', {'expected_revision': integer(), 'conversation': CONVERSATION}, ['expected_revision', 'conversation']),
+    tool('profile_proposal_review', 'Record a user review of a sourced open-text proposal. An optional existing rule id makes an explicit correction.', {'expected_revision': integer(), 'proposal_id': string(80), 'decision': {'type': 'string', 'enum': ['accept', 'reject']}, 'source_id': string(200), 'replace_rule_id': string(80)}, ['expected_revision', 'proposal_id', 'decision', 'source_id']),
+    tool('profile_portrait', 'Describe imported writing patterns, confirmed working preferences and pending proposals with evidence; never diagnose personality.', {'context': string(200)}, ['context'], True),
+    tool('profile_forecast', 'Retrieve what followed similar historical requests, with sources and abstention. Suggestions never execute.', {'context': string(200), 'request': string(2000)}, ['context', 'request'], True),
+    tool('profile_forget_conversation', 'Delete a conversation and all dependent proposals, rules, writing features and original transitions.', {'expected_revision': integer(), 'session_id': string(80)}, ['expected_revision', 'session_id']),
+    tool('profile_forget_messages', 'Delete selected user-message evidence and its dependent proposals, rules, style contributions and transitions.', {'expected_revision': integer(), 'source_keys': {'type': 'array', 'items': string(80), 'minItems': 1, 'maxItems': 100}}, ['expected_revision', 'source_keys']),
+    tool('profile_model_context', 'Build a local extraction request from authorized stored excerpts; this tool sends nothing to a provider.', {'context': string(200)}, ['context'], True),
+    tool('profile_model_propose', 'Validate host-model proposals against exact stored user quotes and stage them for human review; cannot confirm a rule.', {'expected_revision': integer(), 'proposals': {'type': 'array', 'items': MODEL_PROPOSAL, 'minItems': 1, 'maxItems': 20}}, ['expected_revision', 'proposals']),
 ]
 
 
@@ -91,6 +110,14 @@ def dispatch(name, values, args):
             return recall(db, args, values['context'])
         if name == 'profile_insights':
             return insights(load(db, args), values['context'])
+        if name == 'profile_portrait':
+            return portrait(load(db, args), values['context'])
+        if name == 'profile_model_context':
+            return model_context(load(db, args), values['context'])
+        if name == 'profile_forecast':
+            profile = load(db, args)
+            result = {'status': 'paused', 'candidates': [], 'reasons': ['Personalization is paused.']} if profile['paused'] else forecast(profile['conversation_messages'], profile['conversation_transitions'], values['context'], values['request'])
+            return {'subject_id': args.subject, 'revision': profile['revision'], **result}
         if name == 'profile_export':
             def export():
                 profile = load(db, args)
@@ -104,10 +131,32 @@ def dispatch(name, values, args):
             need(profile['revision'] == values['expected_revision'], 'STALE_REVISION', 'Read the current profile before changing it.')
             replayed = False
             details = {}
-            if name in ('profile_correct', 'profile_observe', 'profile_review'):
+            if name in ('profile_correct', 'profile_observe', 'profile_review', 'conversation_import', 'profile_proposal_review', 'profile_model_propose'):
                 need(not profile['paused'], 'MEMORY_PAUSED', 'Resume memory before saving ordinary updates.')
             if name == 'profile_pause':
                 profile['paused'] = values['paused']
+            elif name == 'conversation_import':
+                need(getattr(args, 'enable_conversations', False), 'CONVERSATIONS_DISABLED', 'The operator must explicitly enable authorized conversation import.')
+                details = import_conversation(profile, values['conversation'])
+                replayed = details.pop('replayed')
+            elif name == 'profile_proposal_review':
+                details = review_proposal(profile, values, save_rule)
+            elif name == 'profile_model_propose':
+                need(getattr(args, 'enable_conversations', False), 'CONVERSATIONS_DISABLED', 'Conversation learning must be enabled in host configuration.')
+                details = import_model_proposals(profile, values['proposals'])
+                replayed = details.pop('replayed')
+            elif name == 'profile_forget_conversation':
+                session_key = 'session-' + digest(identifier(values['session_id']))
+                need(session_key in profile['conversation_sessions'], 'SESSION_MISSING', 'This conversation session does not exist.')
+                keys = [key for key, message in profile['conversation_messages'].items() if message['session_key'] == session_key]
+                details = purge(profile, conversation_keys=keys)
+                del profile['conversation_sessions'][session_key]
+                clear_managed_files(db, args)
+            elif name == 'profile_forget_messages':
+                keys = values['source_keys']
+                need(len(keys) == len(set(keys)) and all(key in profile['conversation_messages'] for key in keys), 'SOURCE_MISSING', 'Choose distinct source keys from the current profile.')
+                details = purge(profile, conversation_keys=keys)
+                clear_managed_files(db, args)
             elif name == 'profile_correct':
                 raw = values['rule']
                 identifier(raw['id'])
@@ -171,7 +220,7 @@ def dispatch(name, values, args):
                 profile.update(revision=revision, paused=True, deleted_source_hashes=sorted(sources), deleted_observation_hashes=sorted(old_ids))
                 clear_managed_files(db, args)
             if replayed:
-                return {'profile': profile, 'replayed': True}
+                return {'profile': profile, 'replayed': True, **details}
             profile['revision'] += 1
             profile['updated_at'] = stamp()
             db.put(subject_key(args), profile)
@@ -183,4 +232,4 @@ def dispatch(name, values, args):
 
 
 if __name__ == '__main__':
-    raise SystemExit(main('user_behavior_personalization', '0.3.0', TOOLS, dispatch))
+    raise SystemExit(main('user_behavior_personalization', '0.4.0', TOOLS, dispatch))

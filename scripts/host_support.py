@@ -97,7 +97,7 @@ def validate(value,s):
         for k,v in value.items():
             if k in s['properties']:validate(v,s['properties'][k])
     if typ=='array':
-        need(len(value)<=s.get('maxItems',100),'INVALID_INPUT','Too many items.')
+        need(s.get('minItems',0)<=len(value)<=s.get('maxItems',100),'INVALID_INPUT','Array item count is outside the allowed range.')
         for v in value:validate(v,s['items'])
     if typ=='string':need(s.get('minLength',0)<=len(value)<=s.get('maxLength',100000) and bool(value.strip()),'INVALID_INPUT','Text is empty or too long.')
     if typ=='integer':need(value>=s.get('minimum',0),'INVALID_INPUT','Integer is below the minimum.')
@@ -109,6 +109,7 @@ def install(args,name,script):
     argv=[str(script),'--root',str(private_root(args.root)),'--workspace',str(workspace),'--host-id',args.install_host]
     if args.subject:argv+=['--subject',args.subject]
     if getattr(args,'enable_observations',False):argv+=['--enable-observations']
+    if getattr(args,'enable_conversations',False):argv+=['--enable-conversations']
     argv+=['mcp'];entry={'command':sys.executable,'args':argv}
     if args.install_host=='cursor':
         path=workspace/'.cursor/mcp.json';value=json.loads(path.read_text()) if path.exists() else {};value.setdefault('mcpServers',{})
@@ -151,6 +152,7 @@ def main(name,version,tools,dispatch):
     parser=argparse.ArgumentParser(description='Private local host adapter with CLI and MCP stdio entry points.')
     parser.add_argument('--root',required=True);parser.add_argument('--workspace',default='.');parser.add_argument('--host-id',default='local');parser.add_argument('--subject')
     parser.add_argument('--enable-observations',action='store_true',help='Allow authorized structured user feedback to be recorded; disabled by default.')
+    parser.add_argument('--enable-conversations',action='store_true',help='Allow authorized user-message excerpts, text features and preference proposals; disabled by default.')
     parser.add_argument('--install-host',choices=['codex','cursor']);parser.add_argument('command',choices=['call','mcp','install']);parser.add_argument('tool',nargs='?');parser.add_argument('--input',default='-')
     args=parser.parse_args()
     try:

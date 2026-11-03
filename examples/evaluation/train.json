@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "fixed_now": "2026-11-03T12:00:00+00:00",
+  "purpose": "Independent small synthetic corpus. No real person or model output. Labels are for evaluation and are never passed to the learner.",
+  "examples": [
+    {
+      "id": "lab-en-1",
+      "followup_group": "retest-plan",
+      "conversation": {
+        "session_id": "lab-en-1",
+        "context": "lab-review",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "Review the assay report and explain the unusual measurements before we choose our next step.",
+            "at": "2026-10-10T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-10T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "Make a retest plan listing the questionable samples, controls, and acceptance criteria.",
+            "at": "2026-10-10T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lab-en-2",
+      "followup_group": "retest-plan",
+      "conversation": {
+        "session_id": "lab-en-2",
+        "context": "lab-review",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "Please examine the assay results, including outliers and uncertainty in the measurements.",
+            "at": "2026-10-12T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-12T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "Now prepare a retest checklist with sample IDs, controls, and pass criteria.",
+            "at": "2026-10-12T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lab-zh-1",
+      "followup_group": "retest-plan",
+      "conversation": {
+        "session_id": "lab-zh-1",
+        "context": "lab-review",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "帮我审阅这次检测结果，指出异常读数以及测量的不确定性。",
+            "at": "2026-10-14T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-14T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "下一步请列出复测方案，包含样本编号、对照组和通过标准。",
+            "at": "2026-10-14T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lab-zh-2",
+      "followup_group": "retest-plan",
+      "conversation": {
+        "session_id": "lab-zh-2",
+        "context": "lab-review",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "先分析实验检测报告里的异常样本，再说明这些读数是否可靠。",
+            "at": "2026-10-16T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-16T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "整理一份复测清单，把重复检测的样本、对照和验收标准写清楚。",
+            "at": "2026-10-16T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "code-en-1",
+      "followup_group": "patch-regression",
+      "conversation": {
+        "session_id": "code-en-1",
+        "context": "code-review",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "Review this cache change for correctness, especially expiration and stale reads.",
+            "at": "2026-10-11T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-11T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "Write a small patch and regression tests for the cache expiration bug.",
+            "at": "2026-10-11T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "code-en-2",
+      "followup_group": "patch-regression",
+      "conversation": {
+        "session_id": "code-en-2",
+        "context": "code-review",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "Inspect the cache implementation and explain which edge cases could return stale data.",
+            "at": "2026-10-13T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-13T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "Prepare a focused patch with regression tests that reproduce the stale cache failure.",
+            "at": "2026-10-13T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "code-zh-1",
+      "followup_group": "patch-regression",
+      "conversation": {
+        "session_id": "code-zh-1",
+        "context": "code-review",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "检查这个缓存实现，重点看过期时间和旧数据读取的问题。",
+            "at": "2026-10-15T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-15T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "接着写修复补丁和回归测试，先复现缓存过期的错误。",
+            "at": "2026-10-15T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "code-zh-2",
+      "followup_group": "patch-regression",
+      "conversation": {
+        "session_id": "code-zh-2",
+        "context": "code-review",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "请审查缓存修改，说明哪些边界情况会导致返回过期的数据。",
+            "at": "2026-10-17T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-17T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "补上修复代码与回归测试，验证旧缓存不再返回。",
+            "at": "2026-10-17T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "email-en-1",
+      "followup_group": "email-draft",
+      "conversation": {
+        "session_id": "email-en-1",
+        "context": "customer-writing",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "Review this customer email and explain whether the wording is clear and respectful.",
+            "at": "2026-10-12T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-12T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "Draft a concise email subject line and a polished version of the customer email.",
+            "at": "2026-10-12T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "email-en-2",
+      "followup_group": "email-draft",
+      "conversation": {
+        "session_id": "email-en-2",
+        "context": "customer-writing",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "Look over the message to our customer for unclear wording and unnecessary jargon.",
+            "at": "2026-10-14T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-14T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "Now rewrite the customer email and include a clear subject line.",
+            "at": "2026-10-14T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "email-zh-1",
+      "followup_group": "email-draft",
+      "conversation": {
+        "session_id": "email-zh-1",
+        "context": "customer-writing",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "审阅这封客户邮件，检查表达是否清楚、有礼貌，并标出多余的术语。",
+            "at": "2026-10-16T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-16T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "给我一版修改后的客户邮件，同时写一个简洁的邮件标题。",
+            "at": "2026-10-16T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "email-zh-2",
+      "followup_group": "email-draft",
+      "conversation": {
+        "session_id": "email-zh-2",
+        "context": "customer-writing",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "帮我看看发给客户的邮件，指出不自然和容易误解的措辞。",
+            "at": "2026-10-18T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-18T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "接下来重写邮件正文，并提供一个合适的标题。",
+            "at": "2026-10-18T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "conflict-0",
+      "followup_group": "release-notes",
+      "conversation": {
+        "session_id": "conflict-0",
+        "context": "release-planning",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "Review the release plan before choosing the next step.",
+            "at": "2026-10-19T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-19T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "Prepare release notes describing the changes and known limitations.",
+            "at": "2026-10-19T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "conflict-1",
+      "followup_group": "release-notes",
+      "conversation": {
+        "session_id": "conflict-1",
+        "context": "release-planning",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "Review the release plan before choosing the next step.",
+            "at": "2026-10-20T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-20T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "Prepare release notes describing the changes and known limitations.",
+            "at": "2026-10-20T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "conflict-2",
+      "followup_group": "release-hold",
+      "conversation": {
+        "session_id": "conflict-2",
+        "context": "release-planning",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "Review the release plan before choosing the next step.",
+            "at": "2026-10-21T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-21T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "Hold the deployment and investigate the unresolved release risks.",
+            "at": "2026-10-21T10:03:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "conflict-3",
+      "followup_group": "release-hold",
+      "conversation": {
+        "session_id": "conflict-3",
+        "context": "release-planning",
+        "messages": [
+          {
+            "id": "request",
+            "role": "user",
+            "text": "Review the release plan before choosing the next step.",
+            "at": "2026-10-22T10:00:00+00:00"
+          },
+          {
+            "id": "answer",
+            "role": "assistant",
+            "text": "Synthetic response omitted. This is not preference evidence.",
+            "at": "2026-10-22T10:01:00+00:00"
+          },
+          {
+            "id": "followup",
+            "role": "user",
+            "text": "Hold the deployment and investigate the unresolved release risks.",
+            "at": "2026-10-22T10:03:00+00:00"
+          }
+        ]
+      }
+    }
+  ]
+}

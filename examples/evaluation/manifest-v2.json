@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "frozen_before_implementation_inspection": true,
+  "fixed_now": "2026-11-03T12:00:00+00:00",
+  "policy": "Never pass held-out requests, expected groups, match patterns, or extraction labels to training. No tuning against these held-out answers. Failures remain visible. This small synthetic set does not measure human benefit or provider quality. The original heldout.json is retained as a development comparison. heldout-v2.json is a second unseen query set at the first evaluation; never silently replace either set.",
+  "files": {
+    "train.json": {
+      "sha256": "0ab3f96dacc4d5cf5d30cad2a4e9669b1a79821af7c62cc6b48d91c798fda597",
+      "bytes": 14403
+    },
+    "heldout.json": {
+      "sha256": "2d0b2fd434c394ba8d2ba7a6aedc6da1cfc0ad375d5975b470976e9d25421f26",
+      "bytes": 4070
+    },
+    "extraction.json": {
+      "sha256": "22715c1f319f67e915ed1241823e4a2d6d7d656c478368352b6e51979eed3655",
+      "bytes": 10685
+    },
+    "heldout-v2.json": {
+      "sha256": "da05812189f847f1fab263b74776fc5530aecc3f19412f0fce333e209a5618f4",
+      "bytes": 7365
+    }
+  },
+  "holdout_roles": {
+    "heldout.json": "development_comparison_after_aggregate_feedback",
+    "heldout-v2.json": "independent_second_holdout"
+  }
+}

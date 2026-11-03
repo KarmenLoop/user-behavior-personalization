@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "fixed_now": "2026-11-03T12:00:00+00:00",
+  "purpose": "Second independently authored holdout frozen before exposing queries or labels to the forecast implementer. Includes natural paraphrases with lower lexical overlap. Original holdout is now a development comparison after aggregate failure feedback. No fixture was selected based on model outputs.",
+  "cases": [
+    {
+      "id": "v2-lab-en-a",
+      "context": "lab-review",
+      "request": "These assay readings don't line up. Walk me through the suspicious sample values and how uncertain the results are.",
+      "expected": "suggested",
+      "expected_group": "retest-plan",
+      "match_any": [
+        [
+          "retest"
+        ],
+        [
+          "复测"
+        ]
+      ]
+    },
+    {
+      "id": "v2-lab-en-b",
+      "context": "lab-review",
+      "request": "Compare the concentration readings with the expected range and explain the odd values before we decide what comes next.",
+      "expected": "suggested",
+      "expected_group": "retest-plan",
+      "match_any": [
+        [
+          "retest"
+        ],
+        [
+          "复测"
+        ]
+      ]
+    },
+    {
+      "id": "v2-lab-zh-a",
+      "context": "lab-review",
+      "request": "这批样本的检测数值有几处偏离，帮我判断偏差和测量误差。",
+      "expected": "suggested",
+      "expected_group": "retest-plan",
+      "match_any": [
+        [
+          "retest"
+        ],
+        [
+          "复测"
+        ]
+      ]
+    },
+    {
+      "id": "v2-lab-zh-b",
+      "context": "lab-review",
+      "request": "看看本轮实验里哪些数据不合群，说明这些样本的结论有多可靠。",
+      "expected": "suggested",
+      "expected_group": "retest-plan",
+      "match_any": [
+        [
+          "retest"
+        ],
+        [
+          "复测"
+        ]
+      ]
+    },
+    {
+      "id": "v2-code-en-a",
+      "context": "code-review",
+      "request": "Is the TTL logic sound, or could this cache serve yesterday's value after invalidation?",
+      "expected": "suggested",
+      "expected_group": "patch-regression",
+      "match_any": [
+        [
+          "patch",
+          "regression"
+        ],
+        [
+          "修复",
+          "回归"
+        ],
+        [
+          "补丁",
+          "回归"
+        ]
+      ]
+    },
+    {
+      "id": "v2-code-en-b",
+      "context": "code-review",
+      "request": "Please audit this cache update: could an expired item still be handed back to a reader?",
+      "expected": "suggested",
+      "expected_group": "patch-regression",
+      "match_any": [
+        [
+          "patch",
+          "regression"
+        ],
+        [
+          "修复",
+          "回归"
+        ],
+        [
+          "补丁",
+          "回归"
+        ]
+      ]
+    },
+    {
+      "id": "v2-code-zh-a",
+      "context": "code-review",
+      "request": "缓存失效以后还能不能取到旧值？请检查这段代码的时间判断。",
+      "expected": "suggested",
+      "expected_group": "patch-regression",
+      "match_any": [
+        [
+          "patch",
+          "regression"
+        ],
+        [
+          "修复",
+          "回归"
+        ],
+        [
+          "补丁",
+          "回归"
+        ]
+      ]
+    },
+    {
+      "id": "v2-code-zh-b",
+      "context": "code-review",
+      "request": "审一下本次缓存更新，找找数据过了有效期却继续返回的漏洞。",
+      "expected": "suggested",
+      "expected_group": "patch-regression",
+      "match_any": [
+        [
+          "patch",
+          "regression"
+        ],
+        [
+          "修复",
+          "回归"
+        ],
+        [
+          "补丁",
+          "回归"
+        ]
+      ]
+    },
+    {
+      "id": "v2-email-en-a",
+      "context": "customer-writing",
+      "request": "Does this note to the buyer get the point across without sounding brusque or full of technical language?",
+      "expected": "suggested",
+      "expected_group": "email-draft",
+      "match_any": [
+        [
+          "email",
+          "subject"
+        ],
+        [
+          "邮件",
+          "标题"
+        ]
+      ]
+    },
+    {
+      "id": "v2-email-en-b",
+      "context": "customer-writing",
+      "request": "Give this email to the customer a language review; flag phrases that sound stiff or make the meaning hard to follow.",
+      "expected": "suggested",
+      "expected_group": "email-draft",
+      "match_any": [
+        [
+          "email",
+          "subject"
+        ],
+        [
+          "邮件",
+          "标题"
+        ]
+      ]
+    },
+    {
+      "id": "v2-email-zh-a",
+      "context": "customer-writing",
+      "request": "看看给客户的这段邮件有没有生硬、绕弯或者让收件人误会的说法。",
+      "expected": "suggested",
+      "expected_group": "email-draft",
+      "match_any": [
+        [
+          "email",
+          "subject"
+        ],
+        [
+          "邮件",
+          "标题"
+        ]
+      ]
+    },
+    {
+      "id": "v2-email-zh-b",
+      "context": "customer-writing",
+      "request": "这封信准备发给买家，请从表达得体和意思明确两个方面帮我把关。",
+      "expected": "suggested",
+      "expected_group": "email-draft",
+      "match_any": [
+        [
+          "email",
+          "subject"
+        ],
+        [
+          "邮件",
+          "标题"
+        ]
+      ]
+    },
+    {
+      "id": "v2-cold",
+      "context": "code-review",
+      "request": "Please audit this cache update: could an expired item still be handed back to a reader?",
+      "training_filter": "none",
+      "expected": "abstain",
+      "reason": "An empty subject has no private evidence even when a request sounds familiar."
+    },
+    {
+      "id": "v2-unseen-context",
+      "context": "new-team-onboarding",
+      "request": "Please audit this cache update: could an expired item still be handed back to a reader?",
+      "expected": "abstain",
+      "reason": "Code-review history must not be borrowed into an unseen context."
+    },
+    {
+      "id": "v2-topic-mismatch",
+      "context": "lab-review",
+      "request": "Why do the rings of Saturn appear tilted when viewed through a telescope?",
+      "expected": "abstain",
+      "reason": "The configured context alone supplies no related source evidence."
+    },
+    {
+      "id": "v2-context-mismatch",
+      "context": "lab-review",
+      "request": "Give this email to the customer a language review; flag phrases that sound stiff or make the meaning hard to follow.",
+      "expected": "abstain",
+      "reason": "A customer email request must not use the laboratory successor pattern."
+    },
+    {
+      "id": "v2-conflict",
+      "context": "release-planning",
+      "request": "Check the release plan and help decide on the next step.",
+      "expected": "abstain",
+      "reason": "The training history supports incompatible release actions equally."
+    },
+    {
+      "id": "v2-explicit-new-direction",
+      "context": "code-review",
+      "request": "The cache patch and its regression tests are already finished. Do not suggest another patch or test; I only need a short release announcement.",
+      "expected": "abstain",
+      "reason": "A historical next step must not override an explicit current direction that says it is already complete."
+    }
+  ]
+}

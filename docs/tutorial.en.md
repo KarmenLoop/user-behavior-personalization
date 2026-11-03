@@ -1,44 +1,72 @@
-# User Behavior Personalization v0.3.0 tutorial
+# Conversation learning tutorial — v0.4.0
 
 [English](tutorial.en.md) · [中文](tutorial.zh-CN.md)
 
-Start with the local exercise below. It uses synthetic feedback and no model account. Then connect one host and verify an actual response before relying on it.
+This walkthrough starts with actual conversation text, then reviews a preference, uses a working profile, retrieves a historical follow-up, and deletes the source. All exercises use synthetic data. Your own imports should contain only conversations you are authorized to process.
 
-## 1. Download and check the package
+## 1. Download and install
 
-Get the ZIP and `SHA256SUMS.txt` from [v0.3.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.3.0). Compare the ZIP's SHA-256 with the published file before extracting. On macOS, use `shasum -a 256`; on Linux, `sha256sum`; in PowerShell, `Get-FileHash -Algorithm SHA256`.
+Download the ZIP and `SHA256SUMS.txt` from [v0.4.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.4.0). Compare the ZIP's SHA-256 before extraction: `shasum -a 256` on macOS, `sha256sum` on Linux, or `Get-FileHash -Algorithm SHA256` in PowerShell.
 
-Use Python 3.11 or newer. The adapter has no third-party Python dependencies. Open a terminal in the extracted package:
+Use Python 3.11+; there are no third-party Python runtime dependencies. In the extracted directory:
 
 ```sh
 python3 --version
 python3 -B scripts/check_package.py
 python3 -B -m unittest discover -s tests -v
-python3 -B scripts/check_publication.py
 ```
 
-Windows installations may use `py -3.12` instead of `python3`. Use the same interpreter for installation, tools, and the MCP entry. These checks exercise local code and publication consistency; they do not contact a model.
+Windows may use `py -3.12` instead of `python3`. To create a portable skill copy, use `python3 scripts/install_skill.py --destination ../installed-skills/user-behavior-personalization`. The destination must not already exist. Keep the package together and the private data root outside Git.
 
-To copy the portable package to a new host-selected directory:
+## 2. Import a selected conversation
 
 ```sh
-python3 scripts/install_skill.py --destination ../installed-skills/user-behavior-personalization
+python3 scripts/learn_conversation.py --root ../private-profile --subject demo \
+  --enable-conversations --input examples/conversations/sample.en.json
 ```
 
-The destination must not already exist. Keep `SKILL.md`, `scripts/`, `references/`, and `assets/` together. Never use the public checkout as a private profile directory.
+The command obtains the current revision, imports the chosen file, and prints import counts plus a portrait. It does not auto-confirm proposals. A subject is a host-bound identity, not a display name inferred from chat.
 
-## 2. Complete a local learning cycle
+The JSON shape is:
 
-For a single-command version of the same synthetic exercise:
+```json
+{
+  "session_id": "release-planning-1",
+  "context": "release-planning",
+  "messages": [
+    {
+      "id": "message-1",
+      "role": "user",
+      "text": "From now on, include a rollback checklist in release plans.",
+      "at": "2026-11-03T00:00:00Z"
+    }
+  ]
+}
+```
+
+Use actual timestamps and stable source identifiers. `session_id` and message `id` use 1–80 ASCII letters, numbers, hyphens, or underscores. Messages must be chronological. Each batch accepts at most 100 messages, each with at most 4,000 characters. Roles are `user`, `assistant`, `system`, or `tool`; only user messages become retained user evidence.
+
+For JSONL, put one message object on each line and supply the session and context:
 
 ```sh
-python3 -B scripts/demo_learning.py --root ../new-synthetic-demo
+python3 scripts/learn_conversation.py --root ../private-profile --subject owner \
+  --enable-conversations --format jsonl --session-id project-session-1 \
+  --context release-planning --input /path/to/selected-messages.jsonl
 ```
 
-Choose a destination that does not exist. This launches actual local CLI processes; it is not a model-based effectiveness test.
+To append, import the original session prefix plus new messages in order. Re-importing identical content is deduplicated. Rewriting a stored user message, changing the context, or reordering the original history is rejected. This prevents an updated export from silently changing the evidence behind an accepted preference.
+
+## 3. Complete the learning and deletion cycle
+For a one-command synthetic lifecycle, run:
+
+```sh
+python3 -B scripts/demo_conversations.py --root ../new-conversation-demo
+```
+
+It exercises actual local processes, including model-proposal staging without a provider call. Use a new directory.
 
 
-The following Python block is a complete exercise. Save it outside the package or paste it into Python while your working directory is the extracted package. It reads the revision before each write instead of guessing which version comes next.
+Run this Python block from the package directory. Each write reads the current revision; the exercise does not rely on a hard-coded counter.
 
 ```python
 import datetime as dt
@@ -48,149 +76,132 @@ import subprocess
 import sys
 import tempfile
 
-# Run from the extracted package. This store contains synthetic data only.
-package = Path.cwd()
-private = Path(tempfile.mkdtemp(prefix="personalization-demo-"))
-command = [sys.executable, "-B", str(package / "scripts/host.py"),
-           "--root", str(private), "--subject", "demo",
-           "--enable-observations"]
+# Run from the extracted package. All messages here are synthetic.
+private = Path(tempfile.mkdtemp(prefix="conversation-learning-"))
+base = [sys.executable, "-B", str(Path.cwd() / "scripts/host.py"),
+        "--root", str(private), "--subject", "demo", "--enable-conversations"]
+context = "database-release"
 
 def call(tool, arguments):
-    result = subprocess.run(command + ["call", tool],
-                            input=json.dumps(arguments), text=True,
-                            capture_output=True, check=True)
+    result = subprocess.run(base + ["call", tool], input=json.dumps(arguments),
+                            text=True, capture_output=True, check=True)
     return json.loads(result.stdout)
 
 def revision():
-    return call("profile_read", {"context": "code-review"})["revision"]
+    return call("profile_read", {"context": context})["revision"]
 
-# Explicit requests do not need three observations.
-call("profile_correct", {"expected_revision": revision(), "rule": {
-    "id": "status-length", "statement": "Keep status updates concise.",
-    "scope": "status-update", "source_id": "demo-explicit-1",
-    "source_summary": "Synthetic user asked for concise status updates.",
-    "kind": "explicit", "dimension": "response_length", "value": "concise"
-}})
-assert call("profile_read", {"context": "code-review"})["rules"] == []
+now = dt.datetime.now(dt.timezone.utc)
+query = "Check the database schema migration plan."
+followup = "Write a rollback checklist for the database migration."
+conversations = []
+for session in (1, 2):
+    when = now - dt.timedelta(days=3-session)
+    text = [query, followup]
+    if session == 1:
+        text.insert(0, "From now on, include a rollback checklist in release plans.")
+    conversation = {
+        "session_id": f"release-{session}", "context": context,
+        "messages": [{"id": f"message-{i}", "role": "user", "text": body,
+                      "at": (when + dt.timedelta(minutes=i)).isoformat()}
+                     for i, body in enumerate(text)]
+    }
+    conversations.append(conversation)
+    call("conversation_import", {"expected_revision": revision(),
+                                 "conversation": conversation})
 
-# Three distinct sessions, not three copies of one message.
-for day in (3, 2, 1):
-    occurred = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=day)
-    call("profile_observe", {"expected_revision": revision(), "event": {
-        "id": f"demo-event-{day}", "source_id": f"demo-feedback-{day}",
-        "session_id": f"demo-session-{day}", "context": "code-review",
-        "dimension": "structure", "value": "conclusion_first",
-        "signal": "positive", "occurred_at": occurred.isoformat()
-    }})
+portrait = call("profile_portrait", {"context": context})
+print(json.dumps(portrait, indent=2))
+proposal = next(p for p in portrait["pending_preferences"]
+                if p["category"] == "workflow")
+assert call("profile_read", {"context": context})["rules"] == []
 
-insights = call("profile_insights", {"context": "code-review"})
-print(json.dumps(insights, indent=2))
-candidate = next(c for c in insights["candidates"]
-                 if c["status"] == "ready_to_review")
-assert call("profile_read", {"context": "code-review"})["rules"] == []
-
-# Synthetic confirmation for this exercise only.
-# A real integration must ask the user and use the actual review source.
-accepted = call("profile_review", {
-    "expected_revision": revision(), "candidate_id": candidate["candidate_id"],
-    "decision": "accept", "source_id": "demo-user-confirmation-1"
+# Synthetic approval for this exercise; real use needs the user's actual decision.
+reviewed = call("profile_proposal_review", {
+    "expected_revision": revision(), "proposal_id": proposal["id"],
+    "decision": "accept", "source_id": "demo-user-review-1"
 })
-assert call("profile_read", {"context": "code-review"})["rules"]
+assert call("profile_read", {"context": context})["rules"]
 
-call("profile_pause", {"expected_revision": revision(), "paused": True})
-assert call("profile_read", {"context": "code-review"})["rules"] == []
-export = call("profile_export", {})
-print("Private export:", export["path"])
+forecast = call("profile_forecast", {"context": context, "request": query})
+print(json.dumps(forecast, indent=2))
+assert forecast["status"] == "suggested"
+assert forecast["candidates"][0]["suggestion"] == followup
 
-# Deletion remains available while paused.
-call("profile_forget", {"expected_revision": revision(),
-                        "rule_id": accepted["rule_id"]})
+# Forget the source of the confirmed rule and one supporting forecast session.
+call("profile_forget_conversation", {"expected_revision": revision(),
+                                     "session_id": "release-1"})
+assert call("profile_read", {"context": context})["rules"] == []
+assert call("profile_forecast", {"context": context,
+                                 "request": query})["status"] == "insufficient_evidence"
 call("profile_reset", {"expected_revision": revision()})
-assert call("profile_read", {"context": "code-review"})["paused"] is True
-print("Demo complete. Private demo directory:", private)
+assert call("profile_read", {"context": context})["paused"] is True
+print("Exercise complete. Private synthetic store:", private)
 ```
 
-Expected behavior: a scoped explicit preference is saved immediately; three independent feedback events produce a reviewable candidate; ordinary recall stays empty for that context until confirmation; pause suppresses recall; export and deletion remain available; reset ends paused. The local demo directory is printed so you can inspect or remove this synthetic store.
+This example succeeds because two sessions contain the same preceding request and follow-up. It demonstrates the executable path, not performance on paraphrases. The frozen diagnostic in [evaluation](evaluation.md) tests separate, unseen queries and retains misses.
 
-A new `source_id` must identify a genuinely new user statement or feedback item. Changing an identifier to bypass a forgotten-source error defeats the control; a host must not do that. Source and session IDs are host attestations, not cryptographic proof that three people or sessions existed.
+## 4. Read the portrait
 
-## 3. Choose dimensions and contexts
+`profile_portrait({"context": "release-planning"})` returns:
 
-| Dimension | Values | Example context |
-|---|---|---|
-| `response_length` | `concise`, `balanced`, `detailed` | `status-update` |
-| `structure` | `conclusion_first`, `steps`, `examples` | `code-review` |
-| `teaching` | `explain_back`, `worked_example`, `practice` | `learn-python` |
-| `initiative` | `ask_first`, `suggest_next` | `project-planning` |
-| `workflow_next_step` | `clarify`, `plan`, `implement`, `test`, `review`, `summarize` | `after-implementation` |
-| `language` | `en`, `zh` | `technical-explanation` |
-
-Use stable, narrow context names. Matching is exact and case-insensitive. A global explicit rule uses `scope: "*"`; observations should describe the specific context in which feedback occurred. A temporary request is not a lasting observation by default. Use an explicit rule with a timezone-qualified `expires_at` when the user authorizes a temporary stored preference.
-
-Negative feedback uses `signal: "negative"` for the dimension and value the user actually rejected. Do not turn “that example was wrong” into a rejection of examples in general. Silence, assistant output, a quoted colleague, or a generated explanation of the user's motives is not feedback from the user.
-
-## 4. Connect Codex or Cursor
-
-Create the intended project first. Choose a private profile root outside Git and bind an opaque subject ID to the actual user in your host setup.
-
-```sh
-python3 scripts/host.py --root ../private-profile --subject owner \
-  --workspace /path/to/project --enable-observations --install-host codex install
-python3 scripts/host.py --root ../private-profile --subject owner \
-  --workspace /path/to/project --enable-observations --install-host cursor install
-```
-
-Omit `--enable-observations` if you only want explicitly saved rules. It is a server setting, not a permission a tool argument can grant. Existing server entries are preserved: if installation reports an existing entry, inspect and update it deliberately rather than adding a duplicate server.
-
-Reload the chosen host and approve this specific server. Check `tools/list`, then `profile_read`. Verify the subject and root, save a synthetic preference, and read it from the second host. Sharing a store does not link online accounts automatically.
-
-For each host's next model turn, ask a harmless question with a clear style preference. Check whether the preference was loaded, whether the actual answer followed it, and whether correction changes the next response. Configuration, MCP tool discovery, and model behavior are separate acceptance steps.
-
-## 5. Load preferences before a new CLI task
-
-Write a private task file, then invoke the wrapper:
-
-```sh
-python3 scripts/run_host.py --root ../private-profile --subject owner \
-  --context code-review --host codex --workspace /path/to/project \
-  --prompt /path/to/private-task.txt
-```
-
-Use `--host cursor` for Cursor CLI. The wrapper loads confirmed rules before starting the host. It streams host output to the console and stores a subject-bound metadata receipt, not raw prompt or model-output files. Terminal history, host logs, and provider retention remain outside this store. The wrapper creates no recurring job or per-turn hook in an already-open chat.
-
-## 6. Build a model API request
-
-```sh
-python3 scripts/build_context.py --root ../private-profile --subject owner \
-  --context code-review --task-file /path/to/private-task.txt
-```
-
-This prints JSON with `messages` and local `personalization` metadata. Your own DeepSeek-style chat client can send the **`messages` value** in its request. Do not send the entire output as if it were the provider's request schema. The command makes no network call and requires no API key. Redirected output contains the task and selected rules: treat that file as private and clean it up separately.
-
-DeepSeek's chat API is a model endpoint, not a direct MCP client. A tool-using integration needs its own allowlisted tool bridge, current revisions, response validation, and user authorization. See [host integration](host-integration.md).
-
-## 7. Inspect, correct, forget, and reset
-
-- Use `profile_insights` to inspect candidates. A support score is an engineering heuristic; it is not psychological certainty.
-- Use `profile_correct` with the existing rule ID and a new source to replace an explicit preference. Include `dimension` and `value` together when you want structured conflict handling.
-- Use `profile_review` with `decision: "reject"` to dismiss a candidate. New evidence can justify a later review; rejection is not agreement.
-- Use `profile_forget_observations` with a nonempty `observation_ids` list to remove selected evidence and dependent learned rules.
-- Use `profile_forget` to remove a rule and its linked learning evidence. Previously copied exports and provider histories require separate action.
-- Use `profile_reset` to remove profile content and pause future ordinary use. Minimal source hashes remain to suppress replay; it is not a physical disk wipe.
-
-All writes require the current `expected_revision`. Do not retry a stale write blindly. Read again, review what changed, and decide whether the intended update still makes sense.
-
-## 8. Understand failures and limits
-
-| Symptom | What to check |
+| Field | How to use it |
 |---|---|
-| `STALE_REVISION` | Another write changed the profile. Re-read before deciding what to save. |
-| Observation is disabled | Start the approved server with `--enable-observations`; do not infer consent from a conversation. |
-| `MEMORY_PAUSED` | Resume only at the user's request. Inspection and deletion still work. |
-| Source was forgotten | Do not replay that source with a new identifier. Obtain genuinely new feedback if appropriate. |
-| No candidate is ready | Check independent sessions, context, recency, counterevidence, and an existing explicit preference. |
-| A scope stopped matching after upgrade | v0.3.0 uses exact labels. `art` intentionally no longer matches `cartography`. |
-| The observation limit is reached | Review and remove unnecessary evidence; the adapter does not silently discard it. |
-| A host ignores a saved preference | Check actual tool loading or use the wrapper; a stored rule is not proof of model compliance. |
+| `confirmed_preferences` | Preferences the user has reviewed or explicitly saved; suitable for contextual recall. |
+| `pending_preferences` | Proposed communication, workflow, goal, or constraint statements with source quotes. |
+| `writing_observations` | Message/session counts, median length, lists, questions, language mix, and source examples. |
 
-For advanced use, compare behavior across contexts, test a changed preference, challenge a candidate with counterevidence, and confirm that deletion prevents reappearance. Record results with the [evaluation guide](evaluation.md). Never use test pass counts as a score for how well the system understands a person.
+A custom term, a detailed release ritual, or a stated learning goal can remain open text. The extractor looks for explicit English/Chinese cues. It does not require fitting them into the original six observation labels. It can miss indirect requests; a missed sentence is not evidence that the person lacks that preference.
+
+Writing statistics describe the imported user's messages. They do not automatically tell the assistant to imitate that style. If a user asks for a matching style, inspect examples together and confirm the desired response rules.
+
+## 5. Review or correct a proposal
+
+Read the portrait, then call `profile_proposal_review` with its current `expected_revision`, the proposal's `id` as `proposal_id`, a genuine review `source_id`, and `decision: "accept"` or `"reject"`.
+
+To replace a conflicting accepted rule, also supply `replace_rule_id` for that existing rule. A free-text correction is not semantically merged automatically. Review the old and proposed statements before replacing one; unrelated preferences should remain intact.
+
+An explicit cue produces a proposal immediately. The three-session rule belongs to the older structured-feedback path, not this explicit-language extraction path. See [structured feedback](structured-feedback.en.md) if you want to keep using `profile_observe` and its fixed dimensions.
+
+## 6. Ask what usually follows
+
+Call `profile_forecast` with an exact context and the current request text. Inspect `status`, `candidates`, each candidate's `suggestion`, and its evidence containing `previous_request` and `next_request`.
+
+- `suggested`: a leading historical follow-up has enough consistent support to offer.
+- `insufficient_evidence`: too few matched sessions, stale evidence, or insufficient support.
+- `conflicted`: competing follow-ups prevent a clear suggestion.
+
+Candidates can be returned for inspection even when status is not `suggested`; do not present those as an accepted prediction. The method compares English word/subword and Chinese character patterns, considers recency, and gives each session at most one contributing match. Returned wording comes from a real retained request, not a newly generated plan. It never executes that request.
+
+## 7. Add an optional model-assisted pass
+
+`profile_model_context` selects up to 20 recent retained user excerpts for a context and supplies an extraction contract. Your host may send this context to its authorized model. The local tool sends nothing itself.
+
+Return proposals through `profile_model_propose`. Each item needs `statement`, `scope`, `category`, and `evidence` containing a stored `source_key` and an exact retained `quote`. The adapter checks source existence, scope, quote matching, input bounds, and basic unsafe-content patterns. Passing those checks establishes traceability, not that the model interpreted the person correctly. Every item remains pending until `profile_proposal_review` records the user's decision.
+
+See [host integration](host-integration.md) for the data flow and DeepSeek boundary. Do not send API keys or hidden model reasoning into the profile.
+
+## 8. Connect and use a host
+
+```sh
+python3 scripts/host.py --root ../private-profile --subject owner \
+  --workspace /path/to/project --enable-conversations --install-host codex install
+```
+
+Choose `--install-host cursor` for Cursor. Add `--enable-observations` separately if you also want the structured-feedback path. Reload and approve the server, verify its 18 tools, and make an actual call. Existing entries are preserved; review a duplicate-entry error instead of silently installing a second server.
+
+Accepted rules can be loaded through `profile_read`, `scripts/run_host.py`, or `scripts/build_context.py`. The wrapper takes `--context`, `--host`, `--workspace`, and `--prompt`; the context builder takes `--context` and `--task-file`. The wrapper streams output and saves metadata-only receipts. Codex receives the composed prompt on stdin; the current Cursor CLI path uses a positional argument, visible to same-user process inspection.
+
+## 9. Inspect, pause, and delete
+
+`profile_pause` suppresses ordinary use and learning. Export and deletion remain available. `profile_forget_conversation` takes `session_id` and removes the session's messages and dependent proposals, rules, writing contributions, and transitions. It does not connect a request before a deleted message to a request after it. `profile_reset` clears profile content and ends paused, retaining minimal hashes against replay.
+
+The store is bounded to 400 user records and 80 sessions. It retains up to 600 sanitized characters per user excerpt plus features and hashes. Delete evidence you no longer need; do not disguise the same source with new IDs to bypass limits or forgetting. External backups, exports, terminal output, and provider histories remain separate copies. See [privacy controls](privacy-and-memory-control.md).
+
+
+To remove selected messages, call `profile_forget_messages` with the current revision and a nonempty `source_keys` list from the portrait or model context. It removes dependent proposals, rules, writing contributions, and transitions. Other messages in the session remain; no new transition is invented across a gap.
+
+The portrait also compares request-length observations in the last 30 days with days 31–90, only when each window has at least three sessions. This describes a possible change in writing behavior; it does not change a response preference.
+
+## 10. Evaluate before relying on suggestions
+
+Run `python3 -B scripts/evaluate_conversations.py` for the frozen synthetic diagnostic. Read coverage, conditional precision, abstentions, failed case IDs, and extraction misses separately. A result on eleven queries is a diagnostic, not proof of broad accuracy. Compare the actual response before and after an accepted preference, then ask whether it helped with the task.

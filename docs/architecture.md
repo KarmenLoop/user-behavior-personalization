@@ -1,76 +1,69 @@
-# Architecture — v0.3.0
+# Architecture — v0.4.0
 
 [English](architecture.md) · [中文](architecture.zh-CN.md)
 
-The unit of personalization is an observable collaboration preference: when it applies, what to do, and why it was saved. A profile can say “start code reviews with the main finding.” It cannot establish the user's inner motives or psychological condition.
+Conversation learning produces three distinct outputs: reviewable preferences, descriptive writing observations, and historical follow-up suggestions. They share source records but do not share the same meaning or adoption rules.
 
-![Learning and review architecture diagram](images/learning-loop-v0.3.0.en.svg)
+![Conversation learning architecture diagram](images/conversation-learning-v0.4.0.en.svg)
 
-## Four boundaries
+## From text to evidence
 
-| Layer | Responsibility | Does not provide |
+A host submits an authorized, chronological conversation with a fixed subject and context. The importer validates IDs, roles, timestamps, and size; masks known credentials and email patterns; then retains user excerpts, surface features, content hashes, and original request transitions. Assistant, system, and tool text is not stored as user evidence.
+
+The store holds at most 400 user records and 80 sessions. Each retained excerpt is at most 600 sanitized characters; a message may be up to 4,000 characters at import. Features are computed from sanitized authored text after quoted/code spans are masked. Automatic explicit-cue extraction uses the retained excerpt, so a durable preference far into a long message can be missed. This boundary is visible rather than hidden behind a claim to analyze everything.
+
+## Three branches
+
+| Branch | Actual output | What uses it |
 |---|---|---|
-| Host | Identity mapping, user permission, source/session IDs, real feedback | Proof from a tool argument that permission exists |
-| Adapter | Validate typed input; commit under a revision check; explain candidates | A history crawler or an NLP extractor |
-| Private profile | Explicit rules, structured observations, review state, minimal replay markers | A public personality dossier |
-| Model invocation | Load confirmed preferences and follow current instructions | Guaranteed compliance or extra tool authority |
+| Explicit-cue extraction | Open-text statements categorized as communication, workflow, goal, or constraint; exact source evidence | A user accepts or rejects a proposal before ordinary recall changes |
+| Writing observation | Counts, median length, language mix, examples, and eligible recent/older window comparisons | Inspection and discussion; not automatic instructions to imitate |
+| Request-sequence retrieval | A previous user request paired with its original next user request | `profile_forecast` matches a new request and ranks historical follow-ups |
 
-The local adapter uses SQLite. `USER_SKILL.md` and the original reflection templates remain portable integration formats; the SQLite path does not automatically maintain a second Markdown profile. Keeping two independently editable sources of truth would create conflicting preferences.
+The older six-dimension feedback subsystem still has its own independent-session and review rules. See [structured architecture](structured-architecture.en.md). Its three-session threshold does not apply to extracting an explicit statement from a conversation.
 
-## Observation is not confirmation
-
-```mermaid
-stateDiagram-v2
-  [*] --> Observed: Authorized structured feedback
-  Observed --> Insufficient: Too few independent sessions or stale evidence
-  Observed --> Conflicted: Counterevidence prevents review
-  Observed --> Reviewable: Current evidence meets the heuristic
-  Reviewable --> Dismissed: User rejects candidate
-  Reviewable --> Confirmed: User accepts current candidate
-  Confirmed --> Corrected: New explicit correction
-  Confirmed --> Forgotten: User requests deletion
-  Observed --> Forgotten: Delete supporting observation
-  Forgotten --> [*]: Old sources stay suppressed
-```
-
-A candidate is ready for review only when there are at least three supporting sessions, weighted support is at least 75% of support plus opposition, and at least one supporting event is no more than 30 days old. Events older than 90 days do not contribute. Evidence has a 30-day half-life. Within a context and dimension, a session contributes only its latest observation.
-
-These thresholds are inspectable engineering defaults. They are not trained or calibrated confidence probabilities. Hosts are responsible for assigning honest source and session IDs; the adapter cannot detect fabricated real-world sessions.
-
-A candidate fingerprint binds its context, proposed value, and evidence. A review uses the current profile revision, so an older screen cannot silently confirm a changed candidate. Negative feedback and competing values remain visible as counterevidence.
-
-## Scope and precedence
-
-1. Follow current instructions within the host's instruction hierarchy.
-2. Load the confirmed preference for the exact context, with specific structured rules ahead of applicable global defaults.
-3. Use explicit corrections to replace old defaults.
-4. Keep behavioral candidates out of ordinary recall until review.
-
-The adapter can resolve structured `dimension`/`value` rules. It does not semantically understand every arbitrary free-text rule: an older manual statement can still require human review for a conflict. Expiry is checked as a timezone-aware instant, not a string comparison.
-
-## Explain an inference
-
-An insight includes its scope, dimension, proposed value, supporting/opposing session counts, recency-weighted totals, event IDs, latest timestamp, and reasons. Useful explanations name the evidence and the uncertainty:
-
-> Three independent sessions favored conclusion-first code reviews. No current opposing feedback was found. Review this as a default for code reviews?
-
-Avoid “You are an analytical personality” or “We know you will want this.” Neither follows from the evidence. A next-step preference such as `workflow_next_step=test` means “offer testing in this context,” not “run tests without authorization.”
-
-## Deletion and recovery
+## Proposal review and correction
 
 ```mermaid
-flowchart TD
-  A[Forget rule or observations] --> B[Hold profile revision lock]
-  B --> C[Remove affected rules and history]
-  C --> D[Remove linked observations and review state]
-  D --> E[Remove managed export and subject receipts]
-  E --> F[Retain minimal source hashes against replay]
-  F --> G[Commit new revision]
-  X[External backups / provider logs / old unbound output] -. separate cleanup .-> H[Host or user control]
+sequenceDiagram
+  participant H as Authorized host
+  participant S as Local store
+  participant U as User
+  H->>S: conversation_import(current revision, selected text)
+  S-->>H: Pending proposals and sources
+  H->>U: Show proposed preference with original evidence
+  U-->>H: Accept, reject, or correct
+  H->>S: profile_proposal_review(current revision, actual decision)
+  S-->>H: Confirmed rule or rejected proposal
+  H->>S: profile_read(exact context)
+  S-->>H: Confirmed rules only
 ```
 
-Reset clears profile content and ends paused. It does not promise physical disk erasure. Exports and deletion share a transaction boundary to avoid rewriting an old managed export after a deletion. A revision conflict leaves the newer profile in place.
+A model can assist through `profile_model_context` and `profile_model_propose`. It receives selected excerpts, returns proposed statements with exact quotes, and cannot confirm a rule. The local validator proves source correspondence and basic input constraints, not that a paraphrase is semantically correct. Human review remains the adoption step.
 
-## What a pass means
+Free-text statements preserve custom vocabulary and detailed workflows. They also require deliberate conflict resolution: `replace_rule_id` identifies the old rule to correct. The adapter does not infer every contradiction between arbitrary sentences.
 
-Stored, loaded, applied, and helpful are different outcomes. Local tests can establish storage and deterministic learning behavior. A host run establishes one actual integration. User benefit needs subsequent feedback; neither a diagram nor a test suite demonstrates it. See [evaluation](evaluation.md).
+## How forecasts use history
+
+The forecaster considers original same-session request transitions in the exact context. A transition spans at most 24 hours; usable history is bounded to 90 days. English word/subword and Chinese character channels provide lexical similarity, while recency weights newer examples more strongly. Each session contributes at most its best matching case. Similar follow-ups are grouped, and a representative is an actual retained user request.
+
+A suggestion needs support from at least two sessions, recent evidence, and enough separation from alternatives. Weak or conflicting evidence causes abstention. Scores rank available cases; they are not calibrated probabilities, general semantic understanding, or predictions of private thoughts. The [frozen diagnostic](evaluation.md) reports coverage and misses.
+
+## Deletion preserves real sequence boundaries
+
+```mermaid
+flowchart LR
+  A[Original request A] --> B[Original request B]
+  B --> C[Original request C]
+  B --> D[Delete B]
+  D --> E[Remove B and both incident transitions]
+  E --> F[No invented A to C transition]
+```
+
+Deleting a message or conversation removes dependent proposals, accepted rules, writing contributions, and original transitions. A broader cascade can remove linked evidence needed to prevent a forgotten preference from reappearing. Minimal source hashes suppress old-message replay. Pausing stops ordinary reads and learning; reset clears content and ends paused.
+
+## Storage and execution
+
+The SQLite adapter is the runtime source of truth. Original Markdown templates remain an alternative host-managed format, not a second automatically maintained database. All writes use revision checks; concurrent or stale clients cannot silently overwrite a newer review. Host identity, consent, provider calls, and external backups remain separate integration responsibilities.
+
+Stored → loaded → applied → helpful are different outcomes. Check the actual host response and user feedback after a preference is accepted; local code checks establish only their tested behavior.
