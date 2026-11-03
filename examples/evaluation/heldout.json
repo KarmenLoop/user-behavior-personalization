@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "fixed_now": "2026-11-03T12:00:00+00:00",
+  "purpose": "Held-out requests authored before inspecting predictor or extractor implementation. Do not use labels or requests to train or tune the learner.",
+  "cases": [
+    {
+      "id": "lab-en",
+      "context": "lab-review",
+      "request": "Could you analyze the assay measurements and point out outliers and uncertainty?",
+      "expected": "suggested",
+      "expected_group": "retest-plan",
+      "match_any": [
+        [
+          "retest"
+        ],
+        [
+          "复测"
+        ]
+      ]
+    },
+    {
+      "id": "lab-zh",
+      "context": "lab-review",
+      "request": "请分析这份检测报告，重点解释异常读数和样本的不确定性。",
+      "expected": "suggested",
+      "expected_group": "retest-plan",
+      "match_any": [
+        [
+          "retest"
+        ],
+        [
+          "复测"
+        ]
+      ]
+    },
+    {
+      "id": "code-en",
+      "context": "code-review",
+      "request": "Check the cache code for expiration errors and cases where stale data might leak through.",
+      "expected": "suggested",
+      "expected_group": "patch-regression",
+      "match_any": [
+        [
+          "patch",
+          "regression"
+        ],
+        [
+          "修复",
+          "回归"
+        ],
+        [
+          "补丁",
+          "回归"
+        ]
+      ]
+    },
+    {
+      "id": "code-zh",
+      "context": "code-review",
+      "request": "看看缓存代码有没有过期处理错误，哪些情况下仍会读到旧数据？",
+      "expected": "suggested",
+      "expected_group": "patch-regression",
+      "match_any": [
+        [
+          "patch",
+          "regression"
+        ],
+        [
+          "修复",
+          "回归"
+        ],
+        [
+          "补丁",
+          "回归"
+        ]
+      ]
+    },
+    {
+      "id": "email-en",
+      "context": "customer-writing",
+      "request": "Please assess this customer email for confusing terms and awkward wording.",
+      "expected": "suggested",
+      "expected_group": "email-draft",
+      "match_any": [
+        [
+          "email",
+          "subject"
+        ],
+        [
+          "邮件",
+          "标题"
+        ]
+      ]
+    },
+    {
+      "id": "email-zh",
+      "context": "customer-writing",
+      "request": "这封给客户的邮件是否清晰？请找出不自然的表达和没必要的术语。",
+      "expected": "suggested",
+      "expected_group": "email-draft",
+      "match_any": [
+        [
+          "email",
+          "subject"
+        ],
+        [
+          "邮件",
+          "标题"
+        ]
+      ]
+    },
+    {
+      "id": "cold-profile",
+      "context": "lab-review",
+      "request": "Could you analyze the assay measurements and point out outliers and uncertainty?",
+      "training_filter": "none",
+      "expected": "abstain",
+      "reason": "A new subject has no authorized history."
+    },
+    {
+      "id": "unseen-domain",
+      "context": "travel-planning",
+      "request": "Help me choose a train connection for tomorrow morning.",
+      "expected": "abstain",
+      "reason": "No matching context exists."
+    },
+    {
+      "id": "irrelevant-in-known-context",
+      "context": "lab-review",
+      "request": "What are three exercises for practicing jazz piano chord voicings?",
+      "expected": "abstain",
+      "reason": "A known context label cannot make an unrelated request similar."
+    },
+    {
+      "id": "context-mismatch",
+      "context": "customer-writing",
+      "request": "Could you analyze the assay measurements and point out outliers and uncertainty?",
+      "expected": "abstain",
+      "reason": "Identical words from a different context must not borrow laboratory history."
+    },
+    {
+      "id": "conflicting-successors",
+      "context": "release-planning",
+      "request": "Please review the release plan before choosing what to do next.",
+      "expected": "abstain",
+      "reason": "Two equally supported incompatible follow-up patterns exist."
+    }
+  ]
+}

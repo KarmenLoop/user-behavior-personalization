@@ -1,4 +1,4 @@
-# Research and design choices — v0.3.0
+# Research and design choices — v0.4.0
 
 [English](research.en.md) · [中文](research.zh-CN.md)
 
@@ -29,7 +29,7 @@ The choices in the right column are our engineering interpretation. The package 
 | [Deci & Ryan, 2000: Self-determination theory](https://selfdeterminationtheory.org/SDT/documents/2000_DeciRyan_PIWhatWhy.pdf) | A framework involving autonomy, competence, and relatedness. | Let the user choose, skip, or change a learning mode. Do not optimize for dependence or pressure. |
 | [Microsoft HAX: Adapt cautiously](https://www.microsoft.com/en-us/haxtoolkit/guideline/update-and-adapt-cautiously/) and [explain behavior](https://www.microsoft.com/en-us/haxtoolkit/guideline/make-clear-why-the-system-did-what-it-did/) | Human-AI interaction guidance favors careful adaptation and understandable behavior. | Show scope, counterevidence, and uncertainty; require review before adopting inferred preferences. |
 
-These studies and guidelines do not validate this package's effectiveness. No clinical, educational-outcome, or user-satisfaction study is claimed for v0.3.0.
+These studies and guidelines do not validate this package's effectiveness. No clinical, educational-outcome, or user-satisfaction study is claimed for v0.4.0.
 
 ## A useful teaching interaction
 
@@ -51,3 +51,11 @@ A next-step suggestion asks whether a known workflow pattern is useful in the cu
 ## How to evaluate improvement
 
 Measure observable outcomes: fewer repeated style corrections, fewer irrelevant rules loaded, fewer stale candidates accepted, successful corrections and deletion, and the user's own assessment of usefulness. Compare like-for-like tasks and retain negative results. Do not report invented “understanding,” personality, emotional-state, or thought-prediction scores.
+
+## Conversation retrieval and honest comparison
+
+[LaMP (Salemi et al., ACL 2024)](https://aclanthology.org/2024.acl-long.399/) studies personalized language tasks with user-specific information and retrieval augmentation, including term-, semantic-, and time-aware approaches. Our interpretation is to select a small relevant context with inspectable sources. We have not run the LaMP benchmark or reproduced its results.
+
+[Ludewig and Jannach's session-based recommendation comparison](https://arxiv.org/abs/1803.09587) compares methods, including simpler nearest-neighbor approaches, on session recommendation tasks. It motivates testing a transparent historical-case baseline before assuming a more complex method is better. It does not validate this repository's request forecaster.
+
+The v0.4.0 forecaster is an independent lexical case-retrieval implementation. A new holdout exposed poor paraphrase coverage, especially English (0/6 positive cases suggested). See [evaluation](evaluation.md) for initial failures, development comparisons, and the separate new holdout. The next development step needs broader independent data and improved retrieval, not a claim of reading the user's mind.

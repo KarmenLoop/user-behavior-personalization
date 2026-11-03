@@ -1,0 +1,813 @@
+{
+  "version": "0.4.0",
+  "schema_version": 1,
+  "synthetic_only": true,
+  "provider_calls": 0,
+  "note": "Small synthetic diagnostics, not a benchmark of real users or evidence of psychological understanding. Historical records remain separate from final-source reproducibility.",
+  "stages": [
+    {
+      "stage": "initial_implementation",
+      "original_report_sha256": "d1edb6bd2873d666e9c4b21123f63b1fa0ec8913b3d024b19fe6fbc2c72a7d8f",
+      "fixed_now": "2026-11-03T12:00:00+00:00",
+      "fixture_pins": {
+        "train.json": {
+          "sha256": "0ab3f96dacc4d5cf5d30cad2a4e9669b1a79821af7c62cc6b48d91c798fda597",
+          "bytes": 14403
+        },
+        "heldout.json": {
+          "sha256": "2d0b2fd434c394ba8d2ba7a6aedc6da1cfc0ad375d5975b470976e9d25421f26",
+          "bytes": 4070
+        },
+        "extraction.json": {
+          "sha256": "22715c1f319f67e915ed1241823e4a2d6d7d656c478368352b6e51979eed3655",
+          "bytes": 10685
+        }
+      },
+      "source_pins": null,
+      "source_pin_note": "Initial historical report predates source hash recording; not reproducible as an exact source snapshot.",
+      "forecast": {
+        "cases": 11,
+        "suggestions_emitted": 0,
+        "coverage": 0.0,
+        "precision_conditional_on_suggestion": null,
+        "top_3_precision_conditional_on_suggestion": null,
+        "abstentions": 11,
+        "correct_abstentions": 5,
+        "abstention_specificity": 1.0,
+        "positive_case_coverage": 0.0,
+        "correct_cases_including_abstentions": 5,
+        "failed_case_ids": [
+          "lab-en",
+          "lab-zh",
+          "code-en",
+          "code-zh",
+          "email-en",
+          "email-zh"
+        ]
+      },
+      "baseline": {
+        "method": "Most frequent annotated follow-up group within the current context; lexical tie break; no query similarity. Labels are training-only and make this a label-assisted reference baseline.",
+        "metrics": {
+          "cases": 11,
+          "suggestions_emitted": 9,
+          "coverage": 0.818182,
+          "precision_conditional_on_suggestion": 0.666667,
+          "top_3_precision_conditional_on_suggestion": 0.666667,
+          "abstentions": 2,
+          "correct_abstentions": 2,
+          "abstention_specificity": 0.4,
+          "positive_case_coverage": 1.0,
+          "correct_cases_including_abstentions": 8,
+          "failed_case_ids": [
+            "irrelevant-in-known-context",
+            "context-mismatch",
+            "conflicting-successors"
+          ]
+        }
+      },
+      "extraction": {
+        "cases": 20,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "precision": 1.0,
+        "recall": 0.875,
+        "invalid_evidence": 0,
+        "failed_case_ids": [
+          "procurement-zh"
+        ]
+      },
+      "all_quality_cases_passed": false,
+      "case_outcomes": [
+        {
+          "id": "lab-en",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "lab-zh",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "code-en",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "code-zh",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "email-en",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "email-zh",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "cold-profile",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "unseen-domain",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "irrelevant-in-known-context",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "context-mismatch",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "conflicting-successors",
+          "expected": "abstain",
+          "status": "conflicted",
+          "emitted": false,
+          "correct": true
+        }
+      ]
+    },
+    {
+      "stage": "development_comparison",
+      "original_report_sha256": "d9a32a26fc2137fc0853b5774a8a568057346974d09e0db77403c1eb9fc7f531",
+      "fixed_now": "2026-11-03T12:00:00+00:00",
+      "fixture_pins": {
+        "train.json": {
+          "sha256": "0ab3f96dacc4d5cf5d30cad2a4e9669b1a79821af7c62cc6b48d91c798fda597",
+          "bytes": 14403
+        },
+        "heldout.json": {
+          "sha256": "2d0b2fd434c394ba8d2ba7a6aedc6da1cfc0ad375d5975b470976e9d25421f26",
+          "bytes": 4070
+        },
+        "extraction.json": {
+          "sha256": "22715c1f319f67e915ed1241823e4a2d6d7d656c478368352b6e51979eed3655",
+          "bytes": 10685
+        },
+        "heldout-v2.json": {
+          "sha256": "da05812189f847f1fab263b74776fc5530aecc3f19412f0fce333e209a5618f4",
+          "bytes": 7365
+        }
+      },
+      "source_pins": {
+        "scripts/conversations.py": {
+          "sha256": "36cf4f066e6cf7e5bba5b4138acae9b192a0b01ee84d9f29221569b961a71062",
+          "bytes": 14353
+        },
+        "scripts/evaluate_conversations.py": {
+          "sha256": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+          "bytes": 13614
+        },
+        "scripts/forecast.py": {
+          "sha256": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+          "bytes": 15020
+        },
+        "scripts/host_support.py": {
+          "sha256": "0a9abba5509cc27d4c0464582c93ac656f88131b85f0c87b31dd6570ba4a5a5c",
+          "bytes": 12446
+        },
+        "scripts/learning.py": {
+          "sha256": "f3e93f3f4d000a6087ab7f3d360e3a4e2892e3e3449e4a858ff0790e58060888",
+          "bytes": 13051
+        }
+      },
+      "source_pin_note": null,
+      "forecast": {
+        "cases": 11,
+        "suggestions_emitted": 6,
+        "coverage": 0.545455,
+        "precision_conditional_on_suggestion": 1.0,
+        "top_3_precision_conditional_on_suggestion": 1.0,
+        "abstentions": 5,
+        "correct_abstentions": 5,
+        "abstention_specificity": 1.0,
+        "positive_case_coverage": 1.0,
+        "correct_cases_including_abstentions": 11,
+        "failed_case_ids": []
+      },
+      "baseline": {
+        "method": "Most frequent annotated follow-up group within the current context; lexical tie break; no query similarity. Labels are training-only and make this a label-assisted reference baseline.",
+        "metrics": {
+          "cases": 11,
+          "suggestions_emitted": 9,
+          "coverage": 0.818182,
+          "precision_conditional_on_suggestion": 0.666667,
+          "top_3_precision_conditional_on_suggestion": 0.666667,
+          "abstentions": 2,
+          "correct_abstentions": 2,
+          "abstention_specificity": 0.4,
+          "positive_case_coverage": 1.0,
+          "correct_cases_including_abstentions": 8,
+          "failed_case_ids": [
+            "irrelevant-in-known-context",
+            "context-mismatch",
+            "conflicting-successors"
+          ]
+        }
+      },
+      "extraction": {
+        "cases": 20,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "precision": 1.0,
+        "recall": 0.875,
+        "invalid_evidence": 0,
+        "failed_case_ids": [
+          "procurement-zh"
+        ]
+      },
+      "all_quality_cases_passed": false,
+      "case_outcomes": [
+        {
+          "id": "lab-en",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "lab-zh",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "code-en",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "code-zh",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "email-en",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "email-zh",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "cold-profile",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "unseen-domain",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "irrelevant-in-known-context",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "context-mismatch",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "conflicting-successors",
+          "expected": "abstain",
+          "status": "conflicted",
+          "emitted": false,
+          "correct": true
+        }
+      ],
+      "manifest": {
+        "name": "manifest-v2.json",
+        "sha256": "47a0537b511fe383024e694c098e1e78e08d9115f9ace06b01d6ed12026f5735"
+      }
+    },
+    {
+      "stage": "new_holdout_first_run",
+      "original_report_sha256": "c325f9e34010ee89209b476f90f7d93ef7aea367d73b972a3f4037604574646b",
+      "fixed_now": "2026-11-03T12:00:00+00:00",
+      "fixture_pins": {
+        "train.json": {
+          "sha256": "0ab3f96dacc4d5cf5d30cad2a4e9669b1a79821af7c62cc6b48d91c798fda597",
+          "bytes": 14403
+        },
+        "heldout.json": {
+          "sha256": "2d0b2fd434c394ba8d2ba7a6aedc6da1cfc0ad375d5975b470976e9d25421f26",
+          "bytes": 4070
+        },
+        "extraction.json": {
+          "sha256": "22715c1f319f67e915ed1241823e4a2d6d7d656c478368352b6e51979eed3655",
+          "bytes": 10685
+        },
+        "heldout-v2.json": {
+          "sha256": "da05812189f847f1fab263b74776fc5530aecc3f19412f0fce333e209a5618f4",
+          "bytes": 7365
+        }
+      },
+      "source_pins": {
+        "scripts/conversations.py": {
+          "sha256": "36cf4f066e6cf7e5bba5b4138acae9b192a0b01ee84d9f29221569b961a71062",
+          "bytes": 14353
+        },
+        "scripts/evaluate_conversations.py": {
+          "sha256": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+          "bytes": 13614
+        },
+        "scripts/forecast.py": {
+          "sha256": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+          "bytes": 15020
+        },
+        "scripts/host_support.py": {
+          "sha256": "0a9abba5509cc27d4c0464582c93ac656f88131b85f0c87b31dd6570ba4a5a5c",
+          "bytes": 12446
+        },
+        "scripts/learning.py": {
+          "sha256": "f3e93f3f4d000a6087ab7f3d360e3a4e2892e3e3449e4a858ff0790e58060888",
+          "bytes": 13051
+        }
+      },
+      "source_pin_note": null,
+      "forecast": {
+        "cases": 18,
+        "suggestions_emitted": 4,
+        "coverage": 0.222222,
+        "precision_conditional_on_suggestion": 1.0,
+        "top_3_precision_conditional_on_suggestion": 1.0,
+        "abstentions": 14,
+        "correct_abstentions": 6,
+        "abstention_specificity": 1.0,
+        "positive_case_coverage": 0.333333,
+        "correct_cases_including_abstentions": 10,
+        "failed_case_ids": [
+          "v2-lab-en-a",
+          "v2-lab-en-b",
+          "v2-lab-zh-b",
+          "v2-code-en-a",
+          "v2-code-en-b",
+          "v2-email-en-a",
+          "v2-email-en-b",
+          "v2-email-zh-b"
+        ]
+      },
+      "baseline": {
+        "method": "Most frequent annotated follow-up group within the current context; lexical tie break; no query similarity. Labels are training-only and make this a label-assisted reference baseline.",
+        "metrics": {
+          "cases": 18,
+          "suggestions_emitted": 16,
+          "coverage": 0.888889,
+          "precision_conditional_on_suggestion": 0.75,
+          "top_3_precision_conditional_on_suggestion": 0.75,
+          "abstentions": 2,
+          "correct_abstentions": 2,
+          "abstention_specificity": 0.333333,
+          "positive_case_coverage": 1.0,
+          "correct_cases_including_abstentions": 14,
+          "failed_case_ids": [
+            "v2-topic-mismatch",
+            "v2-context-mismatch",
+            "v2-conflict",
+            "v2-explicit-new-direction"
+          ]
+        }
+      },
+      "extraction": {
+        "cases": 20,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "precision": 1.0,
+        "recall": 0.875,
+        "invalid_evidence": 0,
+        "failed_case_ids": [
+          "procurement-zh"
+        ]
+      },
+      "all_quality_cases_passed": false,
+      "case_outcomes": [
+        {
+          "id": "v2-lab-en-a",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-lab-en-b",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-lab-zh-a",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "v2-lab-zh-b",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-code-en-a",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-code-en-b",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-code-zh-a",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "v2-code-zh-b",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "v2-email-en-a",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-email-en-b",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-email-zh-a",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "v2-email-zh-b",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-cold",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "v2-unseen-context",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "v2-topic-mismatch",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "v2-context-mismatch",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "v2-conflict",
+          "expected": "abstain",
+          "status": "conflicted",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "v2-explicit-new-direction",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        }
+      ],
+      "manifest": {
+        "name": "manifest-v2.json",
+        "sha256": "47a0537b511fe383024e694c098e1e78e08d9115f9ace06b01d6ed12026f5735"
+      }
+    },
+    {
+      "stage": "final_source_reproduction",
+      "original_report_sha256": "c325f9e34010ee89209b476f90f7d93ef7aea367d73b972a3f4037604574646b",
+      "fixed_now": "2026-11-03T12:00:00+00:00",
+      "fixture_pins": {
+        "train.json": {
+          "sha256": "0ab3f96dacc4d5cf5d30cad2a4e9669b1a79821af7c62cc6b48d91c798fda597",
+          "bytes": 14403
+        },
+        "heldout.json": {
+          "sha256": "2d0b2fd434c394ba8d2ba7a6aedc6da1cfc0ad375d5975b470976e9d25421f26",
+          "bytes": 4070
+        },
+        "extraction.json": {
+          "sha256": "22715c1f319f67e915ed1241823e4a2d6d7d656c478368352b6e51979eed3655",
+          "bytes": 10685
+        },
+        "heldout-v2.json": {
+          "sha256": "da05812189f847f1fab263b74776fc5530aecc3f19412f0fce333e209a5618f4",
+          "bytes": 7365
+        }
+      },
+      "source_pins": {
+        "scripts/conversations.py": {
+          "sha256": "36cf4f066e6cf7e5bba5b4138acae9b192a0b01ee84d9f29221569b961a71062",
+          "bytes": 14353
+        },
+        "scripts/evaluate_conversations.py": {
+          "sha256": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+          "bytes": 13614
+        },
+        "scripts/forecast.py": {
+          "sha256": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+          "bytes": 15020
+        },
+        "scripts/host_support.py": {
+          "sha256": "0a9abba5509cc27d4c0464582c93ac656f88131b85f0c87b31dd6570ba4a5a5c",
+          "bytes": 12446
+        },
+        "scripts/learning.py": {
+          "sha256": "f3e93f3f4d000a6087ab7f3d360e3a4e2892e3e3449e4a858ff0790e58060888",
+          "bytes": 13051
+        }
+      },
+      "source_pin_note": null,
+      "forecast": {
+        "cases": 18,
+        "suggestions_emitted": 4,
+        "coverage": 0.222222,
+        "precision_conditional_on_suggestion": 1.0,
+        "top_3_precision_conditional_on_suggestion": 1.0,
+        "abstentions": 14,
+        "correct_abstentions": 6,
+        "abstention_specificity": 1.0,
+        "positive_case_coverage": 0.333333,
+        "correct_cases_including_abstentions": 10,
+        "failed_case_ids": [
+          "v2-lab-en-a",
+          "v2-lab-en-b",
+          "v2-lab-zh-b",
+          "v2-code-en-a",
+          "v2-code-en-b",
+          "v2-email-en-a",
+          "v2-email-en-b",
+          "v2-email-zh-b"
+        ]
+      },
+      "baseline": {
+        "method": "Most frequent annotated follow-up group within the current context; lexical tie break; no query similarity. Labels are training-only and make this a label-assisted reference baseline.",
+        "metrics": {
+          "cases": 18,
+          "suggestions_emitted": 16,
+          "coverage": 0.888889,
+          "precision_conditional_on_suggestion": 0.75,
+          "top_3_precision_conditional_on_suggestion": 0.75,
+          "abstentions": 2,
+          "correct_abstentions": 2,
+          "abstention_specificity": 0.333333,
+          "positive_case_coverage": 1.0,
+          "correct_cases_including_abstentions": 14,
+          "failed_case_ids": [
+            "v2-topic-mismatch",
+            "v2-context-mismatch",
+            "v2-conflict",
+            "v2-explicit-new-direction"
+          ]
+        }
+      },
+      "extraction": {
+        "cases": 20,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "precision": 1.0,
+        "recall": 0.875,
+        "invalid_evidence": 0,
+        "failed_case_ids": [
+          "procurement-zh"
+        ]
+      },
+      "all_quality_cases_passed": false,
+      "case_outcomes": [
+        {
+          "id": "v2-lab-en-a",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-lab-en-b",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-lab-zh-a",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "v2-lab-zh-b",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-code-en-a",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-code-en-b",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-code-zh-a",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "v2-code-zh-b",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "v2-email-en-a",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-email-en-b",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-email-zh-a",
+          "expected": "suggested",
+          "status": "suggested",
+          "emitted": true,
+          "correct": true
+        },
+        {
+          "id": "v2-email-zh-b",
+          "expected": "suggested",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": false
+        },
+        {
+          "id": "v2-cold",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "v2-unseen-context",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "v2-topic-mismatch",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "v2-context-mismatch",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "v2-conflict",
+          "expected": "abstain",
+          "status": "conflicted",
+          "emitted": false,
+          "correct": true
+        },
+        {
+          "id": "v2-explicit-new-direction",
+          "expected": "abstain",
+          "status": "insufficient_evidence",
+          "emitted": false,
+          "correct": true
+        }
+      ],
+      "manifest": {
+        "name": "manifest-v2.json",
+        "sha256": "47a0537b511fe383024e694c098e1e78e08d9115f9ace06b01d6ed12026f5735"
+      }
+    }
+  ],
+  "limitations": [
+    "Small independently authored synthetic set; not a public benchmark or evidence of human benefit.",
+    "Lexical retrieval is not general semantic understanding, personality analysis, or thought prediction.",
+    "Held-out requests and labels do not train the algorithm or its vocabulary; failed cases are retained.",
+    "Quality failures do not make an evaluation run incomplete. Use --require-all for a strict optional gate.",
+    "The new holdout was not used to tune the final forecaster. Final reproduction is a repeat, not another independent holdout.",
+    "The label-assisted baseline gets more positives right but incorrectly suggests follow-ups on four negative controls. No overall superiority is established."
+  ]
+}

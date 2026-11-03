@@ -1,12 +1,12 @@
-# 宿主接入 — v0.3.0
+# 宿主接入 — v0.4.0
 
 [English](host-integration.md) · [中文](host-integration.zh-CN.md)
 
 ## 本地 CLI 与 MCP
 
-`scripts/host.py` 提供 [README](../README.zh-CN.md) 中的十个工具，CLI `call` 与 MCP stdio 共用实现和输入校验。subject 在进程启动时绑定，工具参数不能切换用户。操作者取得授权后，使用 `--enable-observations` 开启观察路径。
+`scripts/host.py` 提供 [README](../README.zh-CN.md) 中的十八个工具，CLI `call` 与 MCP stdio 共用实现和输入校验。subject 在进程启动时绑定，工具参数不能切换用户。操作者取得授权后，使用 `--enable-observations` 开启观察路径。
 
-宿主负责身份核实、已授权消息、真实来源与会话编号、明确审查决定和当前场景。适配器不爬取历史，也无法证明传入的 `source_id` 是真实同意收条。工具能调用，不等于可以随意收集反馈。
+宿主负责身份核实、已授权消息、真实来源与会话编号、明确审查决定和当前场景。适配器导入明确选择的对话，不会自动爬取历史，也无法证明传入的 `source_id` 是真实同意收条。工具能调用，不等于可以随意收集反馈。
 
 ## Codex 与 Cursor
 
@@ -37,14 +37,22 @@ sequenceDiagram
 
 DeepSeek JSON Output 约束的是输出格式，不能证明抽取的偏好真实。自行开发的工具桥接必须校验类型和枚举，仅接受已授权用户消息白名单中的来源，拒绝空白或截断输出，保留版本检查，并只发送必要内容。不要将隐藏推理或助手输出当成用户证据。参见[官方 JSON Output 文档](https://api-docs.deepseek.com/guides/json_mode/)。
 
-本版本没有提供自动运行的 DeepSeek 工具循环或模型驱动的历史抽取器。本地请求内容生成成功，不等于 DeepSeek 在线接入验收通过。
+本版本提供离线明确表达提取器，以及接收宿主模型提案的本地桥接；不提供自动运行的 DeepSeek 工具循环，也不自行调用提供方。本地请求内容生成成功，不等于 DeepSeek 在线接入验收通过。
 
 ## 宿主仍需负责的能力
 
-身份提供方、历史采集、会话结束事件、后台反思、加密和系统权限、提供方留存、群聊披露及多设备同步，均需要独立实现和验收。[原有反思协议](../references/reflection-workflow.md)说明宿主如何提供这些能力，并不是已经运行的服务。
+身份提供方、后台历史采集、会话结束事件、后台反思、加密和系统权限、提供方留存、群聊披露及多设备同步，均需要独立实现和验收。[原有反思协议](../references/reflection-workflow.md)说明宿主如何提供这些能力，并不是已经运行的服务。
 
 可复现本地调用见[教程](tutorial.zh-CN.md)，验收范围见[验收指南](evaluation.zh-CN.md)。
 
 ## 本地进程可见性
 
 Codex 通过 stdin 接收组合后的提示。当前 Cursor CLI 路径使用位置参数，同一系统用户运行的其他工具可能在进程参数中看到内容。如不能接受这层暴露，应使用 MCP 路径或合适的本地账号隔离。输出仍可能被终端或宿主记录；适配器只留元数据，并不会删除那些独立副本。
+
+## 对话导入与宿主模型提案
+
+`--enable-conversations` 与 `--enable-observations` 独立。可通过 `learn_conversation.py` 导入选定 JSON/JSONL，也可携当前版本调用 `conversation_import`。角色和来源编号由宿主提供，导入前需对应到获授权的记录。适配器保留有限的清理后用户片段，并暂存自由文本提案。
+
+需要模型辅助时，调用 `profile_model_context(context)`，将选定片段和提取要求交给获授权的模型，再用 `profile_model_propose` 提交结构化提案。每项需要类别、场景、陈述和已知来源键的精确引文；校验后仍是待审状态，`profile_proposal_review` 才记录本人真实决定。工具不能把模型的同意当成本人审查。
+
+`profile_portrait` 与 `profile_forecast` 为查看提供私有来源例子，不应把完整输出塞进无关任务或共享聊天。普通回复仍通过 `profile_read` 加载简洁的已确认规则。

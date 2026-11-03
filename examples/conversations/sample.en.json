@@ -1,0 +1,30 @@
+{
+  "session_id": "demo-writing-en",
+  "context": "writing",
+  "messages": [
+    {
+      "id": "message-1",
+      "role": "user",
+      "text": "For future customer emails, lead with the requested decision and keep product names unchanged.",
+      "at": "2026-11-03T00:00:00Z"
+    },
+    {
+      "id": "message-2",
+      "role": "user",
+      "text": "My goal is to write clear product updates for nontechnical readers.",
+      "at": "2026-11-03T00:01:00Z"
+    },
+    {
+      "id": "message-3",
+      "role": "user",
+      "text": "Draft a short release announcement for the new export feature.",
+      "at": "2026-11-03T00:02:00Z"
+    },
+    {
+      "id": "message-4",
+      "role": "user",
+      "text": "Now list the questions a first-time user might ask about exporting.",
+      "at": "2026-11-03T00:03:00Z"
+    }
+  ]
+}

@@ -1,6 +1,16 @@
 # Changelog
 
-## 0.3.0 — 2026-11-03
+## 0.4.0 — 2026-11-03
+
+- Import selected JSON/JSONL conversations and extract open-text English/Chinese preferences, workflows, goals, and constraints for review.
+- Add an inspectable portrait with source examples, writing features, and eligible recent/older request-length comparisons.
+- Add experimental historical next-request retrieval with original sequence evidence, recency weighting, context boundaries, and abstention.
+- Add local host-model proposal staging with known-source and exact-quote validation; user review remains required.
+- Add message-level and conversation-level deletion cascading to dependent proposals, rules, writing features, and original transitions.
+- Retain failed evaluations: the new 18-query holdout produced 4/12 expected positive suggestions (English 0/6, Chinese 4/6) and correctly abstained on all 6 negative cases. Forecast coverage remains limited.
+- Publish original bilingual conversation-learning diagrams, an actual import/review/delete tutorial, and a reproducible frozen diagnostic. No online DeepSeek call or new successful model-host certification is claimed.
+
+## 0.3.0 — 2026-11-03 (merged intermediate source; not released)
 
 - Add opt-in structured observations, recency-weighted evidence, candidate explanations, and explicit accept/reject review.
 - Add observation deletion and profile reset, including dependent learned rules and source replay suppression.

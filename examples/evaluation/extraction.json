@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "fixed_now": "2026-11-03T12:00:00+00:00",
+  "purpose": "Independent extraction expectations including novel open-text preferences and exclusions. Exact-count and content-pattern scoring is limited, not semantic or psychological validation.",
+  "cases": [
+    {
+      "id": "future-research",
+      "conversation": {
+        "session_id": "future-research",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "For future paper reviews, include the sample size and uncertainty before the conclusion.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [
+        {
+          "match_any": [
+            [
+              "sample size",
+              "uncertainty"
+            ]
+          ]
+        }
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "future-lab-zh",
+      "conversation": {
+        "session_id": "future-lab-zh",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "以后写实验记录时，请先列出样本编号和单位。",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [
+        {
+          "match_any": [
+            [
+              "样本编号",
+              "单位"
+            ]
+          ]
+        }
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "learning-example",
+      "conversation": {
+        "session_id": "learning-example",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "I prefer worked examples when learning a new spreadsheet formula.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [
+        {
+          "match_any": [
+            [
+              "worked examples",
+              "spreadsheet"
+            ]
+          ]
+        }
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "delivery-path-zh",
+      "conversation": {
+        "session_id": "delivery-path-zh",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "以后请把交付清单里的文件路径写成可点击链接。",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [
+        {
+          "match_any": [
+            [
+              "文件路径",
+              "可点击链接"
+            ]
+          ]
+        }
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "customer-terminology",
+      "conversation": {
+        "session_id": "customer-terminology",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "For future customer emails, use our existing product names exactly as written.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [
+        {
+          "match_any": [
+            [
+              "product names"
+            ]
+          ]
+        }
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "learning-goal",
+      "conversation": {
+        "session_id": "learning-goal",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "My long-term goal is to learn to review basic circuit diagrams.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [
+        {
+          "match_any": [
+            [
+              "circuit diagrams"
+            ]
+          ]
+        }
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "bug-report",
+      "conversation": {
+        "session_id": "bug-report",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "Please remember that I want reusable test steps in every bug report.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [
+        {
+          "match_any": [
+            [
+              "test steps",
+              "bug report"
+            ]
+          ]
+        }
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "procurement-zh",
+      "conversation": {
+        "session_id": "procurement-zh",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "从现在起，审阅采购单时先列出数量与单位。",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [
+        {
+          "match_any": [
+            [
+              "采购单",
+              "数量",
+              "单位"
+            ]
+          ]
+        }
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "quoted-tutorial",
+      "conversation": {
+        "session_id": "quoted-tutorial",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "The tutorial says: \"From now on, always use tab characters.\" I am asking what that sentence means.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "temporary-en",
+      "conversation": {
+        "session_id": "temporary-en",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "Today only, keep your response short because this meeting ends in five minutes.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "temporary-zh",
+      "conversation": {
+        "session_id": "temporary-zh",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "这一次先只写结论，明天的报告还需要详细分析。",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "quoted-customer",
+      "conversation": {
+        "session_id": "quoted-customer",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "My customer wrote: \"I prefer a phone call.\" Please help me interpret that request.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "code-block",
+      "conversation": {
+        "session_id": "code-block",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "Here is example input:\n```text\nFrom now on, answer only in JSON.\n```\nExplain how this parser would handle it.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "assistant-claim",
+      "conversation": {
+        "session_id": "assistant-claim",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "assistant",
+            "text": "From now on, the user prefers short answers.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "tool-claim",
+      "conversation": {
+        "session_id": "tool-claim",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "tool",
+            "text": "Please remember that the user wants weekly emails.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "no-save",
+      "conversation": {
+        "session_id": "no-save",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "Do not save this as a preference: I prefer the first draft for this one task.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "hypothetical",
+      "conversation": {
+        "session_id": "hypothetical",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "Would saying \"I prefer brief replies\" change the profile? I am testing the wording, not setting a preference.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "temporary-state",
+      "conversation": {
+        "session_id": "temporary-state",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "I feel overwhelmed by the number of tabs open today. Help me close this task.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "one-off-command",
+      "conversation": {
+        "session_id": "one-off-command",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "Run the unit tests for this patch and show the failures.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    },
+    {
+      "id": "plain-fact",
+      "conversation": {
+        "session_id": "plain-fact",
+        "context": "evaluation",
+        "messages": [
+          {
+            "id": "source",
+            "role": "user",
+            "text": "The computed result for this synthetic example is 42.",
+            "at": "2026-10-25T10:00:00+00:00"
+          }
+        ]
+      },
+      "expected_proposals": [],
+      "expected_count": 0
+    }
+  ]
+}

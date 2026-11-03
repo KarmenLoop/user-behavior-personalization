@@ -1,4 +1,4 @@
-# 研究与设计依据 — v0.3.0
+# 研究与设计依据 — v0.4.0
 
 [English](research.en.md) · [中文](research.zh-CN.md)
 
@@ -29,7 +29,7 @@
 | [Deci 与 Ryan，2000：自我决定理论](https://selfdeterminationtheory.org/SDT/documents/2000_DeciRyan_PIWhatWhy.pdf) | 涉及自主、能力与关系需要的理论框架。 | 让用户选择、跳过和更换学习方式，不以施压或依赖为优化目标。 |
 | [Microsoft HAX：谨慎适配](https://www.microsoft.com/en-us/haxtoolkit/guideline/update-and-adapt-cautiously/)与[解释行为](https://www.microsoft.com/en-us/haxtoolkit/guideline/make-clear-why-the-system-did-what-it-did/) | 人机交互指导强调谨慎调整和可理解性。 | 展示场景、反对证据和不确定性，推断偏好确认后才生效。 |
 
-这些研究和指南不能证明本产品有效。v0.3.0 未声称完成临床、教学成果或用户满意度试验。
+这些研究和指南不能证明本产品有效。v0.4.0 未声称完成临床、教学成果或用户满意度试验。
 
 ## 一个合理的教学过程
 
@@ -51,3 +51,11 @@
 ## 如何评价是否改进
 
 关注可观察结果：用户是否少重复纠正格式、无关规则是否减少、是否少接受过期候选、纠正与删除是否成功，以及用户自己是否觉得有帮助。比较相近任务，保留负面结果。不要编造“理解度”、人格、情绪状态或思想预测分数。
+
+## 对话检索与可比较的评估
+
+[LaMP（Salemi 等，ACL 2024）](https://aclanthology.org/2024.acl-long.399/)研究使用本人信息和检索增强的个性化语言任务，涉及词项、语义和时间相关方法。我们的设计借鉴是选择少量相关且来源可查的上下文；未运行 LaMP 基准，也未复现其成绩。
+
+[Ludewig 与 Jannach 的会话推荐比较](https://arxiv.org/abs/1803.09587)比较包括近邻方法在内的会话推荐方案。它启发我们先测试可解释的历史案例基线，再判断复杂方法是否更好，但不能据此证明本仓库的请求预测有效。
+
+v0.4.0 预测器独立实现词法案例检索。新的留出测试暴露了改写覆盖不足，尤其英文正例 0/6 被提出建议。初始失败、开发对照和独立新留出见[验收](evaluation.zh-CN.md)。后续需要更广独立数据和检索改进，而不是宣称读懂用户思想。

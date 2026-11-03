@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1260" height="820" viewBox="0 0 1260 820" role="img" aria-labelledby="title desc"><title id="title">从对话学习，到可查证的协作档案</title><desc id="desc">v0.4.0 架构图 · 独立的文本、表达与请求序列路径</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#60738f"/></marker></defs>
+<rect width="1260" height="820" rx="20" fill="#f6f8fb"/><rect width="1260" height="120" rx="20" fill="#171c25"/><rect y="95" width="1260" height="25" fill="#171c25"/><g font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+<text x="40" y="52" font-size="31" font-weight="700" fill="#fff">从对话学习，到可查证的协作档案</text>
+<text x="40" y="89" font-size="17" fill="#c1ccdc">v0.4.0 架构图 · 独立的文本、表达与请求序列路径</text>
+<rect x="40" y="155" width="510" height="130" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="60" y="188" font-size="21" font-weight="650" fill="#243b59">01 选择并授权导入</text>
+<text x="60" y="221" font-size="16" fill="#45576e">用户指定 JSON / JSONL 对话</text>
+<text x="60" y="248" font-size="16" fill="#45576e">绑定本人、场景、来源与时间</text>
+<rect x="710" y="155" width="510" height="130" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="730" y="188" font-size="21" font-weight="650" fill="#243b59">02 保留必要用户证据</text>
+<text x="730" y="221" font-size="16" fill="#45576e">已知凭据脱敏；最多 600 字符片段</text>
+<text x="730" y="248" font-size="16" fill="#45576e">忽略助手角色；来源与原始顺序可核对</text>
+<rect x="40" y="355" width="360" height="185" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="60" y="388" font-size="21" font-weight="650" fill="#243b59">03A 自由文本候选</text>
+<text x="60" y="421" font-size="16" fill="#45576e">沟通 · 工作流程 · 目标 · 约束</text>
+<text x="60" y="448" font-size="16" fill="#45576e">支持中文与英文明确表达</text>
+<text x="60" y="475" font-size="16" fill="#45576e">候选附原文与来源</text>
+<text x="60" y="502" font-size="16" fill="#45576e">用户审查后才成为回复偏好</text>
+<rect x="450" y="355" width="360" height="185" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="470" y="388" font-size="21" font-weight="650" fill="#243b59">03B 表达观察</text>
+<text x="470" y="421" font-size="16" fill="#45576e">长度中位数 · 列表 · 问句</text>
+<text x="470" y="448" font-size="16" fill="#45576e">语言分布与实际例子</text>
+<text x="470" y="475" font-size="16" fill="#45576e">描述用户怎么写</text>
+<text x="470" y="502" font-size="16" fill="#45576e">不自动转成助手回答格式</text>
+<rect x="860" y="355" width="360" height="185" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="880" y="388" font-size="21" font-weight="650" fill="#243b59">03C 原始请求序列</text>
+<text x="880" y="421" font-size="16" fill="#45576e">历史请求 → 实际后续请求</text>
+<text x="880" y="448" font-size="16" fill="#45576e">相近场景词法与时效检索</text>
+<text x="880" y="475" font-size="16" fill="#45576e">至少两个独立会话支持</text>
+<text x="880" y="502" font-size="16" fill="#45576e">证据不足或冲突时不建议</text>
+<rect x="40" y="610" width="570" height="115" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="60" y="643" font-size="21" font-weight="650" fill="#243b59">04 已确认档案用于宿主任务</text>
+<text x="60" y="676" font-size="16" fill="#45576e">Codex / Cursor / 本地模型请求内容</text>
+<text x="60" y="703" font-size="16" fill="#45576e">新要求优先；可纠正、暂停与遗忘</text>
+<rect x="650" y="610" width="570" height="115" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="670" y="643" font-size="21" font-weight="650" fill="#243b59">05 有依据的下一步建议</text>
+<text x="670" y="676" font-size="16" fill="#45576e">返回历史后续原话与匹配案例</text>
+<text x="670" y="703" font-size="16" fill="#45576e">只建议，不执行；删除不会拼接虚假序列</text>
+<path d="M550 220H706" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M965 285V320H220V351" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M630 320V351" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M965 320H1040V351" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M220 540V606" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M1040 540V606" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="40" y="777" font-size="16" fill="#52647b">提案、写作描述、检索建议分别呈现。图解不是产品截图，评分不是思想预测概率。</text>
+</g></svg>

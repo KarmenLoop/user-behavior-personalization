@@ -128,7 +128,7 @@ def insights(profile, context, now=None):
 
 
 def blank_profile(subject):
-    return {'schema_version': 2, 'subject_id': subject, 'revision': 0, 'paused': False, 'rules': {}, 'source_hashes': {}, 'deleted_source_hashes': [], 'history': [], 'observations': {}, 'deleted_observation_hashes': [], 'dismissed_candidates': {}, 'updated_at': None}
+    return {'schema_version': 2, 'subject_id': subject, 'revision': 0, 'paused': False, 'rules': {}, 'source_hashes': {}, 'deleted_source_hashes': [], 'history': [], 'observations': {}, 'deleted_observation_hashes': [], 'dismissed_candidates': {}, 'conversation_messages': {}, 'conversation_proposals': {}, 'conversation_transitions': [], 'conversation_sessions': {}, 'updated_at': None}
 
 
 def upgrade(profile):
@@ -156,20 +156,22 @@ def tombstone(profile, source):
     profile['deleted_source_hashes'] = sorted(set(profile['deleted_source_hashes']) | {source})
 
 
-def purge(profile, rule_ids=(), event_ids=()):
+def purge(profile, rule_ids=(), event_ids=(), conversation_keys=()):
     """Remove the full dependency closure, including superseded derived rules."""
     rules = list(profile['rules'].values()) + [h['rule'] for h in profile['history']]
-    rule_ids, event_ids = set(rule_ids), set(event_ids)
+    rule_ids, event_ids, conversation_keys = set(rule_ids), set(event_ids), set(conversation_keys)
     forgotten_dimensions = set()
     while True:
-        before = (len(rule_ids), len(event_ids), len(forgotten_dimensions))
+        before = (len(rule_ids), len(event_ids), len(forgotten_dimensions), len(conversation_keys))
         for rule in rules:
             sources = set(rule.get('evidence_ids', []))
             lineage = set(rule.get('supersedes_rule_ids', []))
-            if rule['id'] in rule_ids or sources & event_ids or lineage & rule_ids:
+            dialogue = set(rule.get('conversation_source_keys', []))
+            if rule['id'] in rule_ids or sources & event_ids or lineage & rule_ids or dialogue & conversation_keys:
                 rule_ids.add(rule['id'])
                 rule_ids.update(lineage)
                 event_ids.update(sources)
+                conversation_keys.update(dialogue)
                 if rule.get('dimension'):
                     forgotten_dimensions.add((context_key(rule['scope']), rule['dimension']))
         # The latest-per-session filter is a scoring rule, not a deletion
@@ -180,7 +182,13 @@ def purge(profile, rule_ids=(), event_ids=()):
             if any(dimension == event['dimension'] and (scope == '*' or scope == event['context'])
                    for scope, dimension in forgotten_dimensions):
                 event_ids.add(event_id)
-        if before == (len(rule_ids), len(event_ids), len(forgotten_dimensions)):
+        for proposal in profile.get('conversation_proposals', {}).values():
+            sources = set(proposal['source_keys'])
+            if sources & conversation_keys or proposal.get('rule_id') in rule_ids:
+                conversation_keys.update(sources)
+                if proposal.get('rule_id'):
+                    rule_ids.add(proposal['rule_id'])
+        if before == (len(rule_ids), len(event_ids), len(forgotten_dimensions), len(conversation_keys)):
             break
     for rule in rules:
         if rule['id'] in rule_ids:
@@ -192,6 +200,17 @@ def purge(profile, rule_ids=(), event_ids=()):
             profile['deleted_observation_hashes'] = sorted(set(profile['deleted_observation_hashes']) | {digest(event_id)})
     profile['rules'] = {k: v for k, v in profile['rules'].items() if k not in rule_ids}
     profile['history'] = [h for h in profile['history'] if h['rule']['id'] not in rule_ids]
+    for key in conversation_keys:
+        message = profile.get('conversation_messages', {}).pop(key, None)
+        if message:
+            tombstone(profile, message['source_hash'])
+    for pid, proposal in list(profile.get('conversation_proposals', {}).items()):
+        if set(proposal['source_keys']) & conversation_keys:
+            if proposal.get('review_source_hash'):
+                tombstone(profile, proposal['review_source_hash'])
+            del profile['conversation_proposals'][pid]
+    profile['conversation_transitions'] = [edge for edge in profile.get('conversation_transitions', [])
+        if edge['from_key'] not in conversation_keys and edge['to_key'] not in conversation_keys]
     # Content-free dismissals stay intact: forgetting unrelated evidence must not
     # revive a candidate the user already rejected. Reset removes all dismissals.
-    return {'removed_rule_ids': sorted(rule_ids), 'removed_observation_ids': sorted(event_ids)}
+    return {'removed_rule_ids': sorted(rule_ids), 'removed_observation_ids': sorted(event_ids), 'removed_message_keys': sorted(conversation_keys)}

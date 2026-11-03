@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1260" height="820" viewBox="0 0 1260 820" role="img" aria-labelledby="title desc"><title id="title">From conversation to a working profile</title><desc id="desc">v0.4.0 architecture · separate paths for preferences, writing, and request sequences</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#60738f"/></marker></defs>
+<rect width="1260" height="820" rx="20" fill="#f6f8fb"/><rect width="1260" height="120" rx="20" fill="#171c25"/><rect y="95" width="1260" height="25" fill="#171c25"/><g font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+<text x="40" y="52" font-size="31" font-weight="700" fill="#fff">From conversation to a working profile</text>
+<text x="40" y="89" font-size="17" fill="#c1ccdc">v0.4.0 architecture · separate paths for preferences, writing, and request sequences</text>
+<rect x="40" y="155" width="510" height="130" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="60" y="188" font-size="21" font-weight="650" fill="#243b59">01 Select and authorize an import</text>
+<text x="60" y="221" font-size="16" fill="#45576e">A user-selected JSON / JSONL conversation</text>
+<text x="60" y="248" font-size="16" fill="#45576e">Bound subject, context, sources, and timestamps</text>
+<rect x="710" y="155" width="510" height="130" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="730" y="188" font-size="21" font-weight="650" fill="#243b59">02 Keep necessary user evidence</text>
+<text x="730" y="221" font-size="16" fill="#45576e">Known credentials redacted; 600-character excerpts</text>
+<text x="730" y="248" font-size="16" fill="#45576e">Ignore assistant roles; preserve source order</text>
+<rect x="40" y="355" width="360" height="185" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="60" y="388" font-size="21" font-weight="650" fill="#243b59">03A Open-text proposals</text>
+<text x="60" y="421" font-size="16" fill="#45576e">Communication · workflow · goals · constraints</text>
+<text x="60" y="448" font-size="16" fill="#45576e">Explicit English and Chinese cues</text>
+<text x="60" y="475" font-size="16" fill="#45576e">Original wording and source evidence</text>
+<text x="60" y="502" font-size="16" fill="#45576e">User review before preference adoption</text>
+<rect x="450" y="355" width="360" height="185" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="470" y="388" font-size="21" font-weight="650" fill="#243b59">03B Writing observations</text>
+<text x="470" y="421" font-size="16" fill="#45576e">Median length · lists · questions</text>
+<text x="470" y="448" font-size="16" fill="#45576e">Language mix and actual examples</text>
+<text x="470" y="475" font-size="16" fill="#45576e">Describe how the user writes</text>
+<text x="470" y="502" font-size="16" fill="#45576e">Do not infer the desired reply style</text>
+<rect x="860" y="355" width="360" height="185" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="880" y="388" font-size="21" font-weight="650" fill="#243b59">03C Original request sequences</text>
+<text x="880" y="421" font-size="16" fill="#45576e">Earlier request → actual follow-up</text>
+<text x="880" y="448" font-size="16" fill="#45576e">Lexical and recency retrieval in context</text>
+<text x="880" y="475" font-size="16" fill="#45576e">Support from at least two sessions</text>
+<text x="880" y="502" font-size="16" fill="#45576e">Abstain when weak or conflicting</text>
+<rect x="40" y="610" width="570" height="115" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="60" y="643" font-size="21" font-weight="650" fill="#243b59">04 Confirmed profile for the next task</text>
+<text x="60" y="676" font-size="16" fill="#45576e">Codex / Cursor / local model-request payload</text>
+<text x="60" y="703" font-size="16" fill="#45576e">Current instructions first; correct, pause, or forget</text>
+<rect x="650" y="610" width="570" height="115" rx="13" fill="#fff" stroke="#c9d3e1"/>
+<text x="670" y="643" font-size="21" font-weight="650" fill="#243b59">05 Grounded next-request suggestions</text>
+<text x="670" y="676" font-size="16" fill="#45576e">Return historical wording and matching examples</text>
+<text x="670" y="703" font-size="16" fill="#45576e">Suggestions only; deletion never invents new edges</text>
+<path d="M550 220H706" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M965 285V320H220V351" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M630 320V351" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M965 320H1040V351" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M220 540V606" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M1040 540V606" fill="none" stroke="#60738f" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="40" y="777" font-size="16" fill="#52647b">Proposals, writing descriptions, and retrieval suggestions stay separate. Diagram, not a screenshot; scores are not thought-prediction probabilities.</text>
+</g></svg>

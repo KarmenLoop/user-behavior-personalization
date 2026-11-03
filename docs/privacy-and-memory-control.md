@@ -1,4 +1,4 @@
-# Privacy and memory control — v0.3.0
+# Privacy and memory control — v0.4.0
 
 [English](privacy-and-memory-control.md) · [中文](privacy-and-memory-control.zh-CN.md)
 
@@ -6,7 +6,7 @@ Profiles are private collaboration data. They do not authorize actions or reveal
 
 ## Collection and consent
 
-Observation is disabled unless the operator enables `--enable-observations`. The host must obtain the user's permission, bind the right subject, and pass only authorized feedback. A flag is a technical setting, not proof of legal consent. The adapter accepts bounded dimensions and values; it does not scrape conversations, monitor a screen, read keystrokes, or collect browsing history.
+Structured observation is disabled unless the operator enables `--enable-observations`. Conversation import separately requires `--enable-conversations`. The host must obtain the user's permission, bind the right subject, and pass only authorized feedback. A flag is a technical setting, not proof of legal consent. The structured path accepts bounded dimensions and values. The conversation path accepts selected text, retains bounded sanitized user excerpts, and extracts open-text proposals. Neither path scrapes conversations, monitors a screen, reads keystrokes, or collects browsing history.
 
 Do not create evidence from assistant messages, third-party quotes, silence, inferred mood, or fabricated sessions. Do not infer health diagnoses or sensitive identity attributes. Never put credentials or unrelated private text in source IDs, contexts, rule statements, or summaries. Structured fields reduce unnecessary storage but do not make user-provided strings harmless.
 
@@ -16,7 +16,7 @@ Keep `--root` outside public repositories. Local files use restricted modes wher
 
 `profile_read` supplies selected confirmed rules to the host. A remote model may receive those rules and the task under the host/provider's own network and retention policy. `build_context.py` sends nothing, but its stdout contains private request content if you redirect it. Review the destination before sending anything.
 
-The v0.3.0 wrapper streams model output to the terminal and retains metadata receipts. It does not persist prompt or raw output files. Terminal capture, host logs, external exports, provider history, and backups remain separate copies. v0.2.0 `host-runs` directories can contain unbound raw output; review and remove those manually after checking ownership and any records you need to keep.
+The current wrapper streams model output to the terminal and retains metadata receipts. It does not persist prompt or raw output files. Terminal capture, host logs, external exports, provider history, and backups remain separate copies. v0.2.0 `host-runs` directories can contain unbound raw output; review and remove those manually after checking ownership and any records you need to keep.
 
 ## Inspect and correct
 
@@ -49,3 +49,11 @@ Use profiles to reduce friction, preserve factual disagreement, and support the 
 ## Local process visibility
 
 Codex receives the composed prompt on stdin. The current Cursor CLI path accepts it as a positional argument, so other tools running as the same local user may be able to inspect it in process arguments. Use the MCP path or an appropriate local account boundary when that exposure is unacceptable. Streaming output can still be captured by your terminal or host; metadata-only adapter receipts do not erase those separate copies.
+
+## Conversation evidence and derived data
+
+Conversation import keeps at most 400 user records across 80 sessions. Each record retains the first 600 sanitized characters plus surface features, source/content hashes, and original sequence references. Assistant/system/tool text is ignored as user evidence. Known credential and email patterns are redacted; other personal information may remain. Automatic extraction can miss statements beyond the retained excerpt. Inspect the portrait/export after an import.
+
+`profile_forget_messages` deletes selected source keys; `profile_forget_conversation` deletes a session. Both cascade through dependent proposals, accepted rules, writing statistics, and original transitions, including linked evidence where needed to prevent resurrection. Deleting a middle message does not create a new neighbor-to-neighbor transition. Minimal hashes remain for replay suppression.
+
+`profile_model_context` returns up to 20 recent user excerpts to the calling host. It performs no network call, but a host may forward them to an authorized provider. An exact quote check proves correspondence to the retained excerpt, not consent or correctness of an interpretation. Treat portraits, forecast examples, and model context as private user data rather than ordinary public response instructions.
