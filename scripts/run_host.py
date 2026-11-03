@@ -14,6 +14,7 @@ import uuid
 from build_context import context_payload, add_plan_arguments, parse_plan_arguments
 from host import load
 from host_support import Database, Problem, atomic, need, stamp
+from provider_runtime import proxy_environment
 
 
 def stop_owned_process(process):
@@ -51,6 +52,7 @@ def main():
     parser.add_argument('--prompt', type=Path, required=True)
     parser.add_argument('--timeout', type=int, default=180)
     parser.add_argument('--read-only', action='store_true', help='Use the host read-only mode.')
+    parser.add_argument('--system-proxy', action='store_true', help='Opt in to the existing macOS loopback HTTPS proxy for this child only. Existing proxy environment variables take precedence.')
     add_plan_arguments(parser)
     args = parser.parse_args()
     try:
@@ -77,10 +79,13 @@ def main():
                 argv += ['--mode', 'ask']
             # Cursor uses a positional prompt; same-user process tools can see it.
             argv += [prompt]
+        environment, network = proxy_environment(args.system_proxy)
+        record['network'] = network
         try:
             process = subprocess.Popen(
                 argv, stdin=subprocess.PIPE if args.host == 'codex' else subprocess.DEVNULL,
                 start_new_session=os.name == 'posix',
+                env=environment,
                 creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == 'nt' else 0)
             try:
                 process.communicate(input=prompt.encode() if args.host == 'codex' else None,

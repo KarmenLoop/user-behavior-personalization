@@ -6,6 +6,10 @@ license: Apache-2.0
 
 # User Behavior Personalization
 
+## Real answer checks — v0.6.0
+
+Use the [model check guide](docs/model-checks.en.md) for actual Codex responses and evidence-bound rubric review. A request finishing is not a passing grade. Keep reviewer identity, supplied-source attribution, and the exact scope of observed success visible. These reviews do not rewrite preferences or train weights.
+
 ## Executable local adapter
 
 Read [the current host tutorial](docs/tutorial.en.md) to configure the bundled Python 3.11+ CLI/MCP adapter. Verify real calls and saved state before claiming a connection. The tutorial distinguishes implemented local operations from scheduling, identity providers, and remote execution that require an authorized host.

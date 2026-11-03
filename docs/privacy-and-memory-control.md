@@ -1,4 +1,4 @@
-# Privacy and memory control — v0.5.1
+# Privacy and memory control — v0.6.0
 
 [English](privacy-and-memory-control.md) · [中文](privacy-and-memory-control.zh-CN.md)
 
@@ -69,3 +69,7 @@ A preview builds prompt content in memory. Preparing a plan saves its task hash,
 The watcher reads only the regular file explicitly selected with `--input`. Its cursor stores the filename, byte offset, line/import counts, prefix hash, status, and timestamp—not a second copy of the conversation. Cursors are private metadata under `watchers/` and survive profile reset to avoid accidentally replaying old content. Pause prevents advancing over unread data.
 
 The selected JSONL file is outside the profile's controlled copy; deletion and reset do not erase it. Stop its writer/watcher before deliberate source or cursor cleanup. Do not remove replay markers simply to re-ingest forgotten material. See [feed recovery](automatic-learning.en.md).
+
+## Explicit evaluation copies
+
+`evaluate_judgment.py` deliberately retains selected synthetic prompts, provider answers and logs in the external directory you choose. These files are separate from a user profile; profile forget/reset does not delete them. Inspect and remove that evaluation directory separately when it is no longer needed. Ordinary `run_host.py` receipts remain metadata only.

@@ -1,4 +1,4 @@
-# 从选定文件自动学习 — v0.5.1
+# 从选定文件自动学习 — v0.6.0
 
 [English](automatic-learning.en.md) · [中文](automatic-learning.zh-CN.md)
 

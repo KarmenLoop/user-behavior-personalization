@@ -1,4 +1,4 @@
-# 宿主接入 — v0.5.1
+# 宿主接入 — v0.6.0
 
 [English](host-integration.md) · [中文](host-integration.zh-CN.md)
 
@@ -45,10 +45,14 @@ JSON 输出包含 `messages` 及本地个性化元数据。由你自己的客户
 
 `profile_model_context(context)` 返回有限的已存摘录和提议格式。经授权的宿主可将其发送给选定模型，包括兼容 DeepSeek 风格的聊天 API。返回结果通过 `profile_model_propose` 提交，工具会核对已知来源、精确引用、类别与范围。通过校验的提议仍需用户审阅。
 
-DeepSeek JSON Output 约束格式，不证明内容真实。需要拒绝空白或截断结果、校验字段及来源白名单，并将摘录视为数据而非指令。参见[官方 JSON Output 指南](https://api-docs.deepseek.com/guides/json_mode/)。本包不包含提供商凭据或模型循环，也未声称完成 DeepSeek 真实调用验收。
+DeepSeek JSON Output 约束格式，不证明内容真实。需要拒绝空白或截断结果、校验字段及来源白名单，并将摘录视为数据而非指令。参见[官方 JSON Output 指南](https://api-docs.deepseek.com/guides/json_mode/)。这条提取路径不包含提供商凭据或自动 DeepSeek 模型循环，也未声称完成 DeepSeek 真实调用验收。单独的验收工具使用已经登录的 Codex CLI。
 
 ## 明确接入边界
 
 宿主负责可信身份、获准使用的消息、准确的角色与来源标识，以及用户真实的审阅决定。来源字符串是宿主记录，并非独立的授权证明。当前指令与普通执行权限仍然有效。
 
 每日调度、账号历史导出、操作系统隔离、多设备同步及外部留存需要宿主分别实现。[早期反思契约](../references/reflection-workflow.md)说明了这些责任。指定文件监听是已实现的前台导入器，不代表整套后台服务已具备。本地与提供商结果见[当前验收记录](evaluation.zh-CN.md)。
+
+## 真实回答检查
+
+[模型验收](model-checks.zh-CN.md)介绍可选的 `--system-proxy` 子进程环境、可复现的 Codex 调用和绑定具体回答的审核。验收使用合成案例并保留原文，普通任务记录仍只保存元数据。

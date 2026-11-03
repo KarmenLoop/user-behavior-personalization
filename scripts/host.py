@@ -286,4 +286,4 @@ def dispatch(name, values, args):
 
 
 if __name__ == '__main__':
-    raise SystemExit(main('user_behavior_personalization', '0.5.1', TOOLS, dispatch))
+    raise SystemExit(main('user_behavior_personalization', '0.6.0', TOOLS, dispatch))

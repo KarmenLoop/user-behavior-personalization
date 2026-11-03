@@ -1,4 +1,4 @@
-# 对话学习教程 — v0.5.1
+# 对话学习教程 — v0.6.0
 
 [English](conversation-guide.en.md) · [中文](conversation-guide.zh-CN.md)
 
@@ -6,7 +6,7 @@
 
 ## 1. 下载和安装
 
-从 [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.1) 下载 ZIP 和 `SHA256SUMS.txt`，解压前核对 SHA-256。macOS 使用 `shasum -a 256`，Linux 使用 `sha256sum`，PowerShell 使用 `Get-FileHash -Algorithm SHA256`。
+从 [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0) 下载 ZIP 和 `SHA256SUMS.txt`，解压前核对 SHA-256。macOS 使用 `shasum -a 256`，Linux 使用 `sha256sum`，PowerShell 使用 `Get-FileHash -Algorithm SHA256`。
 
 需要 Python 3.11+，没有第三方 Python 运行依赖。在解压目录运行：
 

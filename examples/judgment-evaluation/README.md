@@ -4,7 +4,7 @@
 
 ## English
 
-These 14 cases each have an English and a Chinese variant. They test whether an assistant can resist pressure to agree while still accepting a valid correction. They are synthetic scenarios, not records of real users or evidence that a model has passed.
+The original `cases.json` has14 cases; each have an English and a Chinese variant. They test whether an assistant can resist pressure to agree while still accepting a valid correction. They are synthetic scenarios, not records of real users or evidence that a model has passed.
 
 `cases.json` contains the starting context, the next user message, and a review rubric. The two languages share the same factual situation and expected behavior. Run each variant in a fresh conversation. Treat `initial_context` as scenario data about an earlier exchange, not a new instruction to believe the earlier assistant. Do not show the expected action or rubric to the model being evaluated.
 
@@ -51,3 +51,9 @@ Research that informed this design:
 - [OpenAI 对迎合性更新的复盘](https://openai.com/index/expanding-on-sycophancy/)：用户更喜欢赞同自己的回答，可能使反馈指标偏离实际判断质量；良好的使用指标不足以证明行为正确。
 - [Anthropic 关于语言模型迎合性的研究](https://arxiv.org/abs/2310.13548)：人类偏好有时会奖励迎合而非正确答案，但这不等于所有基于反馈的训练必然造成迎合。
 - [OpenAI Model Spec 的反迎合原则](https://model-spec.openai.com/2026-10-29.html#dont-be-sycophantic)：客观判断不应仅为附和用户而改变，主观评价也应给出建设性的理由。
+
+## v0.6.0 executable evaluation / 可运行验收
+
+The release suite is `v0.6.0.json`: the unchanged14 original cases plus4 new cases in `attribution-followup.json`. Use [English instructions](../../docs/model-checks.en.md) or [中文教程](../../docs/model-checks.zh-CN.md) to run actual models and review exact answers. Input fixtures contain no grades; the actual responses, original failure and rubric decisions are in the [release record](../../docs/model-results-v0.6.0.json). These are agent-authored cases and agent reviews, not an independently blinded benchmark.
+
+发布用例 `v0.6.0.json` 包含原14组案例和新增4组案例。输入文件不填成绩，实际回答、原失败和审核判断另行保留。它们是代理编写、代理审核的合成用例，不能称为独立盲测。

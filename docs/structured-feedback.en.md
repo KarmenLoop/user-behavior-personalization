@@ -1,4 +1,4 @@
-# User Behavior Personalization v0.5.1 structured feedback tutorial
+# User Behavior Personalization v0.6.0 structured feedback tutorial
 
 [English](structured-feedback.en.md) · [中文](structured-feedback.zh-CN.md)
 
@@ -6,7 +6,7 @@ Start with the local exercise below. It uses synthetic feedback and no model acc
 
 ## 1. Download and check the package
 
-Get the ZIP and `SHA256SUMS.txt` from [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.1). Compare the ZIP's SHA-256 with the published file before extracting. On macOS, use `shasum -a 256`; on Linux, `sha256sum`; in PowerShell, `Get-FileHash -Algorithm SHA256`.
+Get the ZIP and `SHA256SUMS.txt` from [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0). Compare the ZIP's SHA-256 with the published file before extracting. On macOS, use `shasum -a 256`; on Linux, `sha256sum`; in PowerShell, `Get-FileHash -Algorithm SHA256`.
 
 Use Python 3.11 or newer. The adapter has no third-party Python dependencies. Open a terminal in the extracted package:
 

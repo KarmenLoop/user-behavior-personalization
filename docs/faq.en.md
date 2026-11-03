@@ -1,4 +1,4 @@
-# Twenty practical questions — v0.5.1
+# Twenty practical questions — v0.6.0
 
 [English](faq.en.md) · [中文](faq.zh-CN.md)
 
