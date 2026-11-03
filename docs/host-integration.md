@@ -1,4 +1,4 @@
-# Host integration — v0.5.1
+# Host integration — v0.6.0
 
 [English](host-integration.md) · [中文](host-integration.zh-CN.md)
 
@@ -45,10 +45,14 @@ The JSON output contains `messages` and local personalization metadata. Send onl
 
 `profile_model_context(context)` returns bounded retained excerpts and a proposal contract. An authorized host can send these to its chosen model, including a DeepSeek-style chat API. Submit returned proposals through `profile_model_propose`; known source keys, exact quotes, categories, and scope are checked. Valid output stays pending until the user reviews it.
 
-DeepSeek JSON Output constrains format, not truth. Reject blank/truncated responses, validate fields and source allowlists, and treat excerpts as data rather than instructions. See the [official JSON Output guide](https://api-docs.deepseek.com/guides/json_mode/). This package does not include provider credentials, a model loop, or a live DeepSeek certification.
+DeepSeek JSON Output constrains format, not truth. Reject blank/truncated responses, validate fields and source allowlists, and treat excerpts as data rather than instructions. See the [official JSON Output guide](https://api-docs.deepseek.com/guides/json_mode/). This extraction path includes neither provider credentials nor an automatic DeepSeek model loop; no live DeepSeek acceptance is claimed. The separate evaluation runner uses an already authenticated Codex CLI.
 
 ## Keep integration boundaries clear
 
 The host supplies verified identity, authorized messages, accurate roles/source IDs, and actual review decisions. Source strings are attestations, not independent proof of permission. Current instructions and normal execution authority still apply.
 
 Daily schedules, account-history export, OS isolation, multi-device synchronization, and external retention need their own host implementation. The [legacy reflection contract](../references/reflection-workflow.md) describes these responsibilities. The selected-file watcher is an implemented foreground importer, not that entire service. See [current evaluation](evaluation.md) for local and provider results.
+
+## Actual response checks
+
+[Model checks](model-checks.en.md) covers the optional `--system-proxy` child environment, reproducible Codex runs, and response-bound reviews. The evaluation path uses synthetic cases and retains raw outputs; normal task receipts still retain metadata only.

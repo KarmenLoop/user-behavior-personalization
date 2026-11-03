@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 — Real model checks and evidence scope
+
+- Restore CLI requests in the tested macOS proxy environment with an opt-in child-process proxy setting. Keep system configuration, authentication and TLS checks intact.
+- Add reproducible baseline/guarded Codex runs with deadlines, fixture snapshots, full outputs, explicit failure states and no automatic passing grades.
+- Bind named rubric reviews to exact answers and report unsupported reversals, missed corrections, false verification and overconfident scope separately.
+- Tighten policy1.2.0 after a real answer extended reported test success into unobserved build success. Preserve the original failure and rerun the release suite.
+- Add paired bilingual tutorials and public answer/review evidence. Prior provider timeouts and recognition limitations remain available.
+
 ## 0.5.1 — Evidence-first personalization
 
 - Keep one versioned judgment policy in previews, host prompts, direct recall, and extraction. Adapt communication without treating user agreement as evidence.

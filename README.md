@@ -1,16 +1,16 @@
 # User Behavior Personalization
 
-[English](README.md) · [中文](README.zh-CN.md) · **v0.5.1**
+[English](README.md) · [中文](README.zh-CN.md) · **v0.6.0**
 
 You have asked for shorter answers three times. The next task needs a detailed explanation. Your assistant should handle both.
 
 This local workspace turns recurring feedback into preferences you can review, shows exactly how those preferences change the next task's prompt, and lets you record whether the change helped. A one-time choice leaves your saved habits intact.
 
-![Actual v0.5.1 task preview with the shared evidence-first judgment policy](docs/images/judgment-v0.5.1.en.jpg)
+![Actual v0.6.0 task preview with the shared evidence-first judgment policy](docs/images/judgment-v0.6.0.en.jpg)
 
-*Actual v0.5.1 workspace with a synthetic task. A concise-answer preference changes presentation; the judgment rules still require evidence and counterexample checks.*
+*Actual v0.6.0 workspace with a synthetic task. A concise-answer preference changes presentation; the judgment rules still require evidence and counterexample checks.*
 
-[Download](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.1) · [Full walkthrough](docs/tutorial.en.md) · [Automatic learning](docs/automatic-learning.en.md) · [Current evaluation](docs/evaluation.md)
+[Download](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0) · [Full walkthrough](docs/tutorial.en.md) · [Automatic learning](docs/automatic-learning.en.md) · [Current evaluation](docs/evaluation.md)
 
 ## Try the complete loop
 
@@ -40,6 +40,10 @@ Open the printed `http://127.0.0.1:...` URL. The workspace runs on your computer
 
 **Adapt the collaboration, keep independent judgment.** Both prompt previews include the same evidence-first rules. Technical explanations remain hypotheses until supported; a conclusion changes for new evidence or better reasoning, not pressure or a high rating. Recognized requests for unconditional agreement are blocked from active preferences. [See the behavior and its limits](docs/independent-judgment.en.md).
 
+## Check actual answers
+
+Run the same synthetic case with and without the judgment policy, inspect the complete responses, and bind a review to each exact answer. Timeouts and unreviewed answers do not pass. [Start with one case](docs/model-checks.en.md).
+
 ## Bring your own conversations
 
 Import a JSON conversation in the workspace, or run:
@@ -59,7 +63,7 @@ Existing capabilities remain available: open-text preferences, project terminolo
 
 Codex and Cursor can use the included MCP configuration helpers or pre-invocation wrapper. `build_context.py` produces scoped messages for your own model client, including DeepSeek-style APIs. The package sends no provider request on its own.
 
-The browser preview is real local functionality. It is **not a successful model-response test**: the v0.5.0 Codex attempt timed out after 80 seconds, and the v0.5.1 pressure-case preflight timed out after 45 seconds without an answer. Read [host acceptance and learning diagnostics](docs/evaluation.md) before treating a feature or score as proven.
+v0.6.0 adds [actual model runs and answer review](docs/model-checks.en.md). The earlier provider timeouts remain recorded; the tested Mac connection now works through its existing loopback system proxy. Read the [complete answer and review record](docs/model-results-v0.6.0.json), including the original scope-overstatement failure. Equal baseline results are not evidence that the policy improved accuracy.
 
 ## Go deeper
 

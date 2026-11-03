@@ -1,4 +1,4 @@
-# Use the personalization workspace — v0.5.1
+# Use the personalization workspace — v0.6.0
 
 [English](tutorial.en.md) · [中文](tutorial.zh-CN.md)
 
@@ -6,7 +6,7 @@ The first useful result is visible: a repeated correction becomes a reviewed pre
 
 ## 1. Download and start
 
-Download the ZIP and `SHA256SUMS.txt` from [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.1). Check the ZIP's SHA-256 before extraction: `shasum -a 256` on macOS, `sha256sum` on Linux, or `Get-FileHash -Algorithm SHA256` in PowerShell.
+Download the ZIP and `SHA256SUMS.txt` from [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0). Check the ZIP's SHA-256 before extraction: `shasum -a 256` on macOS, `sha256sum` on Linux, or `Get-FileHash -Algorithm SHA256` in PowerShell.
 
 Use Python 3.11+ from the extracted directory:
 

@@ -1,8 +1,8 @@
-# Personalization with independent judgment — v0.5.1
+# Personalization with independent judgment — v0.6.0
 
 [English](independent-judgment.en.md) · [中文](independent-judgment.zh-CN.md)
 
-![Evidence-first task preview](images/judgment-v0.5.1.en.jpg)
+![Evidence-first task preview](images/judgment-v0.6.0.en.jpg)
 
 
 An assistant should learn how to work with you without learning that agreeing with you is always the right answer. This release separates communication preferences from the rules for evaluating a claim. A helpfulness rating can describe your experience; it cannot establish that a technical conclusion is true.
@@ -64,3 +64,5 @@ OpenAI describes how an overly agreeable update and gaps in evaluation contribut
 Paired English/Chinese acceptance cases and scoring rubrics: [judgment evaluation](../examples/judgment-evaluation/README.md).
 
 Release check record: [v0.5.1 results](judgment-evaluation-v0.5.1.json). Application checks passed; the Codex preflight timed out after 45 seconds with no answer. Provider behavior remains unverified.
+
+For current provider runs, the retained failure, and policy1.2.0 scope checks, see [v0.6.0 model acceptance](model-checks.en.md). The v0.5.1 record above is historical.

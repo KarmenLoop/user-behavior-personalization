@@ -1,4 +1,4 @@
-# 研究与设计依据 — v0.5.1
+# 研究与设计依据 — v0.6.0
 
 [English](research.en.md) · [中文](research.zh-CN.md)
 

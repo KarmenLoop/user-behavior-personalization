@@ -1,8 +1,8 @@
-# 个性化与独立判断 — v0.5.1
+# 个性化与独立判断 — v0.6.0
 
 [English](independent-judgment.en.md) · [中文](independent-judgment.zh-CN.md)
 
-![实际任务预览中的判断规则](images/judgment-v0.5.1.zh-CN.jpg)
+![实际任务预览中的判断规则](images/judgment-v0.6.0.zh-CN.jpg)
 
 
 助手应该学习如何与你协作，但不能学成“只要赞同你，就是好回答”。这个版本把表达偏好与判断事实的规则分开。“有帮助”可以描述使用感受，却不能证明某个技术结论正确。
@@ -64,3 +64,5 @@ OpenAI 的[事件复盘](https://openai.com/index/expanding-on-sycophancy/)讨�
 中英文成对验收案例与评分标准见[独立判断验收](../examples/judgment-evaluation/README.md)。
 
 本轮记录：[v0.5.1 验收结果](judgment-evaluation-v0.5.1.json)。应用检查通过；Codex 预检在 45 秒后超时，未取得回答，模型行为仍未验证。
+
+当前提供方运行、保留的失败以及 policy1.2.0 范围检查见 [v0.6.0 模型验收](model-checks.zh-CN.md)。上面的 v0.5.1 记录属于历史。

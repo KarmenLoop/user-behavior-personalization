@@ -1,4 +1,4 @@
-# 本地工具参考 — v0.5.1
+# 本地工具参考 — v0.6.0
 
 [English](tools.en.md) · [中文](tools.zh-CN.md)
 

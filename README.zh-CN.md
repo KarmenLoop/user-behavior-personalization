@@ -1,16 +1,16 @@
 # 用户行为个性化
 
-[English](README.md) · [中文](README.zh-CN.md) · **v0.5.1**
+[English](README.md) · [中文](README.zh-CN.md) · **v0.6.0**
 
 你已经三次要求回答短一点，但下一件事又需要详细解释。助手应该记住习惯，也能处理例外。
 
 这个本地工作台把反复出现的反馈整理为可审查的偏好，让你看见它怎样改变下一次任务的提示内容，再记录这次调整是否有帮助。一次性的选择不会改掉长期习惯。
 
-![v0.5.1 实际任务预览与固定的独立判断规则](docs/images/judgment-v0.5.1.zh-CN.jpg)
+![v0.6.0 实际任务预览与固定的独立判断规则](docs/images/judgment-v0.6.0.zh-CN.jpg)
 
-*v0.5.1 真实工作台截图，使用合成任务。简洁偏好影响表达方式，证据和反例检查仍然保留。*
+*v0.6.0 真实工作台截图，使用合成任务。简洁偏好影响表达方式，证据和反例检查仍然保留。*
 
-[下载](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.1) · [完整教程](docs/tutorial.zh-CN.md) · [自动学习](docs/automatic-learning.zh-CN.md) · [当前验收](docs/evaluation.zh-CN.md)
+[下载](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0) · [完整教程](docs/tutorial.zh-CN.md) · [自动学习](docs/automatic-learning.zh-CN.md) · [当前验收](docs/evaluation.zh-CN.md)
 
 ## 先走完一次闭环
 
@@ -59,7 +59,7 @@ python3 -B scripts/watch_conversations.py --root ../private-profile --subject ow
 
 Codex、Cursor 可使用 MCP 配置助手或调用前包装入口。`build_context.py` 为自己的模型客户端生成限定上下文，也适用于 DeepSeek 类聊天 API；包本身不会自行发送提供方请求。
 
-浏览器预览是已经实现的本地功能，但**不代表模型回复验收成功**：v0.5.0 的 Codex 尝试在 80 秒后超时；v0.5.1 的施压案例预检也在 45 秒后超时，未取得回答。能力和分数的实际依据见[宿主验收与学习诊断](docs/evaluation.zh-CN.md)。
+v0.6.0 新增[真实模型调用与回答审核](docs/model-checks.zh-CN.md)。旧的超时记录仍保留，本轮 Mac 环境已通过既有回环系统代理恢复连接。[完整回答与审核记录](docs/model-results-v0.6.0.json)也保留了最初扩大成功范围的失败案例。对照组表现相同，不能据此声称规则提高了准确率。
 
 ## 继续深入
 
