@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "suite": "fresh-v4",
+  "frozen_at": "2026-11-03T14:55:50.989636+00:00",
+  "files": {
+    "acceptance.json": {
+      "sha256": "e4b81317a71efc0f61c1b38b310b3c7d5f49462d7f11974e3020413ed830ea1b",
+      "bytes": 1053
+    },
+    "expected.json": {
+      "sha256": "324955298316d8533fc9864a654f8864bad226c56e7fb1b7702d5bf719d1fc0d",
+      "bytes": 5045
+    },
+    "inputs.json": {
+      "sha256": "27dc08e176461b0774e6663081edc496556aeee5d7f4f6fe081d8a3cb8376a65",
+      "bytes": 21968
+    }
+  },
+  "case_count": 16,
+  "positive_count": 8,
+  "negative_count": 8,
+  "source_pin_at_freeze": null,
+  "evaluation_started": false
+}

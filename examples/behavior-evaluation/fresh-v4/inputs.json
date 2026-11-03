@@ -1,0 +1,712 @@
+{
+  "schema_version": 1,
+  "suite": "fresh-v4",
+  "evaluation_now": "2026-11-03T12:00:00+00:00",
+  "synthetic_only": true,
+  "cases": [
+    {
+      "id": "v4-positive-en-brief",
+      "locale": "en",
+      "behavior_learning_enabled": true,
+      "target_context": "writing",
+      "conversations": [
+        {
+          "session_id": "v4-positive-en-brief-session-1",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "That took too long to get to the point. Can you boil your reply down to the essentials?",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-en-brief-session-2",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "I'm scanning these between calls. A tighter answer would be easier for me to use.",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-en-brief-session-3",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "There's more background here than I need. Please trim the response to what actually matters.",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-positive-en-code",
+      "locale": "en",
+      "behavior_learning_enabled": true,
+      "target_context": "coding",
+      "conversations": [
+        {
+          "session_id": "v4-positive-en-code-session-1",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Can you put the actual diff above the explanation? I want to inspect the change before reading the rationale.",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-en-code-session-2",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "For coding answers, I'd rather see the patch up front and the notes underneath.",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-en-code-session-3",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Lead your reply with the code; walk me through your reasoning afterward.",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-positive-en-worked",
+      "locale": "en",
+      "behavior_learning_enabled": true,
+      "target_context": "learning",
+      "conversations": [
+        {
+          "session_id": "v4-positive-en-worked-session-1",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Could you pick one small input and take it all the way through, showing each intermediate result?",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-en-worked-session-2",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "I follow better when you solve a complete sample problem with me instead of stopping at the formula.",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-en-worked-session-3",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Please demonstrate the whole process on a concrete case so I can see how each step changes the result.",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-positive-en-language",
+      "locale": "en",
+      "behavior_learning_enabled": true,
+      "target_context": "writing",
+      "conversations": [
+        {
+          "session_id": "v4-positive-en-language-session-1",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Even if my notes arrive in Chinese, I'd like your replies in English.",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-en-language-session-2",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "English is easier for me to review at work. Could you stick to that for your answers?",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-en-language-session-3",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Please keep our written back-and-forth in English; you can leave product names as they are.",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-positive-zh-brief",
+      "locale": "zh",
+      "behavior_learning_enabled": true,
+      "target_context": "writing",
+      "conversations": [
+        {
+          "session_id": "v4-positive-zh-brief-session-1",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "你这段铺垫有点多，我一般只需要能直接用上的那几句。",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-zh-brief-session-2",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "回复再收一收吧，保留重点就够了。",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-zh-brief-session-3",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "我看东西习惯快一点，回答不用铺这么开，压缩一下。",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-positive-zh-code",
+      "locale": "zh",
+      "behavior_learning_enabled": true,
+      "target_context": "coding",
+      "conversations": [
+        {
+          "session_id": "v4-positive-zh-code-session-1",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "以后讲代码时，把能直接改的那段放在最上面，解释接在后面就行。",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-zh-code-session-2",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "这次我又得翻到底下找补丁了。先贴改动，再讲你为什么这么改。",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-zh-code-session-3",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "我习惯先看实现，再看说明。代码相关的回复照这个顺序来吧。",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-positive-zh-worked",
+      "locale": "zh",
+      "behavior_learning_enabled": true,
+      "target_context": "learning",
+      "conversations": [
+        {
+          "session_id": "v4-positive-zh-worked-session-1",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "我还是没连起来，拿一组小数据从头算到结果给我看吧。",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-zh-worked-session-2",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "能不能挑个完整的小案例，边做边讲每一步是怎么得到的？",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-zh-worked-session-3",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "别只摆公式，带着具体数值把整个过程走完，我才知道怎么自己做。",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-positive-zh-language",
+      "locale": "zh",
+      "behavior_learning_enabled": true,
+      "target_context": "writing",
+      "conversations": [
+        {
+          "session_id": "v4-positive-zh-language-session-1",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "变量名留英文没关系，跟我解释的时候还是中文读着顺。",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-zh-language-session-2",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "我理解中文更快，后面的文字回复就用中文吧。",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-positive-zh-language-session-3",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "技术术语可以保留原文，其他说明尽量写成中文。",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-negative-en-report",
+      "locale": "en",
+      "behavior_learning_enabled": true,
+      "target_context": "writing",
+      "conversations": [
+        {
+          "session_id": "v4-negative-en-report-session-1",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "The support ticket says, \"Please cut the reply down to the essentials.\" Summarize what the customer complained about.",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-en-report-session-2",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Our account manager forwarded a customer note: \"A tighter answer would be easier to read.\" Identify the issue in that note.",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-en-report-session-3",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "The customer survey includes \"trim the response to what matters.\" That is feedback about their previous vendor.",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-negative-en-meta",
+      "locale": "en",
+      "behavior_learning_enabled": true,
+      "target_context": "coding",
+      "conversations": [
+        {
+          "session_id": "v4-negative-en-meta-session-1",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "What does 'put the patch before the explanation' mean in a code review checklist?",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-en-meta-session-2",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Why would someone ask for code at the top and commentary afterward?",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-en-meta-session-3",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Can you explain the tradeoff behind a code-first reply format?",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-negative-en-negated",
+      "locale": "en",
+      "behavior_learning_enabled": true,
+      "target_context": "learning",
+      "conversations": [
+        {
+          "session_id": "v4-negative-en-negated-session-1",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "I do not want a worked example walked through from start to finish.",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-en-negated-session-2",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Please avoid solving a complete sample problem for me; that is not what I am asking for.",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-en-negated-session-3",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "There is no need to take concrete values through every intermediate step.",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-negative-en-translation",
+      "locale": "en",
+      "behavior_learning_enabled": true,
+      "target_context": "writing",
+      "conversations": [
+        {
+          "session_id": "v4-negative-en-translation-session-1",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "Please translate the phrase 'answer in English' into French.",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-en-translation-session-2",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "On this worksheet, how would you render 'English replies only' in Spanish?",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-en-translation-session-3",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "The words 'write back in English' are a heading I need localized into German.",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-negative-zh-report",
+      "locale": "zh",
+      "behavior_learning_enabled": true,
+      "target_context": "writing",
+      "conversations": [
+        {
+          "session_id": "v4-negative-zh-report-session-1",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "同事嫌回复太长，原话是“压缩到三句话”。你帮我把他的意见记到会议纪要里。",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-zh-report-session-2",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "客户在问卷里写“请简短一点”，这里说的是他们收到的客服邮件。",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-zh-report-session-3",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "她刚才提出“省掉前言，只给重点”，这是她的阅读习惯，不是我的要求。",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-negative-zh-description",
+      "locale": "zh",
+      "behavior_learning_enabled": true,
+      "target_context": "writing",
+      "conversations": [
+        {
+          "session_id": "v4-negative-zh-description-session-1",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "这条公告总共只有两句话，字数比上一版少了一半。",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-zh-description-session-2",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "新闻摘要的第三段被编辑删掉了，剩下的内容读起来短了很多。",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-zh-description-session-3",
+          "context": "writing",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "这份周报压缩到一页后，首页还是先放数据图。",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-negative-zh-temporary",
+      "locale": "zh",
+      "behavior_learning_enabled": true,
+      "target_context": "coding",
+      "conversations": [
+        {
+          "session_id": "v4-negative-zh-temporary-session-1",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "仅这一次先贴补丁，方便我转给值班同事；不用记成长期偏好。",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-zh-temporary-session-2",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "当前这一问把代码挪到开头就好，其他回复仍按各自需要组织。",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-zh-temporary-session-3",
+          "context": "coding",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "这回先给实现，我正在对照报错；以后不必固定这种顺序。",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v4-negative-zh-meta",
+      "locale": "zh",
+      "behavior_learning_enabled": true,
+      "target_context": "learning",
+      "conversations": [
+        {
+          "session_id": "v4-negative-zh-meta-session-1",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "为什么有人学算法非得看一组数据从输入算到输出？",
+              "at": "2026-11-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-zh-meta-session-2",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "教学评测里“完整演算示例”这个标签具体指什么？",
+              "at": "2026-11-02T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "session_id": "v4-negative-zh-meta-session-3",
+          "context": "learning",
+          "messages": [
+            {
+              "id": "user-feedback",
+              "role": "user",
+              "text": "请比较完整示例和自己做题这两种教学方法的区别。",
+              "at": "2026-11-03T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

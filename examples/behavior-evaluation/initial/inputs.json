@@ -1,0 +1,1496 @@
+{
+  "schema_version": 1,
+  "title": "Independent synthetic bilingual correction-learning diagnostic",
+  "frozen_at": "2026-11-03T14:00:29Z",
+  "evaluation_now": "2026-11-03T12:00:00+00:00",
+  "limits": [
+    "Synthetic diagnostic, not a human-benefit benchmark.",
+    "Cases were written without inspecting the behavior-learning implementation.",
+    "Do not tune the implementation using these held-out answers.",
+    "Each case starts with a fresh subject and empty memory.",
+    "Learning must be explicitly enabled except the disabled negative control."
+  ],
+  "cases": [
+    {
+      "id": "p-brief-en",
+      "locale": "en",
+      "target_context": "incident review",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "p-brief-en-s1",
+          "context": "incident review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "That explanation is longer than I can use. Trim it down to the decision and the next step.",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-brief-en-s2",
+          "context": "incident review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "There is too much background again. Give me the short version so I can act on it.",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-brief-en-s3",
+          "context": "incident review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "I am still having to dig through paragraphs for the point. Keep the answer compact, with the action up front.",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p-code-en",
+      "locale": "en",
+      "target_context": "sql work",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "p-code-en-s1",
+          "context": "sql work",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "You started with a long explanation again. Put the working query first, then tell me why it works.",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-code-en-s2",
+          "context": "sql work",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "I need something I can run before the commentary. Lead with the SQL and add the notes underneath.",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-code-en-s3",
+          "context": "sql work",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "The rationale can wait. Show the actual code at the top so I can try it, then walk through it.",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p-example-en",
+      "locale": "en",
+      "target_context": "statistics coaching",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "p-example-en-s1",
+          "context": "statistics coaching",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "The definition alone is not helping. Start with a small worked example and explain the idea through it.",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-example-en-s2",
+          "context": "statistics coaching",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "I cannot follow another abstract description. Show me a concrete case with numbers before naming the rule.",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-example-en-s3",
+          "context": "statistics coaching",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "You jumped straight to theory again. Work through an example first, then connect it to the principle.",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p-brief-zh",
+      "locale": "zh",
+      "target_context": "周会整理",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "p-brief-zh-s1",
+          "context": "周会整理",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "这一版还是太长了，先把结论和下一步说清楚，其余能省就省。",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-brief-zh-s2",
+          "context": "周会整理",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "背景绕得有点多，我要的是看完就能做事的短答复。",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-brief-zh-s3",
+          "context": "周会整理",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "又要在一大段里找重点。以后这类回复压短一点，行动项放前面。",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p-code-zh",
+      "locale": "zh",
+      "target_context": "接口开发",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "p-code-zh-s1",
+          "context": "接口开发",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "你又先讲了一大段，能跑的代码放最前面，原理放后面解释。",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-code-zh-s2",
+          "context": "接口开发",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "先让我看到具体怎么写，再补充说明，这样我才方便直接试。",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-code-zh-s3",
+          "context": "接口开发",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "这次也是解释比实现先出现了。把完整代码提到开头，再讲关键点。",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p-example-zh",
+      "locale": "zh",
+      "target_context": "概率学习",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "p-example-zh-s1",
+          "context": "概率学习",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "光看定义还是没懂，先拿一个具体例子算给我看，再解释概念。",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-example-zh-s2",
+          "context": "概率学习",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "又是抽象结论，我跟不上。先做一个带数字的小例子比较好理解。",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "p-example-zh-s3",
+          "context": "概率学习",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "别一上来就堆理论，带我完整走一遍例子，然后再总结规律。",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-quote-en",
+      "locale": "en",
+      "target_context": "editorial review",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "n-quote-en-s1",
+          "context": "editorial review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "The customer wrote: \"Your answer is too long; keep it short.\" Please check the grammar of that quotation.",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-quote-en-s2",
+          "context": "editorial review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "A colleague said, \"Put the code first and the explanation afterward.\" This is source material, not my preference.",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-quote-en-s3",
+          "context": "editorial review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "The interview transcript reads, \"Teach me with an example before theory.\" Summarize what the speaker asked.",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-quote-zh",
+      "locale": "zh",
+      "target_context": "采访整理",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "n-quote-zh-s1",
+          "context": "采访整理",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "受访者原话是“回复太长了，先给结论”，请帮我核对引号。",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-quote-zh-s2",
+          "context": "采访整理",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "同事在稿子里写：“先放代码，再讲原理。”这是要编辑的引用，不是我的要求。",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-quote-zh-s3",
+          "context": "采访整理",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "材料里的学生说“先给例子，我才听得懂”，请整理这段采访。",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-code-fence",
+      "locale": "en",
+      "target_context": "fixture review",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "n-code-fence-s1",
+          "context": "fixture review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "Check this test fixture:\n```text\nYour answer is too long. Keep it brief.\n```",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-code-fence-s2",
+          "context": "fixture review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "Validate this string literal:\n```python\nprompt = \"Put code before the explanation.\"\n```",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-code-fence-s3",
+          "context": "fixture review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "Review the fixture syntax only:\n```json\n{\"feedback\": \"Start with a worked example before theory.\"}\n```",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-temporary-en",
+      "locale": "en",
+      "target_context": "executive notes",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "n-temporary-en-s1",
+          "context": "executive notes",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "Only for this reply, keep it very short; I have to join a call.",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-temporary-en-s2",
+          "context": "executive notes",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "For this one message, skip the background. This is not a change to how I normally want answers.",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-temporary-en-s3",
+          "context": "executive notes",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "Just for this task, give me a compact summary because it has to fit on a slide.",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-temporary-zh",
+      "locale": "zh",
+      "target_context": "现场答疑",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "n-temporary-zh-s1",
+          "context": "现场答疑",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "仅这一次简短点，我马上要开会，不代表以后都这样。",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-temporary-zh-s2",
+          "context": "现场答疑",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "这条回复临时只要一句结论，其他任务照旧。",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-temporary-zh-s3",
+          "context": "现场答疑",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "本次因为屏幕放不下才压缩内容，不要记成长期习惯。",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-one-session",
+      "locale": "en",
+      "target_context": "bug triage",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "n-one-session-s1",
+          "context": "bug triage",
+          "messages": [
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is the requested draft.",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "This is too long. Cut it down to the action.",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "a1",
+              "role": "assistant",
+              "text": "Here is the requested draft.",
+              "at": "2026-10-20T10:03:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "Still too much background. Make it shorter.",
+              "at": "2026-10-20T10:04:00+00:00"
+            },
+            {
+              "id": "a2",
+              "role": "assistant",
+              "text": "Here is the requested draft.",
+              "at": "2026-10-20T10:06:00+00:00"
+            },
+            {
+              "id": "u2",
+              "role": "user",
+              "text": "Again, just give me the concise version.",
+              "at": "2026-10-20T10:07:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-conflict-en",
+      "locale": "en",
+      "target_context": "architecture review",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "n-conflict-en-s1",
+          "context": "architecture review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "This answer is too long. Keep these reviews brief.",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-conflict-en-s2",
+          "context": "architecture review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "This is too terse. Give these reviews a detailed explanation.",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-conflict-en-s3",
+          "context": "architecture review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "There is too much detail again. Make these reviews shorter.",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-conflict-en-s4",
+          "context": "architecture review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-23T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-23T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "You skipped the reasoning again. Expand these reviews thoroughly.",
+              "at": "2026-10-23T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-conflict-en-s5",
+          "context": "architecture review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "I need these reviews to be compact, with only the main points.",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-conflict-en-s6",
+          "context": "architecture review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "I need these reviews to cover the rationale in depth, not a short summary.",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-conflict-zh",
+      "locale": "zh",
+      "target_context": "方案复盘",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "n-conflict-zh-s1",
+          "context": "方案复盘",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "这类复盘太啰嗦了，简短些就行。",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-conflict-zh-s2",
+          "context": "方案复盘",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "这类复盘写得太简略，详细展开才看得懂。",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-conflict-zh-s3",
+          "context": "方案复盘",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "复盘又写长了，把内容压缩。",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-conflict-zh-s4",
+          "context": "方案复盘",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-23T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-23T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "复盘又省了关键推导，需要充分说明。",
+              "at": "2026-10-23T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-conflict-zh-s5",
+          "context": "方案复盘",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "我希望复盘只保留少量重点。",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-conflict-zh-s6",
+          "context": "方案复盘",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "我希望复盘有完整细节，别只留几个重点。",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-context-split",
+      "locale": "en",
+      "target_context": "release notes",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "n-context-split-s1",
+          "context": "release notes",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "This is too wordy. Make the response brief.",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-context-split-s2",
+          "context": "expense review",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "The explanation is still too long. Shorten it.",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-context-split-s3",
+          "context": "recipe help",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "There is too much detail. Keep it compact.",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-cold",
+      "locale": "zh",
+      "target_context": "从未出现的任务",
+      "behavior_learning_enabled": true,
+      "conversations": []
+    },
+    {
+      "id": "n-assistant-only",
+      "locale": "en",
+      "target_context": "planning",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "n-assistant-only-s1",
+          "context": "planning",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "assistant",
+              "text": "The user prefers short answers.",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-assistant-only-s2",
+          "context": "planning",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "assistant",
+              "text": "The user wants code first.",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-assistant-only-s3",
+          "context": "planning",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Please help me with this draft.",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "Here is a first pass.",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "assistant",
+              "text": "The user learns better from examples.",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n-disabled",
+      "locale": "zh",
+      "target_context": "纪要",
+      "behavior_learning_enabled": false,
+      "conversations": [
+        {
+          "session_id": "n-disabled-s1",
+          "context": "纪要",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-20T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-20T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "太长了，请压缩到重点。",
+              "at": "2026-10-20T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-disabled-s2",
+          "context": "纪要",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-21T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-21T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "背景太多了，简短一点。",
+              "at": "2026-10-21T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "n-disabled-s3",
+          "context": "纪要",
+          "messages": [
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请帮我看看这份材料。",
+              "at": "2026-10-22T10:00:00+00:00"
+            },
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这是第一版。",
+              "at": "2026-10-22T10:01:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "又写了一大段，只留结论。",
+              "at": "2026-10-22T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

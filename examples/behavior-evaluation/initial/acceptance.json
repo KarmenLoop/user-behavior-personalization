@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-11-03T14:00:29Z",
+  "scenarios": [
+    {
+      "id": "append-observation",
+      "steps": [
+        "Grant access to exactly one append-only JSONL input.",
+        "Append one complete authorized conversation line and poll once.",
+        "Poll again without new bytes."
+      ],
+      "expected": [
+        "One import receipt with evidence provenance.",
+        "No duplicate observation or support inflation."
+      ]
+    },
+    {
+      "id": "partial-line",
+      "steps": [
+        "Append an incomplete JSON line and poll.",
+        "Finish the same line and poll."
+      ],
+      "expected": [
+        "No import from incomplete text.",
+        "Exactly one import after completion; no lost or duplicated byte range."
+      ]
+    },
+    {
+      "id": "replace-and-pause",
+      "steps": [
+        "Replace or truncate the selected source file.",
+        "Pause observation and append another complete line."
+      ],
+      "expected": [
+        "Visible changed-source or truncation handling; never silently read an unrelated replacement.",
+        "No new import while paused; resume behavior stated explicitly."
+      ]
+    },
+    {
+      "id": "task-isolation",
+      "steps": [
+        "Confirm a recurring concise-response candidate.",
+        "For task A choose a detailed walkthrough override.",
+        "Preview task B with no override."
+      ],
+      "expected": [
+        "A displays and renders detailed override with the suppressed default and reason.",
+        "B still uses confirmed concise default; A did not mutate global preference."
+      ]
+    },
+    {
+      "id": "why-matches-context",
+      "steps": [
+        "Generate a task plan with two selected and one suppressed rule.",
+        "Build the actual model context for that same plan."
+      ],
+      "expected": [
+        "Every applied rule is traceable to an evidence ID and selection reason.",
+        "The displayed plan and actual context use the same selected rules and revision."
+      ]
+    },
+    {
+      "id": "forget-removes-support",
+      "steps": [
+        "Create a candidate from exactly three independent source sessions.",
+        "Forget one supporting session.",
+        "Recompute the plan and discovery report."
+      ],
+      "expected": [
+        "The old source quote disappears from evidence and model context.",
+        "The now-under-supported derived candidate is withdrawn or explicitly no longer eligible, without replay resurrection."
+      ]
+    },
+    {
+      "id": "outcome-provenance",
+      "steps": [
+        "Attach a user correction to a known delivered-response ID and plan revision.",
+        "Try attaching feedback to an unknown response ID."
+      ],
+      "expected": [
+        "Known feedback can show the original plan and correction without model-self-rating.",
+        "Unknown response does not become evidence of delivered behavior."
+      ]
+    }
+  ]
+}

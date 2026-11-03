@@ -1,0 +1,3505 @@
+{
+  "schema_version": 1,
+  "release": "0.5.0",
+  "synthetic_only": true,
+  "provider_calls": false,
+  "real_user_benefit_measured": false,
+  "executable": "scripts/evaluate_behavior.py",
+  "fixtures": "examples/behavior-evaluation",
+  "historical_stages": [
+    {
+      "stage": "initial-detector",
+      "fixture_suite": "initial",
+      "evaluated_at": "2026-11-03T14:18:27.026584+00:00",
+      "method": "Normalized authorized evidence; disabled import checked through real host; fixed discovery date.",
+      "historical_report_sha256": "a6af6426798f99b2684711e330778366508747400326d0b1e9a761a78496f6f0",
+      "fixture_manifest_sha256": "7d1f40710e1b48d76f107ddadbedd530e130335dec9893f0aa4b8b980d156e53",
+      "fixture_files": {
+        "inputs.json": {
+          "sha256": "810cb41d4c6a5b2b1511689c4a272e20ef672e30ff9fb5c1b230019116bf7584",
+          "bytes": 45160
+        },
+        "expected.json": {
+          "sha256": "4bb3e017f6091aff8f4453047bedf65e3abf69e94311bf4056965d3fa2329a11",
+          "bytes": 5775
+        },
+        "acceptance.json": {
+          "sha256": "d4c029937a89dab71388fe47f260d59587e3c1ef8fc6eeddcbf5ac1eca103cb7",
+          "bytes": 2936
+        }
+      },
+      "source_sha256": {
+        "scripts/behavior_learning.py": "5144b05155bd7fef26ef19d2a17292bbbe86f9ad8f6cdb2817a6854f4e240f60",
+        "scripts/build_context.py": "636d47a8f37a444ea88203b01e47e6af3060286258fbba3810b68f17601a5a62",
+        "scripts/check_package.py": "82054e0f46a8b7f711a0e8f0e11a3f76fb01948f4506c8aafb55c2354b2125f2",
+        "scripts/check_publication.py": "1cc01268fd8e82785b5513e3b2e82383f7d73c18ce433aa121d8cb45461ba5ea",
+        "scripts/conversation_store.py": "47f3cc5bc7747d213f9aa05b3d80dc190dc6ce5c67819d35b12f812fe3b5b002",
+        "scripts/conversations.py": "36cf4f066e6cf7e5bba5b4138acae9b192a0b01ee84d9f29221569b961a71062",
+        "scripts/demo_conversations.py": "8bbdc134a5753f4c6ece6833a54c90ff9e369eb5016450f15d2b0f8b9767f13b",
+        "scripts/demo_learning.py": "2d6a54f87bcf8090e11c454afee4eca8ecfba21a295787c9e1c0aabb125c829c",
+        "scripts/evaluate_conversations.py": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+        "scripts/forecast.py": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+        "scripts/host.py": "2941fa74faf643861b51dc60ed055969fd99993501b1714689283e62d615eb64",
+        "scripts/host_support.py": "0a9abba5509cc27d4c0464582c93ac656f88131b85f0c87b31dd6570ba4a5a5c",
+        "scripts/install_skill.py": "0c16d13fd6e8cddf93fdeff2b0fbf5bf0be871f543f546e9463b730e404c557d",
+        "scripts/learn_conversation.py": "d0a1687b2081a7afda6821962f5c17e9ecfe7ca152097fbfa1ab0243a39d6692",
+        "scripts/learning.py": "1f8d16337a2d8faba0053cdd4fe15bff7bea05a8c4b5daecf6a20b1748c34812",
+        "scripts/outcomes.py": "93cb341a5d2f53b78e66a442a2f44d47a670100ce7ce303d784a813e1a89698d",
+        "scripts/package_release.py": "7469dca90c3ae1dfba71a33eac5efef0b3f1ca0a5f71be13f28b1f763d2bf83c",
+        "scripts/planning.py": "1950cae1efe6b9db7fe130f3dd1c8cc14b28a2c66abf5a917c157581f8273e18",
+        "scripts/run_host.py": "2599f74bdd9eb1136cc8255657b5effcfca508d6942acecd3bce5fbea5818179",
+        "scripts/watch_conversations.py": "85167745457b5a5a1f50e340eceeede4f6653ddee63548e74d509d2984b62093",
+        "scripts/workspace.py": "0527df8865c3ed0b92e77ea380e3f4eb0cb1281ddf0edf8e7b28a21c61457cfd"
+      },
+      "evaluator_sha256": "1bb1d5199195fb8c6cbdd86f0c36f6d536b70e24a66d822c2a94234a45b8ce74",
+      "metrics": {
+        "positive_case_coverage": {
+          "numerator": 0,
+          "denominator": 6,
+          "value": 0.0
+        },
+        "candidate_precision_given_emission": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "negative_control_false_positive_rate": {
+          "numerator": 0,
+          "denominator": 12,
+          "value": 0.0
+        },
+        "conflict_abstention_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "value": 1.0
+        },
+        "cases_passing": {
+          "numerator": 12,
+          "denominator": 18,
+          "value": 0.6666666666666666
+        },
+        "pending_review_boundary_passed": true,
+        "independent_session_threshold_passed": true,
+        "offered_candidates": 0,
+        "all_candidates_including_not_ready": 8,
+        "locale_positive_coverage": {
+          "en": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "zh": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        }
+      },
+      "failed_case_ids": [
+        "p-brief-en",
+        "p-code-en",
+        "p-example-en",
+        "p-brief-zh",
+        "p-code-zh",
+        "p-example-zh"
+      ],
+      "all_quality_cases_passed": false,
+      "sources_unchanged_during_run": true
+    },
+    {
+      "stage": "revised-original",
+      "fixture_suite": "initial",
+      "evaluated_at": "2026-11-03T14:37:04.229144+00:00",
+      "method": "Actual host imports and habits in disposable SQLite stores; wall-clock evaluation.",
+      "historical_report_sha256": "b34788c73b673607029dff4731b8fb6edd509c3786ee37b7273927e899a67c0d",
+      "fixture_manifest_sha256": "7d1f40710e1b48d76f107ddadbedd530e130335dec9893f0aa4b8b980d156e53",
+      "fixture_files": {
+        "inputs.json": {
+          "sha256": "810cb41d4c6a5b2b1511689c4a272e20ef672e30ff9fb5c1b230019116bf7584",
+          "bytes": 45160
+        },
+        "expected.json": {
+          "sha256": "4bb3e017f6091aff8f4453047bedf65e3abf69e94311bf4056965d3fa2329a11",
+          "bytes": 5775
+        },
+        "acceptance.json": {
+          "sha256": "d4c029937a89dab71388fe47f260d59587e3c1ef8fc6eeddcbf5ac1eca103cb7",
+          "bytes": 2936
+        }
+      },
+      "source_sha256": {
+        "scripts/behavior_learning.py": "1ed18a9cbd2a3c0fb3a2f49df35dd687fb93285ed27ecfcdf0a470fe38d5920f",
+        "scripts/build_context.py": "636d47a8f37a444ea88203b01e47e6af3060286258fbba3810b68f17601a5a62",
+        "scripts/check_package.py": "8827b190422e635edb79186d644c5ab003dc2607d0685d21750e198c7f127353",
+        "scripts/check_publication.py": "18dd2b7e93b2bcd8157fd2b5b8173ed7e8bba9bbd99be256f8bff65ecde5f81a",
+        "scripts/conversation_store.py": "47f3cc5bc7747d213f9aa05b3d80dc190dc6ce5c67819d35b12f812fe3b5b002",
+        "scripts/conversations.py": "36cf4f066e6cf7e5bba5b4138acae9b192a0b01ee84d9f29221569b961a71062",
+        "scripts/demo_conversations.py": "8bbdc134a5753f4c6ece6833a54c90ff9e369eb5016450f15d2b0f8b9767f13b",
+        "scripts/demo_learning.py": "2d6a54f87bcf8090e11c454afee4eca8ecfba21a295787c9e1c0aabb125c829c",
+        "scripts/evaluate_conversations.py": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+        "scripts/forecast.py": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+        "scripts/host.py": "2941fa74faf643861b51dc60ed055969fd99993501b1714689283e62d615eb64",
+        "scripts/host_support.py": "0a9abba5509cc27d4c0464582c93ac656f88131b85f0c87b31dd6570ba4a5a5c",
+        "scripts/install_skill.py": "0c16d13fd6e8cddf93fdeff2b0fbf5bf0be871f543f546e9463b730e404c557d",
+        "scripts/learn_conversation.py": "d0a1687b2081a7afda6821962f5c17e9ecfe7ca152097fbfa1ab0243a39d6692",
+        "scripts/learning.py": "1f8d16337a2d8faba0053cdd4fe15bff7bea05a8c4b5daecf6a20b1748c34812",
+        "scripts/outcomes.py": "93cb341a5d2f53b78e66a442a2f44d47a670100ce7ce303d784a813e1a89698d",
+        "scripts/package_release.py": "7469dca90c3ae1dfba71a33eac5efef0b3f1ca0a5f71be13f28b1f763d2bf83c",
+        "scripts/planning.py": "ddcf33a3f7e969bcb9bc090c6e5e9e9000f9b19d787b838467b41e395697ed10",
+        "scripts/run_host.py": "2599f74bdd9eb1136cc8255657b5effcfca508d6942acecd3bce5fbea5818179",
+        "scripts/watch_conversations.py": "85167745457b5a5a1f50e340eceeede4f6653ddee63548e74d509d2984b62093",
+        "scripts/workspace.py": "90e5f92742005c14436fbaa84d6707aeb4e5a4cadaa6eae3f089a3fd71b7c714"
+      },
+      "evaluator_sha256": "47fa1f5f009300a083725e392ec60e6583b128badcdbe5d2fb4e78ea96131337",
+      "metrics": {
+        "positive_case_coverage": {
+          "numerator": 1,
+          "denominator": 6,
+          "value": 0.16666666666666666
+        },
+        "candidate_precision_given_emission": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "negative_control_false_positive_rate": {
+          "numerator": 0,
+          "denominator": 12,
+          "value": 0.0
+        },
+        "conflict_abstention_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "value": 1.0
+        },
+        "cases_passing": {
+          "numerator": 13,
+          "denominator": 18,
+          "value": 0.7222222222222222
+        },
+        "pending_review_boundary_passed": true,
+        "independent_session_threshold_passed": true,
+        "offered_candidates": 1,
+        "all_candidates_including_not_ready": 10,
+        "locale_positive_coverage": {
+          "en": {
+            "numerator": 1,
+            "denominator": 3,
+            "value": 0.3333333333333333
+          },
+          "zh": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        }
+      },
+      "failed_case_ids": [
+        "p-code-en",
+        "p-example-en",
+        "p-brief-zh",
+        "p-code-zh",
+        "p-example-zh"
+      ],
+      "all_quality_cases_passed": false,
+      "sources_unchanged_during_run": true
+    },
+    {
+      "stage": "revised-fresh-v2",
+      "fixture_suite": "fresh-v2",
+      "evaluated_at": "2026-11-03T14:37:05.052703+00:00",
+      "method": "Actual host imports and habits in disposable SQLite stores; wall-clock evaluation.",
+      "historical_report_sha256": "3c8d5b54a3ec831c0e07661282547624bdd1f38535c07f7d8a81ae0fe278c836",
+      "fixture_manifest_sha256": "70f9ae1c8aeaa530923e53bf964a25b6ae2f5ff3f9cc023e3360a7086e8b8214",
+      "fixture_files": {
+        "inputs.json": {
+          "sha256": "97f8e467c50c1fe3194df666401cf8d130a8c10600b65bb1970e9335109aac36",
+          "bytes": 54897
+        },
+        "expected.json": {
+          "sha256": "0c525f92c321d64c6e3c1c02b51052a9041bdec7619bcbc5e93c0b08b3d90172",
+          "bytes": 7015
+        }
+      },
+      "source_sha256": {
+        "scripts/behavior_learning.py": "1ed18a9cbd2a3c0fb3a2f49df35dd687fb93285ed27ecfcdf0a470fe38d5920f",
+        "scripts/build_context.py": "636d47a8f37a444ea88203b01e47e6af3060286258fbba3810b68f17601a5a62",
+        "scripts/check_package.py": "8827b190422e635edb79186d644c5ab003dc2607d0685d21750e198c7f127353",
+        "scripts/check_publication.py": "18dd2b7e93b2bcd8157fd2b5b8173ed7e8bba9bbd99be256f8bff65ecde5f81a",
+        "scripts/conversation_store.py": "47f3cc5bc7747d213f9aa05b3d80dc190dc6ce5c67819d35b12f812fe3b5b002",
+        "scripts/conversations.py": "36cf4f066e6cf7e5bba5b4138acae9b192a0b01ee84d9f29221569b961a71062",
+        "scripts/demo_conversations.py": "8bbdc134a5753f4c6ece6833a54c90ff9e369eb5016450f15d2b0f8b9767f13b",
+        "scripts/demo_learning.py": "2d6a54f87bcf8090e11c454afee4eca8ecfba21a295787c9e1c0aabb125c829c",
+        "scripts/evaluate_conversations.py": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+        "scripts/forecast.py": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+        "scripts/host.py": "2941fa74faf643861b51dc60ed055969fd99993501b1714689283e62d615eb64",
+        "scripts/host_support.py": "0a9abba5509cc27d4c0464582c93ac656f88131b85f0c87b31dd6570ba4a5a5c",
+        "scripts/install_skill.py": "0c16d13fd6e8cddf93fdeff2b0fbf5bf0be871f543f546e9463b730e404c557d",
+        "scripts/learn_conversation.py": "d0a1687b2081a7afda6821962f5c17e9ecfe7ca152097fbfa1ab0243a39d6692",
+        "scripts/learning.py": "1f8d16337a2d8faba0053cdd4fe15bff7bea05a8c4b5daecf6a20b1748c34812",
+        "scripts/outcomes.py": "93cb341a5d2f53b78e66a442a2f44d47a670100ce7ce303d784a813e1a89698d",
+        "scripts/package_release.py": "7469dca90c3ae1dfba71a33eac5efef0b3f1ca0a5f71be13f28b1f763d2bf83c",
+        "scripts/planning.py": "ddcf33a3f7e969bcb9bc090c6e5e9e9000f9b19d787b838467b41e395697ed10",
+        "scripts/run_host.py": "2599f74bdd9eb1136cc8255657b5effcfca508d6942acecd3bce5fbea5818179",
+        "scripts/watch_conversations.py": "85167745457b5a5a1f50e340eceeede4f6653ddee63548e74d509d2984b62093",
+        "scripts/workspace.py": "90e5f92742005c14436fbaa84d6707aeb4e5a4cadaa6eae3f089a3fd71b7c714"
+      },
+      "evaluator_sha256": "47fa1f5f009300a083725e392ec60e6583b128badcdbe5d2fb4e78ea96131337",
+      "metrics": {
+        "positive_case_coverage": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0
+        },
+        "candidate_precision_given_emission": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "negative_control_false_positive_rate": {
+          "numerator": 0,
+          "denominator": 14,
+          "value": 0.0
+        },
+        "conflict_abstention_rate": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "cases_passing": {
+          "numerator": 14,
+          "denominator": 22,
+          "value": 0.6363636363636364
+        },
+        "pending_review_boundary_passed": true,
+        "independent_session_threshold_passed": true,
+        "offered_candidates": 0,
+        "all_candidates_including_not_ready": 9,
+        "locale_positive_coverage": {
+          "en": {
+            "numerator": 0,
+            "denominator": 4,
+            "value": 0.0
+          },
+          "zh": {
+            "numerator": 0,
+            "denominator": 4,
+            "value": 0.0
+          }
+        }
+      },
+      "failed_case_ids": [
+        "v2-length-en",
+        "v2-length-zh",
+        "v2-structure-en",
+        "v2-structure-zh",
+        "v2-example-en",
+        "v2-example-zh",
+        "v2-language-en",
+        "v2-language-zh"
+      ],
+      "all_quality_cases_passed": false,
+      "sources_unchanged_during_run": true
+    },
+    {
+      "stage": "pre-exposure-frozen-93efecee",
+      "classification": "PRESERVED_EARLIER_UNSEEN_FAILURES",
+      "record": {
+        "status": "COMPLETED_WITH_COVERAGE_FAILURES",
+        "learner_sha256": "93efecee29b346e99c4a9a382de9188342a3000a8eec4781eabfd99551e1c51c",
+        "evaluator_sha256": "40e568659c359e556ec6a5cba44c996e0db6db97b5e2131fe7930f919b24ce97",
+        "source_sha256": {
+          "scripts/behavior_learning.py": "93efecee29b346e99c4a9a382de9188342a3000a8eec4781eabfd99551e1c51c",
+          "scripts/build_context.py": "636d47a8f37a444ea88203b01e47e6af3060286258fbba3810b68f17601a5a62",
+          "scripts/check_package.py": "8827b190422e635edb79186d644c5ab003dc2607d0685d21750e198c7f127353",
+          "scripts/check_publication.py": "18dd2b7e93b2bcd8157fd2b5b8173ed7e8bba9bbd99be256f8bff65ecde5f81a",
+          "scripts/conversation_store.py": "47f3cc5bc7747d213f9aa05b3d80dc190dc6ce5c67819d35b12f812fe3b5b002",
+          "scripts/conversations.py": "36cf4f066e6cf7e5bba5b4138acae9b192a0b01ee84d9f29221569b961a71062",
+          "scripts/demo_conversations.py": "8bbdc134a5753f4c6ece6833a54c90ff9e369eb5016450f15d2b0f8b9767f13b",
+          "scripts/demo_learning.py": "2d6a54f87bcf8090e11c454afee4eca8ecfba21a295787c9e1c0aabb125c829c",
+          "scripts/evaluate_behavior.py": "40e568659c359e556ec6a5cba44c996e0db6db97b5e2131fe7930f919b24ce97",
+          "scripts/evaluate_conversations.py": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+          "scripts/forecast.py": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+          "scripts/host.py": "2941fa74faf643861b51dc60ed055969fd99993501b1714689283e62d615eb64",
+          "scripts/host_support.py": "0a9abba5509cc27d4c0464582c93ac656f88131b85f0c87b31dd6570ba4a5a5c",
+          "scripts/install_skill.py": "0c16d13fd6e8cddf93fdeff2b0fbf5bf0be871f543f546e9463b730e404c557d",
+          "scripts/learn_conversation.py": "d0a1687b2081a7afda6821962f5c17e9ecfe7ca152097fbfa1ab0243a39d6692",
+          "scripts/learning.py": "1f8d16337a2d8faba0053cdd4fe15bff7bea05a8c4b5daecf6a20b1748c34812",
+          "scripts/outcomes.py": "93cb341a5d2f53b78e66a442a2f44d47a670100ce7ce303d784a813e1a89698d",
+          "scripts/package_release.py": "7469dca90c3ae1dfba71a33eac5efef0b3f1ca0a5f71be13f28b1f763d2bf83c",
+          "scripts/planning.py": "ddcf33a3f7e969bcb9bc090c6e5e9e9000f9b19d787b838467b41e395697ed10",
+          "scripts/run_host.py": "2599f74bdd9eb1136cc8255657b5effcfca508d6942acecd3bce5fbea5818179",
+          "scripts/watch_conversations.py": "85167745457b5a5a1f50e340eceeede4f6653ddee63548e74d509d2984b62093",
+          "scripts/workspace.py": "90e5f92742005c14436fbaa84d6707aeb4e5a4cadaa6eae3f089a3fd71b7c714"
+        },
+        "method": "Actual host imports and habit discovery in isolated disposable SQLite stores; only UTC clock functions are fixed to each manifest reference date.",
+        "sources_unchanged_during_runs": true,
+        "all_quality_cases_passed": false,
+        "suites": [
+          {
+            "suite": "initial",
+            "first_unseen_exposure": false,
+            "evaluated_at": "2026-11-03T14:50:42.854997+00:00",
+            "receipt_sha256": "0acfe3ad15bb93175b3cd117b991a760d7e976db20f244fd81d56f2dbb1b6f7c",
+            "fixture_manifest_sha256": "7d1f40710e1b48d76f107ddadbedd530e130335dec9893f0aa4b8b980d156e53",
+            "fixture_files": {
+              "inputs.json": {
+                "sha256": "810cb41d4c6a5b2b1511689c4a272e20ef672e30ff9fb5c1b230019116bf7584",
+                "bytes": 45160
+              },
+              "expected.json": {
+                "sha256": "4bb3e017f6091aff8f4453047bedf65e3abf69e94311bf4056965d3fa2329a11",
+                "bytes": 5775
+              },
+              "acceptance.json": {
+                "sha256": "d4c029937a89dab71388fe47f260d59587e3c1ef8fc6eeddcbf5ac1eca103cb7",
+                "bytes": 2936
+              }
+            },
+            "evaluation_now": "2026-11-03T12:00:00+00:00",
+            "clock_overrides": [
+              "conversation_store.now_utc",
+              "conversation_store.stamp",
+              "conversations.now_utc",
+              "forecast.now_utc",
+              "host.stamp",
+              "host_support.stamp",
+              "learning.now_utc",
+              "outcomes.stamp"
+            ],
+            "metrics": {
+              "positive_case_coverage": {
+                "numerator": 1,
+                "denominator": 6,
+                "value": 0.16666666666666666
+              },
+              "candidate_precision_given_emission": {
+                "numerator": 1,
+                "denominator": 1,
+                "value": 1.0
+              },
+              "negative_control_false_positive_rate": {
+                "numerator": 0,
+                "denominator": 12,
+                "value": 0.0
+              },
+              "conflict_abstention_rate": {
+                "numerator": 2,
+                "denominator": 2,
+                "value": 1.0
+              },
+              "offered_candidates": 1,
+              "all_candidates_including_not_ready": 12,
+              "cases_passing": {
+                "numerator": 13,
+                "denominator": 18,
+                "value": 0.7222222222222222
+              },
+              "locale_positive_coverage": {
+                "en": {
+                  "numerator": 1,
+                  "denominator": 3,
+                  "value": 0.3333333333333333
+                },
+                "zh": {
+                  "numerator": 0,
+                  "denominator": 3,
+                  "value": 0.0
+                }
+              },
+              "import_boundary_passed": true,
+              "pending_review_boundary_passed": true,
+              "discovery_read_only": true,
+              "independent_session_threshold_passed": true
+            },
+            "failed_case_ids": [
+              "p-code-en",
+              "p-example-en",
+              "p-brief-zh",
+              "p-code-zh",
+              "p-example-zh"
+            ],
+            "all_quality_cases_passed": false,
+            "require_all_exit_code": 1,
+            "imported_conversations": 52,
+            "disabled_import_rejections": 3,
+            "case_outcomes": [
+              {
+                "id": "p-brief-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "response_length",
+                  "concise"
+                ],
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 1,
+                "correct_offered_count": 1,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "ready_to_review",
+                    "supporting_sessions": 3,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "p-code-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "structure",
+                  "code_first"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "code_first",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "p-example-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "teaching",
+                  "worked_example"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "examples",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  },
+                  {
+                    "dimension": "teaching",
+                    "value": "worked_example",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 2,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "p-brief-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "response_length",
+                  "concise"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "conclusion_first",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "p-code-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "structure",
+                  "code_first"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "p-example-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "teaching",
+                  "worked_example"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "examples",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "n-quote-en",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "n-quote-zh",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "n-code-fence",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "n-temporary-en",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "n-temporary-zh",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "n-one-session",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "n-conflict-en",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": true,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 2,
+                    "opposing_sessions": 3
+                  },
+                  {
+                    "dimension": "response_length",
+                    "value": "detailed",
+                    "status": "conflicted",
+                    "supporting_sessions": 3,
+                    "opposing_sessions": 2
+                  }
+                ]
+              },
+              {
+                "id": "n-conflict-zh",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": true,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 2,
+                    "opposing_sessions": 1
+                  },
+                  {
+                    "dimension": "response_length",
+                    "value": "detailed",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 2
+                  }
+                ]
+              },
+              {
+                "id": "n-context-split",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "n-cold",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "n-assistant-only",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "n-disabled",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              }
+            ]
+          },
+          {
+            "suite": "fresh-v2",
+            "first_unseen_exposure": false,
+            "evaluated_at": "2026-11-03T14:50:42.947534+00:00",
+            "receipt_sha256": "742b1d4dfea1084d8369b1432b83cd0c0ccf01a123d2ea7c205b1636e05e8214",
+            "fixture_manifest_sha256": "70f9ae1c8aeaa530923e53bf964a25b6ae2f5ff3f9cc023e3360a7086e8b8214",
+            "fixture_files": {
+              "inputs.json": {
+                "sha256": "97f8e467c50c1fe3194df666401cf8d130a8c10600b65bb1970e9335109aac36",
+                "bytes": 54897
+              },
+              "expected.json": {
+                "sha256": "0c525f92c321d64c6e3c1c02b51052a9041bdec7619bcbc5e93c0b08b3d90172",
+                "bytes": 7015
+              }
+            },
+            "evaluation_now": "2026-11-03T14:30:00+00:00",
+            "clock_overrides": [
+              "conversation_store.now_utc",
+              "conversation_store.stamp",
+              "conversations.now_utc",
+              "forecast.now_utc",
+              "host.stamp",
+              "host_support.stamp",
+              "learning.now_utc",
+              "outcomes.stamp"
+            ],
+            "metrics": {
+              "positive_case_coverage": {
+                "numerator": 1,
+                "denominator": 8,
+                "value": 0.125
+              },
+              "candidate_precision_given_emission": {
+                "numerator": 1,
+                "denominator": 1,
+                "value": 1.0
+              },
+              "negative_control_false_positive_rate": {
+                "numerator": 0,
+                "denominator": 14,
+                "value": 0.0
+              },
+              "conflict_abstention_rate": {
+                "numerator": 1,
+                "denominator": 1,
+                "value": 1.0
+              },
+              "offered_candidates": 1,
+              "all_candidates_including_not_ready": 14,
+              "cases_passing": {
+                "numerator": 15,
+                "denominator": 22,
+                "value": 0.6818181818181818
+              },
+              "locale_positive_coverage": {
+                "en": {
+                  "numerator": 1,
+                  "denominator": 4,
+                  "value": 0.25
+                },
+                "zh": {
+                  "numerator": 0,
+                  "denominator": 4,
+                  "value": 0.0
+                }
+              },
+              "import_boundary_passed": true,
+              "pending_review_boundary_passed": true,
+              "discovery_read_only": true,
+              "independent_session_threshold_passed": true
+            },
+            "failed_case_ids": [
+              "v2-length-en",
+              "v2-length-zh",
+              "v2-structure-en",
+              "v2-structure-zh",
+              "v2-example-en",
+              "v2-example-zh",
+              "v2-language-zh"
+            ],
+            "all_quality_cases_passed": false,
+            "require_all_exit_code": 1,
+            "imported_conversations": 61,
+            "disabled_import_rejections": 3,
+            "case_outcomes": [
+              {
+                "id": "v2-length-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "response_length",
+                  "detailed"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "detailed",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v2-length-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "response_length",
+                  "detailed"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 1
+                  },
+                  {
+                    "dimension": "response_length",
+                    "value": "detailed",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 1
+                  }
+                ]
+              },
+              {
+                "id": "v2-structure-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "structure",
+                  "steps"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v2-structure-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "structure",
+                  "steps"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "steps",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v2-example-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "teaching",
+                  "worked_example"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "examples",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  },
+                  {
+                    "dimension": "teaching",
+                    "value": "worked_example",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 2,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v2-example-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "teaching",
+                  "worked_example"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "teaching",
+                    "value": "worked_example",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v2-language-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "language",
+                  "en"
+                ],
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 1,
+                "correct_offered_count": 1,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "language",
+                    "value": "en",
+                    "status": "ready_to_review",
+                    "supporting_sessions": 3,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v2-language-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "language",
+                  "zh"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v2-negated-en",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v2-negated-zh",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v2-quoted-en",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v2-quoted-zh",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v2-reported-en",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v2-reported-zh",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "language",
+                    "value": "zh",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v2-temporary-en",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v2-temporary-zh",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "steps",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v2-code",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v2-mixed-conflict",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": true,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "conflicted",
+                    "supporting_sessions": 3,
+                    "opposing_sessions": 3
+                  },
+                  {
+                    "dimension": "response_length",
+                    "value": "detailed",
+                    "status": "conflicted",
+                    "supporting_sessions": 3,
+                    "opposing_sessions": 3
+                  }
+                ]
+              },
+              {
+                "id": "v2-context-split",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "steps",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v2-single-session",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "steps",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v2-cold",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v2-disabled",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              }
+            ]
+          },
+          {
+            "suite": "fresh-v3",
+            "first_unseen_exposure": true,
+            "evaluated_at": "2026-11-03T14:50:20.563904+00:00",
+            "receipt_sha256": "2ebdf0ea4516a611570d07eb23363e508aad6cf187073e4cb0559006c8b68c27",
+            "fixture_manifest_sha256": "c94a23683e3a4126c47edabb80c8d49bbec20af401e7f6e586a0ea3cba8cf30a",
+            "fixture_files": {
+              "inputs.json": {
+                "sha256": "4815a7d916c215096a53fda29cd846cf6cea66f1f7bb981b9b698719d4e35ca4",
+                "bytes": 40715
+              },
+              "expected.json": {
+                "sha256": "76f6782322c29755e55430c4923704094e1baff728d9bea0918d5e882a90d064",
+                "bytes": 5254
+              }
+            },
+            "evaluation_now": "2026-11-03T14:40:00+00:00",
+            "clock_overrides": [
+              "conversation_store.now_utc",
+              "conversation_store.stamp",
+              "conversations.now_utc",
+              "forecast.now_utc",
+              "host.stamp",
+              "host_support.stamp",
+              "learning.now_utc",
+              "outcomes.stamp"
+            ],
+            "metrics": {
+              "positive_case_coverage": {
+                "numerator": 1,
+                "denominator": 8,
+                "value": 0.125
+              },
+              "candidate_precision_given_emission": {
+                "numerator": 1,
+                "denominator": 1,
+                "value": 1.0
+              },
+              "negative_control_false_positive_rate": {
+                "numerator": 0,
+                "denominator": 8,
+                "value": 0.0
+              },
+              "conflict_abstention_rate": {
+                "numerator": 1,
+                "denominator": 1,
+                "value": 1.0
+              },
+              "offered_candidates": 1,
+              "all_candidates_including_not_ready": 15,
+              "cases_passing": {
+                "numerator": 9,
+                "denominator": 16,
+                "value": 0.5625
+              },
+              "locale_positive_coverage": {
+                "en": {
+                  "numerator": 1,
+                  "denominator": 4,
+                  "value": 0.25
+                },
+                "zh": {
+                  "numerator": 0,
+                  "denominator": 4,
+                  "value": 0.0
+                }
+              },
+              "import_boundary_passed": true,
+              "pending_review_boundary_passed": true,
+              "discovery_read_only": true,
+              "independent_session_threshold_passed": true
+            },
+            "failed_case_ids": [
+              "v3-short-en",
+              "v3-code-en",
+              "v3-language-en",
+              "v3-short-zh",
+              "v3-code-zh",
+              "v3-example-zh",
+              "v3-language-zh"
+            ],
+            "all_quality_cases_passed": false,
+            "require_all_exit_code": 1,
+            "imported_conversations": 46,
+            "disabled_import_rejections": 3,
+            "case_outcomes": [
+              {
+                "id": "v3-short-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "response_length",
+                  "concise"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 2,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-code-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "structure",
+                  "code_first"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "code_first",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-example-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "teaching",
+                  "worked_example"
+                ],
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 1,
+                "correct_offered_count": 1,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "steps",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  },
+                  {
+                    "dimension": "teaching",
+                    "value": "worked_example",
+                    "status": "ready_to_review",
+                    "supporting_sessions": 3,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-language-en",
+                "locale": "en",
+                "primary_typed_target": [
+                  "language",
+                  "en"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "language",
+                    "value": "en",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-short-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "response_length",
+                  "concise"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-code-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "structure",
+                  "code_first"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "code_first",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-example-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "teaching",
+                  "worked_example"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "examples",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  },
+                  {
+                    "dimension": "teaching",
+                    "value": "worked_example",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-language-zh",
+                "locale": "zh",
+                "primary_typed_target": [
+                  "language",
+                  "zh"
+                ],
+                "passed": false,
+                "failure_reasons": [
+                  "Expected recurring preference was not offered for review."
+                ],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "language",
+                    "value": "zh",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-negation-en",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v3-quoted-zh",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v3-temporary-en",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              },
+              {
+                "id": "v3-third-party-zh",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-conflict-en",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": true,
+                "candidates": [
+                  {
+                    "dimension": "response_length",
+                    "value": "concise",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 2,
+                    "opposing_sessions": 3
+                  },
+                  {
+                    "dimension": "response_length",
+                    "value": "detailed",
+                    "status": "conflicted",
+                    "supporting_sessions": 3,
+                    "opposing_sessions": 2
+                  }
+                ]
+              },
+              {
+                "id": "v3-context-split",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "structure",
+                    "value": "conclusion_first",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-single-session",
+                "locale": "zh",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": [
+                  {
+                    "dimension": "language",
+                    "value": "zh",
+                    "status": "insufficient_evidence",
+                    "supporting_sessions": 1,
+                    "opposing_sessions": 0
+                  }
+                ]
+              },
+              {
+                "id": "v3-disabled",
+                "locale": "en",
+                "primary_typed_target": null,
+                "passed": true,
+                "failure_reasons": [],
+                "offered_count": 0,
+                "correct_offered_count": 0,
+                "conflict_control": false,
+                "candidates": []
+              }
+            ]
+          }
+        ],
+        "combined_descriptive_counts": {
+          "note": "These small suites have overlapping task types; this is a descriptive sum, not an independent population estimate.",
+          "positive_case_coverage": {
+            "numerator": 3,
+            "denominator": 22,
+            "value": 0.13636363636363635
+          },
+          "candidate_precision_given_emission": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "negative_control_false_positive_rate": {
+            "numerator": 0,
+            "denominator": 34,
+            "value": 0.0
+          },
+          "conflict_abstention_rate": {
+            "numerator": 4,
+            "denominator": 4,
+            "value": 1.0
+          },
+          "conflict_explicitly_identified_rate": {
+            "numerator": 3,
+            "denominator": 4,
+            "value": 0.75
+          },
+          "locale_positive_coverage": {
+            "en": {
+              "numerator": 3,
+              "denominator": 11,
+              "value": 0.2727272727272727
+            },
+            "zh": {
+              "numerator": 0,
+              "denominator": 11,
+              "value": 0.0
+            }
+          }
+        }
+      },
+      "interpretation": [
+        "Historical initial coverage was 0/6; revised original coverage was 1/6; revised fresh-v2 coverage was 0/8. These failures remain part of the record.",
+        "Zero false offers on small synthetic controls does not establish broad reliability. Precision with zero offers is undefined.",
+        "Only ready_to_review candidates count as offers. A missed positive is not counted as a pass because the learner abstained.",
+        "A single correct offer gives a denominator of one, not robust evidence of high accuracy.",
+        "On the final frozen learner, initial coverage was 1/6, fresh-v2 coverage was 1/8, and the first unseen fresh-v3 run covered 1/8. Each suite still failed --require-all.",
+        "Across these suites, English positive coverage was 3/11 and Chinese coverage was 0/11. These results do not support a claim of broad bilingual automatic feedback understanding.",
+        "All four conflict controls withheld offers. Three displayed an explicit conflicted candidate; one Chinese case only displayed insufficient evidence. Abstention must not be described as complete conflict understanding.",
+        "Current tests imported 159 synthetic conversations through the actual host and observed nine disabled-import rejections. They did not assess whether a model followed a confirmed preference in a real delivered answer."
+      ]
+    }
+  ],
+  "current_stage": {
+    "status": "COMPLETED_WITH_UNSEEN_COVERAGE_FAILURES",
+    "learner_sha256": "ffd92e9848e4fb8752d034b281c32be5ffde1c7512136eb52d062ac1a90a4746",
+    "all_quality_cases_passed": false,
+    "known_regression": {
+      "classification": "DEVELOPMENT_AFTER_FIXTURE_EXPOSURE",
+      "unseen_generalization_evidence": false,
+      "evaluated_at": "2026-11-03T15:01:14.064506+00:00",
+      "receipt_sha256": "1fecd362e6e2f6aec2a30c127cebc4b2d8b4a74e0026c64c6a0d0145304387f5",
+      "source_sha256": {
+        "scripts/behavior_learning.py": "ffd92e9848e4fb8752d034b281c32be5ffde1c7512136eb52d062ac1a90a4746",
+        "scripts/build_context.py": "636d47a8f37a444ea88203b01e47e6af3060286258fbba3810b68f17601a5a62",
+        "scripts/check_package.py": "8827b190422e635edb79186d644c5ab003dc2607d0685d21750e198c7f127353",
+        "scripts/check_publication.py": "18dd2b7e93b2bcd8157fd2b5b8173ed7e8bba9bbd99be256f8bff65ecde5f81a",
+        "scripts/conversation_store.py": "47f3cc5bc7747d213f9aa05b3d80dc190dc6ce5c67819d35b12f812fe3b5b002",
+        "scripts/conversations.py": "36cf4f066e6cf7e5bba5b4138acae9b192a0b01ee84d9f29221569b961a71062",
+        "scripts/demo_conversations.py": "8bbdc134a5753f4c6ece6833a54c90ff9e369eb5016450f15d2b0f8b9767f13b",
+        "scripts/demo_learning.py": "2d6a54f87bcf8090e11c454afee4eca8ecfba21a295787c9e1c0aabb125c829c",
+        "scripts/evaluate_behavior.py": "f5c4a2c355f5cf033e9ea9dfa2c00422a8ea94ae92d62fa7cb963bfd3be65362",
+        "scripts/evaluate_conversations.py": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+        "scripts/forecast.py": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+        "scripts/host.py": "2941fa74faf643861b51dc60ed055969fd99993501b1714689283e62d615eb64",
+        "scripts/host_support.py": "0a9abba5509cc27d4c0464582c93ac656f88131b85f0c87b31dd6570ba4a5a5c",
+        "scripts/install_skill.py": "0c16d13fd6e8cddf93fdeff2b0fbf5bf0be871f543f546e9463b730e404c557d",
+        "scripts/learn_conversation.py": "d0a1687b2081a7afda6821962f5c17e9ecfe7ca152097fbfa1ab0243a39d6692",
+        "scripts/learning.py": "1f8d16337a2d8faba0053cdd4fe15bff7bea05a8c4b5daecf6a20b1748c34812",
+        "scripts/outcomes.py": "93cb341a5d2f53b78e66a442a2f44d47a670100ce7ce303d784a813e1a89698d",
+        "scripts/package_release.py": "7469dca90c3ae1dfba71a33eac5efef0b3f1ca0a5f71be13f28b1f763d2bf83c",
+        "scripts/planning.py": "ddcf33a3f7e969bcb9bc090c6e5e9e9000f9b19d787b838467b41e395697ed10",
+        "scripts/run_host.py": "2599f74bdd9eb1136cc8255657b5effcfca508d6942acecd3bce5fbea5818179",
+        "scripts/watch_conversations.py": "85167745457b5a5a1f50e340eceeede4f6653ddee63548e74d509d2984b62093",
+        "scripts/workspace.py": "90e5f92742005c14436fbaa84d6707aeb4e5a4cadaa6eae3f089a3fd71b7c714"
+      },
+      "evaluator_sha256": "f5c4a2c355f5cf033e9ea9dfa2c00422a8ea94ae92d62fa7cb963bfd3be65362",
+      "all_quality_cases_passed": true,
+      "sources_unchanged_during_run": true,
+      "strict_exit_code": 0,
+      "suites": [
+        {
+          "suite": "initial",
+          "fixture_manifest_sha256": "7d1f40710e1b48d76f107ddadbedd530e130335dec9893f0aa4b8b980d156e53",
+          "fixture_files": {
+            "inputs.json": {
+              "sha256": "810cb41d4c6a5b2b1511689c4a272e20ef672e30ff9fb5c1b230019116bf7584",
+              "bytes": 45160
+            },
+            "expected.json": {
+              "sha256": "4bb3e017f6091aff8f4453047bedf65e3abf69e94311bf4056965d3fa2329a11",
+              "bytes": 5775
+            },
+            "acceptance.json": {
+              "sha256": "d4c029937a89dab71388fe47f260d59587e3c1ef8fc6eeddcbf5ac1eca103cb7",
+              "bytes": 2936
+            }
+          },
+          "evaluation_now": "2026-11-03T12:00:00+00:00",
+          "clock_overrides": [
+            "conversation_store.now_utc",
+            "conversation_store.stamp",
+            "conversations.now_utc",
+            "forecast.now_utc",
+            "host.stamp",
+            "host_support.stamp",
+            "learning.now_utc",
+            "outcomes.stamp"
+          ],
+          "metrics": {
+            "positive_case_coverage": {
+              "numerator": 6,
+              "denominator": 6,
+              "value": 1.0
+            },
+            "candidate_precision_given_emission": {
+              "numerator": 6,
+              "denominator": 6,
+              "value": 1.0
+            },
+            "negative_control_false_positive_rate": {
+              "numerator": 0,
+              "denominator": 12,
+              "value": 0.0
+            },
+            "conflict_abstention_rate": {
+              "numerator": 2,
+              "denominator": 2,
+              "value": 1.0
+            },
+            "offered_candidates": 6,
+            "all_candidates_including_not_ready": 13,
+            "cases_passing": {
+              "numerator": 18,
+              "denominator": 18,
+              "value": 1.0
+            },
+            "locale_positive_coverage": {
+              "en": {
+                "numerator": 3,
+                "denominator": 3,
+                "value": 1.0
+              },
+              "zh": {
+                "numerator": 3,
+                "denominator": 3,
+                "value": 1.0
+              }
+            },
+            "import_boundary_passed": true,
+            "pending_review_boundary_passed": true,
+            "discovery_read_only": true,
+            "independent_session_threshold_passed": true
+          },
+          "failed_case_ids": [],
+          "all_quality_cases_passed": true,
+          "case_outcomes": [
+            {
+              "id": "p-brief-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "response_length",
+                "concise"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "concise",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "p-code-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "structure",
+                "code_first"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "structure",
+                  "value": "code_first",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "p-example-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "teaching",
+                "worked_example"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "teaching",
+                  "value": "worked_example",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "p-brief-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "response_length",
+                "concise"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "concise",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                },
+                {
+                  "dimension": "structure",
+                  "value": "conclusion_first",
+                  "status": "insufficient_evidence",
+                  "supporting_sessions": 1,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "p-code-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "structure",
+                "code_first"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "structure",
+                  "value": "code_first",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "p-example-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "teaching",
+                "worked_example"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "teaching",
+                  "value": "worked_example",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "n-quote-en",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "n-quote-zh",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "n-code-fence",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "n-temporary-en",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "n-temporary-zh",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "n-one-session",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "concise",
+                  "status": "insufficient_evidence",
+                  "supporting_sessions": 1,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "n-conflict-en",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": true,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "concise",
+                  "status": "conflicted",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 3
+                },
+                {
+                  "dimension": "response_length",
+                  "value": "detailed",
+                  "status": "conflicted",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 3
+                }
+              ]
+            },
+            {
+              "id": "n-conflict-zh",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": true,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "concise",
+                  "status": "conflicted",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 2
+                },
+                {
+                  "dimension": "response_length",
+                  "value": "detailed",
+                  "status": "insufficient_evidence",
+                  "supporting_sessions": 2,
+                  "opposing_sessions": 3
+                }
+              ]
+            },
+            {
+              "id": "n-context-split",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "concise",
+                  "status": "insufficient_evidence",
+                  "supporting_sessions": 1,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "n-cold",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "n-assistant-only",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "n-disabled",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            }
+          ]
+        },
+        {
+          "suite": "fresh-v2",
+          "fixture_manifest_sha256": "70f9ae1c8aeaa530923e53bf964a25b6ae2f5ff3f9cc023e3360a7086e8b8214",
+          "fixture_files": {
+            "inputs.json": {
+              "sha256": "97f8e467c50c1fe3194df666401cf8d130a8c10600b65bb1970e9335109aac36",
+              "bytes": 54897
+            },
+            "expected.json": {
+              "sha256": "0c525f92c321d64c6e3c1c02b51052a9041bdec7619bcbc5e93c0b08b3d90172",
+              "bytes": 7015
+            }
+          },
+          "evaluation_now": "2026-11-03T14:30:00+00:00",
+          "clock_overrides": [
+            "conversation_store.now_utc",
+            "conversation_store.stamp",
+            "conversations.now_utc",
+            "forecast.now_utc",
+            "host.stamp",
+            "host_support.stamp",
+            "learning.now_utc",
+            "outcomes.stamp"
+          ],
+          "metrics": {
+            "positive_case_coverage": {
+              "numerator": 8,
+              "denominator": 8,
+              "value": 1.0
+            },
+            "candidate_precision_given_emission": {
+              "numerator": 8,
+              "denominator": 8,
+              "value": 1.0
+            },
+            "negative_control_false_positive_rate": {
+              "numerator": 0,
+              "denominator": 14,
+              "value": 0.0
+            },
+            "conflict_abstention_rate": {
+              "numerator": 1,
+              "denominator": 1,
+              "value": 1.0
+            },
+            "offered_candidates": 8,
+            "all_candidates_including_not_ready": 12,
+            "cases_passing": {
+              "numerator": 22,
+              "denominator": 22,
+              "value": 1.0
+            },
+            "locale_positive_coverage": {
+              "en": {
+                "numerator": 4,
+                "denominator": 4,
+                "value": 1.0
+              },
+              "zh": {
+                "numerator": 4,
+                "denominator": 4,
+                "value": 1.0
+              }
+            },
+            "import_boundary_passed": true,
+            "pending_review_boundary_passed": true,
+            "discovery_read_only": true,
+            "independent_session_threshold_passed": true
+          },
+          "failed_case_ids": [],
+          "all_quality_cases_passed": true,
+          "case_outcomes": [
+            {
+              "id": "v2-length-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "response_length",
+                "detailed"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "detailed",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v2-length-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "response_length",
+                "detailed"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "detailed",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v2-structure-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "structure",
+                "steps"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "structure",
+                  "value": "steps",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v2-structure-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "structure",
+                "steps"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "structure",
+                  "value": "steps",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v2-example-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "teaching",
+                "worked_example"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "teaching",
+                  "value": "worked_example",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v2-example-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "teaching",
+                "worked_example"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "teaching",
+                  "value": "worked_example",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v2-language-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "language",
+                "en"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "language",
+                  "value": "en",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v2-language-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "language",
+                "zh"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "language",
+                  "value": "zh",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v2-negated-en",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v2-negated-zh",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v2-quoted-en",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v2-quoted-zh",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v2-reported-en",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v2-reported-zh",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v2-temporary-en",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v2-temporary-zh",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v2-code",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v2-mixed-conflict",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": true,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "concise",
+                  "status": "conflicted",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 3
+                },
+                {
+                  "dimension": "response_length",
+                  "value": "detailed",
+                  "status": "conflicted",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 3
+                }
+              ]
+            },
+            {
+              "id": "v2-context-split",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "structure",
+                  "value": "steps",
+                  "status": "insufficient_evidence",
+                  "supporting_sessions": 1,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v2-single-session",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "structure",
+                  "value": "steps",
+                  "status": "insufficient_evidence",
+                  "supporting_sessions": 1,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v2-cold",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v2-disabled",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            }
+          ]
+        },
+        {
+          "suite": "fresh-v3",
+          "fixture_manifest_sha256": "c94a23683e3a4126c47edabb80c8d49bbec20af401e7f6e586a0ea3cba8cf30a",
+          "fixture_files": {
+            "inputs.json": {
+              "sha256": "4815a7d916c215096a53fda29cd846cf6cea66f1f7bb981b9b698719d4e35ca4",
+              "bytes": 40715
+            },
+            "expected.json": {
+              "sha256": "76f6782322c29755e55430c4923704094e1baff728d9bea0918d5e882a90d064",
+              "bytes": 5254
+            }
+          },
+          "evaluation_now": "2026-11-03T14:40:00+00:00",
+          "clock_overrides": [
+            "conversation_store.now_utc",
+            "conversation_store.stamp",
+            "conversations.now_utc",
+            "forecast.now_utc",
+            "host.stamp",
+            "host_support.stamp",
+            "learning.now_utc",
+            "outcomes.stamp"
+          ],
+          "metrics": {
+            "positive_case_coverage": {
+              "numerator": 8,
+              "denominator": 8,
+              "value": 1.0
+            },
+            "candidate_precision_given_emission": {
+              "numerator": 8,
+              "denominator": 8,
+              "value": 1.0
+            },
+            "negative_control_false_positive_rate": {
+              "numerator": 0,
+              "denominator": 8,
+              "value": 0.0
+            },
+            "conflict_abstention_rate": {
+              "numerator": 1,
+              "denominator": 1,
+              "value": 1.0
+            },
+            "offered_candidates": 8,
+            "all_candidates_including_not_ready": 13,
+            "cases_passing": {
+              "numerator": 16,
+              "denominator": 16,
+              "value": 1.0
+            },
+            "locale_positive_coverage": {
+              "en": {
+                "numerator": 4,
+                "denominator": 4,
+                "value": 1.0
+              },
+              "zh": {
+                "numerator": 4,
+                "denominator": 4,
+                "value": 1.0
+              }
+            },
+            "import_boundary_passed": true,
+            "pending_review_boundary_passed": true,
+            "discovery_read_only": true,
+            "independent_session_threshold_passed": true
+          },
+          "failed_case_ids": [],
+          "all_quality_cases_passed": true,
+          "case_outcomes": [
+            {
+              "id": "v3-short-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "response_length",
+                "concise"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "concise",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v3-code-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "structure",
+                "code_first"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "structure",
+                  "value": "code_first",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v3-example-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "teaching",
+                "worked_example"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "structure",
+                  "value": "steps",
+                  "status": "insufficient_evidence",
+                  "supporting_sessions": 1,
+                  "opposing_sessions": 0
+                },
+                {
+                  "dimension": "teaching",
+                  "value": "worked_example",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v3-language-en",
+              "locale": "en",
+              "primary_typed_target": [
+                "language",
+                "en"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "language",
+                  "value": "en",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v3-short-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "response_length",
+                "concise"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "concise",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v3-code-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "structure",
+                "code_first"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "structure",
+                  "value": "code_first",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v3-example-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "teaching",
+                "worked_example"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "teaching",
+                  "value": "worked_example",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v3-language-zh",
+              "locale": "zh",
+              "primary_typed_target": [
+                "language",
+                "zh"
+              ],
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 1,
+              "correct_offered_count": 1,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "language",
+                  "value": "zh",
+                  "status": "ready_to_review",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v3-negation-en",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v3-quoted-zh",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v3-temporary-en",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v3-third-party-zh",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            },
+            {
+              "id": "v3-conflict-en",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": true,
+              "candidates": [
+                {
+                  "dimension": "response_length",
+                  "value": "concise",
+                  "status": "conflicted",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 3
+                },
+                {
+                  "dimension": "response_length",
+                  "value": "detailed",
+                  "status": "conflicted",
+                  "supporting_sessions": 3,
+                  "opposing_sessions": 3
+                }
+              ]
+            },
+            {
+              "id": "v3-context-split",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "structure",
+                  "value": "conclusion_first",
+                  "status": "insufficient_evidence",
+                  "supporting_sessions": 1,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v3-single-session",
+              "locale": "zh",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": [
+                {
+                  "dimension": "language",
+                  "value": "zh",
+                  "status": "insufficient_evidence",
+                  "supporting_sessions": 1,
+                  "opposing_sessions": 0
+                }
+              ]
+            },
+            {
+              "id": "v3-disabled",
+              "locale": "en",
+              "primary_typed_target": null,
+              "passed": true,
+              "failure_reasons": [],
+              "offered_count": 0,
+              "correct_offered_count": 0,
+              "conflict_control": false,
+              "candidates": []
+            }
+          ]
+        }
+      ],
+      "combined_development_counts": {
+        "positive_case_coverage": {
+          "numerator": 22,
+          "denominator": 22,
+          "value": 1.0
+        },
+        "candidate_precision_given_emission": {
+          "numerator": 22,
+          "denominator": 22,
+          "value": 1.0
+        },
+        "negative_control_false_positive_rate": {
+          "numerator": 0,
+          "denominator": 34,
+          "value": 0.0
+        },
+        "locale_positive_coverage": {
+          "en": {
+            "numerator": 11,
+            "denominator": 11,
+            "value": 1.0
+          },
+          "zh": {
+            "numerator": 11,
+            "denominator": 11,
+            "value": 1.0
+          }
+        }
+      }
+    },
+    "independent_fresh_v4": {
+      "suite": "fresh-v4",
+      "fixture_manifest_sha256": "dc3bc4c59613db44fd9250bf129c24c97df7fb8e43cc1d1d0d202d07d6ad81cc",
+      "fixture_files": {
+        "acceptance.json": {
+          "sha256": "e4b81317a71efc0f61c1b38b310b3c7d5f49462d7f11974e3020413ed830ea1b",
+          "bytes": 1053
+        },
+        "expected.json": {
+          "sha256": "324955298316d8533fc9864a654f8864bad226c56e7fb1b7702d5bf719d1fc0d",
+          "bytes": 5045
+        },
+        "inputs.json": {
+          "sha256": "27dc08e176461b0774e6663081edc496556aeee5d7f4f6fe081d8a3cb8376a65",
+          "bytes": 21968
+        }
+      },
+      "evaluation_now": "2026-11-03T12:00:00+00:00",
+      "clock_overrides": [
+        "conversation_store.now_utc",
+        "conversation_store.stamp",
+        "conversations.now_utc",
+        "forecast.now_utc",
+        "host.stamp",
+        "host_support.stamp",
+        "learning.now_utc",
+        "outcomes.stamp"
+      ],
+      "metrics": {
+        "positive_case_coverage": {
+          "numerator": 1,
+          "denominator": 8,
+          "value": 0.125
+        },
+        "candidate_precision_given_emission": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "negative_control_false_positive_rate": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0
+        },
+        "conflict_abstention_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "offered_candidates": 1,
+        "all_candidates_including_not_ready": 11,
+        "cases_passing": {
+          "numerator": 9,
+          "denominator": 16,
+          "value": 0.5625
+        },
+        "locale_positive_coverage": {
+          "en": {
+            "numerator": 1,
+            "denominator": 4,
+            "value": 0.25
+          },
+          "zh": {
+            "numerator": 0,
+            "denominator": 4,
+            "value": 0.0
+          }
+        },
+        "import_boundary_passed": true,
+        "pending_review_boundary_passed": true,
+        "discovery_read_only": true,
+        "independent_session_threshold_passed": true
+      },
+      "failed_case_ids": [
+        "v4-positive-en-code",
+        "v4-positive-en-worked",
+        "v4-positive-en-language",
+        "v4-positive-zh-brief",
+        "v4-positive-zh-code",
+        "v4-positive-zh-worked",
+        "v4-positive-zh-language"
+      ],
+      "all_quality_cases_passed": false,
+      "case_outcomes": [
+        {
+          "id": "v4-positive-en-brief",
+          "locale": "en",
+          "primary_typed_target": [
+            "response_length",
+            "concise"
+          ],
+          "passed": true,
+          "failure_reasons": [],
+          "offered_count": 1,
+          "correct_offered_count": 1,
+          "conflict_control": false,
+          "candidates": [
+            {
+              "dimension": "response_length",
+              "value": "concise",
+              "status": "ready_to_review",
+              "supporting_sessions": 3,
+              "opposing_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": "v4-positive-en-code",
+          "locale": "en",
+          "primary_typed_target": [
+            "structure",
+            "code_first"
+          ],
+          "passed": false,
+          "failure_reasons": [
+            "Expected recurring preference was not offered for review."
+          ],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": [
+            {
+              "dimension": "response_length",
+              "value": "detailed",
+              "status": "insufficient_evidence",
+              "supporting_sessions": 1,
+              "opposing_sessions": 0
+            },
+            {
+              "dimension": "structure",
+              "value": "code_first",
+              "status": "insufficient_evidence",
+              "supporting_sessions": 2,
+              "opposing_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": "v4-positive-en-worked",
+          "locale": "en",
+          "primary_typed_target": [
+            "teaching",
+            "worked_example"
+          ],
+          "passed": false,
+          "failure_reasons": [
+            "Expected recurring preference was not offered for review."
+          ],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": [
+            {
+              "dimension": "teaching",
+              "value": "worked_example",
+              "status": "insufficient_evidence",
+              "supporting_sessions": 2,
+              "opposing_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": "v4-positive-en-language",
+          "locale": "en",
+          "primary_typed_target": [
+            "language",
+            "en"
+          ],
+          "passed": false,
+          "failure_reasons": [
+            "Expected recurring preference was not offered for review."
+          ],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": [
+            {
+              "dimension": "language",
+              "value": "en",
+              "status": "insufficient_evidence",
+              "supporting_sessions": 2,
+              "opposing_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": "v4-positive-zh-brief",
+          "locale": "zh",
+          "primary_typed_target": [
+            "response_length",
+            "concise"
+          ],
+          "passed": false,
+          "failure_reasons": [
+            "Expected recurring preference was not offered for review."
+          ],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": [
+            {
+              "dimension": "response_length",
+              "value": "concise",
+              "status": "insufficient_evidence",
+              "supporting_sessions": 2,
+              "opposing_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": "v4-positive-zh-code",
+          "locale": "zh",
+          "primary_typed_target": [
+            "structure",
+            "code_first"
+          ],
+          "passed": false,
+          "failure_reasons": [
+            "Expected recurring preference was not offered for review."
+          ],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": [
+            {
+              "dimension": "structure",
+              "value": "code_first",
+              "status": "insufficient_evidence",
+              "supporting_sessions": 1,
+              "opposing_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": "v4-positive-zh-worked",
+          "locale": "zh",
+          "primary_typed_target": [
+            "teaching",
+            "worked_example"
+          ],
+          "passed": false,
+          "failure_reasons": [
+            "Expected recurring preference was not offered for review."
+          ],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": [
+            {
+              "dimension": "teaching",
+              "value": "worked_example",
+              "status": "insufficient_evidence",
+              "supporting_sessions": 1,
+              "opposing_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": "v4-positive-zh-language",
+          "locale": "zh",
+          "primary_typed_target": [
+            "language",
+            "zh"
+          ],
+          "passed": false,
+          "failure_reasons": [
+            "Expected recurring preference was not offered for review."
+          ],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": [
+            {
+              "dimension": "language",
+              "value": "zh",
+              "status": "insufficient_evidence",
+              "supporting_sessions": 1,
+              "opposing_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": "v4-negative-en-report",
+          "locale": "en",
+          "primary_typed_target": null,
+          "passed": true,
+          "failure_reasons": [],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": []
+        },
+        {
+          "id": "v4-negative-en-meta",
+          "locale": "en",
+          "primary_typed_target": null,
+          "passed": true,
+          "failure_reasons": [],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": [
+            {
+              "dimension": "structure",
+              "value": "code_first",
+              "status": "insufficient_evidence",
+              "supporting_sessions": 1,
+              "opposing_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": "v4-negative-en-negated",
+          "locale": "en",
+          "primary_typed_target": null,
+          "passed": true,
+          "failure_reasons": [],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": []
+        },
+        {
+          "id": "v4-negative-en-translation",
+          "locale": "en",
+          "primary_typed_target": null,
+          "passed": true,
+          "failure_reasons": [],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": []
+        },
+        {
+          "id": "v4-negative-zh-report",
+          "locale": "zh",
+          "primary_typed_target": null,
+          "passed": true,
+          "failure_reasons": [],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": []
+        },
+        {
+          "id": "v4-negative-zh-description",
+          "locale": "zh",
+          "primary_typed_target": null,
+          "passed": true,
+          "failure_reasons": [],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": [
+            {
+              "dimension": "response_length",
+              "value": "concise",
+              "status": "insufficient_evidence",
+              "supporting_sessions": 1,
+              "opposing_sessions": 0
+            }
+          ]
+        },
+        {
+          "id": "v4-negative-zh-temporary",
+          "locale": "zh",
+          "primary_typed_target": null,
+          "passed": true,
+          "failure_reasons": [],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": []
+        },
+        {
+          "id": "v4-negative-zh-meta",
+          "locale": "zh",
+          "primary_typed_target": null,
+          "passed": true,
+          "failure_reasons": [],
+          "offered_count": 0,
+          "correct_offered_count": 0,
+          "conflict_control": false,
+          "candidates": []
+        }
+      ],
+      "classification": "FIRST_UNSEEN_EVALUATION",
+      "evaluated_at": "2026-11-03T15:01:29.961271+00:00",
+      "receipt_sha256": "3c088f91cd689080743aa37d8f82c221a1c7763dd32168789de30f6a35cdcf14",
+      "source_sha256": {
+        "scripts/behavior_learning.py": "ffd92e9848e4fb8752d034b281c32be5ffde1c7512136eb52d062ac1a90a4746",
+        "scripts/build_context.py": "636d47a8f37a444ea88203b01e47e6af3060286258fbba3810b68f17601a5a62",
+        "scripts/check_package.py": "8827b190422e635edb79186d644c5ab003dc2607d0685d21750e198c7f127353",
+        "scripts/check_publication.py": "18dd2b7e93b2bcd8157fd2b5b8173ed7e8bba9bbd99be256f8bff65ecde5f81a",
+        "scripts/conversation_store.py": "47f3cc5bc7747d213f9aa05b3d80dc190dc6ce5c67819d35b12f812fe3b5b002",
+        "scripts/conversations.py": "36cf4f066e6cf7e5bba5b4138acae9b192a0b01ee84d9f29221569b961a71062",
+        "scripts/demo_conversations.py": "8bbdc134a5753f4c6ece6833a54c90ff9e369eb5016450f15d2b0f8b9767f13b",
+        "scripts/demo_learning.py": "2d6a54f87bcf8090e11c454afee4eca8ecfba21a295787c9e1c0aabb125c829c",
+        "scripts/evaluate_behavior.py": "f5c4a2c355f5cf033e9ea9dfa2c00422a8ea94ae92d62fa7cb963bfd3be65362",
+        "scripts/evaluate_conversations.py": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+        "scripts/forecast.py": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+        "scripts/host.py": "2941fa74faf643861b51dc60ed055969fd99993501b1714689283e62d615eb64",
+        "scripts/host_support.py": "0a9abba5509cc27d4c0464582c93ac656f88131b85f0c87b31dd6570ba4a5a5c",
+        "scripts/install_skill.py": "0c16d13fd6e8cddf93fdeff2b0fbf5bf0be871f543f546e9463b730e404c557d",
+        "scripts/learn_conversation.py": "d0a1687b2081a7afda6821962f5c17e9ecfe7ca152097fbfa1ab0243a39d6692",
+        "scripts/learning.py": "1f8d16337a2d8faba0053cdd4fe15bff7bea05a8c4b5daecf6a20b1748c34812",
+        "scripts/outcomes.py": "93cb341a5d2f53b78e66a442a2f44d47a670100ce7ce303d784a813e1a89698d",
+        "scripts/package_release.py": "7469dca90c3ae1dfba71a33eac5efef0b3f1ca0a5f71be13f28b1f763d2bf83c",
+        "scripts/planning.py": "ddcf33a3f7e969bcb9bc090c6e5e9e9000f9b19d787b838467b41e395697ed10",
+        "scripts/run_host.py": "2599f74bdd9eb1136cc8255657b5effcfca508d6942acecd3bce5fbea5818179",
+        "scripts/watch_conversations.py": "85167745457b5a5a1f50e340eceeede4f6653ddee63548e74d509d2984b62093",
+        "scripts/workspace.py": "90e5f92742005c14436fbaa84d6707aeb4e5a4cadaa6eae3f089a3fd71b7c714"
+      },
+      "runner_sha256": "a4fe5aa098063c7a5f99f0ce178d31e310980d4f48bcf8fcc21b55082a0c2c63",
+      "evaluator_sha256": "f5c4a2c355f5cf033e9ea9dfa2c00422a8ea94ae92d62fa7cb963bfd3be65362",
+      "sources_unchanged_during_run": true,
+      "strict_exit_code": 1,
+      "scope": "One frozen fresh-v4 diagnostic. Existing evaluator helpers are unchanged; fixture path is external.",
+      "limits": [
+        "Not a provider or real-user benefit evaluation.",
+        "False-positive rate counts ready_to_review offers; safe abstention is not positive coverage.",
+        "No learner tuning or fixture edits are part of this run."
+      ]
+    },
+    "public_runner_reproduction": {
+      "classification": "REPRODUCTION_NOT_A_NEW_FIRST_TEST",
+      "evaluated_at": "2026-11-03T15:05:13.562605+00:00",
+      "receipt_sha256": "a418748a7a8db61443b2180b23ea4bc07f0462d651381c1c5ef0853b406c7bf7",
+      "source_sha256": {
+        "scripts/behavior_learning.py": "ffd92e9848e4fb8752d034b281c32be5ffde1c7512136eb52d062ac1a90a4746",
+        "scripts/build_context.py": "636d47a8f37a444ea88203b01e47e6af3060286258fbba3810b68f17601a5a62",
+        "scripts/check_package.py": "8827b190422e635edb79186d644c5ab003dc2607d0685d21750e198c7f127353",
+        "scripts/check_publication.py": "18dd2b7e93b2bcd8157fd2b5b8173ed7e8bba9bbd99be256f8bff65ecde5f81a",
+        "scripts/conversation_store.py": "47f3cc5bc7747d213f9aa05b3d80dc190dc6ce5c67819d35b12f812fe3b5b002",
+        "scripts/conversations.py": "36cf4f066e6cf7e5bba5b4138acae9b192a0b01ee84d9f29221569b961a71062",
+        "scripts/demo_conversations.py": "8bbdc134a5753f4c6ece6833a54c90ff9e369eb5016450f15d2b0f8b9767f13b",
+        "scripts/demo_learning.py": "2d6a54f87bcf8090e11c454afee4eca8ecfba21a295787c9e1c0aabb125c829c",
+        "scripts/evaluate_behavior.py": "7cd09ef60459e500325a6125ddd69dde7e80baef066a59079ed578b4a218b830",
+        "scripts/evaluate_conversations.py": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+        "scripts/forecast.py": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+        "scripts/host.py": "2941fa74faf643861b51dc60ed055969fd99993501b1714689283e62d615eb64",
+        "scripts/host_support.py": "0a9abba5509cc27d4c0464582c93ac656f88131b85f0c87b31dd6570ba4a5a5c",
+        "scripts/install_skill.py": "0c16d13fd6e8cddf93fdeff2b0fbf5bf0be871f543f546e9463b730e404c557d",
+        "scripts/learn_conversation.py": "d0a1687b2081a7afda6821962f5c17e9ecfe7ca152097fbfa1ab0243a39d6692",
+        "scripts/learning.py": "1f8d16337a2d8faba0053cdd4fe15bff7bea05a8c4b5daecf6a20b1748c34812",
+        "scripts/outcomes.py": "93cb341a5d2f53b78e66a442a2f44d47a670100ce7ce303d784a813e1a89698d",
+        "scripts/package_release.py": "7469dca90c3ae1dfba71a33eac5efef0b3f1ca0a5f71be13f28b1f763d2bf83c",
+        "scripts/planning.py": "ddcf33a3f7e969bcb9bc090c6e5e9e9000f9b19d787b838467b41e395697ed10",
+        "scripts/run_host.py": "2599f74bdd9eb1136cc8255657b5effcfca508d6942acecd3bce5fbea5818179",
+        "scripts/watch_conversations.py": "85167745457b5a5a1f50e340eceeede4f6653ddee63548e74d509d2984b62093",
+        "scripts/workspace.py": "90e5f92742005c14436fbaa84d6707aeb4e5a4cadaa6eae3f089a3fd71b7c714"
+      },
+      "evaluator_sha256": "7cd09ef60459e500325a6125ddd69dde7e80baef066a59079ed578b4a218b830",
+      "sources_unchanged_during_run": true,
+      "strict_exit_code": 1,
+      "comparison_with_first_evaluation": {
+        "metrics_identical": true,
+        "failed_case_ids_identical": true,
+        "case_receipts_identical": true,
+        "fixture_manifest_identical": true
+      },
+      "metrics": {
+        "positive_case_coverage": {
+          "numerator": 1,
+          "denominator": 8,
+          "value": 0.125
+        },
+        "candidate_precision_given_emission": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "negative_control_false_positive_rate": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0
+        },
+        "conflict_abstention_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "offered_candidates": 1,
+        "all_candidates_including_not_ready": 11,
+        "cases_passing": {
+          "numerator": 9,
+          "denominator": 16,
+          "value": 0.5625
+        },
+        "locale_positive_coverage": {
+          "en": {
+            "numerator": 1,
+            "denominator": 4,
+            "value": 0.25
+          },
+          "zh": {
+            "numerator": 0,
+            "denominator": 4,
+            "value": 0.0
+          }
+        },
+        "import_boundary_passed": true,
+        "pending_review_boundary_passed": true,
+        "discovery_read_only": true,
+        "independent_session_threshold_passed": true
+      },
+      "failed_case_ids": [
+        "v4-positive-en-code",
+        "v4-positive-en-worked",
+        "v4-positive-en-language",
+        "v4-positive-zh-brief",
+        "v4-positive-zh-code",
+        "v4-positive-zh-worked",
+        "v4-positive-zh-language"
+      ]
+    }
+  },
+  "interpretation": [
+    "Initial, fresh-v2 and fresh-v3 are now exposed development regression sets. Their 22/22 positive and 0/34 negative false-offer counts must not be presented as unseen accuracy.",
+    "The separate first unseen fresh-v4 run offered one expected preference out of eight positive cases: English 1/4 and Chinese 0/4. It withheld offers on all eight negative controls.",
+    "Precision was 1/1 emitted candidate. A denominator of one does not establish broad accuracy, and safe abstention is not positive coverage.",
+    "Fresh-v4 has no separately labeled conflict control, so its conflict-abstention metric is undefined; do not borrow conflict success from development suites.",
+    "The public runner reproduced all v4 metrics, failure IDs and per-case receipts on the same frozen learner. This is a reproduction, not another independent first evaluation.",
+    "All earlier failures are retained under historical_stages. None of these synthetic runs measures real-user benefit, unrestricted semantic understanding or delivered model response quality."
+  ],
+  "reproduction": [
+    "Run python3 scripts/evaluate_behavior.py to reproduce fresh-v4 on the checked-out source.",
+    "Use --suite initial, --suite fresh-v2, or --suite fresh-v3 for exposed development regression cases. --suite all includes both exposed and independent-origin suites; keep their results separate.",
+    "Use --require-all to return exit 1 on missed positives, incorrect extra offers or failed controls. The frozen v4 reproduction returned 1.",
+    "Only the clock is fixed; imports, persistence, authorization and habit discovery use the real host.",
+    "Historical source and report hashes identify recorded versions; current reruns do not recreate earlier source bytes."
+  ]
+}

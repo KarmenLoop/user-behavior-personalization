@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-11-03T14:00:29Z",
+  "fixture_status": "FROZEN_BEFORE_IMPLEMENTATION_REVIEW",
+  "provider_calls": false,
+  "synthetic_only": true,
+  "cases": 18,
+  "positive_cases": 6,
+  "files": {
+    "inputs.json": {
+      "sha256": "810cb41d4c6a5b2b1511689c4a272e20ef672e30ff9fb5c1b230019116bf7584",
+      "bytes": 45160
+    },
+    "expected.json": {
+      "sha256": "4bb3e017f6091aff8f4453047bedf65e3abf69e94311bf4056965d3fa2329a11",
+      "bytes": 5775
+    },
+    "acceptance.json": {
+      "sha256": "d4c029937a89dab71388fe47f260d59587e3c1ef8fc6eeddcbf5ac1eca103cb7",
+      "bytes": 2936
+    }
+  },
+  "no_evaluation_run_yet": true
+}

@@ -1,17 +1,16 @@
-# 快速开始 — v0.4.0
+# 快速开始 — v0.5.0
 
 [English](quickstart.md) · [中文](quickstart.zh-CN.md)
 
-下载并核对 [v0.4.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.4.0)，解压后在包内使用 Python 3.11+：
+下载并校验 [v0.5.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0)，解压后在包目录中使用 Python 3.11 或更新版本。
 
 ```sh
 python3 -B scripts/check_package.py
-python3 -B scripts/learn_conversation.py --root ../private-profile --subject demo --enable-conversations --input examples/conversations/sample.zh-CN.json
-python3 -B scripts/demo_conversations.py --root ../new-conversation-demo
+python3 -B scripts/workspace.py --root ../private-profile --subject demo --enable-conversations
 ```
 
-导入器打印实际自由文本提案与表达观察，不替用户确认。生命周期演示使用新的目录与合成对话，通过真实本地进程执行审查、预测、模型提案暂存、删除和重置，不调用模型提供方。
+打开终端显示的本地地址。点击「体验一个合成示例」，查看三个会话的证据，然后确认简短回答的习惯。进入「用于下一次任务」预览效果，再将回答长度改为「仅用于这次任务」的详细模式。原来的长期偏好不会改变。
 
-自己的 JSON/JSONL、独立场景、Codex/Cursor 配置、细粒度删除和真实宿主验收见[教程](tutorial.zh-CN.md)。实验性预测目前英文改写覆盖较弱，使用前先看[验收结果](evaluation.zh-CN.md)。
+保存方案后，可以评价这次提示方案是否有帮助。整个本地流程不需要模型账号；预览展示的是实际拼接的提示内容，不是模型生成的回答。完成后在终端按 Ctrl+C 停止服务。
 
-原有[结构化反馈流程](structured-feedback.zh-CN.md)继续可用，需独立的 `--enable-observations`。私有存储放在 Git 外。
+继续阅读[完整教程](tutorial.zh-CN.md)、[指定文件自动导入](automatic-learning.zh-CN.md)或 [Codex/Cursor 接入](host-integration.zh-CN.md)。私有数据目录应放在 Git 之外。[验收记录](evaluation.zh-CN.md)列出了学习能力与真实模型调用目前的边界。

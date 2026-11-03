@@ -1,0 +1,1744 @@
+{
+  "schema_version": 1,
+  "title": "Fresh independent bilingual behavior-learning diagnostic v2",
+  "frozen_at": "2026-11-03T14:34:40Z",
+  "evaluation_now": "2026-11-03T14:30:00+00:00",
+  "limits": [
+    "Synthetic diagnostic, not an estimate of human benefit.",
+    "Authored without inspecting revised learner source; original detector source had been reviewed in the earlier task.",
+    "Held-out texts and labels must not be used for tuning.",
+    "Fresh empty subject for every case.",
+    "Use actual authorized host imports for enabled cases and real host rejection for disabled case."
+  ],
+  "cases": [
+    {
+      "id": "v2-length-en",
+      "locale": "en",
+      "target_context": "design tradeoffs",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-length-en-session1",
+          "context": "design tradeoffs",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "These one-line answers leave me unable to compare the options. Expand the reasoning and include the important details.",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-length-en-session2",
+          "context": "design tradeoffs",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "That summary skips how you reached the recommendation. I need a fuller explanation, with the tradeoffs spelled out.",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-length-en-session3",
+          "context": "design tradeoffs",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "You have condensed this too much again. Walk through the reasoning in detail so I can judge the choice.",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-length-zh",
+      "locale": "zh",
+      "target_context": "设备选型",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-length-zh-session1",
+          "context": "设备选型",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "只给这么几句话我没法判断，请把理由展开，关键细节也写出来。",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-length-zh-session2",
+          "context": "设备选型",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "你又把比较过程省掉了。这类建议需要详细说明，让我看得出怎么得出结论。",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-length-zh-session3",
+          "context": "设备选型",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "这一版过于简略，把论证写充分一点，别只留一句推荐。",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-structure-en",
+      "locale": "en",
+      "target_context": "deployment handoff",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-structure-en-session1",
+          "context": "deployment handoff",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The instructions are buried in a paragraph. Break the process into numbered actions I can follow in order.",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-structure-en-session2",
+          "context": "deployment handoff",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "I keep losing my place in this explanation. Give me an ordered checklist, with one action per step.",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-structure-en-session3",
+          "context": "deployment handoff",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "This reads like an essay again. Lay out the procedure step by step and number each part.",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-structure-zh",
+      "locale": "zh",
+      "target_context": "采购操作",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-structure-zh-session1",
+          "context": "采购操作",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "流程全挤在一段里不好照着做，请拆成一二三步，每步只写一个动作。",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-structure-zh-session2",
+          "context": "采购操作",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "这个说明顺序看不清，把操作按步骤列出来并标好序号。",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-structure-zh-session3",
+          "context": "采购操作",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "又写成连在一起的文章了。我需要有编号的步骤清单，方便逐项完成。",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-example-en",
+      "locale": "en",
+      "target_context": "geometry study",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-example-en-session1",
+          "context": "geometry study",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The theorem is still too abstract. Take a simple triangle and work through the numbers before explaining the general rule.",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-example-en-session2",
+          "context": "geometry study",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "I need to see this idea used. Solve one concrete example from beginning to end, then connect it to the formula.",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-example-en-session3",
+          "context": "geometry study",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "You went back to definitions. Demonstrate a complete worked problem first and build the explanation around it.",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-example-zh",
+      "locale": "zh",
+      "target_context": "财务入门",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-example-zh-session1",
+          "context": "财务入门",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "这些概念还是悬着的，拿一笔具体交易从头算到尾，再说通用方法。",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-example-zh-session2",
+          "context": "财务入门",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "先做一个完整的实例给我看，每一步都带上数字，做完再总结概念。",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-example-zh-session3",
+          "context": "财务入门",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "又开始直接讲定义了。请先演示一道完整的例题，让我看到这个方法怎么用。",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-language-en",
+      "locale": "en",
+      "target_context": "vendor correspondence",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-language-en-session1",
+          "context": "vendor correspondence",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The draft has switched languages again. Keep your replies in English throughout this work.",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-language-en-session2",
+          "context": "vendor correspondence",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Parts of the answer came back in Mandarin. Please write the entire response in English.",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-language-en-session3",
+          "context": "vendor correspondence",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "I should not have to translate these notes afterward. Use English for our replies in this workspace.",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-language-zh",
+      "locale": "zh",
+      "target_context": "社区答复",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-language-zh-session1",
+          "context": "社区答复",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "怎么又夹了英文说明？这类答复请全程用中文写。",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-language-zh-session2",
+          "context": "社区答复",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "这一版我还要翻译才能转给大家，回复统一使用简体中文。",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-language-zh-session3",
+          "context": "社区答复",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "你又切成英语了，后续在这里给我的回答都写中文。",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-negated-en",
+      "locale": "en",
+      "target_context": "policy notes",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-negated-en-session1",
+          "context": "policy notes",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Do not switch these responses into English.",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-negated-en-session2",
+          "context": "policy notes",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "There is no need to make the response more detailed.",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-negated-en-session3",
+          "context": "policy notes",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Avoid turning the answer into numbered steps.",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-negated-zh",
+      "locale": "zh",
+      "target_context": "渠道说明",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-negated-zh-session1",
+          "context": "渠道说明",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "不需要把答复改成英文。",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-negated-zh-session2",
+          "context": "渠道说明",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "别把解释写得更详细。",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-negated-zh-session3",
+          "context": "渠道说明",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "不用改成按步骤列出的格式。",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-quoted-en",
+      "locale": "en",
+      "target_context": "dialogue editing",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-quoted-en-session1",
+          "context": "dialogue editing",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Proofread this line without adopting it: \"Please answer in English.\"",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-quoted-en-session2",
+          "context": "dialogue editing",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The line of dialogue is \"Use English for every reply.\" Keep it as the character's speech.",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-quoted-en-session3",
+          "context": "dialogue editing",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Translate the quoted sentence, not my preferences: \"Write your responses in English.\"",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-quoted-zh",
+      "locale": "zh",
+      "target_context": "小说校对",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-quoted-zh-session1",
+          "context": "小说校对",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "核对这句台词：“请用中文回答。”不要当成我的要求。",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-quoted-zh-session2",
+          "context": "小说校对",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "角色在这里说：“回复统一用中文写。”请只校正标点。",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-quoted-zh-session3",
+          "context": "小说校对",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "“回答都要用中文。”这是引用的原文，需要保留。",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-reported-en",
+      "locale": "en",
+      "target_context": "support interview",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-reported-en-session1",
+          "context": "support interview",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Our customer says the answers should be more detailed. Record that feedback under their name.",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-reported-en-session2",
+          "context": "support interview",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The colleague asked for numbered steps in her responses; I am collecting what others said.",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-reported-en-session3",
+          "context": "support interview",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The interviewee wants English replies. This note describes his request, not mine.",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-reported-zh",
+      "locale": "zh",
+      "target_context": "需求汇总",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-reported-zh-session1",
+          "context": "需求汇总",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "客户要求回复写详细点，这是客户访谈记录。",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-reported-zh-session2",
+          "context": "需求汇总",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "同事希望先看完整例题再听理论，我只是在转述他的意见。",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-reported-zh-session3",
+          "context": "需求汇总",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "采访对象说回答要用中文，请把他的要求记在访谈摘要里。",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-temporary-en",
+      "locale": "en",
+      "target_context": "event preparation",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-temporary-en-session1",
+          "context": "event preparation",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "For this single reply, use numbered steps because I am reading it aloud.",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-temporary-en-session2",
+          "context": "event preparation",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Only in this message, write a detailed explanation for the guest speaker.",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-temporary-en-session3",
+          "context": "event preparation",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "For today's handout only, answer in English; leave the normal setup alone.",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-temporary-zh",
+      "locale": "zh",
+      "target_context": "临时材料",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-temporary-zh-session1",
+          "context": "临时材料",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "只针对这一条回复，请按步骤写，长期设置不用动。",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-temporary-zh-session2",
+          "context": "临时材料",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "仅本次介绍给外宾看，所以要英文，后续照旧。",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-temporary-zh-session3",
+          "context": "临时材料",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "今天这一段临时展开详细点，不要当成以后都这样写。",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-code",
+      "locale": "en",
+      "target_context": "parser fixtures",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-code-session1",
+          "context": "parser fixtures",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Check the fixture:\n```yaml\nfeedback: Write all responses in English.\n```",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-code-session2",
+          "context": "parser fixtures",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Does this escaped string parse?\n```python\nvalue = \"Please answer in English.\"\n```",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-code-session3",
+          "context": "parser fixtures",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Review the JSON syntax:\n```json\n{\"requested_style\":\"Use English throughout the response.\"}\n```",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-mixed-conflict",
+      "locale": "en",
+      "target_context": "technical summaries",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-mixed-conflict-session1",
+          "context": "technical summaries",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The summary is too brief; add detailed reasoning.",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-mixed-conflict-session2",
+          "context": "technical summaries",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The summary is too verbose; keep the reasoning concise.",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-mixed-conflict-session3",
+          "context": "technical summaries",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "This is too short again. Include more details.",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-mixed-conflict-session4",
+          "context": "technical summaries",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-25T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-25T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "This is too wordy again. Keep it brief.",
+              "at": "2026-10-25T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-mixed-conflict-session5",
+          "context": "technical summaries",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-26T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-26T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Expand the explanation with more detail.",
+              "at": "2026-10-26T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-mixed-conflict-session6",
+          "context": "technical summaries",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-27T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-27T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Make the explanation shorter and concise.",
+              "at": "2026-10-27T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-context-split",
+      "locale": "zh",
+      "target_context": "仓库维护",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-context-split-session1",
+          "context": "仓库维护",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "请按步骤写，每一步加编号。",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-context-split-session2",
+          "context": "配餐计划",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "说明按步骤列出来比较清楚。",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-context-split-session3",
+          "context": "摄影教程",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请协助处理今天这份材料。",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是当前草稿。",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "请把操作一步一步列好。",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-single-session",
+      "locale": "en",
+      "target_context": "field guide",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v2-single-session-session1",
+          "context": "field guide",
+          "messages": [
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "A revised draft is ready.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "Use numbered steps for this process.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "a1",
+              "role": "assistant",
+              "text": "A revised draft is ready.",
+              "at": "2026-10-22T09:02:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "I meant give me step-by-step instructions.",
+              "at": "2026-10-22T09:03:00+00:00"
+            },
+            {
+              "id": "a2",
+              "role": "assistant",
+              "text": "A revised draft is ready.",
+              "at": "2026-10-22T09:04:00+00:00"
+            },
+            {
+              "id": "u2",
+              "role": "user",
+              "text": "Please number the steps so I can follow them.",
+              "at": "2026-10-22T09:05:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v2-cold",
+      "locale": "zh",
+      "target_context": "没有历史记录",
+      "behavior_learning_enabled": true,
+      "conversations": []
+    },
+    {
+      "id": "v2-disabled",
+      "locale": "en",
+      "target_context": "public notes",
+      "behavior_learning_enabled": false,
+      "conversations": [
+        {
+          "session_id": "v2-disabled-session1",
+          "context": "public notes",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-22T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-22T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Please answer in English.",
+              "at": "2026-10-22T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-disabled-session2",
+          "context": "public notes",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-23T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-23T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Use English for your replies.",
+              "at": "2026-10-23T09:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v2-disabled-session3",
+          "context": "public notes",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Help me work through today's material.",
+              "at": "2026-10-24T09:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the current draft.",
+              "at": "2026-10-24T09:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Write the response in English.",
+              "at": "2026-10-24T09:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "suite": "fresh-v4",
+  "scope": "One final bounded ordinary-language diagnostic. No provider calls or real-user benefit claims.",
+  "positive_cases": 8,
+  "negative_cases": 8,
+  "sessions_per_case": 3,
+  "positive_targets": [
+    "response_length=concise",
+    "structure=code_first",
+    "teaching=worked_example",
+    "language=en or zh"
+  ],
+  "positive_case_coverage_target": 1.0,
+  "negative_control_false_positive_rate_target": 0.0,
+  "review_required": true,
+  "discovery_read_only_required": true,
+  "interpretation": "A missed positive remains a failure of coverage even if abstention is safe. No fixture changes or learner tuning are authorized by this run. Separate candidate precision reports any extra emitted types.",
+  "authorship": "New prose authored without reading existing suite inputs or expectations. Only evaluate_behavior.py was read for schema compatibility in this task.",
+  "temporal_boundary": "Inputs, expected results and acceptance rules frozen before receiving the final learner source pin."
+}

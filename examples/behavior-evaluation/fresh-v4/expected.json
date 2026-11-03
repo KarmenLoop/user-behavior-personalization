@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "suite": "fresh-v4",
+  "expectations": [
+    {
+      "id": "v4-positive-en-brief",
+      "expected_recurring_candidates": [
+        {
+          "dimension": "response_length",
+          "value": "concise"
+        }
+      ],
+      "primary_typed_target": [
+        "response_length",
+        "concise"
+      ],
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-positive-en-code",
+      "expected_recurring_candidates": [
+        {
+          "dimension": "structure",
+          "value": "code_first"
+        }
+      ],
+      "primary_typed_target": [
+        "structure",
+        "code_first"
+      ],
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-positive-en-worked",
+      "expected_recurring_candidates": [
+        {
+          "dimension": "teaching",
+          "value": "worked_example"
+        }
+      ],
+      "primary_typed_target": [
+        "teaching",
+        "worked_example"
+      ],
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-positive-en-language",
+      "expected_recurring_candidates": [
+        {
+          "dimension": "language",
+          "value": "en"
+        }
+      ],
+      "primary_typed_target": [
+        "language",
+        "en"
+      ],
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-positive-zh-brief",
+      "expected_recurring_candidates": [
+        {
+          "dimension": "response_length",
+          "value": "concise"
+        }
+      ],
+      "primary_typed_target": [
+        "response_length",
+        "concise"
+      ],
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-positive-zh-code",
+      "expected_recurring_candidates": [
+        {
+          "dimension": "structure",
+          "value": "code_first"
+        }
+      ],
+      "primary_typed_target": [
+        "structure",
+        "code_first"
+      ],
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-positive-zh-worked",
+      "expected_recurring_candidates": [
+        {
+          "dimension": "teaching",
+          "value": "worked_example"
+        }
+      ],
+      "primary_typed_target": [
+        "teaching",
+        "worked_example"
+      ],
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-positive-zh-language",
+      "expected_recurring_candidates": [
+        {
+          "dimension": "language",
+          "value": "zh"
+        }
+      ],
+      "primary_typed_target": [
+        "language",
+        "zh"
+      ],
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-negative-en-report",
+      "expected_recurring_candidates": [],
+      "primary_typed_target": null,
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-negative-en-meta",
+      "expected_recurring_candidates": [],
+      "primary_typed_target": null,
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-negative-en-negated",
+      "expected_recurring_candidates": [],
+      "primary_typed_target": null,
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-negative-en-translation",
+      "expected_recurring_candidates": [],
+      "primary_typed_target": null,
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-negative-zh-report",
+      "expected_recurring_candidates": [],
+      "primary_typed_target": null,
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-negative-zh-description",
+      "expected_recurring_candidates": [],
+      "primary_typed_target": null,
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-negative-zh-temporary",
+      "expected_recurring_candidates": [],
+      "primary_typed_target": null,
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    },
+    {
+      "id": "v4-negative-zh-meta",
+      "expected_recurring_candidates": [],
+      "primary_typed_target": null,
+      "conflict_expected": false,
+      "expected_active_rules": 0,
+      "expected_discovery_mutation": false
+    }
+  ]
+}

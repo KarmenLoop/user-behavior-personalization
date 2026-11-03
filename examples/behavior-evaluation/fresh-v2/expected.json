@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-11-03T14:34:40Z",
+  "oracle": "Predeclared typed semantic targets; only ready_to_review offers count. No partial-match promotion or post-run target changes.",
+  "expectations": [
+    {
+      "id": "v2-length-en",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "response_length",
+        "detailed"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-length-zh",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "response_length",
+        "detailed"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-structure-en",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "structure",
+        "steps"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-structure-zh",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "structure",
+        "steps"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-example-en",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "teaching",
+        "worked_example"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-example-zh",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "teaching",
+        "worked_example"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-language-en",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "language",
+        "en"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-language-zh",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "language",
+        "zh"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-negated-en",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-negated-zh",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-quoted-en",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-quoted-zh",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-reported-en",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-reported-zh",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-temporary-en",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-temporary-zh",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-code",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-mixed-conflict",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": true,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-context-split",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-single-session",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-cold",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v2-disabled",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    }
+  ],
+  "metrics": [
+    "positive_case_coverage",
+    "candidate_precision_given_emission",
+    "negative_control_false_positive_rate",
+    "conflict_abstention_rate",
+    "pending_review_boundary",
+    "source_session_support"
+  ],
+  "reporting": [
+    "Every case and raw output retained.",
+    "Zero emitted candidates means undefined precision.",
+    "Positive abstention is a coverage miss.",
+    "Negative cases permit non-ready conflict or insufficient-evidence records but not a ready offer.",
+    "No human-benefit or delivered-response claims."
+  ]
+}

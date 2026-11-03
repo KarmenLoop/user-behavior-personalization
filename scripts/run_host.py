@@ -11,7 +11,7 @@ import subprocess
 import sys
 import uuid
 
-from build_context import context_payload
+from build_context import context_payload, add_plan_arguments, parse_plan_arguments
 from host import load
 from host_support import Database, Problem, atomic, need, stamp
 
@@ -51,8 +51,10 @@ def main():
     parser.add_argument('--prompt', type=Path, required=True)
     parser.add_argument('--timeout', type=int, default=180)
     parser.add_argument('--read-only', action='store_true', help='Use the host read-only mode.')
+    add_plan_arguments(parser)
     args = parser.parse_args()
     try:
+        parse_plan_arguments(args)
         need(args.workspace.is_dir(), 'WORKSPACE_MISSING', 'Create the workspace first.')
         need(args.prompt.stat().st_size <= 1000000, 'INPUT_TOO_LARGE', 'Prompt exceeds 1 MB.')
         payload = context_payload(args, args.prompt.read_text(encoding='utf-8'))
@@ -60,6 +62,7 @@ def main():
         profile = payload['personalization']
         record = {'host': args.host, 'profile_revision': profile['revision'],
                   'rule_ids': profile['rule_ids'], 'paused': profile['paused'],
+                  'plan_id': profile['plan_id'], 'rule_versions': profile['rule_versions'],
                   'started_at': stamp(), 'output_retention': 'console_only'}
         workspace = str(args.workspace.resolve())
         if args.host == 'codex':
@@ -97,6 +100,8 @@ def main():
                 record['profile_changed_during_run'] = changed
                 if changed:
                     record['rule_ids'] = []
+                    record['rule_versions'] = {}
+                    record['plan_id'] = None
                 runs = db.root / 'host-runs'
                 subject_runs = runs / hashlib.sha256(args.subject.encode()).hexdigest()
                 need(not runs.is_symlink() and not subject_runs.is_symlink(),

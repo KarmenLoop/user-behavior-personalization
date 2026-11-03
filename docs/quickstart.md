@@ -1,17 +1,16 @@
-# Quick start — v0.4.0
+# Quick start — v0.5.0
 
 [English](quickstart.md) · [中文](quickstart.zh-CN.md)
 
-Download and verify [v0.4.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.4.0), extract it, and use Python 3.11+ from that directory.
+Download and verify [v0.5.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0), extract it, and use Python 3.11+ from that directory.
 
 ```sh
 python3 -B scripts/check_package.py
-python3 -B scripts/learn_conversation.py --root ../private-profile --subject demo --enable-conversations --input examples/conversations/sample.en.json
-python3 -B scripts/demo_conversations.py --root ../new-conversation-demo
+python3 -B scripts/workspace.py --root ../private-profile --subject demo --enable-conversations
 ```
 
-The importer prints actual open-text proposals and writing observations; it does not confirm them. The lifecycle demo uses a new directory and synthetic conversations to exercise review, forecast, model-proposal staging, deletion, and reset through real local processes. No model provider is called.
+Open the printed local URL. Choose **Try a synthetic example**, inspect the three supporting conversations, and review the concise-answer habit. In **Shape the next task**, preview its effect, then choose a detailed response **just for this task**. The saved preference stays unchanged.
 
-Continue with the [tutorial](tutorial.en.md) for your own JSON/JSONL, independent context labels, Codex/Cursor configuration, granular deletion, and actual host acceptance. See [evaluation](evaluation.md) before relying on the experimental forecast; English paraphrase coverage is currently weak.
+Save a plan and rate the prompt review. A model account is not needed for this local walkthrough; the preview is a composed prompt, not a generated answer. Stop the server with Ctrl+C.
 
-The [structured-feedback workflow](structured-feedback.en.md) remains available with its separate `--enable-observations` setting. Private stores belong outside Git.
+Continue with the [full tutorial](tutorial.en.md), [selected-file watcher](automatic-learning.en.md), or [Codex/Cursor configuration](host-integration.md). Use a private root outside Git. Current learning and model-response limits are recorded in [evaluation](evaluation.md).

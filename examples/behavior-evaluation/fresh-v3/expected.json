@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-11-03T14:42:07Z",
+  "oracle": "Typed semantic targets declared before source freeze/evaluation. Only ready_to_review offers count; a weaker include-example preference is not worked-example-first success.",
+  "expectations": [
+    {
+      "id": "v3-short-en",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "response_length",
+        "concise"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-code-en",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "structure",
+        "code_first"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-example-en",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "teaching",
+        "worked_example"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-language-en",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "language",
+        "en"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-short-zh",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "response_length",
+        "concise"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-code-zh",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "structure",
+        "code_first"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-example-zh",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "teaching",
+        "worked_example"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-language-zh",
+      "expected_recurring_candidates": 1,
+      "primary_typed_target": [
+        "language",
+        "zh"
+      ],
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-negation-en",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-quoted-zh",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-temporary-en",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-third-party-zh",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-conflict-en",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": true,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-context-split",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-single-session",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "v3-disabled",
+      "expected_recurring_candidates": 0,
+      "primary_typed_target": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    }
+  ],
+  "reporting": [
+    "Preserve every case and raw output.",
+    "Abstention on positives is a miss.",
+    "Zero offers makes precision undefined.",
+    "Conflicting or insufficient evidence may be displayed but must not become an offered or active preference.",
+    "Do not claim delivered response quality without actual model use evidence."
+  ]
+}

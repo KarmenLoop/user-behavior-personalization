@@ -1,58 +1,54 @@
-# 宿主接入 — v0.4.0
+# 宿主接入 — v0.5.0
 
 [English](host-integration.md) · [中文](host-integration.zh-CN.md)
 
-## 本地 CLI 与 MCP
+浏览器工作台、CLI 与 MCP 标准输入输出共用同一本地适配器及 [25 个工具](tools.zh-CN.md)。用户和私有目录在进程启动时固定，工具调用不能切换身份。
 
-`scripts/host.py` 提供 [README](../README.zh-CN.md) 中的十八个工具，CLI `call` 与 MCP stdio 共用实现和输入校验。subject 在进程启动时绑定，工具参数不能切换用户。操作者取得授权后，使用 `--enable-observations` 开启观察路径。
+## 先使用本地工作台
 
-宿主负责身份核实、已授权消息、真实来源与会话编号、明确审查决定和当前场景。适配器导入明确选择的对话，不会自动爬取历史，也无法证明传入的 `source_id` 是真实同意收条。工具能调用，不等于可以随意收集反馈。
-
-## Codex 与 Cursor
-
-安装助手为 Codex 写入 `.codex/config.toml`，为 Cursor 写入 `.cursor/mcp.json`，保留已有配置并拒绝重名服务。条目绑定 Python、包路径、私有根和用户。两者指向同一数据根与 subject 时，可以在同一台机器读取相同的已提交档案。
-
-Skill 是供宿主读取的指导。Codex 的 `AGENTS.md` 和 Cursor 项目规则是另外的指令机制；安装 MCP 不会改写它们，也不保证每轮都调用工具。Cursor 项目规则使用 `.cursor/rules` 下的 `.mdc`，普通 Markdown 文件不等同于规则。请核对现行 [Codex 说明](https://developers.openai.com/codex/guides/agents-md)与 [Cursor 规则](https://cursor.com/docs/rules)。
-
-`scripts/run_host.py` 在新的 CLI 调用前加载已确认偏好。元数据收条区分已加载的版本、规则 ID 和宿主真实退出结果，输出流向终端。它不会为已运行的桌面聊天创建计时器或逐轮钩子；宿主仍需自己的账号、模型权限和可用 CLI。
-
-## DeepSeek 与其他聊天 API
-
-```mermaid
-sequenceDiagram
-  participant User as 用户
-  participant Host as 自行实现的宿主
-  participant Local as 本地档案适配器
-  participant Model as 聊天 API
-  User->>Host: 当前任务
-  Host->>Local: profile_read(完整场景)
-  Local-->>Host: 已确认规则与版本
-  Host->>Model: 选择的规则与任务 messages
-  Model-->>Host: 回复或建议工具调用
-  Host->>Host: 校验白名单、参数、身份与权限
-  Host-->>User: 回复；候选确认前取得本人决定
+```sh
+python3 -B scripts/workspace.py --root ../private-profile --subject owner --enable-conversations
 ```
 
-`scripts/build_context.py` 生成含 `messages` 与本地元数据的请求内容，不执行发送。客户端自行选择提供方支持的模型，按当前 API 规范发送 `messages`。密钥留在客户端，不进入档案或公开仓库。
+打开终端显示的本地地址，导入选定反馈、审阅习惯、预览任务并记录明确评价。这个流程不发送模型请求。需要连续导入时，在另一终端用相同目录与用户启动[指定文件监听](automatic-learning.zh-CN.md)。它只在运行期间导入该文件，不会安装后台服务或发现其他账号。
 
-DeepSeek JSON Output 约束的是输出格式，不能证明抽取的偏好真实。自行开发的工具桥接必须校验类型和枚举，仅接受已授权用户消息白名单中的来源，拒绝空白或截断输出，保留版本检查，并只发送必要内容。不要将隐藏推理或助手输出当成用户证据。参见[官方 JSON Output 文档](https://api-docs.deepseek.com/guides/json_mode/)。
+## 配置 Codex 或 Cursor
 
-本版本提供离线明确表达提取器，以及接收宿主模型提案的本地桥接；不提供自动运行的 DeepSeek 工具循环，也不自行调用提供方。本地请求内容生成成功，不等于 DeepSeek 在线接入验收通过。
+```sh
+python3 scripts/host.py --root ../private-profile --subject owner \
+  --workspace /path/to/project --enable-conversations --install-host codex install
+```
 
-## 宿主仍需负责的能力
+接入 Cursor 时改用 `--install-host cursor`。安装器写入 `.codex/config.toml` 或 `.cursor/mcp.json`，保留已有配置，遇到同名服务器会拒绝覆盖。配置中记录 Python 路径、包路径、私有目录、用户及收集开关。直接记录结构化事件需另外开启 `--enable-observations`。
 
-身份提供方、后台历史采集、会话结束事件、后台反思、加密和系统权限、提供方留存、群聊披露及多设备同步，均需要独立实现和验收。[原有反思协议](../references/reflection-workflow.md)说明宿主如何提供这些能力，并不是已经运行的服务。
+在宿主中重新加载服务器并查看工具列表，实际核对两个宿主能否读取同一条已确认偏好。配置生成及 MCP 调用成功不等于模型已采用规则；真实回答需单独检查。
 
-可复现本地调用见[教程](tutorial.zh-CN.md)，验收范围见[验收指南](evaluation.zh-CN.md)。
+宿主的指令机制是另一层配置。Codex 读取有范围的 `AGENTS.md`；Cursor 项目规则使用 `.cursor/rules/*.mdc`。安装本服务器不会重写这些文件，也不会强制每轮调用。参见官方 [Codex 指南](https://developers.openai.com/codex/guides/agents-md)与 [Cursor 规则](https://cursor.com/docs/rules)。
 
-## 本地进程可见性
+请运行实际安装的 v0.5.0 脚本。旧版技能副本或仍指向旧目录的 MCP 配置，会继续使用旧实现。安装到新目录后，检查并将现有服务器配置改为新路径，再重启工作台或重新加载 MCP。安装器不会静默覆盖已有副本或重复服务器。可以在该安装目录运行 `build_context.py --help` 或 `run_host.py --help` 核对临时覆盖选项。
 
-Codex 通过 stdin 接收组合后的提示。当前 Cursor CLI 路径使用位置参数，同一系统用户运行的其他工具可能在进程参数中看到内容。如不能接受这层暴露，应使用 MCP 路径或合适的本地账号隔离。输出仍可能被终端或宿主记录；适配器只留元数据，并不会删除那些独立副本。
+## 让预览与执行使用同一套选择逻辑
 
-## 对话导入与宿主模型提案
+`profile_plan` 展示采用和排除的规则及原因。`scripts/build_context.py` 与 `scripts/run_host.py` 用相同选择器构建实际请求内容。它们都支持场景、临时类型设置、排除规则及偏好文本预算。
 
-`--enable-conversations` 与 `--enable-observations` 独立。可通过 `learn_conversation.py` 导入选定 JSON/JSONL，也可携当前版本调用 `conversation_import`。角色和来源编号由宿主提供，导入前需对应到获授权的记录。适配器保留有限的清理后用户片段，并暂存自由文本提案。
+```sh
+python3 scripts/build_context.py --root ../private-profile --subject owner \
+  --context writing --task-file /path/to/private-task.txt \
+  --override response_length=detailed --preference-budget 4000
+```
 
-需要模型辅助时，调用 `profile_model_context(context)`，将选定片段和提取要求交给获授权的模型，再用 `profile_model_propose` 提交结构化提案。每项需要类别、场景、陈述和已知来源键的精确引文；校验后仍是待审状态，`profile_proposal_review` 才记录本人真实决定。工具不能把模型的同意当成本人审查。
+JSON 输出包含 `messages` 及本地个性化元数据。由你自己的客户端发送需要的请求字段。构建器不联网、不保存原始任务；重定向后的输出属于你另外管理的私有副本。
 
-`profile_portrait` 与 `profile_forecast` 为查看提供私有来源例子，不应把完整输出塞进无关任务或共享聊天。普通回复仍通过 `profile_read` 加载简洁的已确认规则。
+`run_host.py` 在一次新的 Codex 或 Cursor CLI 调用前加载偏好，将结果输出到终端。保存的回执只有元数据，没有原始提示或回答。Codex 通过标准输入接收提示；当前 Cursor CLI 路径使用位置参数，同一本地用户的进程检查工具可能看到内容。账号、模型权限、终端日志及提供商留存仍由相应系统管理。它不会给已经运行的桌面聊天安装自动钩子。
+
+## 可选的模型辅助学习
+
+`profile_model_context(context)` 返回有限的已存摘录和提议格式。经授权的宿主可将其发送给选定模型，包括兼容 DeepSeek 风格的聊天 API。返回结果通过 `profile_model_propose` 提交，工具会核对已知来源、精确引用、类别与范围。通过校验的提议仍需用户审阅。
+
+DeepSeek JSON Output 约束格式，不证明内容真实。需要拒绝空白或截断结果、校验字段及来源白名单，并将摘录视为数据而非指令。参见[官方 JSON Output 指南](https://api-docs.deepseek.com/guides/json_mode/)。本包不包含提供商凭据或模型循环，也未声称完成 DeepSeek 真实调用验收。
+
+## 明确接入边界
+
+宿主负责可信身份、获准使用的消息、准确的角色与来源标识，以及用户真实的审阅决定。来源字符串是宿主记录，并非独立的授权证明。当前指令与普通执行权限仍然有效。
+
+每日调度、账号历史导出、操作系统隔离、多设备同步及外部留存需要宿主分别实现。[早期反思契约](../references/reflection-workflow.md)说明了这些责任。指定文件监听是已实现的前台导入器，不代表整套后台服务已具备。本地与提供商结果见[当前验收记录](evaluation.zh-CN.md)。

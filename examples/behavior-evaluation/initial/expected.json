@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-11-03T14:00:29Z",
+  "oracle": "Manually specified semantic targets, not substring-only truth. Record raw candidate text and blind-review ambiguous wording. The number counts recurring behavioral candidates only, not pre-existing direct preference extraction.",
+  "expectations": [
+    {
+      "id": "p-brief-en",
+      "expected_recurring_candidates": 1,
+      "meaning": "Prefer concise answers with the decision or next action up front.",
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "p-code-en",
+      "expected_recurring_candidates": 1,
+      "meaning": "Show runnable code before explanatory prose.",
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "p-example-en",
+      "expected_recurring_candidates": 1,
+      "meaning": "Teach through a concrete worked example before abstract explanation.",
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "p-brief-zh",
+      "expected_recurring_candidates": 1,
+      "meaning": "Prefer concise answers with the decision or next action up front.",
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "p-code-zh",
+      "expected_recurring_candidates": 1,
+      "meaning": "Show runnable code before explanatory prose.",
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "p-example-zh",
+      "expected_recurring_candidates": 1,
+      "meaning": "Teach through a concrete worked example before abstract explanation.",
+      "minimum_independent_sessions": 3,
+      "must_remain_pending": true,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-quote-en",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-quote-zh",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-code-fence",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-temporary-en",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-temporary-zh",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-one-session",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-conflict-en",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": true,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-conflict-zh",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": true,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-context-split",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-cold",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-assistant-only",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    },
+    {
+      "id": "n-disabled",
+      "expected_recurring_candidates": 0,
+      "meaning": null,
+      "minimum_independent_sessions": null,
+      "must_remain_pending": false,
+      "conflict_expected": false,
+      "must_not_auto_apply": true
+    }
+  ],
+  "metrics": [
+    "positive_case_coverage",
+    "candidate_precision_given_emission",
+    "negative_control_false_positive_rate",
+    "conflict_abstention_rate",
+    "pending_review_rate",
+    "independent_session_support_rate"
+  ],
+  "reporting": [
+    "Report every case and original raw outputs.",
+    "Abstaining on a positive is a miss, not a pass.",
+    "Conflicting histories must not produce an active one-sided rule. A visible conflict is acceptable.",
+    "No success claim about actual model responses without a real delivered-response receipt."
+  ]
+}

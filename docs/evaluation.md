@@ -1,10 +1,49 @@
-# Evaluation — v0.4.0
+# Evaluation — v0.5.0
 
 [English](evaluation.md) · [中文](evaluation.zh-CN.md)
 
 Conversation import, review, persistence, and deletion are executable local capabilities. The next-request forecaster is an **experimental lexical retrieval method** with limited coverage. Correct storage and passing unit tests do not establish that a system understands a person.
 
-## Quality results, including the misses
+## v0.5.0: working tools and experimental recognition
+
+The local workspace, selected-file importer, and task preference resolver are executable features. Automatic recognition of recurring feedback remains **experimental**: it can handle supported wording but misses many ordinary paraphrases. Recognition quality, prompt construction, user-reported usefulness, and actual provider responses need separate evidence.
+
+### Known examples versus unseen wording
+
+Only a correct `ready_to_review` candidate counts as positive coverage. A safe abstention still misses a positive case. The strict check also rejects incorrect extra offers; recognizing one expected preference does not excuse an unrelated suggestion.
+
+| Stage | Positive cases covered | Negative cases with a false offer | What the result establishes |
+|---|---:|---:|---|
+| Initial detector, original set | 0/6 | 0/12 | Preserved initial failure. The simple workspace demo did not expose these gaps. |
+| Earlier revision, original set | 1/6 | 0/12 | A development comparison on already-known cases. |
+| First unseen `fresh-v2` run | 0/8 | 0/14 | Preserved failure on new wording. A later frozen revision reached 1/8 on this then-known set. |
+| First unseen `fresh-v3` run | 1/8 | 0/8 | Preserved independent result from an earlier frozen learner. |
+| Current learner, exposed `initial` + `fresh-v2` + `fresh-v3` | 22/22 | 0/34 | **Known-case regression**, after those fixtures were exposed during development. This is not unseen accuracy. |
+| Current learner, first unseen `fresh-v4` run | **1/8 (12.5%)** | **0/8** | **English 1/4; Chinese 0/4. Strict quality gate failed.** Seven positive cases were missed. |
+
+The sole emitted `fresh-v4` candidate was correct. A denominator of one does not establish broad accuracy, and the absence of false offers does not make the missing preferences useful. This set has no separately labeled conflict control, so it provides no conflict-abstention estimate. The public runner reproduced the same result and failed case IDs on the frozen learner; that repeat is a reproduction, not another independent first evaluation.
+
+The [v0.5.0 result record](evaluation-results-v0.5.0.json) preserves source/fixture hashes, earlier failures, development comparisons, the first unseen result, and its reproduction. All cases are synthetic. No real-user benefit study or unrestricted semantic-understanding claim follows from these results.
+
+### Reproduce the current habit diagnostic
+
+```sh
+python3 -B scripts/evaluate_behavior.py --suite fresh-v4 --require-all
+```
+
+For this release, **exit 1 is expected** because seven positive cases are missed. Exit 0 without `--require-all` only means the diagnostic completed. Exit 2 indicates an evaluation or source-integrity problem. Use `--output /path/outside/package/new-report.json` to save a new report; an existing file is never overwritten.
+
+`--suite initial`, `--suite fresh-v2`, and `--suite fresh-v3` now run exposed regression data. `--suite all` includes both the known cases and the independent-origin set; do not combine them into one generalization score. The runner verifies frozen fixture hashes and fixes only the clock. Imports, persisted state, collection opt-in, and habit discovery use the real local host. It does not recreate earlier source versions when run against current code.
+
+### Local transport and provider acceptance
+
+Independent actual MCP stdio acceptance listed all **25 tools** and passed **15 checks**. Both language versions of the selected-feed Python walkthrough ran successfully through separate importer processes and a persisted restart cursor. These checks establish their local behavior, not recognition coverage or the quality of a generated answer.
+
+The v0.5.0 Codex preflight timed out after **80 seconds (exit 124)** with three extra MCP services disabled. It did not produce an accepted model answer. Browser prompt previews are not an actual before/after response comparison. No live DeepSeek provider call is claimed.
+
+For local acceptance, follow the [workspace tutorial](tutorial.en.md) and [restartable feed example](automatic-learning.en.md). Check source quotes, review, temporary overrides without profile mutation, corrections, explicit rating basis, and deletion of dependent records. A saved plan does not certify provider execution; an explicit rating does not constitute a controlled effectiveness study.
+
+## Retained v0.4.0 quality results
 
 | Evaluation stage | Result | Interpretation |
 |---|---|---|
@@ -32,9 +71,9 @@ python3 -B scripts/demo_conversations.py --root ../new-conversation-acceptance
 
 The demo uses actual local CLI processes and SQLite writes with synthetic text: import, open-text proposal, portrait, review, restart/recall, a two-session forecast, model-proposal staging, deletion, abstention after evidence removal, replay blocking, and reset. It does not call a provider. Choose a new private directory.
 
-The [tutorial](tutorial.en.md) contains a second executable walkthrough. The earlier structured-feedback demo remains available as `scripts/demo_learning.py`.
+The [conversation guide](conversation-guide.en.md) contains a second executable walkthrough. The earlier structured-feedback demo remains available as `scripts/demo_learning.py`.
 
-## Reproduce the quality diagnostic
+## Reproduce the retained conversation diagnostic
 
 ```sh
 python3 -B scripts/evaluate_conversations.py
@@ -60,11 +99,11 @@ Normal exit 0 means the evaluation completed, **not that every quality case pass
 | Pause/reset | Ordinary use stops; export and deletion remain possible; reset ends paused |
 | Host response | A real answer applies a confirmed preference and changes after correction; evaluate separately from transport |
 
-Use synthetic data in public receipts. Full privacy detection, arbitrary semantic conflict resolution, background ingestion, and cross-device synchronization are not established by these checks.
+Use synthetic data in public receipts. Full privacy detection, arbitrary semantic conflict resolution, arbitrary account-history ingestion, and cross-device synchronization are not established by these checks.
 
 ## Host/provider evidence retained from earlier work
 
-The preceding v0.3.0 work on 2026-11-03 exercised actual MCP pipes and generated Codex/Cursor configurations. A Codex model attempt loaded the rule, then timed out at 55 seconds (exit 124; owned child reaped). Cursor loaded the rule but required authentication (exit 1). Neither produced an accepted model response. These are historical attempts, **not new v0.4.0 model tests**.
+The preceding v0.3.0 work on 2026-11-03 exercised actual MCP pipes and generated Codex/Cursor configurations. A Codex model attempt loaded the rule, then timed out at 55 seconds (exit 124; owned child reaped). Cursor loaded the rule but required authentication (exit 1). Neither produced an accepted model response. These are historical attempts, **not v0.4.0 or v0.5.0 model acceptance**.
 
 No live DeepSeek API call or native desktop GUI acceptance is claimed. Building model context, generating configuration, and validating MCP calls are useful local checks; they do not certify model behavior or user benefit.
 

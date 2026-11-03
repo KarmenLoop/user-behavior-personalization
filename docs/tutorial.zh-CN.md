@@ -1,207 +1,108 @@
-# 对话学习教程 — v0.4.0
+# 使用个性化工作台 — v0.5.0
 
 [English](tutorial.en.md) · [中文](tutorial.zh-CN.md)
 
-本教程从实际对话文本开始，走完提取、审查、档案使用、历史后续请求检索与来源删除。练习使用合成数据；导入自己的记录时，只选择有权处理的会话。
+先看到一个有用的结果：反复纠正形成经确认的偏好，下一次任务什么时候采用、什么时候临时覆盖，都能看清。本教程无需模型账号。
 
-## 1. 下载和安装
+## 1. 下载并启动
 
-从 [v0.4.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.4.0) 下载 ZIP 和 `SHA256SUMS.txt`，解压前核对 SHA-256。macOS 使用 `shasum -a 256`，Linux 使用 `sha256sum`，PowerShell 使用 `Get-FileHash -Algorithm SHA256`。
+从 [v0.5.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0) 下载 ZIP 和 `SHA256SUMS.txt`，解压前核对 SHA-256。macOS 使用 `shasum -a 256`，Linux 使用 `sha256sum`，PowerShell 使用 `Get-FileHash -Algorithm SHA256`。
 
-需要 Python 3.11+，没有第三方 Python 运行依赖。在解压目录运行：
+在解压目录使用 Python 3.11+：
 
 ```sh
 python3 --version
 python3 -B scripts/check_package.py
-python3 -B -m unittest discover -s tests -v
+python3 -B scripts/workspace.py --root ../private-profile --subject demo --enable-conversations
 ```
 
-Windows 可按实际安装使用 `py -3.12`。需要便携副本时，运行 `python3 scripts/install_skill.py --destination ../installed-skills/user-behavior-personalization`，目标目录必须尚不存在。包内文件保持完整，私有数据放在 Git 外。
+Windows 可按安装情况使用 `py -3.12`。打开最后一条命令打印的本地地址。进程在前台运行，停止时在终端按 Ctrl+C；只关浏览器标签不会停止服务。私有数据目录应在包和 Git 之外。
 
-## 2. 导入选定的对话
+需要便携副本时，运行 `python3 scripts/install_skill.py --destination ../installed-skills/user-behavior-personalization`，目标目录必须尚不存在。没有第三方 Python 运行依赖。
+
+## 2. 从三次纠正中学习
+
+在**从反馈中学习**页面，点击**体验一个合成示例**。它在 `demo-writing` 中导入三个独立合成会话，每个含“太长了，请简短一点”，不读取真实聊天历史。
+
+在**哪些习惯值得保留**中查看原文与支持会话，选择**保留这项偏好**，随后它会出现在**下一次任务可以采用什么**里。同一来源重复导入，或重复点击示例，不会制造更多票数。
+
+真实导入方式相同：选择 JSON 对话文件或粘贴内容，再点**导入所选对话**。只有获授权的本人消息成为依据。“以后发布方案都加回滚检查”等直接要求，会列为明确偏好提案；反复纠正则走独立的多会话习惯审查。
+
+![实际工作台画面，使用合成证据与任务方案](images/workspace-v0.5.0.zh-CN.jpg)
+
+*真实本地工作台截图。提示对比不是模型生成的回答。*
+
+## 3. 看清一次任务发生了什么变化
+
+进入**用于下一次任务**，保持 `demo-writing` 场景，输入“解释这份发布方案中的取舍”，点击**预览个性化方案**。
+
+**为什么这次采用这些偏好**解释采用或排除的原因。展开**提示预览**，可以对比原始任务和实际组合后的提示，其中包含选中的已确认偏好。窄屏时两块内容上下排列。上下文生成器和宿主包装入口也使用相同选择逻辑。
+
+在**仅用于这次任务**中选择详细回答，再预览。已存的简洁偏好会因本次要求被排除，长期档案仍保留简洁默认值。也可以让某条已保存规则本次不参与，而不删除它。
+
+任务文本中的少量明确表达，例如“简短一点”“详细解释”，能被识别为临时要求；界面控件可纠正选择。它不能可靠理解所有间接表达，也不会自动解决自由文本规则之间的全部语义矛盾。
+
+![实际任务方案：临时详细回答要求与规则排除原因](images/task-plan-v0.5.0.zh-CN.jpg)
+
+*这张截图使用另一项合成代码任务：保留先给代码的规则，临时覆盖简短偏好。页面展示任务中的明确要求及选择原因，展开「提示预览」可检查组合后的原文。*
+
+## 4. 记录什么真的有帮助
+
+点击**保存方案，便于之后评价**，进入**回看实际效果**，选择方案和评价对象：
+
+- 只看过预览时，选择**我只看过提示方案**。
+- 通过宿主真正使用了生成回答后，才选择**我实际使用了生成的回答**。
+
+再选择**有帮助**、**有好有坏**、**没有帮助**或**还不确定**。这是真实用户评价，不是系统自动算出的质量分。预览、保存、评价都不会在本地工作台触发模型调用。
+
+方案记录只保存任务哈希、版本和确切偏好版本指纹，不保存任务或回答原文。偏好被纠正后，新版本不会继承旧评分。删除方案会移除它的关联反馈。
+
+## 5. 纠正或删除习惯
+
+回到已确认偏好，点击**纠正**，修改陈述或受支持的设置并保存；下一次预览使用新版本。只是本次例外时，应使用任务控制，不必永久更正档案。
+
+**遗忘**会清理指定内容及依赖记录。删除支持消息或会话，可能连带删除学习出的偏好、关联方案与反馈，操作前先查看来源。**暂停学习**停止普通个性化；本地工具仍支持查看/导出及删除。
+
+共享电脑仍需合适的系统账号和文件权限。浏览器不能切换服务绑定的 subject 或私有目录。
+
+## 6. 持续处理选定对话文件
+
+宿主或自己的导出程序，可以向一个 JSONL 文件追加完整会话快照：
 
 ```sh
-python3 scripts/learn_conversation.py --root ../private-profile --subject demo \
-  --enable-conversations --input examples/conversations/sample.zh-CN.json
+python3 -B scripts/watch_conversations.py --root ../private-profile --subject owner \
+  --enable-conversations --input /path/to/selected.jsonl
 ```
 
-命令读取当前版本，导入指定文件，再输出计数和档案；不会自动确认提案。subject 应由宿主绑定到本人，不是根据聊天昵称推测身份。
+每行是完整会话对象，不是消息对象。监听器在终端前台运行；加 `--once` 可执行一次有限导入。它只处理完整新行，保留重启位置，遇到拒绝记录会报错，不会静默跳过。[自动学习指南](automatic-learning.zh-CN.md)提供可运行示例和恢复说明。
 
-JSON 格式如下：
+工作台使用相同 subject 与根目录即可查看该文件产生的证据，新数据到来后刷新。不会安装账号爬虫或后台服务。
 
-```json
-{
-  "session_id": "release-planning-1",
-  "context": "release-planning",
-  "messages": [
-    {
-      "id": "message-1",
-      "role": "user",
-      "text": "以后发布方案里，都要加上回滚检查清单。",
-      "at": "2026-11-03T00:00:00Z"
-    }
-  ]
-}
-```
-
-使用真实时间和稳定来源编号。`session_id` 与消息 `id` 使用 1–80 位 ASCII 字母、数字、连字符或下划线。消息必须按时间排列；每批最多 100 条，每条最多 4,000 字符。角色可为 `user`、`assistant`、`system`、`tool`，只有用户消息成为保留的本人证据。
-
-JSONL 文件每行一个消息对象，命令中另传会话和场景：
-
-```sh
-python3 scripts/learn_conversation.py --root ../private-profile --subject owner \
-  --enable-conversations --format jsonl --session-id project-session-1 \
-  --context release-planning --input /path/to/selected-messages.jsonl
-```
-
-追加时，按原顺序提交原会话前缀和新消息。相同内容重复导入会去重；改写已存用户消息、更换场景或重排原历史会被拒绝，避免更新导出时悄悄改变已确认偏好的依据。
-
-## 3. 走完学习与删除流程
-也可用一条命令运行合成生命周期：
-
-```sh
-python3 -B scripts/demo_conversations.py --root ../new-conversation-demo
-```
-
-它执行真实本地进程，包含不调用提供方的模型提案暂存。请选择新的目录。
-
-
-在包目录运行下面的 Python。每次写入前都读取当前版本，不依赖写死的计数：
-
-```python
-import datetime as dt
-import json
-from pathlib import Path
-import subprocess
-import sys
-import tempfile
-
-# Run from the extracted package. All messages here are synthetic.
-private = Path(tempfile.mkdtemp(prefix="conversation-learning-"))
-base = [sys.executable, "-B", str(Path.cwd() / "scripts/host.py"),
-        "--root", str(private), "--subject", "demo", "--enable-conversations"]
-context = "database-release"
-
-def call(tool, arguments):
-    result = subprocess.run(base + ["call", tool], input=json.dumps(arguments),
-                            text=True, capture_output=True, check=True)
-    return json.loads(result.stdout)
-
-def revision():
-    return call("profile_read", {"context": context})["revision"]
-
-now = dt.datetime.now(dt.timezone.utc)
-query = "Check the database schema migration plan."
-followup = "Write a rollback checklist for the database migration."
-conversations = []
-for session in (1, 2):
-    when = now - dt.timedelta(days=3-session)
-    text = [query, followup]
-    if session == 1:
-        text.insert(0, "From now on, include a rollback checklist in release plans.")
-    conversation = {
-        "session_id": f"release-{session}", "context": context,
-        "messages": [{"id": f"message-{i}", "role": "user", "text": body,
-                      "at": (when + dt.timedelta(minutes=i)).isoformat()}
-                     for i, body in enumerate(text)]
-    }
-    conversations.append(conversation)
-    call("conversation_import", {"expected_revision": revision(),
-                                 "conversation": conversation})
-
-portrait = call("profile_portrait", {"context": context})
-print(json.dumps(portrait, indent=2))
-proposal = next(p for p in portrait["pending_preferences"]
-                if p["category"] == "workflow")
-assert call("profile_read", {"context": context})["rules"] == []
-
-# Synthetic approval for this exercise; real use needs the user's actual decision.
-reviewed = call("profile_proposal_review", {
-    "expected_revision": revision(), "proposal_id": proposal["id"],
-    "decision": "accept", "source_id": "demo-user-review-1"
-})
-assert call("profile_read", {"context": context})["rules"]
-
-forecast = call("profile_forecast", {"context": context, "request": query})
-print(json.dumps(forecast, indent=2))
-assert forecast["status"] == "suggested"
-assert forecast["candidates"][0]["suggestion"] == followup
-
-# Forget the source of the confirmed rule and one supporting forecast session.
-call("profile_forget_conversation", {"expected_revision": revision(),
-                                     "session_id": "release-1"})
-assert call("profile_read", {"context": context})["rules"] == []
-assert call("profile_forecast", {"context": context,
-                                 "request": query})["status"] == "insufficient_evidence"
-call("profile_reset", {"expected_revision": revision()})
-assert call("profile_read", {"context": context})["paused"] is True
-print("Exercise complete. Private synthetic store:", private)
-```
-
-这个例子能提出后续建议，是因为两个会话里出现相同的前置请求与后续请求。它证明调用路径可执行，不代表对改写表达的效果。[验收指南](evaluation.zh-CN.md)中的冻结诊断使用独立查询，并保留漏检。
-
-## 4. 查看协作档案
-
-`profile_portrait({"context": "release-planning"})` 返回：
-
-| 字段 | 用途 |
-|---|---|
-| `confirmed_preferences` | 本人已审查或明确保存的偏好，可进入相应场景的检索。 |
-| `pending_preferences` | 沟通、工作流程、目标、约束等提案，附来源原文。 |
-| `writing_observations` | 消息和会话数、长度中位数、列表、问句、语言混合与例子。 |
-
-自定义术语、详细发布惯例和本人学习目标，都可以保留为自由文本。提取器寻找中英文明确表达，不要求归入原有六个观察标签。间接表达可能漏掉；没提取到一句话，不代表用户没有这种偏好。
-
-表达统计描述用户在导入消息中怎么写，不会自动要求助手模仿。用户确实希望风格相近时，应一起查看例子，再确认希望助手采用的规则。
-
-## 5. 审查或纠正提案
-
-先读取档案，再调用 `profile_proposal_review`：传当前 `expected_revision`、提案的 `id` 作为 `proposal_id`、真实审查来源 `source_id`，以及 `decision: "accept"` 或 `"reject"`。
-
-需要替换冲突的已确认规则时，加上该规则的 `replace_rule_id`。系统不会自动理解并合并所有自由文本冲突；应核对原规则和提案后再替换，保留不相关偏好。
-
-明确表达可以立即成为提案。三个会话门槛属于原有结构化反馈路径，不用于这里的明确语言提取。继续使用 `profile_observe` 和固定维度时，参见[结构化反馈指南](structured-feedback.zh-CN.md)。
-
-## 6. 查询相近任务之后通常会问什么
-
-向 `profile_forecast` 传入完整场景和当前请求文本。查看 `status`、`candidates`、候选的 `suggestion`，以及包含 `previous_request`、`next_request` 的历史证据。
-
-- `suggested`：领先的历史后续请求获得足够一致支持，可以作为建议提供。
-- `insufficient_evidence`：匹配会话太少、证据过旧或支持不足。
-- `conflicted`：不同后续走向相互竞争，无法明确建议。
-
-即使不是 `suggested`，返回中也可能有供查看的候选，不应直接包装成已确定预测。算法比较英文词与子词、中文字符模式，考虑时效，每个会话最多贡献一次匹配。返回的是实际保留的历史原话，不是新编的计划，更不会执行那句话。
-
-## 7. 可选：让宿主模型辅助归纳
-
-`profile_model_context` 选取一个场景中最多 20 条近期保留片段，附上提取约定。宿主可以按授权交给自己的模型；本地工具本身不发送。
-
-模型提案通过 `profile_model_propose` 回传，每项包含 `statement`、`scope`、`category` 和 `evidence`，证据要有已存 `source_key` 与精确匹配的 `quote`。适配器检查来源存在、场景、引文、长度和基本不安全内容模式。通过检查代表可追溯，不代表模型已经正确理解用户；仍需 `profile_proposal_review` 记录本人决定。
-
-具体流程与 DeepSeek 边界见[宿主接入](host-integration.zh-CN.md)。不要把 API 密钥或隐藏模型推理存进档案。
-
-## 8. 接入宿主并使用
+## 7. 接入 Codex、Cursor 或模型客户端
 
 ```sh
 python3 scripts/host.py --root ../private-profile --subject owner \
   --workspace /path/to/project --enable-conversations --install-host codex install
 ```
 
-Cursor 使用 `--install-host cursor`；若同时需要结构化反馈，另加 `--enable-observations`。重载并批准服务，核对 18 个工具，再实际调用。已有条目会保留，遇到重名错误应检查配置，而不是静默新增第二个服务。
+Cursor 使用 `--install-host cursor`。重新加载并批准指定 MCP 服务，核对 [25 个工具](tools.zh-CN.md)。配置成功不等于模型回答成功。
 
-确认后的规则可由 `profile_read`、`scripts/run_host.py` 或 `scripts/build_context.py` 加载。包装入口使用 `--context`、`--host`、`--workspace`、`--prompt`；请求生成器使用 `--context` 和 `--task-file`。包装入口输出流向终端，收条只保存元数据。Codex 通过 stdin 接收组合提示；当前 Cursor CLI 路径使用位置参数，同用户进程检查可能看到内容。
+生成实际限定上下文而不发送：
 
-## 9. 查看、暂停和删除
+```sh
+python3 scripts/build_context.py --root ../private-profile --subject owner \
+  --context writing --task-file /path/to/private-task.txt \
+  --override response_length=detailed
+```
 
-`profile_pause` 暂停普通使用与学习，导出、删除仍可用。`profile_forget_conversation` 接收 `session_id`，删除会话消息及依赖它的提案、规则、表达统计贡献和前后请求关系。中间消息被删，不会把它前后的请求拼成新关系。`profile_reset` 清空内容并暂停，保留最小来源哈希抑制重放。
+覆盖仅作用于本次请求。`--omit-rule RULE_ID` 排除一条已存规则，`--preference-budget 4000` 限制纳入的偏好文字量。自己的客户端可按提供方 API 使用返回的 `messages`，包括 DeepSeek 类接口；生成器不执行网络调用。
 
-最多存储 80 个会话、400 条用户记录，每条保留清理后的前 600 字符片段及特征、哈希。删除不再需要的证据，不要靠更换来源 ID 绕过容量或遗忘。外部备份、导出、终端输出和提供方历史仍是独立副本，参见[隐私控制](privacy-and-memory-control.zh-CN.md)。
+新 Codex/Cursor CLI 调用使用 `scripts/run_host.py`，传 `--root`、`--subject`、`--context`、`--host`、`--workspace`、`--prompt`，并支持相同覆盖参数。Codex 用 stdin 接收提示；当前 Cursor CLI 使用位置参数，同用户进程查看可能看到内容。宿主账号、权限、日志及提供方留存需另行处理。
 
+## 8. 超出演示继续验收
 
-只删除指定消息时，调用 `profile_forget_messages`，传当前版本和从档案或模型上下文取得的非空 `source_keys` 列表。相关提案、规则、表达贡献和序列关系会连带清理，保留同会话的其他消息，缺口两侧不会生成新关系。
+导入跨任务的真实授权反馈，检查单会话重复、引用、临时要求和相反反馈不会形成不合适的长期习惯。尝试一次临时覆盖、一次永久纠正、一次来源删除，再询问本人实际回复是否改善。
 
-档案也比较近 30 天与第 31–90 天的请求长度；每个窗口至少有三个会话才做比较。它描述表达习惯可能的变化，不会自动修改回复偏好。
+[验收指南](evaluation.zh-CN.md)区分单元测试、浏览器流程、盲测习惯诊断与真实模型回答。第一次独立习惯诊断漏掉了全部正例，失败记录保留；最终质量应看独立冻结评估，而不是这个容易通过的演示。
 
-## 10. 评价实际效果
-
-运行 `python3 -B scripts/evaluate_conversations.py` 查看冻结合成诊断。分别阅读覆盖率、输出条件下的准确率、暂不建议、失败编号和提取漏检。十一条查询的结果是诊断，不是广泛准确性的证明。还应比较接受偏好前后的真实回复，并请用户判断是否帮助完成任务。
+自由文本提取、项目术语、目标、表达档案和实验性历史预测仍见[对话指南](conversation-guide.zh-CN.md)；直接传入类型化观察见[结构化反馈指南](structured-feedback.zh-CN.md)。这些是互补入口，不是多份重复档案。
