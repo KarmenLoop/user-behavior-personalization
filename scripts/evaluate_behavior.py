@@ -33,15 +33,15 @@ def ratio(numerator, denominator):
 
 
 def load_suite(directory):
-    manifest = json.loads((directory / 'manifest.json').read_text())
+    manifest = json.loads((directory / 'manifest.json').read_text(encoding='utf-8'))
     for name, expected in manifest['files'].items():
         if name not in ('inputs.json', 'expected.json', 'acceptance.json'):
             raise ValueError('Unexpected fixture filename in manifest')
         path = directory / name
         if sha(path) != expected['sha256'] or path.stat().st_size != expected['bytes']:
             raise ValueError('Frozen fixture hash/size mismatch: ' + name)
-    inputs = json.loads((directory / 'inputs.json').read_text())
-    targets = json.loads((directory / 'expected.json').read_text())['expectations']
+    inputs = json.loads((directory / 'inputs.json').read_text(encoding='utf-8'))
+    targets = json.loads((directory / 'expected.json').read_text(encoding='utf-8'))['expectations']
     ids = [case['id'] for case in inputs['cases']]
     oracle = {target['id']: target for target in targets}
     if len(ids) != len(set(ids)) or len(oracle) != len(targets) or set(ids) != set(oracle):
@@ -212,7 +212,7 @@ def main():
         print(json.dumps({'sources_unchanged': unchanged, 'all_quality_cases_passed': report['all_quality_cases_passed'],
                           'suites': [{k: s[k] for k in ('suite', 'metrics', 'failed_case_ids')} for s in suites]}, ensure_ascii=False, indent=2))
     else:
-        print(json.dumps(report, ensure_ascii=False, indent=2))
+        print(json.dumps(report, ensure_ascii=True, indent=2))
     return 2 if not unchanged else (1 if args.require_all and not report['all_quality_cases_passed'] else 0)
 
 

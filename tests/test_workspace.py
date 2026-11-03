@@ -131,7 +131,7 @@ class WorkspaceTests(unittest.TestCase):
         self.assertNotIn(text,self.request(path='/')[1])
         # Browser rendering remains a separate check; every user-content DOM write
         # in the shipped client uses textContent, never an HTML interpretation sink.
-        self.assertIn('node.textContent=text',(ROOT/'web/app.js').read_text())
+        self.assertIn('node.textContent=text',(ROOT/'web/app.js').read_text(encoding='utf-8'))
 
     def test_disabled_import_and_stale_revision_preserve_state(self):
         self.args.enable_conversations=False

@@ -1,18 +1,21 @@
 """Actual selected-file ingestion and restart/pause/error boundaries."""
 import datetime as dt
 import json
+import os
 from pathlib import Path
+import stat
 import subprocess
 import sys
 import tempfile
 from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from host import dispatch
 from host_support import Problem
-from watch_conversations import process_once, read_watch_status, MAX_RECORD_BYTES
+from watch_conversations import process_once, read_watch_status, _read_source, MAX_RECORD_BYTES
 
 
 class WatchTests(unittest.TestCase):
@@ -130,6 +133,36 @@ class WatchTests(unittest.TestCase):
         self.args.input=self.source
         self.source.write_bytes(b'x'*(MAX_RECORD_BYTES+1))
         self.error('RECORD_TOO_LARGE')
+
+    def test_directory_is_classified_before_windows_open_permission_error(self):
+        # Windows os.open(directory) raises PermissionError rather than returning
+        # a descriptor. The diagnostic should still identify the invalid input.
+        with patch('watch_conversations.os.open',side_effect=PermissionError('directory access denied')) as opened:
+            with self.assertRaises(Problem) as caught:
+                _read_source(self.base)
+        self.assertEqual(caught.exception.code,'UNSAFE_INPUT')
+        opened.assert_not_called()
+
+    def test_regular_file_access_error_remains_input_unavailable(self):
+        denied=PermissionError('file access denied')
+        with patch('watch_conversations.os.open',side_effect=denied) as opened:
+            with self.assertRaises(Problem) as caught:
+                _read_source(self.source)
+        self.assertEqual(caught.exception.code,'INPUT_UNAVAILABLE')
+        self.assertIs(caught.exception.__cause__,denied)
+        opened.assert_called_once()
+
+    def test_opened_descriptor_type_is_checked_after_regular_path_precheck(self):
+        descriptor=os.open(self.source,os.O_RDONLY)
+        with patch('watch_conversations.os.open',return_value=descriptor), \
+             patch('watch_conversations.os.fstat',return_value=SimpleNamespace(st_mode=stat.S_IFDIR)), \
+             patch('watch_conversations.os.close',wraps=os.close) as closed:
+            with self.assertRaises(Problem) as caught:
+                _read_source(self.source)
+        self.assertEqual(caught.exception.code,'UNSAFE_INPUT')
+        closed.assert_called_once_with(descriptor)
+        with self.assertRaises(OSError):
+            os.fstat(descriptor)
 
     def test_symlink_input_is_rejected(self):
         link=self.base/'alias.jsonl'

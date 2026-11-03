@@ -65,7 +65,13 @@ def read_watch_status(root, subject):
 
 
 def _read_source(path):
-    need(not path.is_symlink(), 'UNSAFE_INPUT', 'Select a regular JSONL file, not a symbolic link.')
+    try:
+        selected = path.lstat()
+    except OSError as error:
+        raise Problem('INPUT_UNAVAILABLE', 'The selected conversation file is unavailable.') from error
+    # Windows may refuse to open a directory before fstat can classify it.
+    # lstat also rejects links without following them, including broken links.
+    need(stat.S_ISREG(selected.st_mode), 'UNSAFE_INPUT', 'Select a regular JSONL file, not a symbolic link or directory.')
     flags = os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0) | getattr(os, 'O_NONBLOCK', 0)
     try:
         descriptor = os.open(path, flags)
@@ -73,6 +79,7 @@ def _read_source(path):
         raise Problem('INPUT_UNAVAILABLE', 'The selected conversation file is unavailable.') from error
     try:
         metadata = os.fstat(descriptor)
+        # The pre-open check does not replace checking the opened descriptor.
         need(stat.S_ISREG(metadata.st_mode), 'UNSAFE_INPUT', 'Select a regular JSONL file.')
         need(metadata.st_size <= MAX_FILE_BYTES, 'INPUT_TOO_LARGE', 'Selected feed exceeds 4 MiB.')
         stream = os.fdopen(descriptor, 'rb')
