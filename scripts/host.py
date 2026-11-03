@@ -9,6 +9,7 @@ from conversation_store import import_conversation, review_proposal, portrait, m
 from forecast import forecast
 from planning import response_plan
 from outcomes import prepare, record_outcome, outcome_summary, forget_plans
+from judgment import policy, policy_text, preference_conflict
 
 RULE = schema({
     'id': string(80), 'statement': string(1000), 'scope': string(200),
@@ -87,11 +88,14 @@ def source_hash(value):
 def recall(db, args, context):
     profile = load(db, args)
     rules = [] if profile['paused'] else matching_rules(profile, context)
-    return {'subject_id': profile['subject_id'], 'revision': profile['revision'], 'paused': profile['paused'], 'rules': rules[:30]}
+    return {'subject_id': profile['subject_id'], 'revision': profile['revision'], 'paused': profile['paused'], 'rules': rules[:30],
+            'judgment_policy': policy(), 'instructions': policy_text()}
 
 
 def save_rule(profile, rule):
     identifier(rule['id'])
+    need(not preference_conflict(rule['statement']), 'INDEPENDENT_JUDGMENT_CONFLICT',
+         'Preferences may change communication, not require agreement, conceal uncertainty, or treat claims as verified facts.')
     replaced = [rid for rid, existing in profile['rules'].items() if rid != rule['id'] and rule.get('dimension') and existing.get('dimension') == rule['dimension'] and context_key(existing['scope']) == context_key(rule['scope'])]
     need(rule['id'] in profile['rules'] or replaced or len(profile['rules']) < 30, 'RULE_LIMIT', 'Review the existing 30 rules before adding another.')
     previous = profile['rules'].get(rule['id'])
@@ -137,7 +141,7 @@ def dispatch(name, values, args):
         if name == 'profile_forecast':
             profile = load(db, args)
             result = {'status': 'paused', 'candidates': [], 'reasons': ['Personalization is paused.']} if profile['paused'] else forecast(profile['conversation_messages'], profile['conversation_transitions'], values['context'], values['request'])
-            return {'subject_id': args.subject, 'revision': profile['revision'], **result}
+            return {'subject_id': args.subject, 'revision': profile['revision'], 'judgment_policy': policy(), **result}
         if name == 'profile_export':
             def export():
                 profile = load(db, args)
@@ -282,4 +286,4 @@ def dispatch(name, values, args):
 
 
 if __name__ == '__main__':
-    raise SystemExit(main('user_behavior_personalization', '0.5.0', TOOLS, dispatch))
+    raise SystemExit(main('user_behavior_personalization', '0.5.1', TOOLS, dispatch))

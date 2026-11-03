@@ -1,4 +1,4 @@
-# How the workspace works — v0.5.0
+# How the workspace works — v0.5.1
 
 [English](architecture.md) · [中文](architecture.zh-CN.md)
 

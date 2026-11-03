@@ -1,8 +1,8 @@
-# 快速开始 — v0.5.0
+# 快速开始 — v0.5.1
 
 [English](quickstart.md) · [中文](quickstart.zh-CN.md)
 
-下载并校验 [v0.5.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0)，解压后在包目录中使用 Python 3.11 或更新版本。
+下载并校验 [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.1)，解压后在包目录中使用 Python 3.11 或更新版本。
 
 ```sh
 python3 -B scripts/check_package.py

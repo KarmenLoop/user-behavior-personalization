@@ -1,4 +1,4 @@
-# Structured-feedback architecture — v0.5.0
+# Structured-feedback architecture — v0.5.1
 
 [English](structured-architecture.en.md) · [中文](structured-architecture.zh-CN.md)
 

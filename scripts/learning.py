@@ -5,6 +5,7 @@ import hashlib
 import json
 
 from host_support import need, identifier, content
+from judgment import preference_conflict
 
 UTC = dt.timezone.utc
 DIMENSIONS = {
@@ -75,7 +76,7 @@ def active(rule, now=None):
 def matching_rules(profile, context, now=None):
     """Exact context matching. A typed contextual rule overrides its global peer."""
     key = context_key(context)
-    rules = [r for r in profile['rules'].values() if active(r, now) and (r['scope'] == '*' or context_key(r['scope']) == key)]
+    rules = [r for r in profile['rules'].values() if active(r, now) and (r['scope'] == '*' or context_key(r['scope']) == key) and not preference_conflict(r['statement'])]
     specific = {r['dimension'] for r in rules if r.get('dimension') and r['scope'] != '*'}
     return sorted((r for r in rules if not (r['scope'] == '*' and r.get('dimension') in specific)), key=lambda r: (r['scope'] == '*', r['id']))
 

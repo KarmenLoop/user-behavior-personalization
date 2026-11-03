@@ -1,4 +1,4 @@
-# 隐私与记忆控制 — v0.5.0
+# 隐私与记忆控制 — v0.5.1
 
 [English](privacy-and-memory-control.md) · [中文](privacy-and-memory-control.zh-CN.md)
 

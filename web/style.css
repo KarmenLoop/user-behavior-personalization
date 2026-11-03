@@ -3,3 +3,9 @@
 .prompt-details{margin-top:24px}.prompt-details>summary{font-weight:650;padding:16px 0}.decisions-panel{margin-bottom:24px}
 
 .context-control button{flex-shrink:0;white-space:nowrap}
+
+.judgment-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.judgment-panel>p{margin-top:12px;font-size:12px}.judgment-panel ul{padding-left:20px;margin:16px 0;font-size:12px;line-height:1.75}.judgment-panel li+li{margin-top:8px}.judgment-panel .subtle{color:var(--muted)}.judgment-rating{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:12px}
+
+.blocked-preferences{margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}.blocked-preferences>p{font-size:12px;margin:8px 0 14px}.blocked-preferences .rule-card{background:#fff9f5;border-color:#e8d5c5}
+
+dialog .correction-error{margin:0 0 18px;padding:12px;border:1px solid #edcbc6;border-radius:8px;background:#fff1ef;color:#9a4338;font-size:12px;overflow-wrap:anywhere}

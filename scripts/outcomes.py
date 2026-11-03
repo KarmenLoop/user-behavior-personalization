@@ -13,6 +13,7 @@ def prepare(profile, plan):
     plans[plan['plan_id']] = {'plan_id': plan['plan_id'], 'context': plan['context'],
         'task_sha256': plan['task_sha256'], 'profile_revision': plan['revision'],
         'rule_versions': {r['id']: r['version_fingerprint'] for r in plan['selected']},
+        'judgment_policy': {key: plan['judgment_policy'][key] for key in ('version', 'fingerprint')},
         'created_at': stamp(), 'state': 'prepared'}
     return {'replayed': False, 'prepared': True, 'plan': plan}
 
@@ -32,7 +33,8 @@ def record_outcome(profile, values):
     sources.append(source)
     outcome = {'plan_id': values['plan_id'], 'rating': values['rating'], 'basis': values['basis'],
                'recorded_at': stamp(), 'source_hashes': sources,
-               'evidence_kind': 'explicit_user_report_not_independent_model_verification'}
+               'evidence_kind': 'explicit_user_report_not_independent_model_verification',
+               'learning_use': 'experience_report_only_not_truth_or_reward'}
     profile['source_hashes'][source] = hashed
     profile['plan_outcomes'][values['plan_id']] = outcome
     return {'replayed': False, 'outcome': outcome}
@@ -53,6 +55,7 @@ def outcome_summary(profile, context):
     result = {'context': key, 'revision': profile['revision'], 'paused': profile['paused'],
               'plans': [], 'rule_versions': [], 'counts': empty_counts(),
               'by_basis': {'prompt_review': empty_counts(), 'response_use': empty_counts()},
+              'learning_use': 'experience_report_only_not_truth_or_reward',
               'notes': ['Ratings are explicit user reports, not a controlled study or an automatic quality score.',
                         'Prepared does not mean a model ran. A new rule version does not inherit earlier ratings.']}
     if profile['paused']:

@@ -1,16 +1,16 @@
 # 用户行为个性化
 
-[English](README.md) · [中文](README.zh-CN.md) · **v0.5.0**
+[English](README.md) · [中文](README.zh-CN.md) · **v0.5.1**
 
 你已经三次要求回答短一点，但下一件事又需要详细解释。助手应该记住习惯，也能处理例外。
 
 这个本地工作台把反复出现的反馈整理为可审查的偏好，让你看见它怎样改变下一次任务的提示内容，再记录这次调整是否有帮助。一次性的选择不会改掉长期习惯。
 
-![v0.5.0 真实工作台：原始依据与两项待审核习惯](docs/images/workspace-v0.5.0.zh-CN.jpg)
+![v0.5.1 实际任务预览与固定的独立判断规则](docs/images/judgment-v0.5.1.zh-CN.jpg)
 
-*真实工作台截图，使用合成反馈。三个选定会话形成了两项待审核习惯。*
+*v0.5.1 真实工作台截图，使用合成任务。简洁偏好影响表达方式，证据和反例检查仍然保留。*
 
-[下载](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0) · [完整教程](docs/tutorial.zh-CN.md) · [自动学习](docs/automatic-learning.zh-CN.md) · [当前验收](docs/evaluation.zh-CN.md)
+[下载](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.1) · [完整教程](docs/tutorial.zh-CN.md) · [自动学习](docs/automatic-learning.zh-CN.md) · [当前验收](docs/evaluation.zh-CN.md)
 
 ## 先走完一次闭环
 
@@ -38,6 +38,8 @@ python3 -B scripts/workspace.py --root ../private-profile --subject demo --enabl
 
 **反馈对应真正使用的版本。** 有帮助、部分有用、没帮助、不确定，都关联已准备方案和具体偏好版本。规则改写后不继承旧评价；沉默和命令成功都不算认可。
 
+**学习协作习惯，保留独立判断。** 两侧提示预览都带有同一套基于证据的规则。技术解释先作为假设；出现新证据或更强推理时才修改结论，施压和高评分本身不算依据。识别出的无条件迎合要求不会成为生效偏好。[查看具体行为与限制](docs/independent-judgment.zh-CN.md)。
+
 ## 换成自己的对话
 
 在工作台导入 JSON 对话，也可以运行：
@@ -57,11 +59,12 @@ python3 -B scripts/watch_conversations.py --root ../private-profile --subject ow
 
 Codex、Cursor 可使用 MCP 配置助手或调用前包装入口。`build_context.py` 为自己的模型客户端生成限定上下文，也适用于 DeepSeek 类聊天 API；包本身不会自行发送提供方请求。
 
-浏览器预览是已经实现的本地功能，但**不代表模型回复验收成功**：本轮 v0.5.0 Codex 尝试在 80 秒后超时。能力和分数的实际依据见[宿主验收与学习诊断](docs/evaluation.zh-CN.md)。
+浏览器预览是已经实现的本地功能，但**不代表模型回复验收成功**：v0.5.0 的 Codex 尝试在 80 秒后超时；v0.5.1 的施压案例预检也在 45 秒后超时，未取得回答。能力和分数的实际依据见[宿主验收与学习诊断](docs/evaluation.zh-CN.md)。
 
 ## 继续深入
 
 - [教程](docs/tutorial.zh-CN.md) / [English](docs/tutorial.en.md)：下载、工作台、审核、临时调整、反馈和删除。
+- [独立判断](docs/independent-judgment.zh-CN.md)：验证依据、合理纠正、反例检查及提示约束的边界。
 - [自动学习](docs/automatic-learning.zh-CN.md)：选定文件、证据、冲突、重启与错误处理。
 - [宿主接入](docs/host-integration.zh-CN.md)：Codex、Cursor、模型上下文与 [25 个工具](docs/tools.zh-CN.md)。
 - [对话指南](docs/conversation-guide.zh-CN.md)：JSON/JSONL、自由文本提案、档案及历史检索。

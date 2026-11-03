@@ -19,9 +19,13 @@ Classify new information using [Profile Format](profile-format.md). Collect expl
 
 Each candidate needs a source, scope, classification, and a check for applicable counterevidence. Exclude the agent's own statements, quoted material, and duplicate messages as independent confirmation.
 
+Keep preference feedback separate from factual corrections. A user may prefer a shorter explanation without establishing that the explanation is correct. Do not learn unconditional agreement, unsupported certainty, praise, or avoidance of justified disagreement as successful behavior. Repeated insistence and high satisfaction ratings do not verify a claim. Apply the [independent judgment rules](../docs/independent-judgment.en.md).
+
 ## 3. Review Observable Behavior
 
 Identify which prior rules were followed, which were missed, and which user feedback supports a specific change. State the next observable action rather than a general promise to "understand the user better."
+
+When a factual conclusion changed, record the relevant new evidence or the specific error corrected by stronger reasoning. If neither is available, keep the disputed claim tentative and name a verification step; do not count a reversal as successful personalization. The previous answer also needs support: consistency alone does not make it true.
 
 Save conclusions, evidence summaries, and proposed actions. Do not save hidden reasoning traces or full chat exports.
 
@@ -66,7 +70,7 @@ Use [the reflection template](../assets/templates/REFLECTION.md). Multiple batch
 
 ## 7. Apply and Verify Later
 
-At the next relevant response, load the committed guide and apply its selected rules. Observe actual user feedback. If a change leads to a clear negative correction, revise the affected rule rather than rewriting unrelated supported preferences.
+At the next relevant response, load the committed guide and apply its selected rules. Observe actual user feedback. If a communication preference receives a clear negative correction, review the affected rule rather than rewriting unrelated supported preferences. A negative rating on a factual conclusion calls for evidence review, not an automatic reversal.
 
 Distinguish these outcomes:
 
@@ -74,7 +78,7 @@ Distinguish these outcomes:
 - **Saved:** content was durably committed.
 - **Loaded:** a subsequent interaction read it.
 - **Applied:** the subsequent behavior followed the rule.
-- **Supported by feedback:** the user explicitly responded to the relevant behavior.
+- **Supported by feedback:** the user explicitly responded to the relevant behavior; this is not independent verification of the answer's factual correctness.
 
 Do not collapse these stages into one success claim.
 

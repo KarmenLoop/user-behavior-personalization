@@ -1,16 +1,16 @@
 # User Behavior Personalization
 
-[English](README.md) · [中文](README.zh-CN.md) · **v0.5.0**
+[English](README.md) · [中文](README.zh-CN.md) · **v0.5.1**
 
 You have asked for shorter answers three times. The next task needs a detailed explanation. Your assistant should handle both.
 
 This local workspace turns recurring feedback into preferences you can review, shows exactly how those preferences change the next task's prompt, and lets you record whether the change helped. A one-time choice leaves your saved habits intact.
 
-![Actual v0.5.0 workspace showing source evidence and two reviewable habits](docs/images/workspace-v0.5.0.en.jpg)
+![Actual v0.5.1 task preview with the shared evidence-first judgment policy](docs/images/judgment-v0.5.1.en.jpg)
 
-*Actual workspace capture using synthetic feedback. Three selected conversations support two habits for review.*
+*Actual v0.5.1 workspace with a synthetic task. A concise-answer preference changes presentation; the judgment rules still require evidence and counterexample checks.*
 
-[Download](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0) · [Full walkthrough](docs/tutorial.en.md) · [Automatic learning](docs/automatic-learning.en.md) · [Current evaluation](docs/evaluation.md)
+[Download](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.1) · [Full walkthrough](docs/tutorial.en.md) · [Automatic learning](docs/automatic-learning.en.md) · [Current evaluation](docs/evaluation.md)
 
 ## Try the complete loop
 
@@ -38,6 +38,8 @@ Open the printed `http://127.0.0.1:...` URL. The workspace runs on your computer
 
 **Feedback belongs to the version you used.** Helpful, mixed, not helpful, and unsure ratings refer to a prepared plan and exact preference versions. A rewritten rule does not inherit an old score. Silence and a successful command are never counted as approval.
 
+**Adapt the collaboration, keep independent judgment.** Both prompt previews include the same evidence-first rules. Technical explanations remain hypotheses until supported; a conclusion changes for new evidence or better reasoning, not pressure or a high rating. Recognized requests for unconditional agreement are blocked from active preferences. [See the behavior and its limits](docs/independent-judgment.en.md).
+
 ## Bring your own conversations
 
 Import a JSON conversation in the workspace, or run:
@@ -57,11 +59,12 @@ Existing capabilities remain available: open-text preferences, project terminolo
 
 Codex and Cursor can use the included MCP configuration helpers or pre-invocation wrapper. `build_context.py` produces scoped messages for your own model client, including DeepSeek-style APIs. The package sends no provider request on its own.
 
-The browser preview is real local functionality. It is **not a successful model-response test**: the v0.5.0 Codex attempt timed out after 80 seconds. Read [host acceptance and learning diagnostics](docs/evaluation.md) before treating a feature or score as proven.
+The browser preview is real local functionality. It is **not a successful model-response test**: the v0.5.0 Codex attempt timed out after 80 seconds, and the v0.5.1 pressure-case preflight timed out after 45 seconds without an answer. Read [host acceptance and learning diagnostics](docs/evaluation.md) before treating a feature or score as proven.
 
 ## Go deeper
 
 - [Tutorial](docs/tutorial.en.md) / [中文教程](docs/tutorial.zh-CN.md): download, workspace, review, temporary choices, feedback, and deletion.
+- [Independent judgment](docs/independent-judgment.en.md): evidence, justified corrections, counterexamples, and the limits of prompt safeguards.
 - [Automatic learning](docs/automatic-learning.en.md): selected feeds, evidence, conflicts, restart, and errors.
 - [Host integration](docs/host-integration.md): Codex, Cursor, model context, and the [25 tools](docs/tools.en.md).
 - [Conversation guide](docs/conversation-guide.en.md): JSON/JSONL imports, open-text proposals, portrait, and historical forecasts.
