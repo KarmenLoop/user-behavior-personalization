@@ -17,7 +17,16 @@ Improve how the agent collaborates with the current user through a cycle of obse
 
 Keep the controller in this file stable. The bundled adapter evolves a private SQLite profile; a host-managed Markdown integration may instead maintain one private `USER_SKILL.md`. Do not maintain competing writable profiles. Changing a profile does not retrain model weights or expand execution authority.
 
-## v0.4.0 conversation learning
+## v0.5.0: recurring feedback, task planning, and outcomes
+
+- Use the [local workspace](docs/tutorial.en.md) to inspect selected evidence, review habits, preview actual task prompts, and record explicit feedback. A prompt preview is not a model answer.
+- The foreground [selected-file watcher](docs/automatic-learning.en.md) consumes one authorized append-only JSONL feed. Each line is a full conversation snapshot. It preserves a restart cursor and stops at rejected records; it is not an account crawler or installed scheduler.
+- `profile_habits(context)` experimentally recognizes supported recurring feedback cues from retained user text; current unseen paraphrase coverage is low. Inspect original quotes, independent sessions, counterevidence, and status. Use `profile_habit_review` only after the user's real decision; do not turn silence, your own output, or a synthetic demo into real user confirmation.
+- Before a personalized task, use `profile_plan` or the same resolver in `build_context.py` / `run_host.py`. Apply current-task overrides and omissions without permanently changing the profile. Inspect exclusion reasons; resolve arbitrary free-text conflicts deliberately.
+- `profile_plan_prepare` saves a task hash and exact rule-version manifest. It does not prove a model ran. `profile_outcome` accepts an actual user rating with `prompt_review` or `response_use`; do not infer benefit from successful execution. A corrected rule starts without inherited ratings.
+- Keep the six-dimension recurring-cue learner distinct from open-text explicit proposals, descriptive writing observations, and experimental historical forecasts. Do not generalize an easy demonstration into measured language coverage. Check [current evaluation](docs/evaluation.md).
+
+## Conversation learning retained in v0.5.0
 
 - With the host's separate `--enable-conversations` setting and user permission, import only explicitly selected JSON/JSONL conversations. Preserve subject, context, role, source IDs, and chronology; do not silently scrape other histories.
 - `conversation_import` extracts open-text communication preferences, workflows, stated goals, and constraints from supported English/Chinese explicit cues. A proposal is not yet an active rule. Show original evidence and use `profile_proposal_review` only after the user's actual accept/reject decision.
@@ -27,7 +36,7 @@ Keep the controller in this file stable. The bundled adapter evolves a private S
 - Correct a conflicting free-text rule deliberately using `replace_rule_id` or a new explicit correction. Do not assume arbitrary semantic contradictions were automatically resolved.
 - `profile_forget_messages` and `profile_forget_conversation` remove affected user evidence and dependent rules/proposals/style/sequence data. Do not reconstruct a missing transition across a deletion gap or replay a forgotten source under new IDs.
 
-## Structured-feedback path (retained in v0.4.0)
+## Structured-feedback path (retained in v0.5.0)
 
 [English tutorial](docs/tutorial.en.md) · [中文教程](docs/tutorial.zh-CN.md)
 
@@ -42,7 +51,7 @@ Keep the controller in this file stable. The bundled adapter evolves a private S
 
 ## Choose the Workflow
 
-- **Before a personalized response:** read the current guide and apply relevant rules using the recall workflow below.
+- **Before a personalized response:** read the current guide and resolve relevant rules for this task using the recall workflow below.
 - **After an explicit correction:** update the current interaction immediately; follow the correction workflow below for persistence.
 - **At session end, a daily event, or catch-up:** read [Reflection Workflow](references/reflection-workflow.md) and process new authorized messages.
 - **When creating a profile or resolving evidence conflicts:** read [Profile Format](references/profile-format.md).
@@ -93,7 +102,7 @@ Do not infer sensitive personal attributes, health conditions, or personality di
 ## Recall Before Responding
 
 1. Confirm the user identity and memory setting.
-2. Read the current bound profile with `profile_read` for the exact task context, or load the host-managed committed `USER_SKILL.md` when that separate integration is in use.
+2. Resolve the current task with `profile_plan`, or use `profile_read` when only confirmed rules are needed. Use the exact task context. Load a host-managed committed `USER_SKILL.md` only when that separate integration is in use.
 3. Check ownership, version, scope, expiry, and applicable corrections.
 4. Select the three to five rules most relevant to the current task.
 5. Apply them naturally while following the current request and the host's instruction hierarchy.

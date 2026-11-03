@@ -1,4 +1,4 @@
-# Research and design choices — v0.4.0
+# Research and design choices — v0.5.0
 
 [English](research.en.md) · [中文](research.zh-CN.md)
 
@@ -29,7 +29,7 @@ The choices in the right column are our engineering interpretation. The package 
 | [Deci & Ryan, 2000: Self-determination theory](https://selfdeterminationtheory.org/SDT/documents/2000_DeciRyan_PIWhatWhy.pdf) | A framework involving autonomy, competence, and relatedness. | Let the user choose, skip, or change a learning mode. Do not optimize for dependence or pressure. |
 | [Microsoft HAX: Adapt cautiously](https://www.microsoft.com/en-us/haxtoolkit/guideline/update-and-adapt-cautiously/) and [explain behavior](https://www.microsoft.com/en-us/haxtoolkit/guideline/make-clear-why-the-system-did-what-it-did/) | Human-AI interaction guidance favors careful adaptation and understandable behavior. | Show scope, counterevidence, and uncertainty; require review before adopting inferred preferences. |
 
-These studies and guidelines do not validate this package's effectiveness. No clinical, educational-outcome, or user-satisfaction study is claimed for v0.4.0.
+These studies and guidelines do not validate this package's effectiveness. No clinical, educational-outcome, or user-satisfaction study is claimed for v0.5.0.
 
 ## A useful teaching interaction
 
@@ -59,3 +59,9 @@ Measure observable outcomes: fewer repeated style corrections, fewer irrelevant 
 [Ludewig and Jannach's session-based recommendation comparison](https://arxiv.org/abs/1803.09587) compares methods, including simpler nearest-neighbor approaches, on session recommendation tasks. It motivates testing a transparent historical-case baseline before assuming a more complex method is better. It does not validate this repository's request forecaster.
 
 The v0.4.0 forecaster is an independent lexical case-retrieval implementation. A new holdout exposed poor paraphrase coverage, especially English (0/6 positive cases suggested). See [evaluation](evaluation.md) for initial failures, development comparisons, and the separate new holdout. The next development step needs broader independent data and improved retrieval, not a claim of reading the user's mind.
+
+## Applying those ideas in v0.5.0
+
+Recurring feedback is separated from an accepted preference. A task-only override preserves the user's ability to make an exception. Explicit outcome records separate a prompt review from reported response use and stay attached to the exact rule version. These are our engineering choices informed by the interaction principles above, not new psychological findings.
+
+The visible comparison is actual prompt construction. It cannot establish the quality of a model answer that was never generated. Automatic feedback recognition needs its own independent language tests; ratings need genuine user decisions. Neither replaces controlled evidence of long-term benefit.

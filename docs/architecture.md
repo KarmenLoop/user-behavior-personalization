@@ -1,69 +1,35 @@
-# Architecture — v0.4.0
+# How the workspace works — v0.5.0
 
 [English](architecture.md) · [中文](architecture.zh-CN.md)
 
-Conversation learning produces three distinct outputs: reviewable preferences, descriptive writing observations, and historical follow-up suggestions. They share source records but do not share the same meaning or adoption rules.
+One private SQLite store connects four steps. You can inspect the evidence, change a decision, and see what a later task will actually receive.
 
-![Conversation learning architecture diagram](images/conversation-learning-v0.4.0.en.svg)
+## 1. Import selected feedback
 
-## From text to evidence
+The browser imports a supplied conversation. The foreground watcher follows one explicitly selected JSONL file. Both call the same conversation importer with a fixed subject, stable message IDs, chronological snapshots, and revision checks. Neither searches other histories.
 
-A host submits an authorized, chronological conversation with a fixed subject and context. The importer validates IDs, roles, timestamps, and size; masks known credentials and email patterns; then retains user excerpts, surface features, content hashes, and original request transitions. Assistant, system, and tool text is not stored as user evidence.
+The importer keeps bounded sanitized user excerpts, surface features, source hashes, and original request transitions. Assistant, system, and tool messages do not become user evidence. Known credential and email patterns are masked; this is not complete personal-information detection.
 
-The store holds at most 400 user records and 80 sessions. Each retained excerpt is at most 600 sanitized characters; a message may be up to 4,000 characters at import. Features are computed from sanitized authored text after quoted/code spans are masked. Automatic explicit-cue extraction uses the retained excerpt, so a durable preference far into a long message can be missed. This boundary is visible rather than hidden behind a claim to analyze everything.
+## 2. Review a useful preference
 
-## Three branches
+A direct lasting statement can become an open-text proposal: “From now on, include rollback checks.” Recurring feedback such as “Too long. Please keep it brief.” follows a separate habit learner. Its supported English/Chinese cues produce typed candidates after enough independent sessions, with competing evidence and recency considered. Repetition within one session does not create additional votes.
 
-| Branch | Actual output | What uses it |
-|---|---|---|
-| Explicit-cue extraction | Open-text statements categorized as communication, workflow, goal, or constraint; exact source evidence | A user accepts or rejects a proposal before ordinary recall changes |
-| Writing observation | Counts, median length, language mix, examples, and eligible recent/older window comparisons | Inspection and discussion; not automatic instructions to imitate |
-| Request-sequence retrieval | A previous user request paired with its original next user request | `profile_forecast` matches a new request and ranks historical follow-ups |
+The user reviews candidates before they become confirmed rules. Custom terminology, goals, and workflow statements remain available through open-text proposals. Descriptions of how a user writes are distinct from preferences for how an assistant should answer.
 
-The older six-dimension feedback subsystem still has its own independent-session and review rules. See [structured architecture](structured-architecture.en.md). Its three-session threshold does not apply to extracting an explicit statement from a conversation.
+## 3. Resolve the next task
 
-## Proposal review and correction
+The workspace, request builder, and CLI wrapper share one resolver. It considers confirmed scope, expiry, task-only overrides, omitted rules, and the preference budget. A context-specific typed preference takes precedence over a global preference for the same dimension. Current task controls take precedence over both.
 
-```mermaid
-sequenceDiagram
-  participant H as Authorized host
-  participant S as Local store
-  participant U as User
-  H->>S: conversation_import(current revision, selected text)
-  S-->>H: Pending proposals and sources
-  H->>U: Show proposed preference with original evidence
-  U-->>H: Accept, reject, or correct
-  H->>S: profile_proposal_review(current revision, actual decision)
-  S-->>H: Confirmed rule or rejected proposal
-  H->>S: profile_read(exact context)
-  S-->>H: Confirmed rules only
-```
+The result contains the baseline task, actual personalized prompt, selected rules, and exclusion reasons. A preview does not modify the profile or call a model. Arbitrary semantic conflicts between free-text rules still need deliberate correction.
 
-A model can assist through `profile_model_context` and `profile_model_propose`. It receives selected excerpts, returns proposed statements with exact quotes, and cannot confirm a rule. The local validator proves source correspondence and basic input constraints, not that a paraphrase is semantically correct. Human review remains the adoption step.
+## 4. Check whether it helped
 
-Free-text statements preserve custom vocabulary and detailed workflows. They also require deliberate conflict resolution: `replace_rule_id` identifies the old rule to correct. The adapter does not infer every contradiction between arbitrary sentences.
+Saving a plan records a task hash, revision, and exact rule-version fingerprints. An explicit rating identifies whether the user reviewed the prompt or used a resulting response. The summary separates those two sources of feedback. A changed rule does not inherit old ratings; silence creates no rating.
 
-## How forecasts use history
+These records help compare actual experiences. They do not automatically certify that a model ran or establish an improvement in user outcomes.
 
-The forecaster considers original same-session request transitions in the exact context. A transition spans at most 24 hours; usable history is bounded to 90 days. English word/subword and Chinese character channels provide lexical similarity, while recency weights newer examples more strongly. Each session contributes at most its best matching case. Similar follow-ups are grouped, and a representative is an actual retained user request.
+## Lifecycle and older capabilities
 
-A suggestion needs support from at least two sessions, recent evidence, and enough separation from alternatives. Weak or conflicting evidence causes abstention. Scores rank available cases; they are not calibrated probabilities, general semantic understanding, or predictions of private thoughts. The [frozen diagnostic](evaluation.md) reports coverage and misses.
+All writes use revisions. Forgetting source evidence cascades through affected proposals, rules, writing features, original transitions, and linked plans/ratings. A deleted middle message leaves a gap; it does not create a new A→C transition. Reset clears profile content and pauses personalization; minimal replay markers and selected-feed cursors remain.
 
-## Deletion preserves real sequence boundaries
-
-```mermaid
-flowchart LR
-  A[Original request A] --> B[Original request B]
-  B --> C[Original request C]
-  B --> D[Delete B]
-  D --> E[Remove B and both incident transitions]
-  E --> F[No invented A to C transition]
-```
-
-Deleting a message or conversation removes dependent proposals, accepted rules, writing contributions, and original transitions. A broader cascade can remove linked evidence needed to prevent a forgotten preference from reappearing. Minimal source hashes suppress old-message replay. Pausing stops ordinary reads and learning; reset clears content and ends paused.
-
-## Storage and execution
-
-The SQLite adapter is the runtime source of truth. Original Markdown templates remain an alternative host-managed format, not a second automatically maintained database. All writes use revision checks; concurrent or stale clients cannot silently overwrite a newer review. Host identity, consent, provider calls, and external backups remain separate integration responsibilities.
-
-Stored → loaded → applied → helpful are different outcomes. Check the actual host response and user feedback after a preference is accepted; local code checks establish only their tested behavior.
+The [conversation guide](conversation-guide.en.md) covers portraits, host-model proposals, and the unchanged experimental historical forecaster. Original [v0.4.0 conversation diagrams](images/conversation-learning-v0.4.0.en.svg) and [structured-feedback architecture](structured-architecture.en.md) remain as references. The [workspace tutorial](tutorial.en.md) is the starting point for current use.

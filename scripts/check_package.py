@@ -38,6 +38,7 @@ CJK = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
 LINK = re.compile(r"!?\[[^\]\n]*\]\(([^\n)]+)\)")
 PRIVATE_DIRS = {"profiles", "private-memory", "user-data", "memory", "reflections", "versions"}
 EXCLUDED_DIRS = {".git", ".validation", "__pycache__"}
+MAX_SCREENSHOT_BYTES = 5 * 1024 * 1024
 
 
 def check():
@@ -62,17 +63,37 @@ def check():
 
     for path in files:
         relative = path.relative_to(ROOT)
+        if path.name == "state.json" and relative.as_posix() != "assets/templates/state.json":
+            errors.append(f"Unexpected live state file: {relative}")
+        if path.name.startswith(".env") or path.suffix in {".pem", ".key"}:
+            errors.append(f"Potential local configuration or credential file: {relative}")
         try:
-            content = path.read_text(encoding="utf-8")
+            if path.suffix.lower() == ".jpg":
+                if relative.parts[:2] != ("docs", "images"):
+                    errors.append(f"JPEG screenshots must be inside docs/images: {relative}")
+                    continue
+                # Bound the read as well as the accepted file size. A screenshot
+                # is the only binary format allowed in this source package.
+                with path.open("rb") as stream:
+                    image = stream.read(MAX_SCREENSHOT_BYTES + 1)
+                if len(image) > MAX_SCREENSHOT_BYTES:
+                    errors.append(f"JPEG screenshot exceeds 5 MiB: {relative}")
+                    continue
+                if not image.startswith(b"\xff\xd8\xff") or not image.endswith(b"\xff\xd9"):
+                    errors.append(f"Invalid JPEG screenshot signature: {relative}")
+                    continue
+                # Check textual metadata for the same private paths as text
+                # files; allowing screenshots must not bypass that check.
+                content = image.decode("utf-8", errors="ignore")
+            else:
+                content = path.read_text(encoding="utf-8")
+                if re.search(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", content):
+                    errors.append(f"Unexpected binary content: {relative}")
         except (UnicodeError, OSError) as exc:
             errors.append(f"Cannot read release text {relative}: {exc}")
             continue
         # Public language guides, multilingual parsers, and synthetic fixtures
         # intentionally contain both English and Chinese text.
-        if path.name == "state.json" and relative.as_posix() != "assets/templates/state.json":
-            errors.append(f"Unexpected live state file: {relative}")
-        if path.name.startswith(".env") or path.suffix in {".pem", ".key"}:
-            errors.append(f"Potential local configuration or credential file: {relative}")
         mac_user_prefix = "/" + "Users" + "/"
         windows_user_prefix = "C:" + chr(92) + "Users" + chr(92)
         if mac_user_prefix in content or windows_user_prefix in content:
@@ -147,7 +168,7 @@ def check():
             print(f"ERROR: {error}", file=sys.stderr)
         print(f"FAILED: {len(errors)} package issue(s)", file=sys.stderr)
         return 1
-    print(f"PASS: {len(files)} text files; required artifacts, local file links, fences, basic frontmatter, blank state, and publication hygiene checked.")
+    print(f"PASS: {len(files)} package files; required artifacts, local file links, fences, basic frontmatter, blank state, screenshot format, and publication hygiene checked.")
     print("SCOPE: No live-agent behavior, scheduler, synchronization, or host integration was executed.")
     return 0
 

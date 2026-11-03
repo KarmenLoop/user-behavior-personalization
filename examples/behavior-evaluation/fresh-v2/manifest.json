@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-11-03T14:34:40Z",
+  "fixture_status": "FROZEN_BEFORE_REVISED_SOURCE_INSPECTION_OR_EVALUATION",
+  "synthetic_only": true,
+  "provider_calls": false,
+  "cases": 22,
+  "positive_cases": 8,
+  "negative_cases": 14,
+  "files": {
+    "inputs.json": {
+      "sha256": "97f8e467c50c1fe3194df666401cf8d130a8c10600b65bb1970e9335109aac36",
+      "bytes": 54897
+    },
+    "expected.json": {
+      "sha256": "0c525f92c321d64c6e3c1c02b51052a9041bdec7619bcbc5e93c0b08b3d90172",
+      "bytes": 7015
+    }
+  },
+  "no_evaluation_run_yet": true
+}

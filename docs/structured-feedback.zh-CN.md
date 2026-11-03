@@ -1,4 +1,4 @@
-# 用户行为个性化 v0.4.0 结构化反馈教程
+# 用户行为个性化 v0.5.0 结构化反馈教程
 
 [English](structured-feedback.en.md) · [中文](structured-feedback.zh-CN.md)
 
@@ -6,7 +6,7 @@
 
 ## 1. 下载并检查
 
-从 [v0.4.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.4.0) 下载 ZIP 和 `SHA256SUMS.txt`。解压前核对压缩包 SHA-256：macOS 使用 `shasum -a 256`，Linux 使用 `sha256sum`，PowerShell 使用 `Get-FileHash -Algorithm SHA256`。
+从 [v0.5.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0) 下载 ZIP 和 `SHA256SUMS.txt`。解压前核对压缩包 SHA-256：macOS 使用 `shasum -a 256`，Linux 使用 `sha256sum`，PowerShell 使用 `Get-FileHash -Algorithm SHA256`。
 
 需要 Python 3.11 或更新版本，适配器没有第三方 Python 依赖。在解压目录打开终端：
 
@@ -119,7 +119,7 @@ print("Demo complete. Private demo directory:", private)
 | 维度 | 可用值 | 场景示例 |
 |---|---|---|
 | `response_length` | `concise`、`balanced`、`detailed` | `status-update` |
-| `structure` | `conclusion_first`、`steps`、`examples` | `code-review` |
+| `structure` | `conclusion_first`、`steps`、`examples`、`code_first`、`bullets` | `code-review` |
 | `teaching` | `explain_back`、`worked_example`、`practice` | `learn-python` |
 | `initiative` | `ask_first`、`suggest_next` | `project-planning` |
 | `workflow_next_step` | `clarify`、`plan`、`implement`、`test`、`review`、`summarize` | `after-implementation` |
@@ -189,7 +189,7 @@ DeepSeek 聊天 API 是模型接口，不是直接的 MCP 客户端。需要工�
 | `MEMORY_PAUSED` | 仅按用户要求恢复；查看和删除仍然可用。 |
 | 来源已遗忘 | 不要替换 ID 重放旧来源；需要时取得真正的新反馈。 |
 | 没有可确认候选 | 检查独立会话、场景、时效、反对证据与已有明确偏好。 |
-| 升级后某场景不再匹配 | v0.4.0 改用完整标签，`art` 不再匹配 `cartography`。 |
+| 升级后某场景不再匹配 | 当前版本使用完整标签，`art` 不再匹配 `cartography`。 |
 | 观察条数到上限 | 审查并删除不再需要的证据；系统不会静默清理。 |
 | 宿主忽略已存偏好 | 检查实际工具加载或使用包装入口；保存成功不等于模型遵守。 |
 

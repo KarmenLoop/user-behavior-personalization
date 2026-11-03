@@ -7,6 +7,8 @@ from host_support import Database, need, identifier, content, stamp, atomic, sch
 from learning import DIMENSIONS, STATEMENTS, active, blank_profile, check_source, context_key, digest, insights, matching_rules, normalize_event, purge, timestamp, typed_value, upgrade
 from conversation_store import import_conversation, review_proposal, portrait, model_context, import_model_proposals
 from forecast import forecast
+from planning import response_plan
+from outcomes import prepare, record_outcome, outcome_summary, forget_plans
 
 RULE = schema({
     'id': string(80), 'statement': string(1000), 'scope': string(200),
@@ -28,6 +30,10 @@ MODEL_PROPOSAL = schema({'statement': string(500), 'scope': string(200),
     'evidence': {'type': 'array', 'minItems': 1, 'maxItems': 3,
         'items': schema({'source_key': string(80), 'quote': string(240)}, ['source_key', 'quote'])}},
     ['statement', 'scope', 'category', 'evidence'])
+PLAN_FIELDS = {'context': string(200), 'task': string(16000),
+    'task_overrides': schema({key: {'type': 'string', 'enum': list(values)} for key, values in DIMENSIONS.items()}),
+    'omit_rule_ids': {'type': 'array', 'items': string(80), 'maxItems': 30},
+    'max_preference_chars': {'type': 'integer', 'minimum': 200}}
 
 
 def tool(name, description, fields, required=(), read_only=False):
@@ -56,6 +62,13 @@ TOOLS = [
     tool('profile_forget_messages', 'Delete selected user-message evidence and its dependent proposals, rules, style contributions and transitions.', {'expected_revision': integer(), 'source_keys': {'type': 'array', 'items': string(80), 'minItems': 1, 'maxItems': 100}}, ['expected_revision', 'source_keys']),
     tool('profile_model_context', 'Build a local extraction request from authorized stored excerpts; this tool sends nothing to a provider.', {'context': string(200)}, ['context'], True),
     tool('profile_model_propose', 'Validate host-model proposals against exact stored user quotes and stage them for human review; cannot confirm a rule.', {'expected_revision': integer(), 'proposals': {'type': 'array', 'items': MODEL_PROPOSAL, 'minItems': 1, 'maxItems': 20}}, ['expected_revision', 'proposals']),
+    tool('profile_habits', 'Discover recurring authored feedback across independent conversations, with quotes, conflicts and a review threshold.', {'context': string(200)}, ['context'], True),
+    tool('profile_habit_review', 'Accept or reject a current ready habit based on the actual user decision.', {'expected_revision': integer(), 'context': string(200), 'candidate_id': string(80), 'decision': {'type': 'string', 'enum': ['accept', 'reject']}, 'source_id': string(200)}, ['expected_revision', 'context', 'candidate_id', 'decision', 'source_id']),
+    tool('profile_plan', 'Preview the same preference selection used in actual host context. Explain temporary task overrides and exclusions; no model is called.', PLAN_FIELDS, ['context', 'task'], True),
+    tool('profile_plan_prepare', 'Save a content-free plan manifest for later explicit feedback. Prepared does not mean a model ran.', {'expected_revision': integer(), **PLAN_FIELDS}, ['expected_revision', 'context', 'task']),
+    tool('profile_outcome', 'Record explicit user feedback about a prepared prompt or reported response use. Never infer a rating from silence or process exit.', {'expected_revision': integer(), 'plan_id': string(80), 'source_id': string(200), 'rating': {'type': 'string', 'enum': ['helpful', 'unhelpful', 'mixed', 'not_sure']}, 'basis': {'type': 'string', 'enum': ['prompt_review', 'response_use']}}, ['expected_revision', 'plan_id', 'source_id', 'rating', 'basis']),
+    tool('profile_outcome_summary', 'Report explicit ratings by context and exact rule version, separating prompt review from reported response use.', {'context': string(200)}, ['context'], True),
+    tool('profile_plan_forget', 'Forget a prepared plan and all feedback associated with it.', {'expected_revision': integer(), 'plan_id': string(80)}, ['expected_revision', 'plan_id']),
 ]
 
 
@@ -114,6 +127,13 @@ def dispatch(name, values, args):
             return portrait(load(db, args), values['context'])
         if name == 'profile_model_context':
             return model_context(load(db, args), values['context'])
+        if name == 'profile_habits':
+            from behavior_learning import discover_habits
+            return discover_habits(load(db, args), values['context'])
+        if name == 'profile_plan':
+            return response_plan(load(db, args), **values)
+        if name == 'profile_outcome_summary':
+            return outcome_summary(load(db, args), values['context'])
         if name == 'profile_forecast':
             profile = load(db, args)
             result = {'status': 'paused', 'candidates': [], 'reasons': ['Personalization is paused.']} if profile['paused'] else forecast(profile['conversation_messages'], profile['conversation_transitions'], values['context'], values['request'])
@@ -131,10 +151,40 @@ def dispatch(name, values, args):
             need(profile['revision'] == values['expected_revision'], 'STALE_REVISION', 'Read the current profile before changing it.')
             replayed = False
             details = {}
-            if name in ('profile_correct', 'profile_observe', 'profile_review', 'conversation_import', 'profile_proposal_review', 'profile_model_propose'):
+            if name in ('profile_correct', 'profile_observe', 'profile_review', 'conversation_import', 'profile_proposal_review', 'profile_model_propose', 'profile_habit_review', 'profile_plan_prepare', 'profile_outcome'):
                 need(not profile['paused'], 'MEMORY_PAUSED', 'Resume memory before saving ordinary updates.')
             if name == 'profile_pause':
                 profile['paused'] = values['paused']
+            elif name == 'profile_habit_review':
+                from behavior_learning import discover_habits
+                candidate = next((c for c in discover_habits(profile, values['context'])['candidates'] if c['candidate_id'] == values['candidate_id']), None)
+                need(candidate is not None, 'CANDIDATE_STALE', 'Refresh the current habit candidates before reviewing.')
+                need(candidate['status'] == 'ready_to_review', 'CANDIDATE_NOT_READY', 'This habit needs more consistent evidence or an explicit correction of the existing preference.')
+                source, hashed, replayed = check_source(profile, values['source_id'], {k: v for k, v in values.items() if k != 'expected_revision'})
+                if not replayed:
+                    if values['decision'] == 'accept':
+                        rid = 'habit-' + digest(context_key(values['context']) + '\0' + candidate['dimension'])[:24]
+                        save_rule(profile, {'id': rid, 'statement': candidate['statement'], 'scope': context_key(values['context']),
+                            'kind': 'explicit', 'source_id': values['source_id'], 'source_summary': 'User confirmed a recurring habit from selected conversation evidence.',
+                            'source_hash': source, 'confirmed_at': stamp(), 'dimension': candidate['dimension'], 'value': candidate['value'],
+                            'conversation_source_keys': candidate['source_keys']})
+                        details['rule_id'] = rid
+                    else:
+                        profile['dismissed_habits'][candidate['candidate_id']] = {'source_hash': source, 'source_keys': candidate['source_keys']}
+                    profile['source_hashes'][source] = hashed
+                    details['status'] = 'accepted' if values['decision'] == 'accept' else 'rejected'
+            elif name == 'profile_plan_prepare':
+                plan = response_plan(profile, **{k: v for k, v in values.items() if k != 'expected_revision'})
+                details = prepare(profile, plan)
+                replayed = details.pop('replayed')
+            elif name == 'profile_outcome':
+                details = record_outcome(profile, values)
+                replayed = details.pop('replayed')
+            elif name == 'profile_plan_forget':
+                need(values['plan_id'] in profile['prepared_plans'], 'PLAN_MISSING', 'This plan no longer exists.')
+                forget_plans(profile, [values['plan_id']])
+                details = {'removed_plan_ids': [values['plan_id']]}
+                clear_managed_files(db, args)
             elif name == 'conversation_import':
                 need(getattr(args, 'enable_conversations', False), 'CONVERSATIONS_DISABLED', 'The operator must explicitly enable authorized conversation import.')
                 details = import_conversation(profile, values['conversation'])
@@ -232,4 +282,4 @@ def dispatch(name, values, args):
 
 
 if __name__ == '__main__':
-    raise SystemExit(main('user_behavior_personalization', '0.4.0', TOOLS, dispatch))
+    raise SystemExit(main('user_behavior_personalization', '0.5.0', TOOLS, dispatch))

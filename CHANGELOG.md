@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.0 — 2026-11-03
+
+- Add a bilingual local browser workspace for selected imports, evidence review, task prompt comparisons, corrections, and explicit feedback.
+- Discover recurring supported English/Chinese corrections across independent sessions; keep inferred habits pending until reviewed.
+- Add a foreground watcher for one selected append-only conversation feed, with restart cursors, pause handling, bounded input, and visible failures.
+- Share one task preference resolver across browser previews, the context builder, and the CLI wrapper. Add temporary overrides, rule omissions, and exclusion reasons.
+- Bind explicit prompt-review or response-use ratings to prepared plans and exact rule versions; do not carry ratings into a corrected rule.
+- Keep automatic recognition experimental: exposed regression cases reached 22/22 positives, while the independent fresh-v4 run covered 1/8 (English 1/4, Chinese 0/4), with no false offers on 8 negative controls. Preserve earlier failures and unchanged v0.4.0 forecast limits.
+- Record the v0.5.0 Codex provider timeout at 80 seconds; no accepted model response was produced.
+- Replace diagram-led onboarding with actual workspace captures and a complete practical walkthrough. Earlier release overviews and diagrams remain available.
+
 ## 0.4.0 — 2026-11-03
 
 - Import selected JSON/JSONL conversations and extract open-text English/Chinese preferences, workflows, goals, and constraints for review.

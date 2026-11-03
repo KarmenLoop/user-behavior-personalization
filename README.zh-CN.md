@@ -1,120 +1,74 @@
 # 用户行为个性化
 
-[English](README.md) · [中文](README.zh-CN.md) · **v0.4.0**
+[English](README.md) · [中文](README.zh-CN.md) · **v0.5.0**
 
-[![Local checks](https://github.com/KarmenLoop/user-behavior-personalization/actions/workflows/checks.yml/badge.svg)](https://github.com/KarmenLoop/user-behavior-personalization/actions/workflows/checks.yml)
-[![Release](https://img.shields.io/github/v/release/KarmenLoop/user-behavior-personalization)](https://github.com/KarmenLoop/user-behavior-personalization/releases/latest)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
+你已经三次要求回答短一点，但下一件事又需要详细解释。助手应该记住习惯，也能处理例外。
 
-从用户真正说过的话里，学习解释偏好、项目术语、反复出现的工作流程，以及本人表达的目标。
+这个本地工作台把反复出现的反馈整理为可审查的偏好，让你看见它怎样改变下一次任务的提示内容，再记录这次调整是否有帮助。一次性的选择不会改掉长期习惯。
 
-本项目导入你选择的对话，从中提取中英文明确偏好，整理为可查看的协作档案。它还能描述表达习惯，并检索用户过去遇到相近请求时，接下来实际问了什么。每条结论可以查看来源、纠正，或随来源对话一起删除。
+![v0.5.0 真实工作台：原始依据与两项待审核习惯](docs/images/workspace-v0.5.0.zh-CN.jpg)
 
-由 [KarmenLoop](https://github.com/KarmenLoop) 开发。使用 Python **3.11+** 标准库、私有 SQLite、CLI 与 MCP stdio。本地学习流程无需模型账号或 API 密钥。
+*真实工作台截图，使用合成反馈。三个选定会话形成了两项待审核习惯。*
 
-![架构图：授权对话经清理后，分为偏好候选、表达观察与历史后续请求检索](docs/images/conversation-learning-v0.4.0.zh-CN.svg)
+[下载](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0) · [完整教程](docs/tutorial.zh-CN.md) · [自动学习](docs/automatic-learning.zh-CN.md) · [当前验收](docs/evaluation.zh-CN.md)
 
-[下载 v0.4.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.4.0) · [完整教程](docs/tutorial.zh-CN.md) · [20 个实际问题](docs/faq.zh-CN.md) · [研究依据](docs/research.zh-CN.md)
+## 先走完一次闭环
 
-## 从手动标签，到实际对话学习
-
-| 原有结构化反馈 | 新增对话文本路径 |
-|---|---|
-| 宿主传入六类预设维度之一。 | 导入用户消息，提取自由文本的沟通偏好、工作流程、目标与约束。 |
-| 下一步偏好只能选择固定动作。 | 从历史请求序列中检索真正发生过的后续请求。 |
-| 档案主要是已保存规则。 | 同时查看已确认偏好、待审候选、表达特征、来源和例子。 |
-| 每条观察都需宿主先归纳。 | 保守的中英文规则提取明确表达；可选模型桥接还能提出带原文证据的新解释。 |
-
-原有结构化反馈仍然可用。对话路径需独立开启 `--enable-conversations`，两个开关互不替代。
-
-## 一段话可以教会它什么
-
-| 用户原话 | 可审查的结果 |
-|---|---|
-| “以后发布方案里，都要加上回滚检查清单。” | 当前项目场景下的自定义工作流程偏好。 |
-| “请记住，我们的预演环境统一叫 rehearsal。” | 保留本人用词的项目术语。 |
-| “我的目标是学会 SQL，能自己检查产品指标。” | 明确学习目标，与推测的能力水平分开。 |
-| “以后写方案时，先给我能执行的步骤，再解释取舍。” | 自由文本偏好，不必压缩成少量固定标签。 |
-
-“I prefer”“from now on”“my goal is”及支持的中文表达可产生候选。引用示例、代码、临时要求及识别到的敏感内容不进入自动偏好提取。这是保守的规则提取器，不是通用语义理解模型；具体见[评估结果与边界](docs/evaluation.zh-CN.md)。
-
-## 同一份证据的三种用途
-
-**协作档案。** `profile_portrait` 区分已确认偏好与待审提案，并显示消息长度中位数、列表、问句和语言混合等描述性特征，附来源片段。用户自己怎么写，不自动等于他希望助手怎么回答。
-
-**实验性后续请求建议。** `profile_forecast` 在同一场景中比较当前请求与历史请求，返回后续原话、支持会话与匹配例子，或明确暂不建议。它使用自研的词法与时效评分，不再是六种固定动作，也不是“读懂思想的概率”。
-
-**实际回复上下文。** 确认提案后，`profile_read`、CLI 包装入口或 `build_context.py` 可以在合适任务中加载。待审候选和表达统计不会悄悄变成助手必须遵守的指令。
-
-```mermaid
-flowchart LR
-  A[选择并授权的对话] --> B[清理后的用户片段]
-  B --> C[自由文本偏好候选]
-  B --> D[描述性的表达档案]
-  B --> E[原始请求前后关系]
-  C --> F[用户审查]
-  F --> G[已确认偏好]
-  E --> H[相近请求 → 历史后续原话]
-  G --> I[下一次宿主任务]
-```
-
-## 运行一次真实本地导入
-
-下载 ZIP，核对 `SHA256SUMS.txt` 后解压。在解压目录运行：
+需要 Python **3.11+**。下载、核对并解压后运行：
 
 ```sh
-python3 -B scripts/check_package.py
-python3 -B scripts/learn_conversation.py --root ../private-profile --subject demo \
-  --enable-conversations --input examples/conversations/sample.zh-CN.json
+python3 -B scripts/workspace.py --root ../private-profile --subject demo --enable-conversations
 ```
 
-命令通过实际适配器导入样例，并打印生成的档案。它只提出候选，不替你确认。[教程](docs/tutorial.zh-CN.md)包含自己的 JSON/JSONL 文件、审查、更正、后续建议、宿主配置与删除。
+打开终端打印的 `http://127.0.0.1:...` 地址。工作台在本机运行，无需模型账号。
 
-把项目接入 Codex 或 Cursor：
+1. 点击**体验一个合成示例**，导入三个独立会话中的“太长了，请简短一点”。
+2. 查看简洁回答候选习惯的来源，再选择**保留这项偏好**。
+3. 进入**用于下一次任务**，输入任务，预览已保存偏好进入提示后的变化。
+4. 在**仅用于这次任务**中选择详细回答，再次预览：本次改用临时要求，长期的简洁偏好仍保留。
+5. 保存方案，评价查看提示是否有帮助。通过宿主实际使用模型回答后，再单独记录真实使用反馈。
+
+## 这次真正补上了什么
+
+**反复纠正能变成可用习惯。** 从选择的对话或追加文件中，识别中英文反馈线索，按独立会话整理支持与反对证据，附上原文。明确偏好可以立即审核，反复习惯需要一致的多次支持。
+
+**能看见实际变化。** 工作台、上下文生成器和宿主包装入口共用偏好选择逻辑。预览解释采用了什么、排除了什么及其原因，不用虚构的前后回答充当效果。
+
+**临时要求只影响本次。** 任务控制、暂不使用的规则、场景、过期时间和偏好内容预算共同决定传入内容，预览不会改动永久档案。
+
+**反馈对应真正使用的版本。** 有帮助、部分有用、没帮助、不确定，都关联已准备方案和具体偏好版本。规则改写后不继承旧评价；沉默和命令成功都不算认可。
+
+## 换成自己的对话
+
+在工作台导入 JSON 对话，也可以运行：
 
 ```sh
-python3 scripts/host.py --root ../private-profile --subject owner \
-  --workspace /path/to/project --enable-conversations --install-host codex install
+python3 -B scripts/watch_conversations.py --root ../private-profile --subject owner \
+  --enable-conversations --input /path/to/selected.jsonl
 ```
 
-Cursor 使用 `--install-host cursor`。在宿主中绑定正确本人，批准指定服务，再验证真实工具调用。DeepSeek 类 API 可通过自己的客户端使用本地生成的上下文，包本身不会自动调用提供方。
+每一完整行是一份**完整会话快照**，不是单条消息。前台监听器只处理指定文件的新行，保留重启位置，遇到拒绝的记录就停在该处。它不会搜索账号历史，也不安装后台服务。格式与恢复方法见[自动学习指南](docs/automatic-learning.zh-CN.md)。
 
-## 十八个本地工具
+自动识别仍是实验功能，常见改写也可能漏掉。请核对来源，必要时直接纠正偏好；[公开评估](docs/evaluation.zh-CN.md)同时记录成功建议与漏识别。
 
-| 用途 | 工具 |
-|---|---|
-| 从选择的对话中学习 | `conversation_import`、`profile_proposal_review`、`profile_forget_conversation`、`profile_forget_messages` |
-| 查看与预备下一步 | `profile_portrait`、`profile_forecast` |
-| 可选宿主模型辅助 | `profile_model_context`、`profile_model_propose` |
-| 保存与读取明确规则 | `profile_read`、`profile_correct` |
-| 结构化反馈 | `profile_observe`、`profile_insights`、`profile_review`、`profile_forget_observations` |
-| 档案控制 | `profile_pause`、`profile_forget`、`profile_export`、`profile_reset` |
+已有能力继续保留：自由文本偏好、项目术语、本人目标、表达观察、可选模型提案，以及实验性的历史后续请求检索。后者的英文改写覆盖仍弱，不应与新的习惯学习混为一谈。
 
-写入需要当前版本。可用真实新来源纠正已确认提案，也可以删除来源对话及依赖它的内容。序列中间消息被删除后，不会把两侧消息拼出虚假的新关联。
+## 接到实际宿主
 
-## 当前实现范围
+Codex、Cursor 可使用 MCP 配置助手或调用前包装入口。`build_context.py` 为自己的模型客户端生成限定上下文，也适用于 DeepSeek 类聊天 API；包本身不会自行发送提供方请求。
 
-档案最多保留 80 个会话中的 400 条用户记录。每条存储清理后最多 600 字符的片段，以及特征和来源哈希。已知凭据和邮箱格式会脱敏，但不是完整个人信息检测器。助手、系统和工具消息不会作为用户证据保存。导入必须明确选择文件，没有后台历史爬虫或屏幕监控。
+浏览器预览是已经实现的本地功能，但**不代表模型回复验收成功**：本轮 v0.5.0 Codex 尝试在 80 秒后超时。能力和分数的实际依据见[宿主验收与学习诊断](docs/evaluation.zh-CN.md)。
 
-后续请求检索仍属实验功能，措辞接近时更适用。新一轮 18 条合成留出查询中，12 个应建议案例只正确提出 4 个，其余 8 个暂不建议；6 个负例全部暂不建议。英文正例覆盖 0/6，中文 4/6。这是小规模诊断，不是总体准确率。检索需要至少两个会话支持，可能漏掉改写或陌生主题。分数用于排列历史案例，不是校准过的概率。本地正确性测试、小规模冻结诊断与模型实际效果分别报告；宿主及提供方的验收状态和未成功尝试见[验收指南](docs/evaluation.zh-CN.md)。
+## 继续深入
 
-## 文档导航
+- [教程](docs/tutorial.zh-CN.md) / [English](docs/tutorial.en.md)：下载、工作台、审核、临时调整、反馈和删除。
+- [自动学习](docs/automatic-learning.zh-CN.md)：选定文件、证据、冲突、重启与错误处理。
+- [宿主接入](docs/host-integration.zh-CN.md)：Codex、Cursor、模型上下文与 [25 个工具](docs/tools.zh-CN.md)。
+- [对话指南](docs/conversation-guide.zh-CN.md)：JSON/JSONL、自由文本提案、档案及历史检索。
+- [隐私](docs/privacy-and-memory-control.zh-CN.md)、[研究依据](docs/research.zh-CN.md)与 [20 个实际问题](docs/faq.zh-CN.md)。
 
-| 内容 | 中文 / English |
-|---|---|
-| 下载 → 导入 → 审查 → 使用 → 删除 | [教程](docs/tutorial.zh-CN.md) / [Tutorial](docs/tutorial.en.md) |
-| 对话、档案与后续检索图解 | [架构](docs/architecture.zh-CN.md) / [Architecture](docs/architecture.md) |
-| Codex、Cursor 与可选模型桥接 | [宿主接入](docs/host-integration.zh-CN.md) / [Hosts](docs/host-integration.md) |
-| 文本片段、保留和删除 | [隐私](docs/privacy-and-memory-control.zh-CN.md) / [Privacy](docs/privacy-and-memory-control.md) |
-| 研究与心理学启发的教学设计 | [研究依据](docs/research.zh-CN.md) / [Research](docs/research.en.md) |
-| 二十个具体使用问题 | [常见问题](docs/faq.zh-CN.md) / [FAQ](docs/faq.en.md) |
-| 诊断、失败与验收 | [验收](docs/evaluation.zh-CN.md) / [Evaluation](docs/evaluation.md) |
-| 原有结构化反馈流程 | [指南](docs/structured-feedback.zh-CN.md) / [Guide](docs/structured-feedback.en.md) |
+档案保存在包外的私有 SQLite 中，支持暂停、查看、纠正、遗忘与重置。工作台可切换中英文，本地运行只需 Python 标准库与原生浏览器资源。
 
-[v0.2.0](docs/overview-v0.2.0.zh-CN.md) 和 [v0.3.0](docs/overview-v0.3.0.zh-CN.md) 介绍保留为历史记录。已有档案仍可读取；本项目不训练模型，也没有跨设备同步服务。
+[Apache-2.0](LICENSE) · [KarmenLoop](https://karmenloop.com) 开发 · [支持](SUPPORT.md) · [安全](SECURITY.md)
 
-## 许可与支持
-
-使用 [Apache-2.0](LICENSE)。实现与图解由 KarmenLoop 原创。研究引用说明设计依据，论文中的成绩不等于本项目成绩。
-
-[参与贡献](CONTRIBUTING.md) · [支持](SUPPORT.md) · [安全](SECURITY.md) · [KarmenLoop](https://karmenloop.com)
+历史介绍：[v0.2.0](docs/overview-v0.2.0.zh-CN.md)、[v0.3.0 中间源码](docs/overview-v0.3.0.zh-CN.md)、[v0.4.0](docs/overview-v0.4.0.zh-CN.md)。

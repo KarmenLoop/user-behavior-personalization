@@ -1,4 +1,4 @@
-# Privacy and memory control — v0.4.0
+# Privacy and memory control — v0.5.0
 
 [English](privacy-and-memory-control.md) · [中文](privacy-and-memory-control.zh-CN.md)
 
@@ -57,3 +57,15 @@ Conversation import keeps at most 400 user records across 80 sessions. Each reco
 `profile_forget_messages` deletes selected source keys; `profile_forget_conversation` deletes a session. Both cascade through dependent proposals, accepted rules, writing statistics, and original transitions, including linked evidence where needed to prevent resurrection. Deleting a middle message does not create a new neighbor-to-neighbor transition. Minimal hashes remain for replay suppression.
 
 `profile_model_context` returns up to 20 recent user excerpts to the calling host. It performs no network call, but a host may forward them to an authorized provider. An exact quote check proves correspondence to the retained excerpt, not consent or correctness of an interpretation. Treat portraits, forecast examples, and model context as private user data rather than ordinary public response instructions.
+
+## Local workspace and task plans
+
+The workspace binds to `127.0.0.1`, checks Host/Origin, and requires a per-start token for API calls. It fixes the subject/root at startup and loads no external assets. It is a local tool, not a public multi-user hosting setup. User content is rendered as text. Browser storage saves the language preference; conversation state and task content are not persisted there.
+
+A preview builds prompt content in memory. Preparing a plan saves its task hash, context, revision, and exact rule-version fingerprints, not the raw task or response. An explicit rating is a user report; its basis distinguishes prompt review from reported response use. Plan and rating metadata can still reveal usage patterns. `profile_plan_forget` removes the selected plan and feedback. Deleting dependent source evidence or rules removes affected plans and feedback as well.
+
+## Selected-file watcher
+
+The watcher reads only the regular file explicitly selected with `--input`. Its cursor stores the filename, byte offset, line/import counts, prefix hash, status, and timestamp—not a second copy of the conversation. Cursors are private metadata under `watchers/` and survive profile reset to avoid accidentally replaying old content. Pause prevents advancing over unread data.
+
+The selected JSONL file is outside the profile's controlled copy; deletion and reset do not erase it. Stop its writer/watcher before deliberate source or cursor cleanup. Do not remove replay markers simply to re-ingest forgotten material. See [feed recovery](automatic-learning.en.md).

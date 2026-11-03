@@ -1,58 +1,54 @@
-# Host integration — v0.4.0
+# Host integration — v0.5.0
 
 [English](host-integration.md) · [中文](host-integration.zh-CN.md)
 
-## Local CLI and MCP
+The browser workspace, CLI, and MCP stdio share the same local adapter and [25 tools](tools.en.md). The subject and private root are bound when the process starts. A tool call cannot select another user.
 
-`scripts/host.py` exposes the eighteen tools listed in the [README](../README.md). CLI `call` and MCP stdio use the same implementation and validation. The subject is bound at process startup; tool arguments cannot select another user. `--enable-observations` enables the collection path after the operator has obtained permission.
+## Start with the local workspace
 
-The host supplies verified identity, authorized source messages, honest source/session identifiers, explicit review decisions, and the current context. The adapter imports explicitly supplied conversations; it does not scrape histories or prove that a supplied `source_id` is a real consent receipt. Never treat tool availability as blanket permission to collect feedback.
-
-## Codex and Cursor
-
-The installer writes `.codex/config.toml` for Codex or `.cursor/mcp.json` for Cursor, preserving existing entries and refusing a duplicate server name. The server configuration binds the Python executable, package path, private root, and subject. A shared private root and subject let the two hosts read the same committed profile on one machine.
-
-Use the skill as host-readable guidance. Codex's `AGENTS.md` and Cursor's project rules are separate instruction mechanisms; installing an MCP server does not rewrite those files or guarantee a tool call on every turn. Cursor rule files use `.mdc` under `.cursor/rules`; a plain Markdown file there is not equivalent. Check the host's current [Codex instructions](https://developers.openai.com/codex/guides/agents-md) and [Cursor rules](https://cursor.com/docs/rules).
-
-`scripts/run_host.py` reads confirmed preferences before a new CLI invocation. Its metadata receipts distinguish the loaded revision and rule IDs from the host's actual exit result. Output goes to the console. No timer or hook is installed in an already-running desktop conversation. A host still needs its own account, model access, permissions, and working CLI.
-
-## DeepSeek and other chat APIs
-
-```mermaid
-sequenceDiagram
-  participant User
-  participant Host as Your host
-  participant Local as Local profile adapter
-  participant Model as Chat API
-  User->>Host: Current task
-  Host->>Local: profile_read(exact context)
-  Local-->>Host: Confirmed rules and revision
-  Host->>Model: messages with selected rules and task
-  Model-->>Host: Answer or proposed tool call
-  Host->>Host: Validate allowlist, arguments, identity, authority
-  Host-->>User: Answer; ask before confirming a candidate
+```sh
+python3 -B scripts/workspace.py --root ../private-profile --subject owner --enable-conversations
 ```
 
-`scripts/build_context.py` generates a JSON request payload with `messages` and local metadata. It sends nothing. Your client selects the appropriate provider model and sends `messages` according to the provider's current API. Credentials stay in your client, not in the profile or this repository.
+Open the printed localhost URL. Import selected feedback, review a habit, preview a task, and record an explicit assessment. No provider request is made. For a continuing source, run the [selected-file watcher](automatic-learning.en.md) with the same root and subject in a separate terminal. It imports that file while running; it does not install a daemon or discover accounts.
 
-DeepSeek JSON Output can constrain response formatting; it does not prove the truth of extracted preferences. A custom tool bridge must validate types and enumerations, require sources from an authorized user-message allowlist, reject blank/truncated responses, preserve revision checks, and send only the necessary context. Do not ingest hidden reasoning or assistant output as user evidence. Consult the [official JSON Output guide](https://api-docs.deepseek.com/guides/json_mode/).
+## Configure Codex or Cursor
 
-This release includes an offline explicit-cue extractor and a local bridge for host-model proposals. It does not ship an autonomous DeepSeek tool loop or make provider calls. A successful local payload build is not a live DeepSeek integration test.
+```sh
+python3 scripts/host.py --root ../private-profile --subject owner \
+  --workspace /path/to/project --enable-conversations --install-host codex install
+```
 
-## Capabilities still owned by the host
+Use `--install-host cursor` for Cursor. The installer writes `.codex/config.toml` or `.cursor/mcp.json`, preserving existing entries and refusing a duplicate server name. It records the Python executable, package path, root, subject, and enabled collection flags. `--enable-observations` separately enables direct typed events.
 
-Identity providers, background history collection, session-end events, background reflection, encryption and OS access control, provider retention, shared-chat disclosure, and multi-device synchronization require their own implementations and acceptance. The [legacy reflection contract](../references/reflection-workflow.md) describes how a host could supply those capabilities; it is not a running service.
+Reload the configured server in the host and inspect its tool list. Test reading the same confirmed preference from both hosts. Configuration and MCP calls do not prove a model actually used the rule; check a real response separately.
 
-Use the [tutorial](tutorial.en.md) for reproducible local calls and the [evaluation guide](evaluation.md) for current acceptance boundaries.
+Host instruction mechanisms remain separate. Codex discovers scoped `AGENTS.md` files; Cursor project rules use `.cursor/rules/*.mdc`. Installing this server does not rewrite those instructions or force a call every turn. See the official [Codex guide](https://developers.openai.com/codex/guides/agents-md) and [Cursor rules](https://cursor.com/docs/rules).
 
-## Local process visibility
+Run the v0.5.0 scripts from the package you actually installed. An older copied skill or an MCP entry pointing to an older directory will keep using its old implementation. Install into a new directory, inspect and update the existing server entry to that path, then restart the workspace or reload the MCP server. The installer does not silently overwrite an existing copy or duplicate server. Check `--help` on that installed `build_context.py` or `run_host.py` for the temporary override options.
 
-Codex receives the composed prompt on stdin. The current Cursor CLI path accepts it as a positional argument, so other tools running as the same local user may be able to inspect it in process arguments. Use the MCP path or an appropriate local account boundary when that exposure is unacceptable. Streaming output can still be captured by your terminal or host; metadata-only adapter receipts do not erase those separate copies.
+## Use one resolver for preview and execution
 
-## Conversation import and host-model proposals
+`profile_plan` previews selected and excluded rules with reasons. `scripts/build_context.py` and `scripts/run_host.py` use the same resolver for actual request content. All support a context, temporary typed overrides, omitted rule IDs, and a preference-text budget.
 
-Enable `--enable-conversations` independently of `--enable-observations`. Feed selected JSON/JSONL through `learn_conversation.py`, or call `conversation_import` with the current revision. Tool role labels and source IDs are supplied by the host; bind them to authorized records before import. The adapter retains bounded sanitized user excerpts and stages open-text proposals.
+```sh
+python3 scripts/build_context.py --root ../private-profile --subject owner \
+  --context writing --task-file /path/to/private-task.txt \
+  --override response_length=detailed --preference-budget 4000
+```
 
-For model assistance, call `profile_model_context(context)`, pass the selected excerpts and extraction instructions to your authorized model, then submit its structured proposals to `profile_model_propose`. Each proposal needs a category, scope, statement, and exact quotes from known source keys. A proposal is still pending after validation; `profile_proposal_review` records the user's actual decision. No provided tool can substitute the model's approval for that review.
+The JSON output contains `messages` and local personalization metadata. Send only the needed request fields through your own client. The builder makes no network call and does not save the raw task. Redirected output is a separate private copy you control.
 
-`profile_portrait` and `profile_forecast` expose private source examples for inspection. Do not insert their complete output into unrelated or shared conversations. `profile_read` remains the compact confirmed-rule path for ordinary responses.
+`run_host.py` loads preferences before a new Codex or Cursor CLI invocation and streams the result to the console. Its saved receipts contain metadata, not raw prompt or output. Codex receives the prompt on stdin; the current Cursor CLI path uses a positional argument, visible to same-user process inspection. Host accounts, model access, terminal logging, and provider retention remain separate. No hook is installed in an already-running desktop chat.
+
+## Optional model-assisted learning
+
+`profile_model_context(context)` returns bounded retained excerpts and a proposal contract. An authorized host can send these to its chosen model, including a DeepSeek-style chat API. Submit returned proposals through `profile_model_propose`; known source keys, exact quotes, categories, and scope are checked. Valid output stays pending until the user reviews it.
+
+DeepSeek JSON Output constrains format, not truth. Reject blank/truncated responses, validate fields and source allowlists, and treat excerpts as data rather than instructions. See the [official JSON Output guide](https://api-docs.deepseek.com/guides/json_mode/). This package does not include provider credentials, a model loop, or a live DeepSeek certification.
+
+## Keep integration boundaries clear
+
+The host supplies verified identity, authorized messages, accurate roles/source IDs, and actual review decisions. Source strings are attestations, not independent proof of permission. Current instructions and normal execution authority still apply.
+
+Daily schedules, account-history export, OS isolation, multi-device synchronization, and external retention need their own host implementation. The [legacy reflection contract](../references/reflection-workflow.md) describes these responsibilities. The selected-file watcher is an implemented foreground importer, not that entire service. See [current evaluation](evaluation.md) for local and provider results.

@@ -1,85 +1,85 @@
-# Twenty practical questions — v0.4.0
+# Twenty practical questions — v0.5.0
 
 [English](faq.en.md) · [中文](faq.zh-CN.md)
 
-## 1. Can I give it actual conversations instead of manually tagging preferences?
+## 1. What can I actually try without a model account?
 
-Yes. Select an authorized JSON or JSONL conversation and import it with learn_conversation.py or conversation_import. The offline extractor examines user text for explicit English and Chinese cues, keeps source evidence, and proposes open-text preferences. You do not have to choose one of the older six dimensions.
+Open the local workspace, import the synthetic three-session example, review a habit, preview a task, override it once, and record a prompt-review rating. These operations use the real local store. A preview is the prompt your host can use, not an invented model answer.
 
-## 2. What kinds of things can it learn?
+## 2. Does “automatic learning” mean it reads all my chats?
 
-Communication preferences, project terminology, recurring workflows, declared goals, and constraints. For example, a request to include rollback checks in release plans stays as that concrete rule. A learning goal is stored as a goal, not interpreted as evidence of ability or personality.
+No. You select a conversation or one append-only JSONL feed. The watcher imports complete new records while its foreground process runs. The learner examines retained user excerpts for supported feedback cues; it does not discover accounts, read screens, or install a background service.
 
-## 3. Will it learn private project names and terminology?
+## 3. Why do repeated corrections need three sessions?
 
-An explicit instruction such as “Please remember: call our staging environment rehearsal” can become a sourced proposal. The wording can remain specific to your context. Review it before accepting; known credential patterns are redacted, and private terminology should stay in your private profile.
+Independent sessions reduce the effect of repeating one instruction in a single conversation. Recency, competing evidence, and a weighted support threshold also matter. The thresholds are engineering heuristics, not psychological confidence levels. A ready habit still needs your review.
 
-## 4. Does it understand indirect hints or every paraphrase?
+## 4. Must a direct preference wait for repetition?
 
-No. The bundled extractor uses conservative explicit-cue rules, so indirect preferences can be missed. The optional host-model bridge can propose broader interpretations from exact source quotes, but each proposal still needs user review. Check extraction misses separately from code correctness.
+No. “From now on, include rollback checks” can become an open-text proposal immediately. Review that explicit proposal instead of manufacturing more sessions. Recurring habits and direct instructions share the final profile but have different evidence paths.
 
-## 5. How does the working portrait differ from a list of settings?
+## 5. What if I usually want short answers but need detail today?
 
-profile_portrait combines confirmed preferences, pending open-text proposals, descriptive writing statistics, and source examples for one context. It can show what is established, what is merely suggested, and what the imported writing actually looks like.
+Choose a detailed response under “Just for this task,” or use --override response_length=detailed. The resolver excludes the saved brevity rule for this request and explains why. Your long-term default is unchanged.
 
-## 6. Can it imitate how I write?
+## 6. Does the task preview match what the host receives?
 
-It exposes examples and observable features—length, lists, questions, and language mix—that you and a host can inspect. It does not automatically equate your writing with your desired reply style or train a style-cloning model. Confirm specific response rules if you want the assistant to mirror a chosen aspect.
+The workspace, build_context.py, and run_host.py share one preference resolver. They produce the same selected preference content for the same task and options. A host may add its own higher-priority instructions; previewing does not prove a provider executed or followed the request.
 
-## 7. How does it notice a change in my habits?
+## 7. How can I tell whether a preference helped?
 
-The portrait can compare request length in the last 30 days with days 31–90 when both windows contain at least three sessions. This is a descriptive comparison, not a diagnosis or automatic preference update. A new explicit correction remains the best way to change a confirmed default.
+Save a plan, then give an explicit rating. Distinguish reviewing the prompt from using a resulting response. Compare similar tasks and keep unhelpful or mixed results. The summary tracks exact rule versions; successful commands and silence do not count as positive feedback.
 
-## 8. What does forecasting actually predict?
+## 8. Will an old positive rating follow a corrected rule?
 
-It retrieves what you previously asked for after requests similar to the current one, within the same context. The output contains original follow-up wording and matching historical examples. It suggests a plausible next request rather than predicting private thoughts or executing a plan.
+No. Each plan identifies exact preference-version fingerprints. The revised rule starts without inherited ratings. Updating a plan’s rating replaces its current assessment rather than adding another vote.
 
-## 9. Why can it miss a next step that seems obvious to me?
+## 9. Can it learn our terminology and unusual workflow?
 
-Lexical similarity is limited. Different wording, short or ambiguous requests, insufficient independent sessions, old evidence, or competing workflows can lead to abstention. A small diagnostic may reveal these gaps; its pass rate does not establish broad real-world accuracy.
+Use an explicit sourced proposal for a project term, goal, constraint, or custom workflow. The recurring-cue learner supports a bounded set of collaboration dimensions; it does not infer every custom concept. An optional host model can stage broader proposals with exact source quotes, followed by your review.
 
-## 10. Is the forecast limited to testing, planning, or six canned actions?
+## 10. Can it imitate my writing?
 
-No. The conversation forecast returns actual retained follow-up requests, so it can include a project-specific checklist, a custom terminology question, or another concrete request. The older workflow_next_step label remains a separate structured-feedback option.
+The portrait exposes writing examples, length, lists, questions, and language mix. Those observations describe how you wrote, not automatically how you want answers written. Confirm the specific aspects you want your host to use. The package does not train a style-cloning model.
 
-## 11. Can Codex and Cursor share the learned profile?
+## 11. How does it handle changing preferences?
 
-On one machine, configure both with the same private root and correctly bound subject. Their MCP calls use the same committed state. Identity mapping, actual host tool use, online account access, and cross-device synchronization are separate responsibilities.
+Make an explicit correction for a new lasting default, or use a task-only exception. Habit evidence decays over time and conflicting evidence can prevent adoption. The portrait can compare request-length windows when both have enough sessions, but that observation never automatically changes a preference.
 
-## 12. Where does DeepSeek fit?
+## 12. What belongs in the watched JSONL file?
 
-Your host may send profile_model_context output to an authorized model and return sourced proposals through profile_model_propose. The local adapter validates known source keys, exact quotes, scope, and basic bounds. It makes no DeepSeek call and never auto-confirms a model proposal.
+Each line is a full conversation object with session_id, context, and messages, followed by a newline. To extend a session, append a snapshot containing its unchanged original prefix plus new messages. The separate learn_conversation.py --format jsonl command instead accepts one message per line.
 
-## 13. How do I import new messages without duplicating old evidence?
+## 13. Will the watcher repeat everything after a restart?
 
-Append to the original session prefix in order and submit that full prefix plus the new messages. Identical user records are deduplicated. Changed user text, a different context, or reordered history is rejected rather than silently rewriting the sources behind an accepted rule.
+It saves a progress cursor and verifies the already-consumed prefix. Complete imported records are not treated as new support. A partial last line waits; a rejected record stops processing before that line. Changed earlier bytes raise FEED_HISTORY_CHANGED rather than silently rewriting history.
 
-## 14. What is saved from a long conversation?
+## 14. Can Codex and Cursor share the same profile?
 
-At most 400 user records across 80 sessions. Each retained excerpt contains up to 600 sanitized characters, plus features and hashes; import accepts up to 100 messages per batch and 4,000 characters per message. Non-user message text is not stored as user evidence. Automatic extraction can miss a preference beyond the retained excerpt.
+Yes, on one machine with the same private root and correctly bound subject. The MCP helpers configure both hosts; the wrapper applies preferences before a new CLI invocation. Real host tool use, accounts, and model responses require separate checks. No cross-device sync service is included.
 
-## 15. Does redaction mean every private detail is removed?
+## 15. Where does DeepSeek fit?
 
-No. Recognizable credential and email patterns are redacted. Novel secrets, personal descriptions, or obfuscated values may not be detected. Choose files deliberately, inspect the resulting portrait/export, and keep the store private. No background history crawler is installed.
+Your client can send messages built by build_context.py to its chosen chat API. For learning, profile_model_context supplies retained excerpts and profile_model_propose validates returned sourced proposals. Neither tool calls DeepSeek itself, and source validation does not automatically confirm a proposal.
 
-## 16. How do I correct an inferred preference that is wrong?
+## 16. Does it predict what I will think next?
 
-Reject the pending proposal. If it was accepted, review a new sourced proposal with replace_rule_id pointing to the old rule, or use profile_correct with a genuine new source. Arbitrary free-text contradictions are not automatically resolved; inspect both statements.
+No. The retained experimental forecaster retrieves actual follow-ups after similar historical requests. It does not execute them. Its v0.4.0 unseen test covered 4/12 positive cases, including 0/6 in English; that limitation is unchanged by the new habit workflow.
 
-## 17. Can I delete one message without losing the entire conversation?
+## 17. What gets stored, and what stays in the browser?
 
-Use profile_forget_messages with the source keys. The adapter removes dependent proposals, rules, writing contributions, and transitions. A broader linked cascade can be needed to prevent resurrection. It never invents a direct A-to-C transition when B was deleted.
+Conversation storage retains bounded sanitized excerpts and source metadata. Prepared plans retain hashes and rule versions, not raw tasks or model output. Browser storage keeps the language choice, not the profile. Known-secret redaction is incomplete; keep the root private and inspect imported evidence.
 
-## 18. What happens if I pause or reset it?
+## 18. Can I remove one message or stop learning?
 
-Pause stops ordinary recall and learning while export/deletion remain available. Reset clears profile content and ends paused, retaining minimal hashes to suppress old-source replay. Copied exports, provider histories, old unbound wrapper logs, and external backups require their own cleanup.
+Yes. Delete a source message, a conversation, a preference, or a plan. Related derived records and ratings are removed where necessary. Pause stops ordinary use; reset clears profile content and ends paused. Minimal replay hashes and feed cursors remain. External source files, provider logs, and backups need their own cleanup.
 
-## 19. How do psychology and explain-back help?
+## 19. What do psychology and explain-back contribute?
 
-They inform the interaction: offer an example or optional explain-back, identify a specific gap, and let the user choose what helps. The profile can retain an explicitly stated teaching preference or goal. It does not assign personality types, diagnose mental health, or claim a validated educational outcome.
+They inform the interaction: offer an optional explanation in the user’s own words, identify a concrete gap, then try an example or practice. Store an explicitly preferred teaching format. This is not personality diagnosis, a fixed learning-style label, or a validated educational-outcome claim.
 
-## 20. How can I judge whether the new version is better?
+## 20. How should I judge this release?
 
-Run the actual import/review/forecast/delete tutorial, then read the frozen diagnostic’s coverage, conditional precision, abstentions, and misses. Finally test an accepted preference in a real host and ask whether it helped. Keep initial failures and model-call failures visible; code tests alone do not measure personalization quality.
+Try your own authorized corrections, inspect false positives and misses, test temporary exceptions and deletion, and evaluate an actual host response. Read the preserved failed diagnostics as well as later independent results. Working storage, a successful browser demo, language coverage, and usefulness are separate evidence.
 
 [Tutorial](tutorial.en.md) · [Evaluation](evaluation.md)

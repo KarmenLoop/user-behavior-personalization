@@ -1,4 +1,4 @@
-# User Behavior Personalization v0.4.0 structured feedback tutorial
+# User Behavior Personalization v0.5.0 structured feedback tutorial
 
 [English](structured-feedback.en.md) · [中文](structured-feedback.zh-CN.md)
 
@@ -6,7 +6,7 @@ Start with the local exercise below. It uses synthetic feedback and no model acc
 
 ## 1. Download and check the package
 
-Get the ZIP and `SHA256SUMS.txt` from [v0.4.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.4.0). Compare the ZIP's SHA-256 with the published file before extracting. On macOS, use `shasum -a 256`; on Linux, `sha256sum`; in PowerShell, `Get-FileHash -Algorithm SHA256`.
+Get the ZIP and `SHA256SUMS.txt` from [v0.5.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0). Compare the ZIP's SHA-256 with the published file before extracting. On macOS, use `shasum -a 256`; on Linux, `sha256sum`; in PowerShell, `Get-FileHash -Algorithm SHA256`.
 
 Use Python 3.11 or newer. The adapter has no third-party Python dependencies. Open a terminal in the extracted package:
 
@@ -119,7 +119,7 @@ A new `source_id` must identify a genuinely new user statement or feedback item.
 | Dimension | Values | Example context |
 |---|---|---|
 | `response_length` | `concise`, `balanced`, `detailed` | `status-update` |
-| `structure` | `conclusion_first`, `steps`, `examples` | `code-review` |
+| `structure` | `conclusion_first`, `steps`, `examples`, `code_first`, `bullets` | `code-review` |
 | `teaching` | `explain_back`, `worked_example`, `practice` | `learn-python` |
 | `initiative` | `ask_first`, `suggest_next` | `project-planning` |
 | `workflow_next_step` | `clarify`, `plan`, `implement`, `test`, `review`, `summarize` | `after-implementation` |
@@ -189,7 +189,7 @@ All writes require the current `expected_revision`. Do not retry a stale write b
 | `MEMORY_PAUSED` | Resume only at the user's request. Inspection and deletion still work. |
 | Source was forgotten | Do not replay that source with a new identifier. Obtain genuinely new feedback if appropriate. |
 | No candidate is ready | Check independent sessions, context, recency, counterevidence, and an existing explicit preference. |
-| A scope stopped matching after upgrade | v0.4.0 uses exact labels. `art` intentionally no longer matches `cartography`. |
+| A scope stopped matching after upgrade | Current versions use exact labels. `art` intentionally no longer matches `cartography`. |
 | The observation limit is reached | Review and remove unnecessary evidence; the adapter does not silently discard it. |
 | A host ignores a saved preference | Check actual tool loading or use the wrapper; a stored rule is not proof of model compliance. |
 

@@ -1,0 +1,1337 @@
+{
+  "schema_version": 1,
+  "title": "Fresh ordinary bilingual recurring-correction diagnostic v3",
+  "frozen_at": "2026-11-03T14:42:07Z",
+  "evaluation_now": "2026-11-03T14:40:00+00:00",
+  "limits": [
+    "Synthetic diagnostic only; no real-user benefit inference.",
+    "Authored without reading the current root-cause revision; earlier versions were reviewed in prior tasks.",
+    "Uses ordinary corrections, with three distinct sessions per positive.",
+    "No tuning on held-out inputs or answers.",
+    "Fresh private subject per case; use real host import and discovery."
+  ],
+  "cases": [
+    {
+      "id": "v3-short-en",
+      "locale": "en",
+      "target_context": "issue updates",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-short-en-s1",
+          "context": "issue updates",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "That's more detail than I need. A short answer would be enough.",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-short-en-s2",
+          "context": "issue updates",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Could you cut this reply down? I only need the main point.",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-short-en-s3",
+          "context": "issue updates",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "You're explaining too much again. Please keep your replies brief.",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-code-en",
+      "locale": "en",
+      "target_context": "automation help",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-code-en-s1",
+          "context": "automation help",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Please put the code at the top. I can read the explanation after it.",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-code-en-s2",
+          "context": "automation help",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "You gave me the explanation before the script again. Let me see the script first.",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-code-en-s3",
+          "context": "automation help",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Start your answer with the code, then explain the choices.",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-example-en",
+      "locale": "en",
+      "target_context": "algebra help",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-example-en-s1",
+          "context": "algebra help",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Please explain this with a worked example, not just a definition.",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-example-en-s2",
+          "context": "algebra help",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Can you solve an example for me first? Then explain the general rule.",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-example-en-s3",
+          "context": "algebra help",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "I need to see an example worked out step by step before the theory.",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-language-en",
+      "locale": "en",
+      "target_context": "release communications",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-language-en-s1",
+          "context": "release communications",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The reply came back in Chinese. I need it in English.",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-language-en-s2",
+          "context": "release communications",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Please stick to English when you answer me here.",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-language-en-s3",
+          "context": "release communications",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "You switched languages again. These replies should be in English.",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-short-zh",
+      "locale": "zh",
+      "target_context": "日常汇报",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-short-zh-s1",
+          "context": "日常汇报",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "这段回复太长了，帮我缩短到重点。",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-short-zh-s2",
+          "context": "日常汇报",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "不用把每个细节都写出来，我更想看简短的回答。",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-short-zh-s3",
+          "context": "日常汇报",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "你又解释了很多，把答复写精炼一些。",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-code-zh",
+      "locale": "zh",
+      "target_context": "脚本编写",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-code-zh-s1",
+          "context": "脚本编写",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "先把代码发出来，后面再解释为什么这样写。",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-code-zh-s2",
+          "context": "脚本编写",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "文字说明又排在代码前面了，我希望先看到实现。",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-code-zh-s3",
+          "context": "脚本编写",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "回复从代码开始，讲解接在代码后面。",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-example-zh",
+      "locale": "zh",
+      "target_context": "函数学习",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-example-zh-s1",
+          "context": "函数学习",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "先做一道例题给我看，别只给定义。",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-example-zh-s2",
+          "context": "函数学习",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "能不能把一个例子完整做完，再告诉我规则？",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-example-zh-s3",
+          "context": "函数学习",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "你讲得还是太抽象了，我想先看一步步算出来的例子。",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-language-zh",
+      "locale": "zh",
+      "target_context": "用户帮助",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-language-zh-s1",
+          "context": "用户帮助",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "这段变成英文了，请给我中文回复。",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-language-zh-s2",
+          "context": "用户帮助",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "在这里回答我的时候都使用简体中文就好。",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-language-zh-s3",
+          "context": "用户帮助",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "你又换了语言，这些答复请保持中文。",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-negation-en",
+      "locale": "en",
+      "target_context": "editing notes",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-negation-en-s1",
+          "context": "editing notes",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "I do not want answers in English.",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-negation-en-s2",
+          "context": "editing notes",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Please do not put the code before the explanation.",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-negation-en-s3",
+          "context": "editing notes",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "There is no need to make the answer shorter.",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-quoted-zh",
+      "locale": "zh",
+      "target_context": "录音整理",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-quoted-zh-s1",
+          "context": "录音整理",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "录音里的原话是“请用中文回答”，请保留这句引用。",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-quoted-zh-s2",
+          "context": "录音整理",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "“给我中文回复就好”是对方说的，我只需要整理转写。",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-quoted-zh-s3",
+          "context": "录音整理",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "帮我检查这句引文的标点：“回答用中文写。”",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-temporary-en",
+      "locale": "en",
+      "target_context": "meeting handouts",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-temporary-en-s1",
+          "context": "meeting handouts",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "For this message only, put the code first because it will be pasted into a slide.",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-temporary-en-s2",
+          "context": "meeting handouts",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Just for this answer, show the code before the explanation. Do not save a preference.",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-temporary-en-s3",
+          "context": "meeting handouts",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "For this one handout, start with the code. Use the usual format afterward.",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-third-party-zh",
+      "locale": "zh",
+      "target_context": "访谈记录",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-third-party-zh-s1",
+          "context": "访谈记录",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "客户说回复太长了，希望简短一点。我是在记录他的反馈。",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-third-party-zh-s2",
+          "context": "访谈记录",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "同事认为回答应该更简短，这是他的意见。",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-third-party-zh-s3",
+          "context": "访谈记录",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "受访者要求答复精简一些，请把这个观点写进访谈记录。",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-conflict-en",
+      "locale": "en",
+      "target_context": "proposal discussions",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-conflict-en-s1",
+          "context": "proposal discussions",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The reply is too short. Please include more details.",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-conflict-en-s2",
+          "context": "proposal discussions",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The reply is too long. Please keep it brief.",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-conflict-en-s3",
+          "context": "proposal discussions",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Please make these explanations more detailed.",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-conflict-en-s4",
+          "context": "proposal discussions",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-27T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-27T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Please make these explanations shorter.",
+              "at": "2026-10-27T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-conflict-en-s5",
+          "context": "proposal discussions",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-28T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-28T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "I need detailed answers with the reasoning included.",
+              "at": "2026-10-28T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-conflict-en-s6",
+          "context": "proposal discussions",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-29T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-29T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "I need concise answers without all that detail.",
+              "at": "2026-10-29T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-context-split",
+      "locale": "zh",
+      "target_context": "采购建议",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-context-split-s1",
+          "context": "采购建议",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "请先把结论说出来，理由放后面。",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-context-split-s2",
+          "context": "行程规划",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "回复先给结论，再讲原因。",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-context-split-s3",
+          "context": "食谱说明",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "请继续帮我处理这份内容。",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "这是初稿。",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "先说答案，然后解释。",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-single-session",
+      "locale": "zh",
+      "target_context": "安装说明",
+      "behavior_learning_enabled": true,
+      "conversations": [
+        {
+          "session_id": "v3-single-session-s1",
+          "context": "安装说明",
+          "messages": [
+            {
+              "id": "a0",
+              "role": "assistant",
+              "text": "这里是修改后的内容。",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "u0",
+              "role": "user",
+              "text": "请用中文回答。",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "a1",
+              "role": "assistant",
+              "text": "这里是修改后的内容。",
+              "at": "2026-10-24T10:02:00+00:00"
+            },
+            {
+              "id": "u1",
+              "role": "user",
+              "text": "我想看中文的回复。",
+              "at": "2026-10-24T10:03:00+00:00"
+            },
+            {
+              "id": "a2",
+              "role": "assistant",
+              "text": "这里是修改后的内容。",
+              "at": "2026-10-24T10:04:00+00:00"
+            },
+            {
+              "id": "u2",
+              "role": "user",
+              "text": "这些内容改成中文写。",
+              "at": "2026-10-24T10:05:00+00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v3-disabled",
+      "locale": "en",
+      "target_context": "product support",
+      "behavior_learning_enabled": false,
+      "conversations": [
+        {
+          "session_id": "v3-disabled-s1",
+          "context": "product support",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-24T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-24T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Please keep the answer brief.",
+              "at": "2026-10-24T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-disabled-s2",
+          "context": "product support",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-25T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-25T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "The reply is too long. Make it shorter.",
+              "at": "2026-10-25T10:02:00+00:00"
+            }
+          ]
+        },
+        {
+          "session_id": "v3-disabled-s3",
+          "context": "product support",
+          "messages": [
+            {
+              "id": "request",
+              "role": "user",
+              "text": "Please help me with this next item.",
+              "at": "2026-10-26T10:00:00+00:00"
+            },
+            {
+              "id": "draft",
+              "role": "assistant",
+              "text": "Here is the first draft.",
+              "at": "2026-10-26T10:01:00+00:00"
+            },
+            {
+              "id": "correction",
+              "role": "user",
+              "text": "Give me a concise answer.",
+              "at": "2026-10-26T10:02:00+00:00"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

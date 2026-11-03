@@ -9,7 +9,7 @@ from host_support import need, identifier, content
 UTC = dt.timezone.utc
 DIMENSIONS = {
     'response_length': ('concise', 'balanced', 'detailed'),
-    'structure': ('conclusion_first', 'steps', 'examples'),
+    'structure': ('conclusion_first', 'steps', 'examples', 'code_first', 'bullets'),
     'teaching': ('explain_back', 'worked_example', 'practice'),
     'initiative': ('ask_first', 'suggest_next'),
     'workflow_next_step': ('clarify', 'plan', 'implement', 'test', 'review', 'summarize'),
@@ -17,7 +17,7 @@ DIMENSIONS = {
 }
 STATEMENTS = {
     'response_length': {'concise': 'Keep responses concise.', 'balanced': 'Give a short answer with the details needed to use it.', 'detailed': 'Include detailed reasoning, examples, and verification where useful.'},
-    'structure': {'conclusion_first': 'Start with the conclusion, then explain.', 'steps': 'Organize instructions into clear sequential steps.', 'examples': 'Include a concrete example when explaining a concept.'},
+    'structure': {'conclusion_first': 'Start with the conclusion, then explain.', 'steps': 'Organize instructions into clear sequential steps.', 'examples': 'Include a concrete example when explaining a concept.', 'code_first': 'Show the relevant code before explaining it.', 'bullets': 'Use concise bullet points when the content is a list.'},
     'teaching': {'explain_back': 'Offer an optional explain-back exercise to check understanding.', 'worked_example': 'Teach with a worked example before independent practice.', 'practice': 'Offer optional retrieval practice with corrective feedback.'},
     'initiative': {'ask_first': 'Ask before proposing a change in task direction; preserve existing permissions.', 'suggest_next': 'Offer a useful next step as a suggestion; do not execute it without authorization.'},
     'workflow_next_step': {value: 'In this task context, suggest the next step "' + value + '"; do not execute it automatically.' for value in DIMENSIONS['workflow_next_step']},
@@ -128,7 +128,7 @@ def insights(profile, context, now=None):
 
 
 def blank_profile(subject):
-    return {'schema_version': 2, 'subject_id': subject, 'revision': 0, 'paused': False, 'rules': {}, 'source_hashes': {}, 'deleted_source_hashes': [], 'history': [], 'observations': {}, 'deleted_observation_hashes': [], 'dismissed_candidates': {}, 'conversation_messages': {}, 'conversation_proposals': {}, 'conversation_transitions': [], 'conversation_sessions': {}, 'updated_at': None}
+    return {'schema_version': 2, 'subject_id': subject, 'revision': 0, 'paused': False, 'rules': {}, 'source_hashes': {}, 'deleted_source_hashes': [], 'history': [], 'observations': {}, 'deleted_observation_hashes': [], 'dismissed_candidates': {}, 'conversation_messages': {}, 'conversation_proposals': {}, 'conversation_transitions': [], 'conversation_sessions': {}, 'dismissed_habits': {}, 'prepared_plans': {}, 'plan_outcomes': {}, 'updated_at': None}
 
 
 def upgrade(profile):
@@ -182,6 +182,13 @@ def purge(profile, rule_ids=(), event_ids=(), conversation_keys=()):
             if any(dimension == event['dimension'] and (scope == '*' or scope == event['context'])
                    for scope, dimension in forgotten_dimensions):
                 event_ids.add(event_id)
+        if forgotten_dimensions:
+            from behavior_learning import extract_feedback
+            for key, message in profile.get('conversation_messages', {}).items():
+                dimensions = {cue['dimension'] for cue in extract_feedback(message['excerpt'])}
+                if any(dimension in dimensions and (scope == '*' or scope == message['context'])
+                       for scope, dimension in forgotten_dimensions):
+                    conversation_keys.add(key)
         for proposal in profile.get('conversation_proposals', {}).values():
             sources = set(proposal['source_keys'])
             if sources & conversation_keys or proposal.get('rule_id') in rule_ids:
@@ -211,6 +218,14 @@ def purge(profile, rule_ids=(), event_ids=(), conversation_keys=()):
             del profile['conversation_proposals'][pid]
     profile['conversation_transitions'] = [edge for edge in profile.get('conversation_transitions', [])
         if edge['from_key'] not in conversation_keys and edge['to_key'] not in conversation_keys]
+    for candidate_id, dismissal in list(profile.get('dismissed_habits', {}).items()):
+        if set(dismissal.get('source_keys', [])) & conversation_keys:
+            tombstone(profile, dismissal['source_hash'])
+            del profile['dismissed_habits'][candidate_id]
+    from outcomes import forget_plans
+    removed_plans = [pid for pid, plan in profile.get('prepared_plans', {}).items()
+                     if set(plan['rule_versions']) & rule_ids]
+    forget_plans(profile, removed_plans)
     # Content-free dismissals stay intact: forgetting unrelated evidence must not
     # revive a candidate the user already rejected. Reset removes all dismissals.
-    return {'removed_rule_ids': sorted(rule_ids), 'removed_observation_ids': sorted(event_ids), 'removed_message_keys': sorted(conversation_keys)}
+    return {'removed_rule_ids': sorted(rule_ids), 'removed_observation_ids': sorted(event_ids), 'removed_message_keys': sorted(conversation_keys), 'removed_plan_ids': removed_plans}

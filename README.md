@@ -1,120 +1,74 @@
 # User Behavior Personalization
 
-[English](README.md) · [中文](README.zh-CN.md) · **v0.4.0**
+[English](README.md) · [中文](README.zh-CN.md) · **v0.5.0**
 
-[![Local checks](https://github.com/KarmenLoop/user-behavior-personalization/actions/workflows/checks.yml/badge.svg)](https://github.com/KarmenLoop/user-behavior-personalization/actions/workflows/checks.yml)
-[![Release](https://img.shields.io/github/v/release/KarmenLoop/user-behavior-personalization)](https://github.com/KarmenLoop/user-behavior-personalization/releases/latest)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
+You have asked for shorter answers three times. The next task needs a detailed explanation. Your assistant should handle both.
 
-Learn from what a person actually says: their preferred explanations, project terminology, recurring workflows, and stated goals.
+This local workspace turns recurring feedback into preferences you can review, shows exactly how those preferences change the next task's prompt, and lets you record whether the change helped. A one-time choice leaves your saved habits intact.
 
-User Behavior Personalization imports conversations you select, finds explicit preferences in English and Chinese, and builds an inspectable working profile. It also describes writing patterns and retrieves what the user asked for after similar requests in earlier sessions. You can inspect each source, correct a proposal, and remove the conversation that produced it.
+![Actual v0.5.0 workspace showing source evidence and two reviewable habits](docs/images/workspace-v0.5.0.en.jpg)
 
-Built by [KarmenLoop](https://github.com/KarmenLoop). Python **3.11+**, standard library, private SQLite, CLI and MCP stdio. The local learning path needs no model account or API key.
+*Actual workspace capture using synthetic feedback. Three selected conversations support two habits for review.*
 
-![Architecture diagram: selected conversation text branches into preference proposals, writing observations, and historical follow-up retrieval](docs/images/conversation-learning-v0.4.0.en.svg)
+[Download](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0) · [Full walkthrough](docs/tutorial.en.md) · [Automatic learning](docs/automatic-learning.en.md) · [Current evaluation](docs/evaluation.md)
 
-[Download v0.4.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.4.0) · [Complete tutorial](docs/tutorial.en.md) · [20 practical questions](docs/faq.en.md) · [Research](docs/research.en.md)
+## Try the complete loop
 
-## From manual labels to conversation learning
-
-| Before: structured feedback | Now: selected conversation text |
-|---|---|
-| The host supplied one of six predefined dimensions. | Import user messages; extract open-text communication preferences, workflows, goals, and constraints. |
-| A next-step preference chose from a fixed action list. | Retrieve actual follow-up requests from similar historical request sequences. |
-| A profile mostly listed saved rules. | Inspect confirmed preferences, pending proposals, writing features, sources, and examples together. |
-| The host had to phrase every observation. | A conservative bilingual extractor finds explicit cues; an optional host-model bridge can propose additional interpretations with exact source quotes. |
-
-The original structured-feedback path remains available. The new conversation path requires its own `--enable-conversations` setting; enabling one does not enable the other.
-
-## What a conversation can teach it
-
-| User message | Reviewable result |
-|---|---|
-| “From now on, include a rollback checklist in release plans.” | A custom workflow preference for the current project context. |
-| “Please remember: call our staging environment rehearsal.” | Project terminology in the user's own words. |
-| “My goal is to learn enough SQL to inspect product metrics.” | A stated learning goal, kept separate from an inferred ability level. |
-| “以后写方案时，先给我能执行的步骤，再解释取舍。” | An open-text Chinese preference, without translating it into a small fixed label set. |
-
-Direct language such as “I prefer,” “from now on,” “my goal is,” and their supported Chinese equivalents can produce proposals. Quoted examples, code, temporary requests, and recognized sensitive content are excluded from automatic preference extraction. This is a conservative rule-based extractor, not a general understanding model; see the [evaluation results and limits](docs/evaluation.md).
-
-## Three useful views of the same evidence
-
-**Working profile.** `profile_portrait` separates confirmed preferences from pending proposals. It shows descriptive writing features such as median message length, lists, questions, and language mix, with source excerpts. How someone writes is not automatically how they want an assistant to reply.
-
-**Experimental next-request suggestions.** `profile_forecast` compares a current request with earlier requests in the same context. It returns original follow-up wording, supporting sessions, and matching examples—or abstains. It uses independently implemented lexical and recency scoring, not six canned actions or a probability of reading someone's thoughts.
-
-**Confirmed response context.** Accept a proposal, then `profile_read`, the CLI wrapper, or `build_context.py` can load it for an appropriate task. Pending proposals and writing statistics are not silently adopted as instructions.
-
-```mermaid
-flowchart LR
-  A[Selected authorized conversations] --> B[Sanitized user excerpts]
-  B --> C[Open-text preference proposals]
-  B --> D[Descriptive writing profile]
-  B --> E[Original request transitions]
-  C --> F[User review]
-  F --> G[Confirmed preferences]
-  E --> H[Similar request → historical follow-up]
-  G --> I[Next host task]
-```
-
-## Try a real local import
-
-Download the ZIP, verify `SHA256SUMS.txt`, and extract it. From that directory:
+Python **3.11+** is required. Download, verify, and extract the release, then run:
 
 ```sh
-python3 -B scripts/check_package.py
-python3 -B scripts/learn_conversation.py --root ../private-profile --subject demo \
-  --enable-conversations --input examples/conversations/sample.en.json
+python3 -B scripts/workspace.py --root ../private-profile --subject demo --enable-conversations
 ```
 
-The command imports the sample through the actual adapter and prints the resulting portrait. It stages proposals; it does not confirm them for you. The [tutorial](docs/tutorial.en.md) covers your own JSON/JSONL files, review, correction, forecasts, host setup, and deletion.
+Open the printed `http://127.0.0.1:...` URL. The workspace runs on your computer; no model account is needed.
 
-Connect a project to Codex or Cursor:
+1. Select **Try a synthetic example**. Three separate conversations contain “Too long. Please keep it brief.”
+2. Open the evidence for the proposed concise-answer habit, then choose **Keep this preference**.
+3. Open **Shape the next task**, enter a task, and preview the saved preference in the actual prompt.
+4. Choose a detailed answer under **Just for this task**. Preview again: the temporary choice replaces the saved brevity rule for this task, without changing the profile.
+5. Save the plan, then record whether reviewing the prompt helped. After using a real response through your host, record that separately.
+
+## What makes the difference
+
+**Recurring corrections become usable habits.** Import selected conversations or follow an append-only file. The learner finds supported English and Chinese feedback cues across independent sessions, with source quotes and counterevidence. A direct preference can be reviewed immediately; a recurring habit needs consistent support.
+
+**You can see the actual change.** The workspace, context builder, and host wrapper use one preference resolver. The preview explains which rules were included or left out, and why. It does not fill the screen with an invented before/after answer.
+
+**Exceptions stay temporary.** Current-task controls, omitted rules, context, expiry, and a preference budget determine what is sent. Your permanent profile remains unchanged by a preview.
+
+**Feedback belongs to the version you used.** Helpful, mixed, not helpful, and unsure ratings refer to a prepared plan and exact preference versions. A rewritten rule does not inherit an old score. Silence and a successful command are never counted as approval.
+
+## Bring your own conversations
+
+Import a JSON conversation in the workspace, or run:
 
 ```sh
-python3 scripts/host.py --root ../private-profile --subject owner \
-  --workspace /path/to/project --enable-conversations --install-host codex install
+python3 -B scripts/watch_conversations.py --root ../private-profile --subject owner \
+  --enable-conversations --input /path/to/selected.jsonl
 ```
 
-Use `--install-host cursor` for Cursor. Bind the real user in the host configuration, approve the specific server, and verify actual tool calls. DeepSeek-style APIs can use locally generated context through your own client; the package does not make an automatic provider call.
+Each complete line is a **full conversation snapshot**, not a single message. The foreground watcher imports new lines from that one selected file, keeps a restart cursor, and stops at a rejected record. It does not search your accounts or install a background service. See the [feed format and recovery guide](docs/automatic-learning.en.md).
 
-## Eighteen local tools
+Automatic recognition is experimental and can miss ordinary paraphrases. Review the evidence and correct preferences directly when needed; the [published diagnostics](docs/evaluation.md) report misses as well as successful suggestions.
 
-| Purpose | Tools |
-|---|---|
-| Learn from selected conversations | `conversation_import`, `profile_proposal_review`, `profile_forget_conversation`, `profile_forget_messages` |
-| Inspect and anticipate | `profile_portrait`, `profile_forecast` |
-| Use an optional host model | `profile_model_context`, `profile_model_propose` |
-| Save and load explicit rules | `profile_read`, `profile_correct` |
-| Use structured feedback | `profile_observe`, `profile_insights`, `profile_review`, `profile_forget_observations` |
-| Control the profile | `profile_pause`, `profile_forget`, `profile_export`, `profile_reset` |
+Existing capabilities remain available: open-text preferences, project terminology, stated goals, writing observations, optional model-assisted proposals, and experimental historical next-request retrieval. The latter still has weak English paraphrase coverage; it is not the new habit learner.
 
-Writes require the current revision. Correct an accepted proposal with a genuinely new source, or delete its source conversation and the dependent content. Deleting the middle message in a sequence never invents a new link between its neighbors.
+## Use the result with your host
 
-## Scope and current limits
+Codex and Cursor can use the included MCP configuration helpers or pre-invocation wrapper. `build_context.py` produces scoped messages for your own model client, including DeepSeek-style APIs. The package sends no provider request on its own.
 
-The store retains up to 400 user records across 80 sessions. Each record keeps up to 600 sanitized excerpt characters plus features and source hashes. Known credential and email patterns are redacted; this is not a complete personal-data detector. Assistant, system, and tool messages are not stored as user evidence. Import is explicit, with no background crawler or screen monitoring.
+The browser preview is real local functionality. It is **not a successful model-response test**: the v0.5.0 Codex attempt timed out after 80 seconds. Read [host acceptance and learning diagnostics](docs/evaluation.md) before treating a feature or score as proven.
 
-Forecasting is experimental and works best when wording is close. On a new 18-query synthetic holdout, it correctly suggested 4 of 12 expected positive cases and abstained on the other 8; all 6 negative cases abstained. English positive coverage was 0/6, Chinese 4/6. This is a small diagnostic, not a general accuracy estimate. Forecasting needs evidence from at least two sessions and can miss paraphrases or unfamiliar topics. Its scores rank historical cases; they are not calibrated probabilities. Local correctness tests and the small frozen diagnostic are reported separately from actual model behavior. Current host/provider acceptance is documented in [evaluation](docs/evaluation.md), including unsuccessful attempts.
+## Go deeper
 
-## Documentation
+- [Tutorial](docs/tutorial.en.md) / [中文教程](docs/tutorial.zh-CN.md): download, workspace, review, temporary choices, feedback, and deletion.
+- [Automatic learning](docs/automatic-learning.en.md): selected feeds, evidence, conflicts, restart, and errors.
+- [Host integration](docs/host-integration.md): Codex, Cursor, model context, and the [25 tools](docs/tools.en.md).
+- [Conversation guide](docs/conversation-guide.en.md): JSON/JSONL imports, open-text proposals, portrait, and historical forecasts.
+- [Privacy](docs/privacy-and-memory-control.md), [research](docs/research.en.md), and [20 practical questions](docs/faq.en.md).
 
-| Topic | English / 中文 |
-|---|---|
-| Download → import → review → use → delete | [Tutorial](docs/tutorial.en.md) / [教程](docs/tutorial.zh-CN.md) |
-| Conversation, profile, and forecast diagrams | [Architecture](docs/architecture.md) / [架构](docs/architecture.zh-CN.md) |
-| Codex, Cursor, and optional model bridge | [Host integration](docs/host-integration.md) / [宿主接入](docs/host-integration.zh-CN.md) |
-| Storing excerpts, retention, and deletion | [Privacy](docs/privacy-and-memory-control.md) / [隐私控制](docs/privacy-and-memory-control.zh-CN.md) |
-| Research and psychology-informed teaching | [Research](docs/research.en.md) / [研究依据](docs/research.zh-CN.md) |
-| Twenty concrete usage questions | [FAQ](docs/faq.en.md) / [常见问题](docs/faq.zh-CN.md) |
-| Diagnostics, failures, and acceptance | [Evaluation](docs/evaluation.md) / [验收](docs/evaluation.zh-CN.md) |
-| Original structured-feedback workflow | [Guide](docs/structured-feedback.en.md) / [指南](docs/structured-feedback.zh-CN.md) |
+Profiles stay in a private SQLite store outside the package. Pause, inspect, correct, forget, and reset are available. The workspace is bilingual, and the local runtime uses the Python standard library and native browser assets.
 
-Historical [v0.2.0](docs/overview-v0.2.0.en.md) and [v0.3.0](docs/overview-v0.3.0.en.md) overviews remain available. Existing profiles stay readable; there is no model retraining or cross-device sync service.
+[Apache-2.0](LICENSE) · Built by [KarmenLoop](https://karmenloop.com) · [Support](SUPPORT.md) · [Security](SECURITY.md)
 
-## License and support
-
-[Apache-2.0](LICENSE). Original implementation and diagrams by KarmenLoop. Research references explain design choices; their benchmark results are not this project's results.
-
-[Contributing](CONTRIBUTING.md) · [Support](SUPPORT.md) · [Security](SECURITY.md) · [KarmenLoop](https://karmenloop.com)
+Historical overviews: [v0.2.0](docs/overview-v0.2.0.en.md), [v0.3.0 intermediate source](docs/overview-v0.3.0.en.md), [v0.4.0](docs/overview-v0.4.0.en.md).
