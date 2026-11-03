@@ -1,4 +1,4 @@
-# How the workspace works — v0.6.0
+# How the workspace works — v0.7.0
 
 [English](architecture.md) · [中文](architecture.zh-CN.md)
 
@@ -33,3 +33,12 @@ These records help compare actual experiences. They do not automatically certify
 All writes use revisions. Forgetting source evidence cascades through affected proposals, rules, writing features, original transitions, and linked plans/ratings. A deleted middle message leaves a gap; it does not create a new A→C transition. Reset clears profile content and pauses personalization; minimal replay markers and selected-feed cursors remain.
 
 The [conversation guide](conversation-guide.en.md) covers portraits, host-model proposals, and the unchanged experimental historical forecaster. Original [v0.4.0 conversation diagrams](images/conversation-learning-v0.4.0.en.svg) and [structured-feedback architecture](structured-architecture.en.md) remain as references. The [workspace tutorial](tutorial.en.md) is the starting point for current use.
+
+
+## Selected-source semantic workflow and actual comparisons
+
+The optional v0.7.0 model runner sends selected excerpts through an ephemeral, tool-disabled Codex subprocess. Exact authored source quotes, subject/context binding and a captured revision are checked before suggestions enter the existing pending-proposal store. A profile guard is checked before every dispatch and throughout IO; stale results never become new rules or saved answers. Network IO holds no SQLite transaction.
+
+One resolver selects by context and matching task conditions before applying specificity. It preserves old unconditioned records and abstains on equally specific incompatible typed values. Baseline and personalized answer prompts share the task, policy, temporary choices and conditions; only saved preferences differ. Both must finish before a single transaction saves the prepared manifest and private pair.
+
+The loopback job API keeps one active job and up to 50 metadata records in memory. A duplicate request ID with identical arguments replays; changed arguments reject. Persistent reveal state distinguishes blind votes from later revisions. Pair storage is bounded to20, and deletion follows source→rule→plan→comparison dependencies. These records are runtime state and user reports, not training data or a quality grade. [Walk through the workflow](semantic-learning.en.md).

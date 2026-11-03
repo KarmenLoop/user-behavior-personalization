@@ -1,4 +1,4 @@
-# Personalization with independent judgment — v0.6.0
+# Personalization with independent judgment — v0.7.0
 
 [English](independent-judgment.en.md) · [中文](independent-judgment.zh-CN.md)
 

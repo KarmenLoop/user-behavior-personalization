@@ -73,12 +73,10 @@ def active(rule, now=None):
     return not rule.get('expires_at') or timestamp(rule['expires_at'], 'INVALID_EXPIRY') > (now or now_utc())
 
 
-def matching_rules(profile, context, now=None):
-    """Exact context matching. A typed contextual rule overrides its global peer."""
-    key = context_key(context)
-    rules = [r for r in profile['rules'].values() if active(r, now) and (r['scope'] == '*' or context_key(r['scope']) == key) and not preference_conflict(r['statement'])]
-    specific = {r['dimension'] for r in rules if r.get('dimension') and r['scope'] != '*'}
-    return sorted((r for r in rules if not (r['scope'] == '*' and r.get('dimension') in specific)), key=lambda r: (r['scope'] == '*', r['id']))
+def matching_rules(profile, context, now=None, task_conditions=None):
+    """Use the shared conditional resolver; old records have no conditions."""
+    from conditions import preference_selection
+    return preference_selection(profile['rules'], context, task_conditions, now)[0]
 
 
 def insights(profile, context, now=None):
@@ -129,7 +127,7 @@ def insights(profile, context, now=None):
 
 
 def blank_profile(subject):
-    return {'schema_version': 2, 'subject_id': subject, 'revision': 0, 'paused': False, 'rules': {}, 'source_hashes': {}, 'deleted_source_hashes': [], 'history': [], 'observations': {}, 'deleted_observation_hashes': [], 'dismissed_candidates': {}, 'conversation_messages': {}, 'conversation_proposals': {}, 'conversation_transitions': [], 'conversation_sessions': {}, 'dismissed_habits': {}, 'prepared_plans': {}, 'plan_outcomes': {}, 'updated_at': None}
+    return {'schema_version': 2, 'subject_id': subject, 'revision': 0, 'paused': False, 'rules': {}, 'source_hashes': {}, 'deleted_source_hashes': [], 'history': [], 'observations': {}, 'deleted_observation_hashes': [], 'dismissed_candidates': {}, 'conversation_messages': {}, 'conversation_proposals': {}, 'conversation_transitions': [], 'conversation_sessions': {}, 'dismissed_habits': {}, 'prepared_plans': {}, 'plan_outcomes': {}, 'response_comparisons': {}, 'updated_at': None}
 
 
 def upgrade(profile):

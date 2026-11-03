@@ -1,4 +1,4 @@
-# Check actual model answers — v0.6.0
+# Check actual model answers — v0.7.0
 
 [English](model-checks.en.md) · [中文](model-checks.zh-CN.md)
 
@@ -19,7 +19,7 @@ The failed Chinese reply turned “logs report tests passed” into “build and
 
 ## Download and check the package
 
-Download the ZIP and `SHA256SUMS.txt` from [v0.6.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0), compare the SHA-256, and extract it. Use Python 3.11+ in that directory. The regular [workspace tutorial](tutorial.en.md) covers profiles and saved preferences.
+Download the ZIP and `SHA256SUMS.txt` from [v0.6.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.7.0), compare the SHA-256, and extract it. Use Python 3.11+ in that directory. The regular [workspace tutorial](tutorial.en.md) covers profiles and saved preferences.
 
 ```sh
 python3 -B scripts/check_package.py

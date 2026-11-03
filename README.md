@@ -1,81 +1,71 @@
 # User Behavior Personalization
 
-[English](README.md) · [中文](README.zh-CN.md) · **v0.6.0**
+[English](README.md) · [中文](README.zh-CN.md) · **v0.7.0**
 
-You have asked for shorter answers three times. The next task needs a detailed explanation. Your assistant should handle both.
+“Show me the failing input before the fix” should change the next debugging answer. It should not dictate how your assistant writes a customer email.
 
-This local workspace turns recurring feedback into preferences you can review, shows exactly how those preferences change the next task's prompt, and lets you record whether the change helped. A one-time choice leaves your saved habits intact.
+This local workspace learns from the conversation excerpts you select, lets you confirm what it found, and applies those preferences to matching tasks. Compare two actual model responses to see the difference, then record what helped and what was wrong separately.
 
-![Actual v0.6.0 task preview with the shared evidence-first judgment policy](docs/images/judgment-v0.6.0.en.jpg)
+![Actual v0.7.0 workspace with two model-generated answers](docs/images/actual-comparison-v0.7.0.en.jpg)
 
-*Actual v0.6.0 workspace with a synthetic task. A concise-answer preference changes presentation; the judgment rules still require evidence and counterexample checks.*
+*Actual browser capture using synthetic feedback and a Python debugging task. Both answers come from the configured Codex model; their identities stay hidden until you vote or reveal them.*
 
-[Download](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0) · [Full walkthrough](docs/tutorial.en.md) · [Automatic learning](docs/automatic-learning.en.md) · [Current evaluation](docs/evaluation.md)
+[Download v0.7.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.7.0) · [Complete walkthrough](docs/semantic-learning.en.md) · [Evaluation](docs/evaluation.md) · [Six-part roadmap](docs/roadmap.en.md)
 
-## Try the complete loop
+## Start locally
 
-Python **3.11+** is required. Download, verify, and extract the release, then run:
+Download, verify and extract the release. Python **3.11+** is required; the local runtime has no third-party Python dependencies.
 
 ```sh
+python3 -B scripts/check_package.py
 python3 -B scripts/workspace.py --root ../private-profile --subject demo --enable-conversations
 ```
 
-Open the printed `http://127.0.0.1:...` URL. The workspace runs on your computer; no model account is needed.
+Open the printed local URL. This starts the offline workspace: import authorized conversations, review literal preferences or recurring feedback, inspect task prompts, and manage your private profile. No model account is needed for those steps. [Try the offline tutorial](docs/tutorial.en.md).
 
-1. Select **Try a synthetic example**. Three separate conversations contain “Too long. Please keep it brief.”
-2. Open the evidence for the proposed concise-answer habit, then choose **Keep this preference**.
-3. Open **Shape the next task**, enter a task, and preview the saved preference in the actual prompt.
-4. Choose a detailed answer under **Just for this task**. Preview again: the temporary choice replaces the saved brevity rule for this task, without changing the profile.
-5. Save the plan, then record whether reviewing the prompt helped. After using a real response through your host, record that separately.
-
-## What makes the difference
-
-**Recurring corrections become usable habits.** Import selected conversations or follow an append-only file. The learner finds supported English and Chinese feedback cues across independent sessions, with source quotes and counterevidence. A direct preference can be reviewed immediately; a recurring habit needs consistent support.
-
-**You can see the actual change.** The workspace, context builder, and host wrapper use one preference resolver. The preview explains which rules were included or left out, and why. It does not fill the screen with an invented before/after answer.
-
-**Exceptions stay temporary.** Current-task controls, omitted rules, context, expiry, and a preference budget determine what is sent. Your permanent profile remains unchanged by a preview.
-
-**Feedback belongs to the version you used.** Helpful, mixed, not helpful, and unsure ratings refer to a prepared plan and exact preference versions. A rewritten rule does not inherit an old score. Silence and a successful command are never counted as approval.
-
-**Adapt the collaboration, keep independent judgment.** Both prompt previews include the same evidence-first rules. Technical explanations remain hypotheses until supported; a conclusion changes for new evidence or better reasoning, not pressure or a high rating. Recognized requests for unconditional agreement are blocked from active preferences. [See the behavior and its limits](docs/independent-judgment.en.md).
-
-## Check actual answers
-
-Run the same synthetic case with and without the judgment policy, inspect the complete responses, and bind a review to each exact answer. Timeouts and unreviewed answers do not pass. [Start with one case](docs/model-checks.en.md).
-
-## Bring your own conversations
-
-Import a JSON conversation in the workspace, or run:
+For semantic interpretation and actual answer comparisons, install and sign in to a compatible Codex CLI, then restart with an explicit model:
 
 ```sh
-python3 -B scripts/watch_conversations.py --root ../private-profile --subject owner \
-  --enable-conversations --input /path/to/selected.jsonl
+python3 -B scripts/workspace.py --root ../private-profile --subject demo \
+  --enable-conversations --enable-models --model YOUR_MODEL
 ```
 
-Each complete line is a **full conversation snapshot**, not a single message. The foreground watcher imports new lines from that one selected file, keeps a restart cursor, and stops at a rejected record. It does not search your accounts or install a background service. See the [feed format and recovery guide](docs/automatic-learning.en.md).
+The tested client is `codex-cli 0.165.0-alpha.1.2`; incompatible tool controls fail closed. On macOS, `--system-proxy` can opt into an existing fixed loopback proxy. It changes only the model child process environment.
 
-Automatic recognition is experimental and can miss ordinary paraphrases. Review the evidence and correct preferences directly when needed; the [published diagnostics](docs/evaluation.md) report misses as well as successful suggestions.
+1. Import a conversation you are allowed to use. Check only the excerpts you want analyzed, then select **Analyze selected excerpts**. Those excerpts and relevant confirmed preferences go to your configured Codex account.
+2. Read each proposed preference and its exact quote. Correct an existing rule deliberately or keep a separate preference. Model proposals remain inactive until you review them.
+3. Open **Shape the next task**. Set the task type, audience and stage that apply. Preview why a preference is included or excluded.
+4. Select **Compare actual answers**. The same model answers the same task twice with the same evidence policy and temporary requirements; one arm receives applicable saved preferences. A/B labels and call order are randomized.
+5. Choose A, B, tie or neither. Report correctness separately. Voting reveals the mapping and records an experience report; it changes no factual conclusion or active rule.
 
-Existing capabilities remain available: open-text preferences, project terminology, stated goals, writing observations, optional model-assisted proposals, and experimental historical next-request retrieval. The latter still has weak English paraphrase coverage; it is not the new habit learner.
+## What you can inspect
 
-## Use the result with your host
+**Learning beyond literal phrases.** The optional semantic path can interpret indirect feedback. Every proposal retains selected-source quotes and its conditions. Importing or refreshing alone never sends data to a model. The offline cue learner remains available, with its earlier misses documented.
 
-Codex and Cursor can use the included MCP configuration helpers or pre-invocation wrapper. `build_context.py` produces scoped messages for your own model client, including DeepSeek-style APIs. The package sends no provider request on its own.
+**Preferences with a place and time.** Scope, task type, audience, stage, expiry, omissions and temporary controls determine which rules apply. Missing conditions do not match; equally specific conflicting typed preferences are left out. Arbitrary free-text conflicts still need your review.
 
-v0.6.0 adds [actual model runs and answer review](docs/model-checks.en.md). The earlier provider timeouts remain recorded; the tested Mac connection now works through its existing loopback system proxy. Read the [complete answer and review record](docs/model-results-v0.6.0.json), including the original scope-overstatement failure. Equal baseline results are not evidence that the policy improved accuracy.
+**Actual answers alongside prompt previews.** Both views use the same resolver. Private comparisons retain model/client metadata and exact preference versions. Per-arm metadata is hidden before reveal. A failed, paused or stale request saves no partial pair.
 
-## Go deeper
+**Feedback with an honest boundary.** Preference votes, reported correctness and prepared-plan ratings are separate. Revealing first marks later votes as unblinded. A corrected preference inherits no old score. No model weights are trained, and a good rating is not treated as evidence that a claim is true.
 
-- [Tutorial](docs/tutorial.en.md) / [中文教程](docs/tutorial.zh-CN.md): download, workspace, review, temporary choices, feedback, and deletion.
-- [Independent judgment](docs/independent-judgment.en.md): evidence, justified corrections, counterexamples, and the limits of prompt safeguards.
-- [Automatic learning](docs/automatic-learning.en.md): selected feeds, evidence, conflicts, restart, and errors.
-- [Host integration](docs/host-integration.md): Codex, Cursor, model context, and the [25 tools](docs/tools.en.md).
-- [Conversation guide](docs/conversation-guide.en.md): JSON/JSONL imports, open-text proposals, portrait, and historical forecasts.
-- [Privacy](docs/privacy-and-memory-control.md), [research](docs/research.en.md), and [20 practical questions](docs/faq.en.md).
+**Evidence before agreement.** User explanations and diagnoses remain hypotheses. Both arms carry the same requirements to check evidence, consider counterexamples, distinguish unknowns and revise conclusions for evidence or stronger reasoning. These safeguards do not establish that model sycophancy has been eliminated. [Read the policy and limits](docs/independent-judgment.en.md).
 
-Profiles stay in a private SQLite store outside the package. Pause, inspect, correct, forget, and reset are available. The workspace is bilingual, and the local runtime uses the Python standard library and native browser assets.
+## Keep control of the profile
 
-[Apache-2.0](LICENSE) · Built by [KarmenLoop](https://karmenloop.com) · [Support](SUPPORT.md) · [Security](SECURITY.md)
+Profiles and up to 20 private response pairs stay in a dedicated SQLite root outside the package. Pause hides ordinary evidence and answers and discards stale in-flight results. Forgetting source evidence removes dependent rules, plans, answers and feedback; reset clears profile content and ends paused. Provider history, terminal captures and external backups have their own retention boundaries. [Storage and deletion](docs/privacy-and-memory-control.md).
 
-Historical overviews: [v0.2.0](docs/overview-v0.2.0.en.md), [v0.3.0 intermediate source](docs/overview-v0.3.0.en.md), [v0.4.0](docs/overview-v0.4.0.en.md).
+A selected-file watcher, open-text preferences, stated goals, writing observations and experimental historical follow-up retrieval remain available. The watcher follows one authorized file; it does not crawl accounts. [Feed format and recovery](docs/automatic-learning.en.md) · [Conversation tools](docs/conversation-guide.en.md).
+
+Codex and Cursor can use the existing MCP configuration helpers or invocation wrapper. `build_context.py` generates scoped context for your own client, including DeepSeek-style APIs. Native host coverage and ongoing multi-turn evaluations remain on the [roadmap](docs/roadmap.en.md); configuration is not proof of actual model use.
+
+## Check the work
+
+[Current evaluation](docs/evaluation.md) separates actual provider completion, semantic proposal review, local runtime checks and user benefit. The earlier unseen lexical result of **1/8** and earlier provider failures remain recorded. The v0.7.0 semantic cases are author-created synthetic acceptance data, not a new independent generalization score.
+
+- [Semantic workflow](docs/semantic-learning.en.md) / [中文](docs/semantic-learning.zh-CN.md): setup, selected evidence, review, conditions, actual answers and deletion.
+- [Offline tutorial](docs/tutorial.en.md), [host integration](docs/host-integration.md) and [30-tool reference](docs/tools.en.md).
+- [Model checks](docs/model-checks.en.md), [research](docs/research.en.md) and [20 practical questions](docs/faq.en.md).
+
+[Apache-2.0](LICENSE) · [KarmenLoop](https://karmenloop.com) · [Support](SUPPORT.md) · [Security](SECURITY.md)
+
+Historical overviews: [v0.2.0](docs/overview-v0.2.0.en.md), [v0.3.0](docs/overview-v0.3.0.en.md), [v0.4.0](docs/overview-v0.4.0.en.md), [v0.6.0](docs/overview-v0.6.0.en.md).

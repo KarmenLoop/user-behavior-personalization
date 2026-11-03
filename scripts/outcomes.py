@@ -41,6 +41,9 @@ def record_outcome(profile, values):
 
 
 def forget_plans(profile, plan_ids):
+    from comparisons import forget_comparisons
+    plan_ids = set(plan_ids)
+    forget_comparisons(profile,[cid for cid,row in profile.get('response_comparisons',{}).items() if row['plan_id'] in plan_ids])
     plans, ratings = profile.setdefault('prepared_plans', {}), profile.setdefault('plan_outcomes', {})
     for pid in plan_ids:
         plans.pop(pid, None)

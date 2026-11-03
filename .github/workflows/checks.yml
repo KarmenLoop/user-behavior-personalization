@@ -23,4 +23,6 @@ jobs:
           python-version: '3.12'
       - run: python -B scripts/check_package.py
       - run: python -B -m unittest discover -s tests -v
+      - run: node --check web/app.js
+      - run: node --test tests/test_workspace_ui.cjs
       - run: python -B scripts/check_publication.py

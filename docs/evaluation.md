@@ -1,8 +1,20 @@
-# Evaluation — v0.6.0
+# Evaluation — v0.7.0
 
-Current package: v0.6.0. The v0.5.0 recognition measurements below are unchanged.
+Current package: v0.7.0. The v0.5.0 recognition measurements below are unchanged.
 
 [English](evaluation.md) · [中文](evaluation.zh-CN.md)
+
+
+## v0.7.0: semantic proposals and actual paired answers
+
+The optional model workflow completed **12/12** author-created synthetic requests. Six preference cases produced pending proposals; six temporary, quoted, reported, agreement-pressure, negated or fact-only controls produced none. Every retained proposal passed exact authored-quote and selected-source checks; no rule was automatically confirmed. This is observed proposal presence, **not independently graded semantic accuracy or a real-user benefit study**. [Read the inputs, outputs and execution metadata](semantic-results-v0.7.0.json).
+
+The first strict event-parser run accepted 0/12 because it rejected the client's exact fail-closed code-mode-host-disabled notice. That failure is retained. A separate inherited-pipe diagnostic exposed a 14.11-second return at a 1-second deadline; the nonblocking fix returned in 1.01 seconds and keeps parent reaping separate from pipe EOF.
+
+Actual paired inference then ran through both browser and CLI paths. In a synthetic empty-list debugging task, the personalized answer put the smallest failing input first and supplied a verification command; the baseline described the error first. Coordinator-run checks verified the supplied functions on normal and empty input and executed one standalone test command. These narrow checks establish this example, not general correctness or preference benefit. A synthetic tie vote tested persistent reveal and distinct correctness fields; it is not a real-user assessment. Current screenshots show the pre-vote state.
+
+Conditions, selected-source deletion, in-flight pause/cancellation and private answer deletion are separate runtime checks. Native Cursor sessions, DeepSeek provider calls and a controlled real-user effectiveness study remain unclaimed. [Use the complete workflow](semantic-learning.en.md) and [inspect the roadmap](roadmap.en.md).
+
 
 Current real-response evidence and replay instructions: [v0.6.0 model checks](model-checks.en.md). Historical recognition and timeout records below are unchanged.
 

@@ -12,6 +12,8 @@ from urllib.parse import urlsplit
 from host import dispatch, load
 from host_support import Database, Problem, identifier, private_root
 from learning import DIMENSIONS, STATEMENTS
+from conditions import CONDITION_VALUES
+from model_jobs import ModelJobs
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = {'/': ('index.html', 'text/html; charset=utf-8'),
@@ -23,6 +25,8 @@ ALLOWED_TOOLS = frozenset({
     'profile_correct', 'profile_forget', 'profile_forget_conversation',
     'profile_forget_messages', 'profile_pause', 'profile_plan',
     'profile_plan_prepare', 'profile_plan_forget', 'profile_outcome', 'profile_outcome_summary',
+    'profile_comparison_list', 'profile_comparison_read', 'profile_comparison_reveal',
+    'profile_comparison_vote', 'profile_comparison_forget',
 })
 MAX_BODY = 1_000_000
 
@@ -41,6 +45,9 @@ def bootstrap(args):
         return {'version': (ROOT / 'VERSION').read_text().strip(),
                 'subject_id': args.subject, 'revision': profile['revision'],
                 'paused': profile['paused'], 'conversation_import_enabled': args.enable_conversations,
+                'model_enabled':getattr(args,'enable_models',False),
+                'configured_model':getattr(args,'model',None) if getattr(args,'enable_models',False) else None,
+                'condition_values':CONDITION_VALUES,
                 'contexts': contexts, 'rules': rules, 'dimensions': DIMENSIONS, 'statements': STATEMENTS,
                 'sources': sorted(sources, key=lambda row: (row['at'], row['key']), reverse=True)}
     finally:
@@ -98,6 +105,11 @@ class WorkspaceHandler(BaseHTTPRequestHandler):
                 self.reply(200, bootstrap(self.server.args))
             except (Problem, OSError, ValueError, sqlite3.Error) as error:
                 self.reject(getattr(error, 'code', 'STORAGE_ERROR'), str(error), 400)
+        elif self.path.startswith('/api/model-jobs/') and '?' not in self.path:
+            try:
+                self.reply(200,self.server.jobs.read(self.path.removeprefix('/api/model-jobs/')))
+            except Problem as error:
+                self.reject(error.code,str(error),404 if error.code=='MODEL_JOB_MISSING' else 400)
         elif self.path in ASSETS:
             name, mime = ASSETS[self.path]
             body = (ROOT / 'web' / name).read_bytes()
@@ -110,7 +122,7 @@ class WorkspaceHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         if not self.boundary(api=True):
             return
-        if self.path != '/api/call':
+        if self.path not in ('/api/call','/api/model-jobs'):
             self.reject('NOT_FOUND', 'This workspace route does not exist.', 404)
             return
         lengths = self.headers.get_all('Content-Length') or []
@@ -130,6 +142,9 @@ class WorkspaceHandler(BaseHTTPRequestHandler):
             if len(raw) != length:
                 raise ValueError('The request body was incomplete.')
             value = json.loads(raw)
+            if self.path=='/api/model-jobs':
+                self.reply(202,self.server.jobs.submit(value))
+                return
             if not isinstance(value, dict) or set(value) != {'name', 'arguments'}:
                 raise ValueError('Provide a tool name and its arguments only.')
             if not isinstance(value['name'], str) or value['name'] not in ALLOWED_TOOLS:
@@ -152,10 +167,20 @@ class WorkspaceHandler(BaseHTTPRequestHandler):
 def make_server(args):
     identifier(args.subject)
     args.root = private_root(args.root)
-    server = ThreadingHTTPServer(('127.0.0.1', args.port), WorkspaceHandler)
+    if getattr(args,'enable_models',False):
+        if not isinstance(getattr(args,'model',None),str) or not args.model.strip():
+            raise Problem('MODEL_REQUIRED','Use --model with --enable-models.')
+        if type(getattr(args,'model_timeout',90)) is not int or not 1<=getattr(args,'model_timeout',90)<=300:
+            raise Problem('INVALID_TIMEOUT','Use a model deadline from 1 to 300 seconds.')
+    class LocalServer(ThreadingHTTPServer):
+        def server_close(self):
+            self.jobs.close()
+            super().server_close()
+    server = LocalServer(('127.0.0.1', args.port), WorkspaceHandler)
     server.daemon_threads = True
     server.args = args
     server.token = secrets.token_urlsafe(32)
+    server.jobs = ModelJobs(args)
     return server
 
 
@@ -164,6 +189,10 @@ def main():
     parser.add_argument('--root', required=True)
     parser.add_argument('--subject', required=True)
     parser.add_argument('--enable-conversations', action='store_true')
+    parser.add_argument('--enable-models',action='store_true',help='Allow explicitly selected excerpts and tasks to be sent to the configured Codex account.')
+    parser.add_argument('--model',help='A model available to the signed-in Codex account; required with --enable-models.')
+    parser.add_argument('--system-proxy',action='store_true',help='Opt into the existing macOS loopback proxy for model child processes.')
+    parser.add_argument('--model-timeout',type=int,default=90)
     parser.add_argument('--port', type=int, default=0)
     args = parser.parse_args()
     if not 0 <= args.port <= 65535:

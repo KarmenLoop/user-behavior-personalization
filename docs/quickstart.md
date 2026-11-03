@@ -1,8 +1,8 @@
-# Quick start — v0.6.0
+# Quick start — v0.7.0
 
 [English](quickstart.md) · [中文](quickstart.zh-CN.md)
 
-Download and verify [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0), extract it, and use Python 3.11+ from that directory.
+Download and verify [v0.7.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.7.0), extract it, and use Python 3.11+ from that directory.
 
 ```sh
 python3 -B scripts/check_package.py

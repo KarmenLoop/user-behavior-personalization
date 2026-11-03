@@ -1,4 +1,4 @@
-# 结构化反馈架构 — v0.6.0
+# 结构化反馈架构 — v0.7.0
 
 [English](structured-architecture.en.md) · [中文](structured-architecture.zh-CN.md)
 

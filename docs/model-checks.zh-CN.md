@@ -1,4 +1,4 @@
-# 验收模型的实际回答 — v0.6.0
+# 验收模型的实际回答 — v0.7.0
 
 [English](model-checks.en.md) · [中文](model-checks.zh-CN.md)
 
@@ -19,7 +19,7 @@
 
 ## 下载并检查安装包
 
-从 [v0.6.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0) 下载 ZIP 和 `SHA256SUMS.txt`，核对 SHA-256 后解压，在该目录使用 Python 3.11+。档案和偏好的操作见[工作台教程](tutorial.zh-CN.md)。
+从 [v0.6.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.7.0) 下载 ZIP 和 `SHA256SUMS.txt`，核对 SHA-256 后解压，在该目录使用 Python 3.11+。档案和偏好的操作见[工作台教程](tutorial.zh-CN.md)。
 
 ```sh
 python3 -B scripts/check_package.py

@@ -1,4 +1,4 @@
-# Research and design choices — v0.6.0
+# Research and design choices — v0.7.0
 
 [English](research.en.md) · [中文](research.zh-CN.md)
 

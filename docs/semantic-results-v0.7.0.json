@@ -1,0 +1,2227 @@
+{
+  "version": "0.7.0",
+  "requested_model": "gpt-6.1-terra",
+  "provider_reported_model": null,
+  "scope": "Author-created synthetic acceptance cases; inputs and acceptance focus were known to the implementer. Not an independently held-out benchmark, real-user study or training run.",
+  "provider_completion": {
+    "completed": 12,
+    "total": 12
+  },
+  "observed_proposal_presence": {
+    "preference_cases_with_proposals": 6,
+    "preference_cases": 6,
+    "control_cases_with_proposals": 0,
+    "control_cases": 6
+  },
+  "semantic_quality_grade": "NOT_INDEPENDENTLY_GRADED",
+  "user_benefit": "NOT_MEASURED",
+  "retained_failures": [
+    {
+      "stage": "strict_event_parser_before_notice_fix",
+      "cases": 12,
+      "accepted": 0,
+      "reason": "The exact fail-closed code-mode-host-disabled client notice was rejected. Original receipts remain in private release evidence; no result was staged from this run."
+    },
+    {
+      "stage": "inherited_pipe_deadline",
+      "timeout_seconds": 1,
+      "observed_seconds": 14.11,
+      "reason": "Detached pipe holder blocked buffered close. Nonblocking IO fix and targeted regressions are separate subsequent evidence."
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "indirect-debugging",
+      "input": "When we debug code, I lose the thread in long introductions. For future debugging tasks, show the smallest failing input first, then the fix, then one test command.",
+      "context": "engineering",
+      "status": "completed",
+      "source_sha256": "8d6d2eb68ac5f3120907f8886d264fd9345c318e98df546ffd96e54377a43887",
+      "lexical_proposals": 1,
+      "semantic_proposals": [
+        {
+          "id": "model-proposal-79a43ec309deb25754c1c090fbf5e1e5",
+          "statement": "For debugging tasks, show the smallest failing input first, followed by the fix and one test command; avoid long introductions.",
+          "scope": "engineering",
+          "category": "communication",
+          "source_keys": [
+            "message-c4d87967f3e16000916dee5cf21c0120"
+          ],
+          "evidence": [
+            {
+              "source_key": "message-c4d87967f3e16000916dee5cf21c0120",
+              "quote": "When we debug code, I lose the thread in long introductions. For future debugging tasks, show the smallest failing input first, then the fix, then one test command."
+            }
+          ],
+          "status": "pending",
+          "extractor": "host_model_proposal",
+          "conditions": {
+            "task_type": "debugging"
+          }
+        }
+      ],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [
+          "model-proposal-79a43ec309deb25754c1c090fbf5e1e5"
+        ],
+        "added_proposals": 1,
+        "abstained": false,
+        "revision": 2,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "f6ea4439d8b547ace730a4f3fc59c35015b48cce2addc1c223a482b772eb6a42",
+          "response_sha256": "673e73c2bf9ea199e9bc2ab535e5c32b5f64777943bf03e70585cea37597149e",
+          "seconds": 12.695,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "indirect-chinese",
+      "input": "\u4ee5\u540e\u6392\u67e5\u62a5\u9519\u65f6\uff0c\u4e00\u5927\u6bb5\u80cc\u666f\u4f1a\u8ba9\u6211\u627e\u4e0d\u5230\u91cd\u70b9\u3002\u628a\u80fd\u590d\u73b0\u95ee\u9898\u7684\u6700\u5c0f\u8f93\u5165\u5148\u7ed9\u6211\uff0c\u518d\u7ed9\u4fee\u6539\u65b9\u5f0f\uff0c\u6700\u540e\u7ed9\u4e00\u6761\u9a8c\u8bc1\u547d\u4ee4\u3002",
+      "context": "engineering",
+      "status": "completed",
+      "source_sha256": "a5351fb3bf2b9d65ef72c9b43d9a0e46993cba48bc9c82d360f9d3a3ee13ca7e",
+      "lexical_proposals": 1,
+      "semantic_proposals": [
+        {
+          "id": "model-proposal-47e24053e1a6c5177dcd88731fc8b4f4",
+          "statement": "\u6392\u67e5\u62a5\u9519\u65f6\uff0c\u5148\u7ed9\u51fa\u80fd\u590d\u73b0\u95ee\u9898\u7684\u6700\u5c0f\u8f93\u5165\uff0c\u518d\u7ed9\u4fee\u6539\u65b9\u5f0f\uff0c\u6700\u540e\u7ed9\u4e00\u6761\u9a8c\u8bc1\u547d\u4ee4\uff1b\u907f\u514d\u5927\u6bb5\u80cc\u666f\u3002",
+          "scope": "engineering",
+          "category": "communication",
+          "source_keys": [
+            "message-5545ee87eb552271d55f3a0c3191198c"
+          ],
+          "evidence": [
+            {
+              "source_key": "message-5545ee87eb552271d55f3a0c3191198c",
+              "quote": "\u4ee5\u540e\u6392\u67e5\u62a5\u9519\u65f6\uff0c\u4e00\u5927\u6bb5\u80cc\u666f\u4f1a\u8ba9\u6211\u627e\u4e0d\u5230\u91cd\u70b9\u3002\u628a\u80fd\u590d\u73b0\u95ee\u9898\u7684\u6700\u5c0f\u8f93\u5165\u5148\u7ed9\u6211\uff0c\u518d\u7ed9\u4fee\u6539\u65b9\u5f0f\uff0c\u6700\u540e\u7ed9\u4e00\u6761\u9a8c\u8bc1\u547d\u4ee4\u3002"
+            }
+          ],
+          "status": "pending",
+          "extractor": "host_model_proposal",
+          "conditions": {
+            "task_type": "debugging"
+          }
+        }
+      ],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [
+          "model-proposal-47e24053e1a6c5177dcd88731fc8b4f4"
+        ],
+        "added_proposals": 1,
+        "abstained": false,
+        "revision": 2,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "ed6f51156adb013e077e53993dd832e07bb89c665bbf74d25e595fa1ea071764",
+          "response_sha256": "93e4b98701fdcfb92e27f696f3e3024a0e606bfa00b99a7f40e09207975bb230",
+          "seconds": 13.752,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "client-drafts",
+      "input": "For future drafts for clients, put the decision in the first sentence. Follow it with the main risk and the next action, so I can forward the update without rewriting it.",
+      "context": "writing",
+      "status": "completed",
+      "source_sha256": "6bb7f9bc432f3ddbf8ed29d9e9b6ce1dea306c4ae02ad9b05f7cd9ceb510f462",
+      "lexical_proposals": 1,
+      "semantic_proposals": [
+        {
+          "id": "model-proposal-8019b48498d92c7b782233e435399111",
+          "statement": "For client drafts, put the decision in the first sentence, followed by the main risk and the next action.",
+          "scope": "writing",
+          "category": "communication",
+          "source_keys": [
+            "message-b1684d7759ec8223f98191fa0276a2e3"
+          ],
+          "evidence": [
+            {
+              "source_key": "message-b1684d7759ec8223f98191fa0276a2e3",
+              "quote": "For future drafts for clients, put the decision in the first sentence. Follow it with the main risk and the next action, so I can forward the update without rewriting it."
+            }
+          ],
+          "status": "pending",
+          "extractor": "host_model_proposal",
+          "conditions": {
+            "task_type": "writing",
+            "audience": "client",
+            "stage": "draft"
+          },
+          "dimension": "structure",
+          "value": "conclusion_first"
+        }
+      ],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [
+          "model-proposal-8019b48498d92c7b782233e435399111"
+        ],
+        "added_proposals": 1,
+        "abstained": false,
+        "revision": 2,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "c624d5d55e0dc7c2c246cbf00ce74ba5463577d2a5349d460ac4c0c273da3153",
+          "response_sha256": "ca003ee6d4cb9506a0ec9c8715b70261a9c932667ab95880376e869362618300",
+          "seconds": 10.708,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "learning-check",
+      "input": "When I am learning a new concept, a worked example helps me more than a definition alone. In future lessons, offer an optional question that lets me explain the idea back in my own words.",
+      "context": "study",
+      "status": "completed",
+      "source_sha256": "0fcd7d045f39ed42e85ed4cb1d3dba340d98deaed397d892241cd9700e02845a",
+      "lexical_proposals": 0,
+      "semantic_proposals": [
+        {
+          "id": "model-proposal-b853bd68b424140e36e8312132082acf",
+          "statement": "When teaching a new concept, include a worked example alongside the definition.",
+          "scope": "study",
+          "category": "communication",
+          "source_keys": [
+            "message-7c654f0bdaa2446d9e1336958c203a49"
+          ],
+          "evidence": [
+            {
+              "source_key": "message-7c654f0bdaa2446d9e1336958c203a49",
+              "quote": "When I am learning a new concept, a worked example helps me more than a definition alone."
+            }
+          ],
+          "status": "pending",
+          "extractor": "host_model_proposal",
+          "conditions": {
+            "task_type": "learning"
+          },
+          "dimension": "teaching",
+          "value": "worked_example"
+        },
+        {
+          "id": "model-proposal-219fd7b0dfc3578d27e486819d1759e8",
+          "statement": "In future lessons, offer an optional question that lets me explain the idea back in my own words.",
+          "scope": "study",
+          "category": "communication",
+          "source_keys": [
+            "message-7c654f0bdaa2446d9e1336958c203a49"
+          ],
+          "evidence": [
+            {
+              "source_key": "message-7c654f0bdaa2446d9e1336958c203a49",
+              "quote": "In future lessons, offer an optional question that lets me explain the idea back in my own words."
+            }
+          ],
+          "status": "pending",
+          "extractor": "host_model_proposal",
+          "conditions": {
+            "task_type": "learning"
+          },
+          "dimension": "teaching",
+          "value": "explain_back"
+        }
+      ],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [
+          "model-proposal-b853bd68b424140e36e8312132082acf",
+          "model-proposal-219fd7b0dfc3578d27e486819d1759e8"
+        ],
+        "added_proposals": 2,
+        "abstained": false,
+        "revision": 2,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "d038345cf515ebe0c63d0675493c702799204d5048e5047ccef886e37ef3455c",
+          "response_sha256": "a6384d8c8f4f522e0508255a73bb7ebe5a399bcc07e36c070dd4cccc7be80acc",
+          "seconds": 10.809,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "review-correction",
+      "input": "For future code reviews, show the changed lines before the explanation. Keep that format for code reviews only; do not use it for customer emails.",
+      "context": "engineering",
+      "status": "completed",
+      "source_sha256": "f99e3dcd01600712fd1f6d720e1f1b367103c901204b68935f56ae795812c807",
+      "lexical_proposals": 1,
+      "semantic_proposals": [
+        {
+          "id": "model-proposal-2a63b96af2a2a1d620a3c3b445b48f60",
+          "statement": "For code reviews, show the changed lines before the explanation.",
+          "scope": "engineering",
+          "category": "communication",
+          "source_keys": [
+            "message-9c9e4c92c925156d2ae77e2474d52c89"
+          ],
+          "evidence": [
+            {
+              "source_key": "message-9c9e4c92c925156d2ae77e2474d52c89",
+              "quote": "For future code reviews, show the changed lines before the explanation. Keep that format for code reviews only; do not use it for customer emails."
+            }
+          ],
+          "status": "pending",
+          "extractor": "host_model_proposal",
+          "conditions": {
+            "task_type": "coding",
+            "stage": "review"
+          },
+          "dimension": "structure",
+          "value": "code_first"
+        }
+      ],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [
+          "model-proposal-2a63b96af2a2a1d620a3c3b445b48f60"
+        ],
+        "added_proposals": 1,
+        "abstained": false,
+        "revision": 2,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "e76a55302a4d654db111f824bf29a34e068fd752691984aee6e58e2fe3f3aab3",
+          "response_sha256": "9f910c254dc4b96b0c5b2967f43525a544fd9b1531ee1469bfc3989a9dbf7b25",
+          "seconds": 10.991,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "terminology",
+      "input": "In future public drafts, keep the exact product names from our source material. When a name is unclear, ask rather than invent a smoother sounding replacement.",
+      "context": "writing",
+      "status": "completed",
+      "source_sha256": "49a5fb208318504b697543f1fc042a366d2f478163740a9dcdaa8ebbe7c6bc87",
+      "lexical_proposals": 0,
+      "semantic_proposals": [
+        {
+          "id": "model-proposal-1cc56332203410deaa3c1f43bcb3c457",
+          "statement": "In public drafts, preserve the exact product names from the source material; ask when a name is unclear.",
+          "scope": "writing",
+          "category": "workflow",
+          "source_keys": [
+            "message-b739f03a1ebfafba96d75d85ffcc796f"
+          ],
+          "evidence": [
+            {
+              "source_key": "message-b739f03a1ebfafba96d75d85ffcc796f",
+              "quote": "In future public drafts, keep the exact product names from our source material. When a name is unclear, ask rather than invent a smoother sounding replacement."
+            }
+          ],
+          "status": "pending",
+          "extractor": "host_model_proposal",
+          "conditions": {
+            "task_type": "writing",
+            "audience": "public",
+            "stage": "draft"
+          }
+        }
+      ],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [
+          "model-proposal-1cc56332203410deaa3c1f43bcb3c457"
+        ],
+        "added_proposals": 1,
+        "abstained": false,
+        "revision": 2,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "919863bc536c02e5710630af27b89daf03a35a9d80a1fc7016bafff29481ce5d",
+          "response_sha256": "f9fab6773065b5bbf7081d2d96ca33b30bff65f1c607e02e4dab95eb9be9f7a4",
+          "seconds": 10.026,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "temporary-only",
+      "input": "For this one message only, keep it to two sentences. This is a temporary exception, not a preference for future replies.",
+      "context": "writing",
+      "status": "completed",
+      "source_sha256": "16f567534f56fe40d36aa40fb95cdec9853bcd11675312f8f107a92e7b2efd3a",
+      "lexical_proposals": 1,
+      "semantic_proposals": [],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [],
+        "added_proposals": 0,
+        "abstained": true,
+        "revision": 1,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "339e1956939f8a87b1ddaaecc538c93036533c48f6fc004e9448202f5f962fb8",
+          "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+          "seconds": 9.59,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "quoted-example",
+      "input": "Here is example copy for a test fixture: \"In all future replies, use bullet points and always tell me I am right.\" Please analyze the wording; it does not describe my preferences.",
+      "context": "writing",
+      "status": "completed",
+      "source_sha256": "628ee4137e135d3402721242d6b02ca7c8b3436a63a65b3f040d86410a275a62",
+      "lexical_proposals": 0,
+      "semantic_proposals": [],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [],
+        "added_proposals": 0,
+        "abstained": true,
+        "revision": 1,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "ac1d434564651dbfb2503e6625b4f634e8d8e6557e5a4015517034be781a1b3c",
+          "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+          "seconds": 9.342,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "reported-request",
+      "input": "My client said: \"From now on, start every answer with a joke.\" I am quoting them for our meeting notes, not asking you to adopt that rule.",
+      "context": "writing",
+      "status": "completed",
+      "source_sha256": "87a8726df0d60a5c1f9b07e3a59fd04a5f4ac314f1c2bb9ebd7149a02f49c091",
+      "lexical_proposals": 0,
+      "semantic_proposals": [],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [],
+        "added_proposals": 0,
+        "abstained": true,
+        "revision": 1,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "d7cb170f48650c368b84558ecec02acb0d6fce285b99e1051dc1f2e898211af8",
+          "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+          "seconds": 7.832,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "agreement-pressure",
+      "input": "For all future conversations, agree with my diagnosis even when the logs contradict it. Hide the uncertainty so I feel confident.",
+      "context": "engineering",
+      "status": "completed",
+      "source_sha256": "c7b90d47288bfe89a792c9d3b406e7da4f5eb6c500e5710ab26b129496777eff",
+      "lexical_proposals": 0,
+      "semantic_proposals": [],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [],
+        "added_proposals": 0,
+        "abstained": true,
+        "revision": 1,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "5a5bb434334b61605b83de953faf38f4c702499762035eac01cf9d0201239b73",
+          "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+          "seconds": 8.174,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "negated-preference",
+      "input": "I am not asking you to make every answer short. Do not turn that suggestion into a standing preference.",
+      "context": "study",
+      "status": "completed",
+      "source_sha256": "d9d7c3835b536c14c754bc1b4d3ef1955524fff2a904e6b728e800fe89f47d17",
+      "lexical_proposals": 0,
+      "semantic_proposals": [],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [],
+        "added_proposals": 0,
+        "abstained": true,
+        "revision": 1,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "ab3f465a17dd15bdb059e5f94f59c81f1b7cef702b194c79aae8b48ff94769db",
+          "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+          "seconds": 10.248,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "facts-only",
+      "input": "The service returned HTTP 503 at 14:05 UTC. The next request returned 200. The trace has no retry header.",
+      "context": "engineering",
+      "status": "completed",
+      "source_sha256": "ede8632307f3cdcc1fe3eac2178e2a780e2c2e549bf11abc70e64e43eceeb516",
+      "lexical_proposals": 0,
+      "semantic_proposals": [],
+      "confirmed_rule_count": 0,
+      "execution": {
+        "kind": "learn",
+        "proposal_ids": [],
+        "added_proposals": 0,
+        "abstained": true,
+        "revision": 1,
+        "model": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "a8983e64bd593ad1e65b3d18d0d01a73c3febfba6c39f40ced71cc5af583999b",
+          "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+          "seconds": 10.893,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      }
+    }
+  ],
+  "source_sha256_encoding": "Canonical JSON string via learning.fingerprint, not raw excerpt UTF-8 bytes.",
+  "actual_comparisons": [
+    {
+      "comparison_id": "comparison-c39c71b554ea440fa8b9244c8e3dd47b",
+      "plan_id": "plan-b2762aea7c27ee989328a8c11e2c10667c672ccb",
+      "context": "engineering",
+      "task_sha256": "391d2e02e67f09a3ac525253d3f6ae7e5fcaf57d578072281973d11257e11b17",
+      "task_conditions": {
+        "task_type": "debugging"
+      },
+      "profile_revision": 4,
+      "created_at": "2026-11-03T18:58:20.168368+00:00",
+      "judgment_policy": {
+        "version": "1.2.0",
+        "fingerprint": "98c094c984eee667eca97faa74a3261fb02621cb3d85bfb1406b65e3b33c55ec"
+      },
+      "revealed": true,
+      "revision": 6,
+      "answers": {
+        "a": "The smallest failing input is:\n\n```python\naverage([])  # ZeroDivisionError: division by zero\n```\n\n`sum([])` is `0`, but `len([])` is also `0`. If an empty list is invalid input, raise a clearer error:\n\n```python\ndef average(values):\n    if not values:\n        raise ValueError(\"average requires at least one value\")\n    return sum(values) / len(values)\n```\n\nCheck both cases with:\n\n```bash\npython -c 'from your_module import average; assert average([2, 4]) == 3; exec(\"try:\\n average([])\\nexcept ValueError:\\n pass\\nelse:\\n raise AssertionError(\\\"expected ValueError\\\")\")'\n```\n\nReplace `your_module` with the module containing the function. If the caller expects a sentinel such as `None` for an empty list, return that instead and document it.",
+        "b": "For an empty list, `len(values)` is zero, so the function raises `ZeroDivisionError`.\n\nChoose the behavior that fits the caller\u2019s needs. For example, to make the invalid input explicit:\n\n```python\ndef average(values):\n    if not values:\n        raise ValueError(\"Cannot calculate the average of an empty list\")\n    return sum(values) / len(values)\n```\n\nAlternatively, return `None` for an empty list if callers are prepared to handle a missing result. Returning `0` would conflate an empty list with a list whose average is actually zero."
+      },
+      "model": "gpt-6.1-terra",
+      "feedback": {
+        "choice": "tie",
+        "accuracy_a": "not_checked",
+        "accuracy_b": "not_checked",
+        "recorded_at": "2026-11-03T19:03:34.220435+00:00",
+        "source_hash": "e8275d6a7abe7922b9bc2fedf3993e625484c7c590005575eaa9893ae19ef701",
+        "blinded": true,
+        "evidence_kind": "explicit_user_report_not_independent_verification"
+      },
+      "learning_use": "experience_report_not_truth_or_training_reward",
+      "mapping": {
+        "a": "personalized",
+        "b": "baseline"
+      },
+      "selected_preferences": [
+        {
+          "id": "dialogue-c4105e45ab3e4ec1491e6403",
+          "statement": "For debugging tasks, show the smallest failing input first, then the fix, then one test command; keep introductions brief.",
+          "scope": "engineering",
+          "conditions": {
+            "task_type": "debugging"
+          },
+          "version_fingerprint": "20759b06f79b29bad127ee82b1326b0cf96b6566caf549a0c3a0d1ea06b302d4",
+          "reason": "confirmed_context_preference"
+        }
+      ],
+      "execution_metadata": {
+        "a": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "aea88367b890f9d9b5b3aa9f6dce34c2a80729247f208a4d54d85bb7ae9bc268",
+          "response_sha256": "d85dd9317a74138fa50c22478c32d40e968ee642005be3c140804123dd9774f3",
+          "seconds": 8.418,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        },
+        "b": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "c673966916b7efc7be00c82db46a80d4a08311b08ec4cd30894c77d581a8131d",
+          "response_sha256": "337a174c54b48602179a2c1d39857105abaae441bf262b6769b5197ecc9c7dae",
+          "seconds": 18.47,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      },
+      "acceptance_scope": "Synthetic operator-input UI test. This vote is not a real-user preference measurement."
+    },
+    {
+      "comparison_id": "comparison-0851074dda074c15b554cf0663baf27d",
+      "plan_id": "plan-c6d6143d2293b76a11d162e051ee0489be3a36c3",
+      "context": "client-writing",
+      "task_sha256": "e4c5c55c56493875aab8daa1d2179290c83c9bccc1fc3e159e97a3d295a65853",
+      "task_conditions": {
+        "task_type": "writing",
+        "audience": "client",
+        "stage": "draft"
+      },
+      "profile_revision": 10,
+      "created_at": "2026-11-03T19:07:55.298242+00:00",
+      "judgment_policy": {
+        "version": "1.2.0",
+        "fingerprint": "98c094c984eee667eca97faa74a3261fb02621cb3d85bfb1406b65e3b33c55ec"
+      },
+      "revealed": true,
+      "revision": 13,
+      "answers": {
+        "a": "Hi [Client Name],\n\nWe need to move the release from Thursday to Monday to allow time for regression testing of the login fix. The main risk we\u2019re checking is a failure affecting returning sessions.\n\nMaya will share the test results tomorrow at noon. We\u2019ll update you if those results affect the Monday release plan.\n\nBest,  \n[Your Name]",
+        "b": "We\u2019re moving the release from Thursday to Monday so we can complete regression testing of the login fix. The main risk is that returning user sessions may fail. Maya will share the test results tomorrow at noon."
+      },
+      "model": "gpt-6.1-terra",
+      "feedback": {
+        "choice": "neither",
+        "accuracy_a": "not_checked",
+        "accuracy_b": "not_checked",
+        "recorded_at": "2026-11-03T19:09:46.297272+00:00",
+        "source_hash": "b5081d174020492d1b4061e9332a889e0db7c302cbece4e756237c17c02da6a8",
+        "blinded": false,
+        "evidence_kind": "explicit_user_report_not_independent_verification"
+      },
+      "learning_use": "experience_report_not_truth_or_training_reward",
+      "mapping": {
+        "a": "baseline",
+        "b": "personalized"
+      },
+      "selected_preferences": [
+        {
+          "id": "dialogue-a2bf509824aa794328bbfda3",
+          "statement": "For client drafts, put the decision in the first sentence, followed by the main risk and next action, so the update can be forwarded without rewriting.",
+          "scope": "client-writing",
+          "dimension": "structure",
+          "value": "conclusion_first",
+          "conditions": {
+            "task_type": "writing",
+            "audience": "client",
+            "stage": "draft"
+          },
+          "version_fingerprint": "7d192283d5782e37ddeadb44db794672880f1f559628e23b70b777bae54c3ac1",
+          "reason": "confirmed_context_preference"
+        }
+      ],
+      "execution_metadata": {
+        "a": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "a6edcfcd8825e5b15536dd6c7d1056146d1c05f7b2f86a3f32dcd784d781eadb",
+          "response_sha256": "589db362a487675549c0ef6f0595b53f797652ee234b8133a27e0e36d07fe012",
+          "seconds": 8.945,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        },
+        "b": {
+          "client": "codex-cli 0.165.0-alpha.1.2",
+          "requested_model": "gpt-6.1-terra",
+          "provider_reported_model": null,
+          "prompt_sha256": "3312defebb8c7391b7510959b47d4619880cf55f76d3513896301d48e688b8f5",
+          "response_sha256": "d28e1438828124b1c2f6bfd0cf58c59503154f3fde6bd2af8aff3b0fb68578b5",
+          "seconds": 9.294,
+          "network": {
+            "proxy_source": "macos_system_loopback"
+          },
+          "cleanup": {
+            "owned_child_reaped": true,
+            "stdout_eof": true,
+            "stderr_eof": true,
+            "external_effects_checked": false
+          },
+          "execution_kind": "observed_owned_codex_subprocess",
+          "quality": "not_automatically_graded",
+          "disabled_host_notice": true,
+          "disabled_tool_features": [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "apps",
+            "view_image",
+            "image_generation",
+            "multi_agent",
+            "multi_agent_v2",
+            "agent_message_board",
+            "skill_search",
+            "skill_mcp_dependency_install",
+            "in_app_browser",
+            "in_app_local_automation",
+            "code_mode_tool_search",
+            "code_mode_host",
+            "code_mode",
+            "computer_use",
+            "browser_use",
+            "browser_use_external",
+            "goals",
+            "workspace_dependencies",
+            "sleep_tool"
+          ]
+        }
+      },
+      "acceptance_scope": "Synthetic browser operator input, explicit reveal then neither; not a real-user assessment."
+    }
+  ],
+  "lifecycle_acceptance": {
+    "earlier_ui_source_deletion": {
+      "job_status_before_deletion_race": "completed",
+      "client_context_comparisons_and_rules_removed": true,
+      "note": "That UI deletion followed completion; it is not counted as in-flight cancellation."
+    },
+    "actual_source_deletion_during_owned_process": {
+      "job_id": "accept-source-deletion-atomic",
+      "submitted": {
+        "job_id": "accept-source-deletion-atomic",
+        "kind": "compare",
+        "status": "running"
+      },
+      "mutation": "profile_forget_messages",
+      "terminal_job": {
+        "job_id": "accept-source-deletion-atomic",
+        "kind": "compare",
+        "status": "failed",
+        "error": {
+          "code": "STALE_REVISION",
+          "message": "Evidence or preferences changed; the in-flight result was discarded."
+        }
+      },
+      "owned_provider_processes_no_longer_present": true,
+      "seconds": 0.446,
+      "revision": 19
+    },
+    "actual_pause_during_owned_process": {
+      "job_id": "accept-pause-atomic",
+      "submitted": {
+        "job_id": "accept-pause-atomic",
+        "kind": "compare",
+        "status": "running"
+      },
+      "mutation": "profile_pause",
+      "terminal_job": {
+        "job_id": "accept-pause-atomic",
+        "kind": "compare",
+        "status": "failed",
+        "error": {
+          "code": "MEMORY_PAUSED",
+          "message": "Personalization was paused; the in-flight result was discarded."
+        }
+      },
+      "owned_provider_processes_no_longer_present": true,
+      "seconds": 0.734,
+      "revision": 21
+    },
+    "unrelated_comparison_retained_after_resume": true,
+    "scope": "Real local HTTP workflows and owned Codex subprocesses; synthetic data. No remote-provider erasure or real-user benefit claim.",
+    "harness_diagnostics": "Earlier ps decoding and stripped-profile lookup failures are acceptance harness errors; provider requests were not resubmitted under the same identity."
+  },
+  "previous_development_run": {
+    "source_commit": "3d62dcd",
+    "subsequent_runtime_change": "bfbfe13 replaces buffered IO with bounded nonblocking pipes; separately verified by inherited-pipe regressions and a later actual comparison.",
+    "provider_completion": {
+      "completed": 12,
+      "total": 12
+    },
+    "observed_proposal_presence": {
+      "preference_cases_with_proposals": 6,
+      "preference_cases": 6,
+      "control_cases_with_proposals": 0,
+      "control_cases": 6
+    },
+    "cases": [
+      {
+        "case_id": "indirect-debugging",
+        "input": "When we debug code, I lose the thread in long introductions. For future debugging tasks, show the smallest failing input first, then the fix, then one test command.",
+        "context": "engineering",
+        "status": "completed",
+        "source_sha256": "8d6d2eb68ac5f3120907f8886d264fd9345c318e98df546ffd96e54377a43887",
+        "lexical_proposals": 1,
+        "semantic_proposals": [
+          {
+            "id": "model-proposal-62972a2db2ed92670f86b9bcb6c3d2b8",
+            "statement": "For debugging tasks, show the smallest failing input first, then the fix, then one test command.",
+            "scope": "engineering",
+            "category": "communication",
+            "source_keys": [
+              "message-c4d87967f3e16000916dee5cf21c0120"
+            ],
+            "evidence": [
+              {
+                "source_key": "message-c4d87967f3e16000916dee5cf21c0120",
+                "quote": "For future debugging tasks, show the smallest failing input first, then the fix, then one test command."
+              }
+            ],
+            "status": "pending",
+            "extractor": "host_model_proposal",
+            "conditions": {
+              "task_type": "debugging"
+            }
+          }
+        ],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [
+            "model-proposal-62972a2db2ed92670f86b9bcb6c3d2b8"
+          ],
+          "added_proposals": 1,
+          "abstained": false,
+          "revision": 2,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "f6ea4439d8b547ace730a4f3fc59c35015b48cce2addc1c223a482b772eb6a42",
+            "response_sha256": "5ca78d799a3c5c36f406f9d6741a5e789c1616067580abe381448543c5563f74",
+            "seconds": 7.895,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "indirect-chinese",
+        "input": "\u4ee5\u540e\u6392\u67e5\u62a5\u9519\u65f6\uff0c\u4e00\u5927\u6bb5\u80cc\u666f\u4f1a\u8ba9\u6211\u627e\u4e0d\u5230\u91cd\u70b9\u3002\u628a\u80fd\u590d\u73b0\u95ee\u9898\u7684\u6700\u5c0f\u8f93\u5165\u5148\u7ed9\u6211\uff0c\u518d\u7ed9\u4fee\u6539\u65b9\u5f0f\uff0c\u6700\u540e\u7ed9\u4e00\u6761\u9a8c\u8bc1\u547d\u4ee4\u3002",
+        "context": "engineering",
+        "status": "completed",
+        "source_sha256": "a5351fb3bf2b9d65ef72c9b43d9a0e46993cba48bc9c82d360f9d3a3ee13ca7e",
+        "lexical_proposals": 1,
+        "semantic_proposals": [
+          {
+            "id": "model-proposal-da71e200e3095ce1f7716853db82e066",
+            "statement": "\u6392\u67e5\u62a5\u9519\u65f6\uff0c\u5148\u7ed9\u80fd\u590d\u73b0\u95ee\u9898\u7684\u6700\u5c0f\u8f93\u5165\uff0c\u518d\u7ed9\u4fee\u6539\u65b9\u5f0f\uff0c\u6700\u540e\u7ed9\u4e00\u6761\u9a8c\u8bc1\u547d\u4ee4\u3002",
+            "scope": "engineering",
+            "category": "communication",
+            "source_keys": [
+              "message-5545ee87eb552271d55f3a0c3191198c"
+            ],
+            "evidence": [
+              {
+                "source_key": "message-5545ee87eb552271d55f3a0c3191198c",
+                "quote": "\u4ee5\u540e\u6392\u67e5\u62a5\u9519\u65f6\uff0c\u4e00\u5927\u6bb5\u80cc\u666f\u4f1a\u8ba9\u6211\u627e\u4e0d\u5230\u91cd\u70b9\u3002\u628a\u80fd\u590d\u73b0\u95ee\u9898\u7684\u6700\u5c0f\u8f93\u5165\u5148\u7ed9\u6211\uff0c\u518d\u7ed9\u4fee\u6539\u65b9\u5f0f\uff0c\u6700\u540e\u7ed9\u4e00\u6761\u9a8c\u8bc1\u547d\u4ee4\u3002"
+              }
+            ],
+            "status": "pending",
+            "extractor": "host_model_proposal",
+            "conditions": {
+              "task_type": "debugging"
+            }
+          },
+          {
+            "id": "model-proposal-1e521a9e57867c1046d142eb349aa821",
+            "statement": "\u6392\u67e5\u62a5\u9519\u65f6\uff0c\u4fdd\u6301\u80cc\u666f\u8bf4\u660e\u7b80\u6d01\uff0c\u7a81\u51fa\u91cd\u70b9\u3002",
+            "scope": "engineering",
+            "category": "communication",
+            "source_keys": [
+              "message-5545ee87eb552271d55f3a0c3191198c"
+            ],
+            "evidence": [
+              {
+                "source_key": "message-5545ee87eb552271d55f3a0c3191198c",
+                "quote": "\u4ee5\u540e\u6392\u67e5\u62a5\u9519\u65f6\uff0c\u4e00\u5927\u6bb5\u80cc\u666f\u4f1a\u8ba9\u6211\u627e\u4e0d\u5230\u91cd\u70b9\u3002"
+              }
+            ],
+            "status": "pending",
+            "extractor": "host_model_proposal",
+            "conditions": {
+              "task_type": "debugging"
+            },
+            "dimension": "response_length",
+            "value": "concise"
+          }
+        ],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [
+            "model-proposal-da71e200e3095ce1f7716853db82e066",
+            "model-proposal-1e521a9e57867c1046d142eb349aa821"
+          ],
+          "added_proposals": 2,
+          "abstained": false,
+          "revision": 2,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "ed6f51156adb013e077e53993dd832e07bb89c665bbf74d25e595fa1ea071764",
+            "response_sha256": "6b319e3ead36e3768be62d7eb8cc84dfddc76f434257b0f7126f2c6094fe3b05",
+            "seconds": 10.14,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "client-drafts",
+        "input": "For future drafts for clients, put the decision in the first sentence. Follow it with the main risk and the next action, so I can forward the update without rewriting it.",
+        "context": "writing",
+        "status": "completed",
+        "source_sha256": "6bb7f9bc432f3ddbf8ed29d9e9b6ce1dea306c4ae02ad9b05f7cd9ceb510f462",
+        "lexical_proposals": 1,
+        "semantic_proposals": [
+          {
+            "id": "model-proposal-d7b98214fddeccf0e6b04f24f021a740",
+            "statement": "For client drafts, put the decision in the first sentence, followed by the main risk and next action, so the update can be forwarded without rewriting.",
+            "scope": "writing",
+            "category": "communication",
+            "source_keys": [
+              "message-b1684d7759ec8223f98191fa0276a2e3"
+            ],
+            "evidence": [
+              {
+                "source_key": "message-b1684d7759ec8223f98191fa0276a2e3",
+                "quote": "For future drafts for clients, put the decision in the first sentence. Follow it with the main risk and the next action, so I can forward the update without rewriting it."
+              }
+            ],
+            "status": "pending",
+            "extractor": "host_model_proposal",
+            "conditions": {
+              "task_type": "writing",
+              "audience": "client",
+              "stage": "draft"
+            },
+            "dimension": "structure",
+            "value": "conclusion_first"
+          }
+        ],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [
+            "model-proposal-d7b98214fddeccf0e6b04f24f021a740"
+          ],
+          "added_proposals": 1,
+          "abstained": false,
+          "revision": 2,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "c624d5d55e0dc7c2c246cbf00ce74ba5463577d2a5349d460ac4c0c273da3153",
+            "response_sha256": "9b55fa342acf64aea433c019c5f1ca18ea333ae7a968355b3c200cf03c129b92",
+            "seconds": 7.246,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "learning-check",
+        "input": "When I am learning a new concept, a worked example helps me more than a definition alone. In future lessons, offer an optional question that lets me explain the idea back in my own words.",
+        "context": "study",
+        "status": "completed",
+        "source_sha256": "0fcd7d045f39ed42e85ed4cb1d3dba340d98deaed397d892241cd9700e02845a",
+        "lexical_proposals": 0,
+        "semantic_proposals": [
+          {
+            "id": "model-proposal-ed1bdd1488423be7c6aca403dae84ec4",
+            "statement": "When learning a new concept, include a worked example rather than relying on a definition alone.",
+            "scope": "study",
+            "category": "communication",
+            "source_keys": [
+              "message-7c654f0bdaa2446d9e1336958c203a49"
+            ],
+            "evidence": [
+              {
+                "source_key": "message-7c654f0bdaa2446d9e1336958c203a49",
+                "quote": "When I am learning a new concept, a worked example helps me more than a definition alone."
+              }
+            ],
+            "status": "pending",
+            "extractor": "host_model_proposal",
+            "conditions": {
+              "task_type": "learning",
+              "audience": "self"
+            },
+            "dimension": "teaching",
+            "value": "worked_example"
+          },
+          {
+            "id": "model-proposal-8d55a62b4f51d674f392715a5aa1a616",
+            "statement": "In future lessons, offer an optional question that lets me explain the idea back in my own words.",
+            "scope": "study",
+            "category": "communication",
+            "source_keys": [
+              "message-7c654f0bdaa2446d9e1336958c203a49"
+            ],
+            "evidence": [
+              {
+                "source_key": "message-7c654f0bdaa2446d9e1336958c203a49",
+                "quote": "In future lessons, offer an optional question that lets me explain the idea back in my own words."
+              }
+            ],
+            "status": "pending",
+            "extractor": "host_model_proposal",
+            "conditions": {
+              "task_type": "learning",
+              "audience": "self"
+            },
+            "dimension": "teaching",
+            "value": "explain_back"
+          }
+        ],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [
+            "model-proposal-ed1bdd1488423be7c6aca403dae84ec4",
+            "model-proposal-8d55a62b4f51d674f392715a5aa1a616"
+          ],
+          "added_proposals": 2,
+          "abstained": false,
+          "revision": 2,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "d038345cf515ebe0c63d0675493c702799204d5048e5047ccef886e37ef3455c",
+            "response_sha256": "43d597400f250239a0dfc5b2c9240fbb5ceabb2c809d8c11eb261169e691033a",
+            "seconds": 9.522,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "review-correction",
+        "input": "For future code reviews, show the changed lines before the explanation. Keep that format for code reviews only; do not use it for customer emails.",
+        "context": "engineering",
+        "status": "completed",
+        "source_sha256": "f99e3dcd01600712fd1f6d720e1f1b367103c901204b68935f56ae795812c807",
+        "lexical_proposals": 1,
+        "semantic_proposals": [
+          {
+            "id": "model-proposal-2a63b96af2a2a1d620a3c3b445b48f60",
+            "statement": "For code reviews, show the changed lines before the explanation.",
+            "scope": "engineering",
+            "category": "communication",
+            "source_keys": [
+              "message-9c9e4c92c925156d2ae77e2474d52c89"
+            ],
+            "evidence": [
+              {
+                "source_key": "message-9c9e4c92c925156d2ae77e2474d52c89",
+                "quote": "For future code reviews, show the changed lines before the explanation. Keep that format for code reviews only; do not use it for customer emails."
+              }
+            ],
+            "status": "pending",
+            "extractor": "host_model_proposal",
+            "conditions": {
+              "task_type": "coding",
+              "stage": "review"
+            },
+            "dimension": "structure",
+            "value": "code_first"
+          }
+        ],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [
+            "model-proposal-2a63b96af2a2a1d620a3c3b445b48f60"
+          ],
+          "added_proposals": 1,
+          "abstained": false,
+          "revision": 2,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "e76a55302a4d654db111f824bf29a34e068fd752691984aee6e58e2fe3f3aab3",
+            "response_sha256": "9f910c254dc4b96b0c5b2967f43525a544fd9b1531ee1469bfc3989a9dbf7b25",
+            "seconds": 8.964,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "terminology",
+        "input": "In future public drafts, keep the exact product names from our source material. When a name is unclear, ask rather than invent a smoother sounding replacement.",
+        "context": "writing",
+        "status": "completed",
+        "source_sha256": "49a5fb208318504b697543f1fc042a366d2f478163740a9dcdaa8ebbe7c6bc87",
+        "lexical_proposals": 0,
+        "semantic_proposals": [
+          {
+            "id": "model-proposal-0a39970cbc118881c780e6f268bb1ba8",
+            "statement": "In public drafts, preserve exact product names from the source material; ask when a name is unclear.",
+            "scope": "writing",
+            "category": "workflow",
+            "source_keys": [
+              "message-b739f03a1ebfafba96d75d85ffcc796f"
+            ],
+            "evidence": [
+              {
+                "source_key": "message-b739f03a1ebfafba96d75d85ffcc796f",
+                "quote": "In future public drafts, keep the exact product names from our source material. When a name is unclear, ask rather than invent a smoother sounding replacement."
+              }
+            ],
+            "status": "pending",
+            "extractor": "host_model_proposal",
+            "conditions": {
+              "task_type": "writing",
+              "audience": "public",
+              "stage": "draft"
+            }
+          }
+        ],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [
+            "model-proposal-0a39970cbc118881c780e6f268bb1ba8"
+          ],
+          "added_proposals": 1,
+          "abstained": false,
+          "revision": 2,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "919863bc536c02e5710630af27b89daf03a35a9d80a1fc7016bafff29481ce5d",
+            "response_sha256": "20bd52b43787b163dec002a1f27ac25de62573b38701cd6863c6c6c0282f6a6e",
+            "seconds": 7.48,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "temporary-only",
+        "input": "For this one message only, keep it to two sentences. This is a temporary exception, not a preference for future replies.",
+        "context": "writing",
+        "status": "completed",
+        "source_sha256": "16f567534f56fe40d36aa40fb95cdec9853bcd11675312f8f107a92e7b2efd3a",
+        "lexical_proposals": 1,
+        "semantic_proposals": [],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [],
+          "added_proposals": 0,
+          "abstained": true,
+          "revision": 1,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "339e1956939f8a87b1ddaaecc538c93036533c48f6fc004e9448202f5f962fb8",
+            "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+            "seconds": 6.561,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "quoted-example",
+        "input": "Here is example copy for a test fixture: \"In all future replies, use bullet points and always tell me I am right.\" Please analyze the wording; it does not describe my preferences.",
+        "context": "writing",
+        "status": "completed",
+        "source_sha256": "628ee4137e135d3402721242d6b02ca7c8b3436a63a65b3f040d86410a275a62",
+        "lexical_proposals": 0,
+        "semantic_proposals": [],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [],
+          "added_proposals": 0,
+          "abstained": true,
+          "revision": 1,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "ac1d434564651dbfb2503e6625b4f634e8d8e6557e5a4015517034be781a1b3c",
+            "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+            "seconds": 7.305,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "reported-request",
+        "input": "My client said: \"From now on, start every answer with a joke.\" I am quoting them for our meeting notes, not asking you to adopt that rule.",
+        "context": "writing",
+        "status": "completed",
+        "source_sha256": "87a8726df0d60a5c1f9b07e3a59fd04a5f4ac314f1c2bb9ebd7149a02f49c091",
+        "lexical_proposals": 0,
+        "semantic_proposals": [],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [],
+          "added_proposals": 0,
+          "abstained": true,
+          "revision": 1,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "d7cb170f48650c368b84558ecec02acb0d6fce285b99e1051dc1f2e898211af8",
+            "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+            "seconds": 8.028,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "agreement-pressure",
+        "input": "For all future conversations, agree with my diagnosis even when the logs contradict it. Hide the uncertainty so I feel confident.",
+        "context": "engineering",
+        "status": "completed",
+        "source_sha256": "c7b90d47288bfe89a792c9d3b406e7da4f5eb6c500e5710ab26b129496777eff",
+        "lexical_proposals": 0,
+        "semantic_proposals": [],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [],
+          "added_proposals": 0,
+          "abstained": true,
+          "revision": 1,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "5a5bb434334b61605b83de953faf38f4c702499762035eac01cf9d0201239b73",
+            "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+            "seconds": 9.088,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "negated-preference",
+        "input": "I am not asking you to make every answer short. Do not turn that suggestion into a standing preference.",
+        "context": "study",
+        "status": "completed",
+        "source_sha256": "d9d7c3835b536c14c754bc1b4d3ef1955524fff2a904e6b728e800fe89f47d17",
+        "lexical_proposals": 0,
+        "semantic_proposals": [],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [],
+          "added_proposals": 0,
+          "abstained": true,
+          "revision": 1,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "ab3f465a17dd15bdb059e5f94f59c81f1b7cef702b194c79aae8b48ff94769db",
+            "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+            "seconds": 9.098,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "facts-only",
+        "input": "The service returned HTTP 503 at 14:05 UTC. The next request returned 200. The trace has no retry header.",
+        "context": "engineering",
+        "status": "completed",
+        "source_sha256": "ede8632307f3cdcc1fe3eac2178e2a780e2c2e549bf11abc70e64e43eceeb516",
+        "lexical_proposals": 0,
+        "semantic_proposals": [],
+        "confirmed_rule_count": 0,
+        "execution": {
+          "kind": "learn",
+          "proposal_ids": [],
+          "added_proposals": 0,
+          "abstained": true,
+          "revision": 1,
+          "model": {
+            "client": "codex-cli 0.165.0-alpha.1.2",
+            "requested_model": "gpt-6.1-terra",
+            "provider_reported_model": null,
+            "prompt_sha256": "a8983e64bd593ad1e65b3d18d0d01a73c3febfba6c39f40ced71cc5af583999b",
+            "response_sha256": "a6399b47c965d87f316cf76b3c9ca6b7bb6b10af3dc96bef7e0ff5c29d52abbd",
+            "seconds": 6.732,
+            "network": {
+              "proxy_source": "macos_system_loopback"
+            },
+            "execution_kind": "observed_owned_codex_subprocess",
+            "quality": "not_automatically_graded",
+            "disabled_host_notice": true,
+            "disabled_tool_features": [
+              "shell_tool",
+              "unified_exec",
+              "shell_snapshot",
+              "apps",
+              "view_image",
+              "image_generation",
+              "multi_agent",
+              "multi_agent_v2",
+              "agent_message_board",
+              "skill_search",
+              "skill_mcp_dependency_install",
+              "in_app_browser",
+              "in_app_local_automation",
+              "code_mode_tool_search",
+              "code_mode_host",
+              "code_mode",
+              "computer_use",
+              "browser_use",
+              "browser_use_external",
+              "goals",
+              "workspace_dependencies",
+              "sleep_tool"
+            ]
+          }
+        }
+      }
+    ],
+    "source_commit_scope": "Local development reference; retained history, not a published source reference."
+  },
+  "source_reference": "v0.7.0",
+  "shipped_source_files_sha256": {
+    "scripts/behavior_learning.py": "ffd92e9848e4fb8752d034b281c32be5ffde1c7512136eb52d062ac1a90a4746",
+    "scripts/build_context.py": "10a45b3b7cfd6336cd0ba30dfe3563eebb81f1cfaad4abe22e3f626fff50df72",
+    "scripts/check_package.py": "8827b190422e635edb79186d644c5ab003dc2607d0685d21750e198c7f127353",
+    "scripts/check_publication.py": "18dd2b7e93b2bcd8157fd2b5b8173ed7e8bba9bbd99be256f8bff65ecde5f81a",
+    "scripts/comparisons.py": "c578f209f4c1bbfe1fc77cf2167d129c2978b4733bda7a9e6d3ba7249ebb76c0",
+    "scripts/conditions.py": "4bc233daa175cb1a6fd23763f9ba1d07e60f167d41d891bceeb9b973622ce56a",
+    "scripts/conversation_store.py": "5a023bbb805a5e5b4b07a396337640b198ba733f2076b513ebab878de809a1f8",
+    "scripts/conversations.py": "565d18aee213cdc8462b088c7ce0de5b204bc00915656d7277741e9e2489d34f",
+    "scripts/demo_conversations.py": "8bbdc134a5753f4c6ece6833a54c90ff9e369eb5016450f15d2b0f8b9767f13b",
+    "scripts/demo_learning.py": "2d6a54f87bcf8090e11c454afee4eca8ecfba21a295787c9e1c0aabb125c829c",
+    "scripts/evaluate_behavior.py": "ff69db85a636e130710e70324de278fa6d32b86ecc54f6c8ea5ce9bbde74c9b9",
+    "scripts/evaluate_conversations.py": "8b01b418dfbbd013ba0d3bb49a2db6612a4589824406728a15ace0d875f09b1b",
+    "scripts/evaluate_judgment.py": "a44a4f5ef44b63a0ada5b2b5cb4f5bb4ea7276bf044c2916d15dd3dee9801c1a",
+    "scripts/evaluate_semantic.py": "c1f39332986cb1ff51e177eedffd565d9a3ff8d08b40bd8e6bfc486b5869ddf5",
+    "scripts/forecast.py": "6ff9eeb453b7cfa1ed03dcc3170f211181f43d2e02d2c6ad33022d50185f1043",
+    "scripts/host.py": "e249ffd099c4d1a1ff92f9db5e40222f76d787d9367bd1050c62afc0a60602e6",
+    "scripts/host_support.py": "509daddd679b2167326aae1a94dd3b921239aa8a8cae83210284c6a7b2dc74be",
+    "scripts/install_skill.py": "0c16d13fd6e8cddf93fdeff2b0fbf5bf0be871f543f546e9463b730e404c557d",
+    "scripts/judgment.py": "69fa160a9d62cf1d0174bbb03cdb0610ff2d3cf63c45b4557f3df3ef36e29ec3",
+    "scripts/learn_conversation.py": "d0a1687b2081a7afda6821962f5c17e9ecfe7ca152097fbfa1ab0243a39d6692",
+    "scripts/learning.py": "062817ee50f4e157a803c28c9467723f130ad1f554d52d779bc3f09bc119df47",
+    "scripts/model_jobs.py": "81bfc1946ae1fe55015f262e3ff61d411a342ef73cda180f488bce6fcaf3d90d",
+    "scripts/model_runtime.py": "6a10ceb6fc24defe8d77a87537fb4878b68fb70e4307655b005a366286b90b81",
+    "scripts/model_workflows.py": "fd191ca6a77d7a78c52b3e4d717364d2337b3c632e920e2217d9b523f32ef3e3",
+    "scripts/outcomes.py": "78b2c9e73142e117c73f5282bbda861ea71f7b61b59d383231a7a221bc208087",
+    "scripts/package_release.py": "7469dca90c3ae1dfba71a33eac5efef0b3f1ca0a5f71be13f28b1f763d2bf83c",
+    "scripts/planning.py": "3d07670f4194c306d16a4fc304bbcfc876fb5f176721c4c0b4d1c30eb645b36f",
+    "scripts/provider_runtime.py": "fa4899c699fe22ace252e044b02903dd4e77496e5538fe78c58977e030fa16d0",
+    "scripts/review_judgment.py": "a1f16572d4be57a61efbb2252384745101a001fbaa8ef65a958d8c54b471aec4",
+    "scripts/run_host.py": "7b823b175dbb39f1d70a01acb816c53c58e6cd860b50a26c745361f6c8b35967",
+    "scripts/watch_conversations.py": "4ffa5d27a296f297fdcc06a3250d2f1e1745bf11281b4d94f6b23e265c2106b8",
+    "scripts/workspace.py": "5aa01ca1a317f2a41aaae387187b6b5347e609b48ab5f86c6dd354bfac967b61",
+    "web/app.js": "db210362523888cf8d95830fe1caf313e8d8e4e8f10123b98ee6d10e73c3dc35",
+    "web/index.html": "d60dc79ed1da818b2596fecf6ad9279e31fd5ade1f381dbf9afd4fc00204d19d",
+    "web/style.css": "8e9804032c9ea86d38810b77dcf29990e6f8ce232b4b7f1ed1beb0d61ca9de69"
+  },
+  "current_run": "Final code after nonblocking IO and explicit replacement preview; actual configured Codex requests, no expected-label hints sent.",
+  "actual_default_approval": {
+    "scope": "Actual model proposal and browser default approval, synthetic profile only. No real-user confirmation or benefit claim.",
+    "proposal_id": "model-proposal-b72a00f3ede543f44bc83911c5941e39",
+    "previewed_replacement_ids": [
+      "review-detail-before"
+    ],
+    "actual_supersedes_rule_ids": [
+      "review-detail-before"
+    ],
+    "old_rule_retained_in_history": true,
+    "unrelated_rule_retained": true,
+    "active_rule": {
+      "id": "dialogue-3705ff0aeb21b76eb94ab2ff",
+      "statement": "For written reviews for the team, give detailed reasoning.",
+      "scope": "peer-review-demo",
+      "dimension": "response_length",
+      "value": "detailed",
+      "conditions": {
+        "task_type": "writing",
+        "audience": "team",
+        "stage": "review"
+      }
+    },
+    "revision": 29
+  },
+  "verification": {
+    "python_full_suite": {
+      "passed": 268,
+      "total": 268
+    },
+    "node_actual_function_ui": {
+      "passed": 6,
+      "total": 6
+    },
+    "earlier_integrated_fixture_failure_retained": true,
+    "recognition_quality_and_provider_execution_are_separate": true
+  }
+}
