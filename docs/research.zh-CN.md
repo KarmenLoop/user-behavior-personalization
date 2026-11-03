@@ -1,4 +1,4 @@
-# 研究与设计依据 — v0.5.0
+# 研究与设计依据 — v0.5.1
 
 [English](research.en.md) · [中文](research.zh-CN.md)
 
@@ -29,7 +29,7 @@
 | [Deci 与 Ryan，2000：自我决定理论](https://selfdeterminationtheory.org/SDT/documents/2000_DeciRyan_PIWhatWhy.pdf) | 涉及自主、能力与关系需要的理论框架。 | 让用户选择、跳过和更换学习方式，不以施压或依赖为优化目标。 |
 | [Microsoft HAX：谨慎适配](https://www.microsoft.com/en-us/haxtoolkit/guideline/update-and-adapt-cautiously/)与[解释行为](https://www.microsoft.com/en-us/haxtoolkit/guideline/make-clear-why-the-system-did-what-it-did/) | 人机交互指导强调谨慎调整和可理解性。 | 展示场景、反对证据和不确定性，推断偏好确认后才生效。 |
 
-这些研究和指南不能证明本产品有效。v0.5.0 未声称完成临床、教学成果或用户满意度试验。
+这些研究和指南不能证明本产品有效。v0.5.1 未声称完成临床、教学成果或用户满意度试验。
 
 ## 一个合理的教学过程
 
@@ -60,7 +60,7 @@
 
 v0.4.0 预测器独立实现词法案例检索。新的留出测试暴露了改写覆盖不足，尤其英文正例 0/6 被提出建议。初始失败、开发对照和独立新留出见[验收](evaluation.zh-CN.md)。后续需要更广独立数据和检索改进，而不是宣称读懂用户思想。
 
-## 这些原则在 v0.5.0 中的应用
+## 这些原则在 v0.5.1 中的应用
 
 重复反馈与已采用偏好分开处理，任务临时设置让用户保留例外选择。明确评价区分提示审阅与用户报告的回答使用，并绑定当时的精确规则版本。这些是参考上述交互原则后做出的工程选择，不是新的心理学发现。
 

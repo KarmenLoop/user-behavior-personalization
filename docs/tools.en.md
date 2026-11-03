@@ -1,4 +1,4 @@
-# Local tool reference — v0.5.0
+# Local tool reference — v0.5.1
 
 [English](tools.en.md) · [中文](tools.zh-CN.md)
 

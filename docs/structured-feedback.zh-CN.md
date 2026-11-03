@@ -1,4 +1,4 @@
-# 用户行为个性化 v0.5.0 结构化反馈教程
+# 用户行为个性化 v0.5.1 结构化反馈教程
 
 [English](structured-feedback.en.md) · [中文](structured-feedback.zh-CN.md)
 
@@ -6,7 +6,7 @@
 
 ## 1. 下载并检查
 
-从 [v0.5.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0) 下载 ZIP 和 `SHA256SUMS.txt`。解压前核对压缩包 SHA-256：macOS 使用 `shasum -a 256`，Linux 使用 `sha256sum`，PowerShell 使用 `Get-FileHash -Algorithm SHA256`。
+从 [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.1) 下载 ZIP 和 `SHA256SUMS.txt`。解压前核对压缩包 SHA-256：macOS 使用 `shasum -a 256`，Linux 使用 `sha256sum`，PowerShell 使用 `Get-FileHash -Algorithm SHA256`。
 
 需要 Python 3.11 或更新版本，适配器没有第三方 Python 依赖。在解压目录打开终端：
 

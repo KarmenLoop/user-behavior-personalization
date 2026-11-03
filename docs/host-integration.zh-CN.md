@@ -1,4 +1,4 @@
-# 宿主接入 — v0.5.0
+# 宿主接入 — v0.5.1
 
 [English](host-integration.md) · [中文](host-integration.zh-CN.md)
 
@@ -25,7 +25,7 @@ python3 scripts/host.py --root ../private-profile --subject owner \
 
 宿主的指令机制是另一层配置。Codex 读取有范围的 `AGENTS.md`；Cursor 项目规则使用 `.cursor/rules/*.mdc`。安装本服务器不会重写这些文件，也不会强制每轮调用。参见官方 [Codex 指南](https://developers.openai.com/codex/guides/agents-md)与 [Cursor 规则](https://cursor.com/docs/rules)。
 
-请运行实际安装的 v0.5.0 脚本。旧版技能副本或仍指向旧目录的 MCP 配置，会继续使用旧实现。安装到新目录后，检查并将现有服务器配置改为新路径，再重启工作台或重新加载 MCP。安装器不会静默覆盖已有副本或重复服务器。可以在该安装目录运行 `build_context.py --help` 或 `run_host.py --help` 核对临时覆盖选项。
+请运行实际安装的 v0.5.1 脚本。旧版技能副本或仍指向旧目录的 MCP 配置，会继续使用旧实现。安装到新目录后，检查并将现有服务器配置改为新路径，再重启工作台或重新加载 MCP。安装器不会静默覆盖已有副本或重复服务器。可以在该安装目录运行 `build_context.py --help` 或 `run_host.py --help` 核对临时覆盖选项。
 
 ## 让预览与执行使用同一套选择逻辑
 

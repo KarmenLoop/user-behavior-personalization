@@ -1,4 +1,4 @@
-# Use the personalization workspace — v0.5.0
+# Use the personalization workspace — v0.5.1
 
 [English](tutorial.en.md) · [中文](tutorial.zh-CN.md)
 
@@ -6,7 +6,7 @@ The first useful result is visible: a repeated correction becomes a reviewed pre
 
 ## 1. Download and start
 
-Download the ZIP and `SHA256SUMS.txt` from [v0.5.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.0). Check the ZIP's SHA-256 before extraction: `shasum -a 256` on macOS, `sha256sum` on Linux, or `Get-FileHash -Algorithm SHA256` in PowerShell.
+Download the ZIP and `SHA256SUMS.txt` from [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.5.1). Check the ZIP's SHA-256 before extraction: `shasum -a 256` on macOS, `sha256sum` on Linux, or `Get-FileHash -Algorithm SHA256` in PowerShell.
 
 Use Python 3.11+ from the extracted directory:
 
@@ -36,7 +36,7 @@ A real import works the same way: select a conversation JSON file, or paste it, 
 
 Open **Shape the next task**. Keep the working context set to `demo-writing`, enter “Explain the tradeoffs in a release plan,” and select **Preview personalization**.
 
-**Why this plan looks different** explains inclusion or exclusion. Expand **Prompt preview** to compare the task alone with the actual composed prompt, including selected confirmed preferences. On a narrow screen, the two panels stack. This is the same resolver used by the context builder and host wrapper.
+**Why this plan looks different** explains inclusion or exclusion. Expand **Prompt preview** to compare the prompt without saved preferences with the one that includes selected confirmed preferences. Both include the same fixed evidence-first guidance. On a narrow screen, the two panels stack. This is the same resolver used by the context builder and host wrapper.
 
 Under **Just for this task**, choose a detailed response length and preview again. The saved brevity preference is excluded with the current-task-override reason. The profile still keeps its concise default. You can also leave a specific saved rule out of this task without deleting it.
 

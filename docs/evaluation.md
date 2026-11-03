@@ -1,5 +1,7 @@
 # Evaluation — v0.5.0
 
+Current package: v0.5.1. The v0.5.0 recognition measurements below are unchanged.
+
 [English](evaluation.md) · [中文](evaluation.zh-CN.md)
 
 Conversation import, review, persistence, and deletion are executable local capabilities. The next-request forecaster is an **experimental lexical retrieval method** with limited coverage. Correct storage and passing unit tests do not establish that a system understands a person.

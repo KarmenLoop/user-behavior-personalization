@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.1 — Evidence-first personalization
+
+- Keep one versioned judgment policy in previews, host prompts, direct recall, and extraction. Adapt communication without treating user agreement as evidence.
+- Reject recognized agreement and false-certainty preferences; keep older conflicts inspectable while excluding them from task context.
+- Keep helpfulness reports separate from truth labels and training rewards. Bind feedback to the policy used by the saved plan.
+- Add a bilingual workspace explanation and paired pressure/correction evaluation cases. Provider response behavior remains unverified; see the independent judgment guide.
+
 ## 0.5.0 — 2026-11-03
 
 - Add a bilingual local browser workspace for selected imports, evidence review, task prompt comparisons, corrections, and explicit feedback.

@@ -1,4 +1,4 @@
-# Host integration — v0.5.0
+# Host integration — v0.5.1
 
 [English](host-integration.md) · [中文](host-integration.zh-CN.md)
 
@@ -25,7 +25,7 @@ Reload the configured server in the host and inspect its tool list. Test reading
 
 Host instruction mechanisms remain separate. Codex discovers scoped `AGENTS.md` files; Cursor project rules use `.cursor/rules/*.mdc`. Installing this server does not rewrite those instructions or force a call every turn. See the official [Codex guide](https://developers.openai.com/codex/guides/agents-md) and [Cursor rules](https://cursor.com/docs/rules).
 
-Run the v0.5.0 scripts from the package you actually installed. An older copied skill or an MCP entry pointing to an older directory will keep using its old implementation. Install into a new directory, inspect and update the existing server entry to that path, then restart the workspace or reload the MCP server. The installer does not silently overwrite an existing copy or duplicate server. Check `--help` on that installed `build_context.py` or `run_host.py` for the temporary override options.
+Run the v0.5.1 scripts from the package you actually installed. An older copied skill or an MCP entry pointing to an older directory will keep using its old implementation. Install into a new directory, inspect and update the existing server entry to that path, then restart the workspace or reload the MCP server. The installer does not silently overwrite an existing copy or duplicate server. Check `--help` on that installed `build_context.py` or `run_host.py` for the temporary override options.
 
 ## Use one resolver for preview and execution
 

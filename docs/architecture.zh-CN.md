@@ -1,4 +1,4 @@
-# 工作台如何运行 — v0.5.0
+# 工作台如何运行 — v0.5.1
 
 [English](architecture.md) · [中文](architecture.zh-CN.md)
 

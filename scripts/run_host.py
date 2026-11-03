@@ -63,6 +63,7 @@ def main():
         record = {'host': args.host, 'profile_revision': profile['revision'],
                   'rule_ids': profile['rule_ids'], 'paused': profile['paused'],
                   'plan_id': profile['plan_id'], 'rule_versions': profile['rule_versions'],
+                  'judgment_policy': profile['judgment_policy'],
                   'started_at': stamp(), 'output_retention': 'console_only'}
         workspace = str(args.workspace.resolve())
         if args.host == 'codex':

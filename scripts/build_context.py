@@ -44,7 +44,8 @@ def context_payload(args, task):
                                 'rule_ids': [rule['id'] for rule in plan['selected']],
                                 'plan_id': plan['plan_id'], 'task_sha256': plan['task_sha256'],
                                 'rule_versions': {r['id']: r['version_fingerprint'] for r in plan['selected']},
-                                'task_overrides': plan['task_overrides']}}
+                                'task_overrides': plan['task_overrides'],
+                                'judgment_policy': {key: plan['judgment_policy'][key] for key in ('version', 'fingerprint')}}}
 
 
 def main():

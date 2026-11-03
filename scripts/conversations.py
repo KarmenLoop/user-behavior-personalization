@@ -54,9 +54,10 @@ def safe_candidate_text(text):
     """
     if not isinstance(text, str) or not 0 < len(text.strip()) <= 1000:
         return False
+    from judgment import preference_conflict
     _, redacted = redact(text)
     return not (redacted or '[REDACTED_' in text or DANGEROUS.search(text)
-                or SENSITIVE.search(text) or PSYCHOLOGICAL_LABEL.search(text))
+                or SENSITIVE.search(text) or PSYCHOLOGICAL_LABEL.search(text) or preference_conflict(text))
 
 
 def _blank(match):
@@ -114,6 +115,7 @@ def features(text):
 
 
 def _proposals(excerpt, source_key, scope, truncated=False):
+    from judgment import preference_conflict
     mask = extraction_mask(excerpt)
     proposals, excluded = [], []
     # Split on unquoted sentence boundaries; keep quotes faithful to the excerpt.
@@ -141,6 +143,8 @@ def _proposals(excerpt, source_key, scope, truncated=False):
             reason = 'instruction_override_or_credential_request'
         elif SENSITIVE.search(original) or PSYCHOLOGICAL_LABEL.search(original):
             reason = 'sensitive_attribute_or_diagnosis'
+        elif preference_conflict(original):
+            reason = 'independent_judgment_conflict'
         if reason:
             excluded.append({'source_key': source_key, 'reason': reason})
             continue
