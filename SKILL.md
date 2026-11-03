@@ -1,6 +1,6 @@
 ---
 name: user-behavior-personalization
-description: Learn a user's communication preferences and working habits from authorized conversations. Use before personalized responses, after explicit corrections, or during daily reflection to maintain an evidence-backed, revisable USER_SKILL.md for that user.
+description: Learn a user's communication preferences and working habits from authorized conversations. Use before personalized responses, after explicit corrections, or during daily reflection to maintain scoped, evidence-backed preferences through the local adapter or a host-managed private guide.
 license: Apache-2.0
 ---
 
@@ -15,7 +15,20 @@ Read [the current host tutorial](docs/tutorial.en.md) to configure the bundled P
 
 Improve how the agent collaborates with the current user through a cycle of observation, reflection, profile updates, application, and real feedback.
 
-Keep the controller in this file stable. Evolve the private per-user `USER_SKILL.md`. Changing a profile does not retrain model weights or expand execution authority.
+Keep the controller in this file stable. The bundled adapter evolves a private SQLite profile; a host-managed Markdown integration may instead maintain one private `USER_SKILL.md`. Do not maintain competing writable profiles. Changing a profile does not retrain model weights or expand execution authority.
+
+## v0.3.0 executable learning path
+
+[English tutorial](docs/tutorial.en.md) · [中文教程](docs/tutorial.zh-CN.md)
+
+- Bind identity outside tool arguments. Require host permission before collection and `--enable-observations` in the server configuration.
+- Use `profile_correct` for explicit preferences. Use `profile_observe` only for structured feedback genuinely supplied by the current user; source/session identifiers are attestations, not permission.
+- Use `profile_insights` to inspect evidence and counterevidence. Candidates are not active rules. Ask for the user's decision before `profile_review`; never invent a confirmation source.
+- Keep observations within the supported collaboration dimensions. Do not derive psychological diagnoses, sensitive identity, emotional dependency, or private motives.
+- Treat `workflow_next_step` as a context-specific suggestion, not an action or prediction of private thoughts. Ordinary tool authorization is unchanged.
+- For teaching, offer an example, practice, or an optional explain-back. Store the user's actual feedback on format, not an assessment of intelligence or a permanent learning type.
+- Honor pause, observation deletion, rule deletion, and reset. Forget related evidence as well as active rules; do not rename an old source to bypass suppression.
+- The runtime has no automatic history extractor, daily scheduler, or cross-device service. Do not claim those features based on the portable contracts below.
 
 ## Choose the Workflow
 
@@ -59,7 +72,7 @@ Classify each candidate as an explicit fact, explicit preference, behavioral obs
 - **Tentative:** the same pattern appears in at least three independent interactions spanning different dates or tasks, with no applicable explicit contradiction.
 - **Observation only:** one-off, ambiguous, temporary, or conflicting evidence. Keep it in the reflection record rather than an active long-term rule.
 
-The repetition threshold is a working heuristic, not a statistical confidence claim. Tentative preferences can guide small, reversible presentation changes; they do not decide significant actions for the user.
+The repetition threshold is a working heuristic, not a statistical confidence claim. In the bundled adapter, tentative preferences remain candidates until the user confirms them. Do not apply them as persistent defaults or let them decide significant actions.
 
 Attach source conversation and message identifiers, a timestamp, a minimal quote or accurate summary, and the supported scope. Re-reading or retrieving a source does not create another observation.
 
@@ -70,12 +83,12 @@ Do not infer sensitive personal attributes, health conditions, or personality di
 ## Recall Before Responding
 
 1. Confirm the user identity and memory setting.
-2. Load that user's current committed `USER_SKILL.md`.
+2. Read the current bound profile with `profile_read` for the exact task context, or load the host-managed committed `USER_SKILL.md` when that separate integration is in use.
 3. Check ownership, version, scope, expiry, and applicable corrections.
 4. Select the three to five rules most relevant to the current task.
 5. Apply them naturally while following the current request and the host's instruction hierarchy.
 
-Load the current guide first. Retrieve specific reflection evidence only to resolve a conflict or inspect a source. Do not load every conversation or version into the context window.
+Load the current confirmed profile first. Retrieve specific reflection evidence only to resolve a conflict or inspect a source. Do not load every conversation or version into the context window.
 
 Current explicit instructions override historical personalization within the host's instruction hierarchy. A new correction replaces the old rule in the same scope; a more specific applicable rule takes precedence over a broad preference. If the distinction materially affects the task and cannot be resolved, ask one focused question.
 
@@ -105,7 +118,7 @@ Keep only conclusions, sources, and observable improvements in reflection record
 
 ## Persistence and User Control
 
-Store profiles outside the public package:
+The SQLite adapter stores `host.sqlite` under the configured private root. The following is the alternative host-managed Markdown contract, not a second adapter output. Store it outside the public package:
 
 ```text
 <PROFILE_ROOT>/<USER_ID>/

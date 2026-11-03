@@ -9,6 +9,11 @@ import sys
 root=Path(__file__).resolve().parents[1]
 data=json.loads((root/'publication.json').read_text(encoding='utf-8'))
 errors=[]
+if data['version'] != (root/'VERSION').read_text(encoding='utf-8').strip():
+    errors.append('Publication version does not match VERSION')
+host_text=(root/'scripts/host.py').read_text(encoding='utf-8')
+if "main('user_behavior_personalization', '"+data['version']+"'" not in host_text:
+    errors.append('Host server version does not match publication')
 for name in data['documents']:
     path=root/name
     text=path.read_text(encoding='utf-8')

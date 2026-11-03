@@ -1,63 +1,76 @@
-# Architecture
+# Architecture — v0.3.0
 
-## The Unit of Evolution
+[English](architecture.md) · [中文](architecture.zh-CN.md)
 
-The unit of evolution is a scoped, evidence-backed rule about collaboration. A rule connects a user statement or repeated pattern to a useful observable action.
+The unit of personalization is an observable collaboration preference: when it applies, what to do, and why it was saved. A profile can say “start code reviews with the main finding.” It cannot establish the user's inner motives or psychological condition.
 
-For example, "Prefers technical detail" is too broad. "For implementation plans, include exact steps, validation, and unresolved limits" tells the agent when and how to adapt.
+![Learning and review architecture diagram](images/learning-loop-v0.3.0.en.svg)
 
-The process updates persisted instructions for the individual user. It does not train model weights, modify host policy, or grant additional authority.
+## Four boundaries
 
-## Components
+| Layer | Responsibility | Does not provide |
+|---|---|---|
+| Host | Identity mapping, user permission, source/session IDs, real feedback | Proof from a tool argument that permission exists |
+| Adapter | Validate typed input; commit under a revision check; explain candidates | A history crawler or an NLP extractor |
+| Private profile | Explicit rules, structured observations, review state, minimal replay markers | A public personality dossier |
+| Model invocation | Load confirmed preferences and follow current instructions | Guaranteed compliance or extra tool authority |
 
-| Component | Responsibility |
-| --- | --- |
-| `SKILL.md` | Stable controller and workflow routing |
-| `references/` | Evidence, profile, and reflection mechanics |
-| `assets/templates/` | Blank output formats |
-| Private `USER_SKILL.md` | Current active personalization guide |
-| Private reflection logs | Minimal evidence and change records |
-| Private state | Source checkpoints and committed profile version |
-| Agent host | Identity, storage, tool access, lifecycle, synchronization, and enforcement |
+The local adapter uses SQLite. `USER_SKILL.md` and the original reflection templates remain portable integration formats; the SQLite path does not automatically maintain a second Markdown profile. Keeping two independently editable sources of truth would create conflicting preferences.
 
-One user guide remains current. Daily records describe how it changed. The agent reads historical detail only when the current task needs it.
+## Observation is not confirmation
 
-## Learning Loop
+```mermaid
+stateDiagram-v2
+  [*] --> Observed: Authorized structured feedback
+  Observed --> Insufficient: Too few independent sessions or stale evidence
+  Observed --> Conflicted: Counterevidence prevents review
+  Observed --> Reviewable: Current evidence meets the heuristic
+  Reviewable --> Dismissed: User rejects candidate
+  Reviewable --> Confirmed: User accepts current candidate
+  Confirmed --> Corrected: New explicit correction
+  Confirmed --> Forgotten: User requests deletion
+  Observed --> Forgotten: Delete supporting observation
+  Forgotten --> [*]: Old sources stay suppressed
+```
 
-1. Observe newly available authorized messages.
-2. Separate facts, preferences, behavioral observations, task instructions, and temporary states.
-3. Check sources, independent repetition, scope, and counterevidence.
-4. Propose the smallest useful profile change.
-5. Validate and publish through the host's persistence mechanism.
-6. Load relevant rules for a subsequent interaction.
-7. Use real feedback to keep, refine, or withdraw the affected rule.
+A candidate is ready for review only when there are at least three supporting sessions, weighted support is at least 75% of support plus opposition, and at least one supporting event is no more than 30 days old. Events older than 90 days do not contribute. Evidence has a 30-day half-life. Within a context and dimension, a session contributes only its latest observation.
 
-An explicit correction can enter this loop immediately without waiting for the daily event.
+These thresholds are inspectable engineering defaults. They are not trained or calibrated confidence probabilities. Hosts are responsible for assigning honest source and session IDs; the adapter cannot detect fabricated real-world sessions.
 
-## Evidence and Confidence
+A candidate fingerprint binds its context, proposed value, and evidence. A review uses the current profile revision, so an older screen cannot silently confirm a changed candidate. Negative feedback and competing values remain visible as counterevidence.
 
-Confirmed and tentative are operational evidence categories. They are not numeric probabilities, diagnoses, or personality scores.
+## Scope and precedence
 
-Directly stated lasting preferences can be confirmed immediately. Repeated patterns are tentative until the user confirms them. An observation copied into several contexts is not independent support.
+1. Follow current instructions within the host's instruction hierarchy.
+2. Load the confirmed preference for the exact context, with specific structured rules ahead of applicable global defaults.
+3. Use explicit corrections to replace old defaults.
+4. Keep behavioral candidates out of ordinary recall until review.
 
-The guide records scope so a new request can override an old default without erasing unrelated preferences. "Be brief today" and "Explain complex proposals fully" can coexist when their scopes are represented correctly.
+The adapter can resolve structured `dimension`/`value` rules. It does not semantically understand every arbitrary free-text rule: an older manual statement can still require human review for a conflict. Expiry is checked as a timezone-aware instant, not a string comparison.
 
-## Context Use
+## Explain an inference
 
-Load the compact current guide, then select the few rules relevant to the response. Retrieve original evidence only for a conflict, inspection request, or justified review.
+An insight includes its scope, dimension, proposed value, supporting/opposing session counts, recency-weighted totals, event IDs, latest timestamp, and reasons. Useful explanations name the evidence and the uncertainty:
 
-This reduces unnecessary history loading. It does not change a model's supported context length, bypass provider limits, or replace the host's context management.
+> Three independent sessions favored conclusion-first code reviews. No current opposing feedback was found. Review this as a default for code reviews?
 
-## Isolation and Sharing
+Avoid “You are an analytical personality” or “We know you will want this.” Neither follows from the evidence. A next-step preference such as `workflow_next_step=test` means “offer testing in this context,” not “run tests without authorization.”
 
-The host maps verified users to private namespaces. A display name is not proof of identity. Cross-channel continuity needs an explicit identity mapping; cross-device continuity also needs a working synchronization service.
+## Deletion and recovery
 
-The host defines which preferences may be used in a group. Using a presentation preference in a shared conversation does not authorize repeating its private source message.
+```mermaid
+flowchart TD
+  A[Forget rule or observations] --> B[Hold profile revision lock]
+  B --> C[Remove affected rules and history]
+  C --> D[Remove linked observations and review state]
+  D --> E[Remove managed export and subject receipts]
+  E --> F[Retain minimal source hashes against replay]
+  F --> G[Commit new revision]
+  X[External backups / provider logs / old unbound output] -. separate cleanup .-> H[Host or user control]
+```
 
-## Failure Boundaries
+Reset clears profile content and ends paused. It does not promise physical disk erasure. Exports and deletion share a transaction boundary to avoid rewriting an old managed export after a deletion. A revision conflict leaves the newer profile in place.
 
-A proposed change can fail before publication. A published guide can fail to load later. A loaded rule can fail to affect the response. A response can follow a rule without receiving confirming feedback.
+## What a pass means
 
-The package keeps these stages separate so reports remain meaningful. The actual host must enforce authorization, atomic storage behavior, synchronization, deletion, and scheduling.
-
-See [Host Integration](host-integration.md) for the execution contract and [Evaluation](evaluation.md) for observable checks.
+Stored, loaded, applied, and helpful are different outcomes. Local tests can establish storage and deterministic learning behavior. A host run establishes one actual integration. User benefit needs subsequent feedback; neither a diagram nor a test suite demonstrates it. See [evaluation](evaluation.md).

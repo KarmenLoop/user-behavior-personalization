@@ -1,40 +1,196 @@
-# User Behavior Personalization v0.2.0 tutorial
+# User Behavior Personalization v0.3.0 tutorial
 
 [English](tutorial.en.md) · [中文](tutorial.zh-CN.md)
 
-## Install and bind a subject
+Start with the local exercise below. It uses synthetic feedback and no model account. Then connect one host and verify an actual response before relying on it.
 
-Extract the release and use Python 3.11+. Choose a private data directory outside Git. A local account owner must map the intended person to a stable `--subject` ID; this release does not discover ChatGPT/Cursor account identities automatically. Do not let a conversation select another subject or expose the shared data root to an untrusted local user.
+## 1. Download and check the package
 
-```sh
-python /path/to/scripts/host.py --root /private/profiles --workspace /path/to/project --subject owner --install-host codex install
-python /path/to/scripts/host.py --root /private/profiles --workspace /path/to/project --subject owner --install-host cursor install
-```
+Get the ZIP and `SHA256SUMS.txt` from [v0.3.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.3.0). Compare the ZIP's SHA-256 with the published file before extracting. On macOS, use `shasum -a 256`; on Linux, `sha256sum`; in PowerShell, `Get-FileHash -Algorithm SHA256`.
 
-Reload and approve this specific server. Verify the five profile tools. The server entry binds its subject outside tool arguments.
-
-## Save a correction and verify it
-
-Call `profile_read` with the task context. Use its current revision in `profile_correct`. A rule needs `id`, `statement`, `scope` (`*` for all contexts), a new `source_id`, `source_summary`, and `kind` (`explicit` or `correction`). Optional `expires_at` must include a timezone. Save only preferences the user authorized; the adapter does not infer consent from text.
-
-Read in the other configured host using the matching context. An unrelated context returns no rule. A different bound subject returns its own profile. To correct a rule, keep its ID, provide a genuinely new source ID, and use the current revision. Stale writes are rejected; repeating an unchanged source is deduplicated.
-
-For a model-free call, pass the same tool arguments in a JSON file to `python /path/to/scripts/host.py --root /private/profiles --workspace /path/to/project --subject owner call profile_read --input request.json`.
-
-## Load before a new host task
-
-Write the task into a private prompt file. Run:
+Use Python 3.11 or newer. The adapter has no third-party Python dependencies. Open a terminal in the extracted package:
 
 ```sh
-python /path/to/scripts/run_host.py --root /private/profiles --subject owner --context writing --host codex --workspace /path/to/project --prompt /private/task.txt
+python3 --version
+python3 -B scripts/check_package.py
+python3 -B -m unittest discover -s tests -v
+python3 -B scripts/check_publication.py
 ```
 
-Use `--host cursor` for Cursor CLI. Each host needs its own login and model access. The wrapper loads the current relevant profile before invocation and saves the used revision, rule IDs, actual exit, and host output in `host-runs`. It creates no recurring task and installs no global lifecycle hook. A timeout kills the process group it owns; inspect external effects before a retry.
+Windows installations may use `py -3.12` instead of `python3`. Use the same interpreter for installation, tools, and the MCP entry. These checks exercise local code and publication consistency; they do not contact a model.
 
-## Pause, export, and forget
+To copy the portable package to a new host-selected directory:
 
-Use the current revision in `profile_pause`. Paused recall returns no ordinary preferences; correction is blocked until resume. `profile_export` remains available. `profile_forget` removes the chosen rule and its retained historical content, deletes the controlled export, and keeps only source hashes needed to suppress replay. External exports, backups, and physical storage remnants are separate copies. Secure-delete mode is enabled for SQLite, but no SSD-erasure guarantee is made.
+```sh
+python3 scripts/install_skill.py --destination ../installed-skills/user-behavior-personalization
+```
 
-Keep private stores out of release archives. Stop writers before backing up. If a profile cannot be read, the wrapper fails instead of silently pretending it applied preferences.
+The destination must not already exist. Keep `SKILL.md`, `scripts/`, `references/`, and `assets/` together. Never use the public checkout as a private profile directory.
 
-The acceptance exercise used an actual Codex turn and saved receipts. Cursor tool discovery passed; its model turn and native Windows/Linux behavior remain unverified. Reflection timers, automatic conversation ingestion, and identity providers need an explicit host integration rather than documentation alone.
+## 2. Complete a local learning cycle
+
+For a single-command version of the same synthetic exercise:
+
+```sh
+python3 -B scripts/demo_learning.py --root ../new-synthetic-demo
+```
+
+Choose a destination that does not exist. This launches actual local CLI processes; it is not a model-based effectiveness test.
+
+
+The following Python block is a complete exercise. Save it outside the package or paste it into Python while your working directory is the extracted package. It reads the revision before each write instead of guessing which version comes next.
+
+```python
+import datetime as dt
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+
+# Run from the extracted package. This store contains synthetic data only.
+package = Path.cwd()
+private = Path(tempfile.mkdtemp(prefix="personalization-demo-"))
+command = [sys.executable, "-B", str(package / "scripts/host.py"),
+           "--root", str(private), "--subject", "demo",
+           "--enable-observations"]
+
+def call(tool, arguments):
+    result = subprocess.run(command + ["call", tool],
+                            input=json.dumps(arguments), text=True,
+                            capture_output=True, check=True)
+    return json.loads(result.stdout)
+
+def revision():
+    return call("profile_read", {"context": "code-review"})["revision"]
+
+# Explicit requests do not need three observations.
+call("profile_correct", {"expected_revision": revision(), "rule": {
+    "id": "status-length", "statement": "Keep status updates concise.",
+    "scope": "status-update", "source_id": "demo-explicit-1",
+    "source_summary": "Synthetic user asked for concise status updates.",
+    "kind": "explicit", "dimension": "response_length", "value": "concise"
+}})
+assert call("profile_read", {"context": "code-review"})["rules"] == []
+
+# Three distinct sessions, not three copies of one message.
+for day in (3, 2, 1):
+    occurred = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=day)
+    call("profile_observe", {"expected_revision": revision(), "event": {
+        "id": f"demo-event-{day}", "source_id": f"demo-feedback-{day}",
+        "session_id": f"demo-session-{day}", "context": "code-review",
+        "dimension": "structure", "value": "conclusion_first",
+        "signal": "positive", "occurred_at": occurred.isoformat()
+    }})
+
+insights = call("profile_insights", {"context": "code-review"})
+print(json.dumps(insights, indent=2))
+candidate = next(c for c in insights["candidates"]
+                 if c["status"] == "ready_to_review")
+assert call("profile_read", {"context": "code-review"})["rules"] == []
+
+# Synthetic confirmation for this exercise only.
+# A real integration must ask the user and use the actual review source.
+accepted = call("profile_review", {
+    "expected_revision": revision(), "candidate_id": candidate["candidate_id"],
+    "decision": "accept", "source_id": "demo-user-confirmation-1"
+})
+assert call("profile_read", {"context": "code-review"})["rules"]
+
+call("profile_pause", {"expected_revision": revision(), "paused": True})
+assert call("profile_read", {"context": "code-review"})["rules"] == []
+export = call("profile_export", {})
+print("Private export:", export["path"])
+
+# Deletion remains available while paused.
+call("profile_forget", {"expected_revision": revision(),
+                        "rule_id": accepted["rule_id"]})
+call("profile_reset", {"expected_revision": revision()})
+assert call("profile_read", {"context": "code-review"})["paused"] is True
+print("Demo complete. Private demo directory:", private)
+```
+
+Expected behavior: a scoped explicit preference is saved immediately; three independent feedback events produce a reviewable candidate; ordinary recall stays empty for that context until confirmation; pause suppresses recall; export and deletion remain available; reset ends paused. The local demo directory is printed so you can inspect or remove this synthetic store.
+
+A new `source_id` must identify a genuinely new user statement or feedback item. Changing an identifier to bypass a forgotten-source error defeats the control; a host must not do that. Source and session IDs are host attestations, not cryptographic proof that three people or sessions existed.
+
+## 3. Choose dimensions and contexts
+
+| Dimension | Values | Example context |
+|---|---|---|
+| `response_length` | `concise`, `balanced`, `detailed` | `status-update` |
+| `structure` | `conclusion_first`, `steps`, `examples` | `code-review` |
+| `teaching` | `explain_back`, `worked_example`, `practice` | `learn-python` |
+| `initiative` | `ask_first`, `suggest_next` | `project-planning` |
+| `workflow_next_step` | `clarify`, `plan`, `implement`, `test`, `review`, `summarize` | `after-implementation` |
+| `language` | `en`, `zh` | `technical-explanation` |
+
+Use stable, narrow context names. Matching is exact and case-insensitive. A global explicit rule uses `scope: "*"`; observations should describe the specific context in which feedback occurred. A temporary request is not a lasting observation by default. Use an explicit rule with a timezone-qualified `expires_at` when the user authorizes a temporary stored preference.
+
+Negative feedback uses `signal: "negative"` for the dimension and value the user actually rejected. Do not turn “that example was wrong” into a rejection of examples in general. Silence, assistant output, a quoted colleague, or a generated explanation of the user's motives is not feedback from the user.
+
+## 4. Connect Codex or Cursor
+
+Create the intended project first. Choose a private profile root outside Git and bind an opaque subject ID to the actual user in your host setup.
+
+```sh
+python3 scripts/host.py --root ../private-profile --subject owner \
+  --workspace /path/to/project --enable-observations --install-host codex install
+python3 scripts/host.py --root ../private-profile --subject owner \
+  --workspace /path/to/project --enable-observations --install-host cursor install
+```
+
+Omit `--enable-observations` if you only want explicitly saved rules. It is a server setting, not a permission a tool argument can grant. Existing server entries are preserved: if installation reports an existing entry, inspect and update it deliberately rather than adding a duplicate server.
+
+Reload the chosen host and approve this specific server. Check `tools/list`, then `profile_read`. Verify the subject and root, save a synthetic preference, and read it from the second host. Sharing a store does not link online accounts automatically.
+
+For each host's next model turn, ask a harmless question with a clear style preference. Check whether the preference was loaded, whether the actual answer followed it, and whether correction changes the next response. Configuration, MCP tool discovery, and model behavior are separate acceptance steps.
+
+## 5. Load preferences before a new CLI task
+
+Write a private task file, then invoke the wrapper:
+
+```sh
+python3 scripts/run_host.py --root ../private-profile --subject owner \
+  --context code-review --host codex --workspace /path/to/project \
+  --prompt /path/to/private-task.txt
+```
+
+Use `--host cursor` for Cursor CLI. The wrapper loads confirmed rules before starting the host. It streams host output to the console and stores a subject-bound metadata receipt, not raw prompt or model-output files. Terminal history, host logs, and provider retention remain outside this store. The wrapper creates no recurring job or per-turn hook in an already-open chat.
+
+## 6. Build a model API request
+
+```sh
+python3 scripts/build_context.py --root ../private-profile --subject owner \
+  --context code-review --task-file /path/to/private-task.txt
+```
+
+This prints JSON with `messages` and local `personalization` metadata. Your own DeepSeek-style chat client can send the **`messages` value** in its request. Do not send the entire output as if it were the provider's request schema. The command makes no network call and requires no API key. Redirected output contains the task and selected rules: treat that file as private and clean it up separately.
+
+DeepSeek's chat API is a model endpoint, not a direct MCP client. A tool-using integration needs its own allowlisted tool bridge, current revisions, response validation, and user authorization. See [host integration](host-integration.md).
+
+## 7. Inspect, correct, forget, and reset
+
+- Use `profile_insights` to inspect candidates. A support score is an engineering heuristic; it is not psychological certainty.
+- Use `profile_correct` with the existing rule ID and a new source to replace an explicit preference. Include `dimension` and `value` together when you want structured conflict handling.
+- Use `profile_review` with `decision: "reject"` to dismiss a candidate. New evidence can justify a later review; rejection is not agreement.
+- Use `profile_forget_observations` with a nonempty `observation_ids` list to remove selected evidence and dependent learned rules.
+- Use `profile_forget` to remove a rule and its linked learning evidence. Previously copied exports and provider histories require separate action.
+- Use `profile_reset` to remove profile content and pause future ordinary use. Minimal source hashes remain to suppress replay; it is not a physical disk wipe.
+
+All writes require the current `expected_revision`. Do not retry a stale write blindly. Read again, review what changed, and decide whether the intended update still makes sense.
+
+## 8. Understand failures and limits
+
+| Symptom | What to check |
+|---|---|
+| `STALE_REVISION` | Another write changed the profile. Re-read before deciding what to save. |
+| Observation is disabled | Start the approved server with `--enable-observations`; do not infer consent from a conversation. |
+| `MEMORY_PAUSED` | Resume only at the user's request. Inspection and deletion still work. |
+| Source was forgotten | Do not replay that source with a new identifier. Obtain genuinely new feedback if appropriate. |
+| No candidate is ready | Check independent sessions, context, recency, counterevidence, and an existing explicit preference. |
+| A scope stopped matching after upgrade | v0.3.0 uses exact labels. `art` intentionally no longer matches `cartography`. |
+| The observation limit is reached | Review and remove unnecessary evidence; the adapter does not silently discard it. |
+| A host ignores a saved preference | Check actual tool loading or use the wrapper; a stored rule is not proof of model compliance. |
+
+For advanced use, compare behavior across contexts, test a changed preference, challenge a candidate with counterevidence, and confirm that deletion prevents reappearance. Record results with the [evaluation guide](evaluation.md). Never use test pass counts as a score for how well the system understands a person.
