@@ -1,4 +1,4 @@
-# 使用个性化工作台 — v0.6.0
+# 使用个性化工作台 — v0.7.0
 
 [English](tutorial.en.md) · [中文](tutorial.zh-CN.md)
 
@@ -6,7 +6,7 @@
 
 ## 1. 下载并启动
 
-从 [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0) 下载 ZIP 和 `SHA256SUMS.txt`，解压前核对 SHA-256。macOS 使用 `shasum -a 256`，Linux 使用 `sha256sum`，PowerShell 使用 `Get-FileHash -Algorithm SHA256`。
+从 [v0.7.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.7.0) 下载 ZIP 和 `SHA256SUMS.txt`，解压前核对 SHA-256。macOS 使用 `shasum -a 256`，Linux 使用 `sha256sum`，PowerShell 使用 `Get-FileHash -Algorithm SHA256`。
 
 在解压目录使用 Python 3.11+：
 
@@ -28,9 +28,9 @@ Windows 可按安装情况使用 `py -3.12`。打开最后一条命令打印的�
 
 真实导入方式相同：选择 JSON 对话文件或粘贴内容，再点**导入所选对话**。只有获授权的本人消息成为依据。“以后发布方案都加回滚检查”等直接要求，会列为明确偏好提案；反复纠正则走独立的多会话习惯审查。
 
-![实际工作台画面，使用合成证据与任务方案](images/workspace-v0.5.0.zh-CN.jpg)
+![实际工作台画面，使用合成证据与任务方案](images/semantic-learning-v0.7.0.zh-CN.jpg)
 
-*v0.5.0 本地工作台的历史截图；v0.5.1 新增判断规则面板。提示对比不是模型生成的回答。*
+*v0.7.0 实际工作台，展示另一份合成客户草稿案例，模型解释仍待审核。上方离线示例不需要模型账号。*
 
 ## 3. 看清一次任务发生了什么变化
 
@@ -42,9 +42,9 @@ Windows 可按安装情况使用 `py -3.12`。打开最后一条命令打印的�
 
 任务文本中的少量明确表达，例如“简短一点”“详细解释”，能被识别为临时要求；界面控件可纠正选择。它不能可靠理解所有间接表达，也不会自动解决自由文本规则之间的全部语义矛盾。
 
-![实际任务方案：临时详细回答要求与规则排除原因](images/task-plan-v0.5.0.zh-CN.jpg)
+![实际任务方案：临时详细回答要求与规则排除原因](images/actual-comparison-v0.7.0.zh-CN.jpg)
 
-*这张 v0.5.0 截图使用另一项合成代码任务：保留先给代码的规则，临时覆盖简短偏好。页面展示任务中的明确要求及选择原因，展开「提示预览」可检查组合后的原文。*
+*v0.7.0 另一份合成排错任务的真实回答。这条可选路径需要明确启用模型，提示预览仍可离线使用。两种路径见[语义操作教程](semantic-learning.zh-CN.md)。*
 
 ## 4. 记录什么真的有帮助
 
@@ -85,7 +85,7 @@ python3 scripts/host.py --root ../private-profile --subject owner \
   --workspace /path/to/project --enable-conversations --install-host codex install
 ```
 
-Cursor 使用 `--install-host cursor`。重新加载并批准指定 MCP 服务，核对 [25 个工具](tools.zh-CN.md)。配置成功不等于模型回答成功。
+Cursor 使用 `--install-host cursor`。重新加载并批准指定 MCP 服务，核对 [30 个工具](tools.zh-CN.md)。配置成功不等于模型回答成功。
 
 生成实际限定上下文而不发送：
 

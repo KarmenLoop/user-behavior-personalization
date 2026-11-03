@@ -6,6 +6,12 @@ license: Apache-2.0
 
 # User Behavior Personalization
 
+## Selected evidence and actual comparisons — v0.7.0
+
+For semantic interpretation, conditional preferences or actual A/B answers, follow the [semantic workflow](docs/semantic-learning.en.md) / [中文](docs/semantic-learning.zh-CN.md). Start the offline workspace first; enable model calls explicitly for the configured Codex account. Send only user-selected excerpts and relevant confirmed preferences. Review each sourced proposal before adoption, and preserve its task conditions during corrections.
+
+Use the shared resolver for task type, audience and stage. Inspect exclusions and abstain on equally specific typed conflicts. Actual comparisons use the same model, policy and temporary requirements in both arms. Reveal identities deliberately or after a vote; preserve whether feedback was blind. Report preference and correctness separately. Forget dependent private answers when their source evidence is removed. A completed call or a synthetic test vote establishes neither user benefit nor model training.
+
 ## Real answer checks — v0.6.0
 
 Use the [model check guide](docs/model-checks.en.md) for actual Codex responses and evidence-bound rubric review. A request finishing is not a passing grade. Keep reviewer identity, supplied-source attribution, and the exact scope of observed success visible. These reviews do not rewrite preferences or train weights.

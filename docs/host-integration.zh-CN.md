@@ -1,8 +1,8 @@
-# 宿主接入 — v0.6.0
+# 宿主接入 — v0.7.0
 
 [English](host-integration.md) · [中文](host-integration.zh-CN.md)
 
-浏览器工作台、CLI 与 MCP 标准输入输出共用同一本地适配器及 [25 个工具](tools.zh-CN.md)。用户和私有目录在进程启动时固定，工具调用不能切换身份。
+浏览器工作台、CLI 与 MCP 标准输入输出共用同一本地适配器及 [30 个工具](tools.zh-CN.md)。用户和私有目录在进程启动时固定，工具调用不能切换身份。
 
 ## 先使用本地工作台
 
@@ -25,7 +25,7 @@ python3 scripts/host.py --root ../private-profile --subject owner \
 
 宿主的指令机制是另一层配置。Codex 读取有范围的 `AGENTS.md`；Cursor 项目规则使用 `.cursor/rules/*.mdc`。安装本服务器不会重写这些文件，也不会强制每轮调用。参见官方 [Codex 指南](https://developers.openai.com/codex/guides/agents-md)与 [Cursor 规则](https://cursor.com/docs/rules)。
 
-请运行实际安装的 v0.5.1 脚本。旧版技能副本或仍指向旧目录的 MCP 配置，会继续使用旧实现。安装到新目录后，检查并将现有服务器配置改为新路径，再重启工作台或重新加载 MCP。安装器不会静默覆盖已有副本或重复服务器。可以在该安装目录运行 `build_context.py --help` 或 `run_host.py --help` 核对临时覆盖选项。
+请运行实际安装的 v0.7.0 脚本。旧版技能副本或仍指向旧目录的 MCP 配置，会继续使用旧实现。安装到新目录后，检查并将现有服务器配置改为新路径，再重启工作台或重新加载 MCP。安装器不会静默覆盖已有副本或重复服务器。可以在该安装目录运行 `build_context.py --help` 或 `run_host.py --help` 核对临时覆盖选项。
 
 ## 让预览与执行使用同一套选择逻辑
 
@@ -56,3 +56,12 @@ DeepSeek JSON Output 约束格式，不证明内容真实。需要拒绝空白�
 ## 真实回答检查
 
 [模型验收](model-checks.zh-CN.md)介绍可选的 `--system-proxy` 子进程环境、可复现的 Codex 调用和绑定具体回答的审核。验收使用合成案例并保留原文，普通任务记录仍只保存元数据。
+
+
+## 明确启用语义学习与双组调用
+
+[v0.7.0 操作流程](semantic-learning.zh-CN.md)给本地工作台增加了明确触发的模型调用。启动时增加 `--enable-conversations --enable-models --model YOUR_MODEL`，上方默认命令仍保持离线。需要已登录的兼容 Codex CLI。`--system-proxy` 只为子进程选用既有 macOS 固定回环代理，`--model-timeout` 限制每次调用。Windows 的可选模型流程要求 Python 3.12+，以支持可取消的非阻塞管道；离线适配器仍支持3.11+。
+
+任务文件可使用 `python3 scripts/model_workflows.py compare --root ../private-profile --subject owner --context writing --model YOUR_MODEL --task-file /path/to/task.txt --task-type writing --audience client --stage draft`。只在既有 Mac 代理配置需要时增加 `--system-proxy`。相同条件也可传给 `build_context.py`、`run_host.py`。分析已存原文使用 `learn` 子命令和 `--enable-conversations --source-key MESSAGE_KEY`；结果仍待审核。
+
+这些真实调用使用已配置的 Codex 账号。此工作台路径不代表 DeepSeek 原生提供方或完整 Cursor 宿主会话已验收，更全面的原生宿主覆盖仍是独立路线项。

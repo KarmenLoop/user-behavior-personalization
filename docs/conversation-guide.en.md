@@ -1,4 +1,4 @@
-# Conversation learning tutorial — v0.6.0
+# Conversation learning tutorial — v0.7.0
 
 [English](conversation-guide.en.md) · [中文](conversation-guide.zh-CN.md)
 
@@ -6,7 +6,7 @@ This walkthrough starts with actual conversation text, then reviews a preference
 
 ## 1. Download and install
 
-Download the ZIP and `SHA256SUMS.txt` from [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0). Compare the ZIP's SHA-256 before extraction: `shasum -a 256` on macOS, `sha256sum` on Linux, or `Get-FileHash -Algorithm SHA256` in PowerShell.
+Download the ZIP and `SHA256SUMS.txt` from [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.7.0). Compare the ZIP's SHA-256 before extraction: `shasum -a 256` on macOS, `sha256sum` on Linux, or `Get-FileHash -Algorithm SHA256` in PowerShell.
 
 Use Python 3.11+; there are no third-party Python runtime dependencies. In the extracted directory:
 

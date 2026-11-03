@@ -8,14 +8,17 @@ from learning import DIMENSIONS, STATEMENTS, active, blank_profile, check_source
 from conversation_store import import_conversation, review_proposal, portrait, model_context, import_model_proposals
 from forecast import forecast
 from planning import response_plan
+from conditions import CONDITION_SCHEMA, normalize_conditions, replacement_rule_ids, preference_selection
 from outcomes import prepare, record_outcome, outcome_summary, forget_plans
+from comparisons import ACCURACY_VALUES, list_comparisons, read_comparison, reveal_comparison, vote_comparison, forget_comparisons
 from judgment import policy, policy_text, preference_conflict
 
 RULE = schema({
     'id': string(80), 'statement': string(1000), 'scope': string(200),
     'source_id': string(200), 'source_summary': string(1000),
     'kind': {'type': 'string', 'enum': ['explicit', 'correction']},
-    'expires_at': string(50), 'dimension': {'type': 'string', 'enum': list(DIMENSIONS)}, 'value': string(80),
+    'conditions': CONDITION_SCHEMA,
+    'expires_at': string(50), 'dimension': {'type': 'string', 'enum': [*DIMENSIONS, 'custom']}, 'value': string(80),
 }, ['id', 'statement', 'scope', 'source_id', 'source_summary', 'kind'])
 EVENT = schema({
     'id': string(80), 'source_id': string(200), 'session_id': string(200),
@@ -27,11 +30,12 @@ MESSAGE = schema({'id': string(80), 'role': {'type': 'string', 'enum': ['user', 
 CONVERSATION = schema({'session_id': string(80), 'context': string(200),
     'messages': {'type': 'array', 'items': MESSAGE, 'minItems': 1, 'maxItems': 100}}, ['session_id', 'context', 'messages'])
 MODEL_PROPOSAL = schema({'statement': string(500), 'scope': string(200),
+    'conditions': CONDITION_SCHEMA, 'dimension': {'type': 'string', 'enum': [*DIMENSIONS, 'custom']}, 'value': string(80),
     'category': {'type': 'string', 'enum': ['communication', 'workflow', 'goal', 'constraint']},
     'evidence': {'type': 'array', 'minItems': 1, 'maxItems': 3,
         'items': schema({'source_key': string(80), 'quote': string(240)}, ['source_key', 'quote'])}},
     ['statement', 'scope', 'category', 'evidence'])
-PLAN_FIELDS = {'context': string(200), 'task': string(16000),
+PLAN_FIELDS = {'context': string(200), 'task': string(16000), 'task_conditions': CONDITION_SCHEMA,
     'task_overrides': schema({key: {'type': 'string', 'enum': list(values)} for key, values in DIMENSIONS.items()}),
     'omit_rule_ids': {'type': 'array', 'items': string(80), 'maxItems': 30},
     'max_preference_chars': {'type': 'integer', 'minimum': 200}}
@@ -45,7 +49,7 @@ def tool(name, description, fields, required=(), read_only=False):
 
 
 TOOLS = [
-    tool('profile_read', 'Read active confirmed preferences in the configured subject and exact context. Paused profiles return no rules.', {'context': string(200)}, ['context'], True),
+    tool('profile_read', 'Read active confirmed preferences in the configured subject and exact context. Paused profiles return no rules.', {'context': string(200), 'task_conditions': CONDITION_SCHEMA}, ['context'], True),
     tool('profile_correct', 'Save an explicit sourced preference; source identifiers are host attestations, not proof of consent.', {'expected_revision': integer(), 'rule': RULE}, ['expected_revision', 'rule']),
     tool('profile_pause', 'Pause or resume ordinary recall, evidence collection, and updates.', {'expected_revision': integer(), 'paused': {'type': 'boolean'}}, ['expected_revision', 'paused']),
     tool('profile_forget', 'Purge a rule, its history and supporting observations; retain only replay suppression hashes.', {'expected_revision': integer(), 'rule_id': string(80)}, ['expected_revision', 'rule_id']),
@@ -62,7 +66,7 @@ TOOLS = [
     tool('profile_forget_conversation', 'Delete a conversation and all dependent proposals, rules, writing features and original transitions.', {'expected_revision': integer(), 'session_id': string(80)}, ['expected_revision', 'session_id']),
     tool('profile_forget_messages', 'Delete selected user-message evidence and its dependent proposals, rules, style contributions and transitions.', {'expected_revision': integer(), 'source_keys': {'type': 'array', 'items': string(80), 'minItems': 1, 'maxItems': 100}}, ['expected_revision', 'source_keys']),
     tool('profile_model_context', 'Build a local extraction request from authorized stored excerpts; this tool sends nothing to a provider.', {'context': string(200)}, ['context'], True),
-    tool('profile_model_propose', 'Validate host-model proposals against exact stored user quotes and stage them for human review; cannot confirm a rule.', {'expected_revision': integer(), 'proposals': {'type': 'array', 'items': MODEL_PROPOSAL, 'minItems': 1, 'maxItems': 20}}, ['expected_revision', 'proposals']),
+    tool('profile_model_propose', 'Validate host-model proposals against exact stored user quotes and stage them for human review; cannot confirm a rule.', {'expected_revision': integer(), 'proposals': {'type': 'array', 'items': MODEL_PROPOSAL, 'minItems': 0, 'maxItems': 20}}, ['expected_revision', 'proposals']),
     tool('profile_habits', 'Discover recurring authored feedback across independent conversations, with quotes, conflicts and a review threshold.', {'context': string(200)}, ['context'], True),
     tool('profile_habit_review', 'Accept or reject a current ready habit based on the actual user decision.', {'expected_revision': integer(), 'context': string(200), 'candidate_id': string(80), 'decision': {'type': 'string', 'enum': ['accept', 'reject']}, 'source_id': string(200)}, ['expected_revision', 'context', 'candidate_id', 'decision', 'source_id']),
     tool('profile_plan', 'Preview the same preference selection used in actual host context. Explain temporary task overrides and exclusions; no model is called.', PLAN_FIELDS, ['context', 'task'], True),
@@ -70,6 +74,15 @@ TOOLS = [
     tool('profile_outcome', 'Record explicit user feedback about a prepared prompt or reported response use. Never infer a rating from silence or process exit.', {'expected_revision': integer(), 'plan_id': string(80), 'source_id': string(200), 'rating': {'type': 'string', 'enum': ['helpful', 'unhelpful', 'mixed', 'not_sure']}, 'basis': {'type': 'string', 'enum': ['prompt_review', 'response_use']}}, ['expected_revision', 'plan_id', 'source_id', 'rating', 'basis']),
     tool('profile_outcome_summary', 'Report explicit ratings by context and exact rule version, separating prompt review from reported response use.', {'context': string(200)}, ['context'], True),
     tool('profile_plan_forget', 'Forget a prepared plan and all feedback associated with it.', {'expected_revision': integer(), 'plan_id': string(80)}, ['expected_revision', 'plan_id']),
+    tool('profile_comparison_list', 'List actual response comparisons in this context; paused profiles return none.', {'context': string(200)}, ['context'], True),
+    tool('profile_comparison_read', 'Read two private actual answers. Arm identity stays hidden until a persistent reveal or vote.', {'comparison_id': string(80)}, ['comparison_id'], True),
+    tool('profile_comparison_reveal', 'Explicitly reveal the A/B mapping; later feedback is recorded as unblinded.', {'expected_revision': integer(), 'comparison_id': string(80)}, ['expected_revision', 'comparison_id']),
+    tool('profile_comparison_vote', 'Record a user preference and separate reported correctness for actual answers; never promotes rules or factual truth.',
+         {'expected_revision': integer(), 'comparison_id': string(80), 'source_id': string(200),
+          'choice': {'type':'string','enum':['a','b','tie','neither']},
+          'accuracy_a': {'type':'string','enum':list(ACCURACY_VALUES)}, 'accuracy_b': {'type':'string','enum':list(ACCURACY_VALUES)}},
+         ['expected_revision','comparison_id','source_id','choice','accuracy_a','accuracy_b']),
+    tool('profile_comparison_forget', 'Delete both private answers, execution metadata and comparison feedback.', {'expected_revision': integer(), 'comparison_id': string(80)}, ['expected_revision','comparison_id']),
 ]
 
 
@@ -85,10 +98,11 @@ def source_hash(value):
     return digest(value)
 
 
-def recall(db, args, context):
+def recall(db, args, context, task_conditions=None):
     profile = load(db, args)
-    rules = [] if profile['paused'] else matching_rules(profile, context)
-    return {'subject_id': profile['subject_id'], 'revision': profile['revision'], 'paused': profile['paused'], 'rules': rules[:30],
+    task_conditions = normalize_conditions(task_conditions)
+    rules, excluded = ([], []) if profile['paused'] else preference_selection(profile['rules'], context, task_conditions)
+    return {'subject_id': profile['subject_id'], 'revision': profile['revision'], 'paused': profile['paused'], 'rules': rules[:30], 'task_conditions': task_conditions, 'excluded': excluded,
             'judgment_policy': policy(), 'instructions': policy_text()}
 
 
@@ -96,9 +110,12 @@ def save_rule(profile, rule):
     identifier(rule['id'])
     need(not preference_conflict(rule['statement']), 'INDEPENDENT_JUDGMENT_CONFLICT',
          'Preferences may change communication, not require agreement, conceal uncertainty, or treat claims as verified facts.')
-    replaced = [rid for rid, existing in profile['rules'].items() if rid != rule['id'] and rule.get('dimension') and existing.get('dimension') == rule['dimension'] and context_key(existing['scope']) == context_key(rule['scope'])]
-    need(rule['id'] in profile['rules'] or replaced or len(profile['rules']) < 30, 'RULE_LIMIT', 'Review the existing 30 rules before adding another.')
     previous = profile['rules'].get(rule['id'])
+    rule = dict(rule)
+    if 'conditions' in rule or previous and 'conditions' in previous:
+        rule['conditions'] = normalize_conditions(rule.get('conditions', previous.get('conditions') if previous else None))
+    replaced = replacement_rule_ids(profile['rules'], rule)
+    need(rule['id'] in profile['rules'] or replaced or len(profile['rules']) < 30, 'RULE_LIMIT', 'Review the existing 30 rules before adding another.')
     if previous:
         profile['history'].append({'rule': previous, 'superseded_at': stamp()})
     # A typed correction replaces a conflicting active typed rule in the same scope.
@@ -124,7 +141,7 @@ def dispatch(name, values, args):
     db = Database(args.root)
     try:
         if name == 'profile_read':
-            return recall(db, args, values['context'])
+            return recall(db, args, values['context'], values.get('task_conditions'))
         if name == 'profile_insights':
             return insights(load(db, args), values['context'])
         if name == 'profile_portrait':
@@ -138,6 +155,10 @@ def dispatch(name, values, args):
             return response_plan(load(db, args), **values)
         if name == 'profile_outcome_summary':
             return outcome_summary(load(db, args), values['context'])
+        if name == 'profile_comparison_list':
+            return list_comparisons(load(db,args),values['context'])
+        if name == 'profile_comparison_read':
+            return read_comparison(load(db,args),values['comparison_id'])
         if name == 'profile_forecast':
             profile = load(db, args)
             result = {'status': 'paused', 'candidates': [], 'reasons': ['Personalization is paused.']} if profile['paused'] else forecast(profile['conversation_messages'], profile['conversation_transitions'], values['context'], values['request'])
@@ -155,10 +176,21 @@ def dispatch(name, values, args):
             need(profile['revision'] == values['expected_revision'], 'STALE_REVISION', 'Read the current profile before changing it.')
             replayed = False
             details = {}
-            if name in ('profile_correct', 'profile_observe', 'profile_review', 'conversation_import', 'profile_proposal_review', 'profile_model_propose', 'profile_habit_review', 'profile_plan_prepare', 'profile_outcome'):
+            if name in ('profile_correct', 'profile_observe', 'profile_review', 'conversation_import', 'profile_proposal_review', 'profile_model_propose', 'profile_habit_review', 'profile_plan_prepare', 'profile_outcome', 'profile_comparison_vote', 'profile_comparison_reveal'):
                 need(not profile['paused'], 'MEMORY_PAUSED', 'Resume memory before saving ordinary updates.')
             if name == 'profile_pause':
                 profile['paused'] = values['paused']
+            elif name == 'profile_comparison_vote':
+                details = vote_comparison(profile,values)
+                replayed = details.pop('replayed')
+            elif name == 'profile_comparison_reveal':
+                details = reveal_comparison(profile,values['comparison_id'])
+                replayed = details.pop('replayed')
+            elif name == 'profile_comparison_forget':
+                need(values['comparison_id'] in profile['response_comparisons'],'COMPARISON_MISSING','This comparison no longer exists.')
+                forget_comparisons(profile,[values['comparison_id']])
+                details = {'removed_comparison_ids':[values['comparison_id']]}
+                clear_managed_files(db,args)
             elif name == 'profile_habit_review':
                 from behavior_learning import discover_habits
                 candidate = next((c for c in discover_habits(profile, values['context'])['candidates'] if c['candidate_id'] == values['candidate_id']), None)
@@ -218,7 +250,12 @@ def dispatch(name, values, args):
                     content(raw[field], field, 1000 if field in ('statement', 'source_summary') else 200)
                 need(('dimension' in raw) == ('value' in raw), 'INVALID_DIMENSION', 'Supply both dimension and value, or neither.')
                 if 'dimension' in raw:
-                    typed_value(raw['dimension'], raw['value'])
+                    if raw['dimension'] == 'custom':
+                        content(raw['value'], 'value', 80)
+                    else:
+                        typed_value(raw['dimension'], raw['value'])
+                if 'conditions' in raw:
+                    normalize_conditions(raw['conditions'])
                 source, hashed, replayed = check_source(profile, raw['source_id'], raw)
                 if not replayed:
                     rule = {**raw, 'confirmed_at': stamp(), 'source_hash': source}
@@ -286,4 +323,4 @@ def dispatch(name, values, args):
 
 
 if __name__ == '__main__':
-    raise SystemExit(main('user_behavior_personalization', '0.6.0', TOOLS, dispatch))
+    raise SystemExit(main('user_behavior_personalization', '0.7.0', TOOLS, dispatch))

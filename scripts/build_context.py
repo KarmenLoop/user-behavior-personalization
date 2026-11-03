@@ -9,9 +9,12 @@ from pathlib import Path
 from host import load
 from host_support import Database, Problem, content, identifier, need
 from planning import response_plan
+from conditions import CONDITION_VALUES, normalize_conditions
 
 
 def add_plan_arguments(parser):
+    for key, values in CONDITION_VALUES.items():
+        parser.add_argument('--' + key.replace('_', '-'), choices=values)
     parser.add_argument('--override', action='append', default=[], metavar='DIMENSION=VALUE', help='Temporary preference for this task only; repeat for multiple dimensions.')
     parser.add_argument('--omit-rule', action='append', default=[], dest='omit_rule_ids', help='Leave a saved rule out of this task without deleting it.')
     parser.add_argument('--preference-budget', type=int, default=4000, dest='max_preference_chars', help='Maximum saved preference characters (200–12000).')
@@ -25,6 +28,7 @@ def parse_plan_arguments(args):
         need(key not in values, 'INVALID_OVERRIDES', 'Provide each override dimension once.')
         values[key] = value
     args.task_overrides = values
+    args.task_conditions = normalize_conditions({key: getattr(args, key) for key in CONDITION_VALUES if getattr(args, key, None) is not None})
 
 
 def context_payload(args, task):
@@ -35,6 +39,7 @@ def context_payload(args, task):
     try:
         plan = response_plan(load(db, args), args.context, task,
                              task_overrides=getattr(args, 'task_overrides', None),
+                             task_conditions=getattr(args, 'task_conditions', None),
                              omit_rule_ids=getattr(args, 'omit_rule_ids', None),
                              max_preference_chars=getattr(args, 'max_preference_chars', 4000))
     finally:
@@ -44,7 +49,7 @@ def context_payload(args, task):
                                 'rule_ids': [rule['id'] for rule in plan['selected']],
                                 'plan_id': plan['plan_id'], 'task_sha256': plan['task_sha256'],
                                 'rule_versions': {r['id']: r['version_fingerprint'] for r in plan['selected']},
-                                'task_overrides': plan['task_overrides'],
+                                'task_overrides': plan['task_overrides'], 'task_conditions': plan['task_conditions'],
                                 'judgment_policy': {key: plan['judgment_policy'][key] for key in ('version', 'fingerprint')}}}
 
 

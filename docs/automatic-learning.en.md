@@ -1,4 +1,4 @@
-# Automatic learning from a selected feed — v0.6.0
+# Automatic learning from a selected feed — v0.7.0
 
 [English](automatic-learning.en.md) · [中文](automatic-learning.zh-CN.md)
 

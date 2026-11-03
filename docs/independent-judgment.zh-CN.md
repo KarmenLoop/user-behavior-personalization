@@ -1,4 +1,4 @@
-# 个性化与独立判断 — v0.6.0
+# 个性化与独立判断 — v0.7.0
 
 [English](independent-judgment.en.md) · [中文](independent-judgment.zh-CN.md)
 

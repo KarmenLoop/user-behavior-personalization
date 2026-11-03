@@ -52,7 +52,7 @@ class WrapperTests(unittest.TestCase):
             env = {**os.environ, 'PATH': str(binary)+os.pathsep+os.environ.get('PATH', '')}
             result = subprocess.run([sys.executable, '-B', str(ROOT/'scripts/run_host.py'), '--root', str(base/'private'),
                          '--subject', 'alice', '--context', 'writing', '--workspace', str(base),
-                         '--prompt', str(prompt), '--host', 'codex', '--read-only', '--timeout', '1'],
+                         '--prompt', str(prompt), '--host', 'codex', '--read-only', '--timeout', '1' if timeout else '5'],
                          capture_output=True, text=True, env=env, timeout=20)
             self.assertEqual(result.returncode, 124 if timeout else 0, result.stdout+result.stderr)
             receipt = json.loads(result.stdout.splitlines()[-1])

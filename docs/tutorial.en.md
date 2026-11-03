@@ -1,4 +1,4 @@
-# Use the personalization workspace — v0.6.0
+# Use the personalization workspace — v0.7.0
 
 [English](tutorial.en.md) · [中文](tutorial.zh-CN.md)
 
@@ -6,7 +6,7 @@ The first useful result is visible: a repeated correction becomes a reviewed pre
 
 ## 1. Download and start
 
-Download the ZIP and `SHA256SUMS.txt` from [v0.5.1](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.6.0). Check the ZIP's SHA-256 before extraction: `shasum -a 256` on macOS, `sha256sum` on Linux, or `Get-FileHash -Algorithm SHA256` in PowerShell.
+Download the ZIP and `SHA256SUMS.txt` from [v0.7.0](https://github.com/KarmenLoop/user-behavior-personalization/releases/tag/v0.7.0). Check the ZIP's SHA-256 before extraction: `shasum -a 256` on macOS, `sha256sum` on Linux, or `Get-FileHash -Algorithm SHA256` in PowerShell.
 
 Use Python 3.11+ from the extracted directory:
 
@@ -28,9 +28,9 @@ Under **Patterns worth keeping**, inspect the candidate's source evidence and su
 
 A real import works the same way: select a conversation JSON file, or paste it, then choose **Import selected conversation**. Only authorized user messages become evidence. A direct statement such as “From now on, include rollback checks” appears as an explicit proposal; recurring correction cues use the separate multi-session habit review.
 
-![Actual workspace capture with synthetic evidence and task planning](images/workspace-v0.5.0.en.jpg)
+![Current workspace with synthetic sourced proposals](images/semantic-learning-v0.7.0.en.jpg)
 
-*This is a real local workspace capture. Any prompt comparison is not a generated model answer.*
+*Current v0.7.0 workspace with a separate synthetic client-draft example. Its model interpretation is still pending. The offline demonstration above requires no model account.*
 
 ## 3. See what changes for a task
 
@@ -42,9 +42,9 @@ Under **Just for this task**, choose a detailed response length and preview agai
 
 The resolver recognizes a small set of explicit instructions in task text, such as “keep it brief” or “explain in detail.” The controls let you correct those choices. It does not reliably interpret every indirect instruction or semantic conflict between free-text rules.
 
-![Actual task planning screen showing a temporary detailed-answer request and rule exclusion reasons](images/task-plan-v0.5.0.en.jpg)
+![Actual v0.7.0 model responses for a synthetic debugging task](images/actual-comparison-v0.7.0.en.jpg)
 
-*This separate synthetic code task keeps a code-first rule and overrides the brevity rule. The task-text instruction is visible, along with the selection reasons. Expand Prompt preview to inspect the composed text.*
+*Current v0.7.0 actual answers for a separate synthetic debugging task. This optional path uses an explicitly enabled model; prompt preview remains available offline. Follow the [semantic walkthrough](semantic-learning.en.md) for both paths.*
 
 ## 4. Record what helped
 
@@ -85,7 +85,7 @@ python3 scripts/host.py --root ../private-profile --subject owner \
   --workspace /path/to/project --enable-conversations --install-host codex install
 ```
 
-Use `--install-host cursor` for Cursor. Reload and approve the specific MCP server, then verify its [25 tools](tools.en.md). Configuration alone does not establish a successful model answer.
+Use `--install-host cursor` for Cursor. Reload and approve the specific MCP server, then verify its [30 tools](tools.en.md). Configuration alone does not establish a successful model answer.
 
 To build actual scoped messages without sending them:
 

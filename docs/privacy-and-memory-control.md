@@ -1,4 +1,4 @@
-# Privacy and memory control — v0.6.0
+# Privacy and memory control — v0.7.0
 
 [English](privacy-and-memory-control.md) · [中文](privacy-and-memory-control.zh-CN.md)
 
@@ -73,3 +73,12 @@ The selected JSONL file is outside the profile's controlled copy; deletion and r
 ## Explicit evaluation copies
 
 `evaluate_judgment.py` deliberately retains selected synthetic prompts, provider answers and logs in the external directory you choose. These files are separate from a user profile; profile forget/reset does not delete them. Inspect and remove that evaluation directory separately when it is no longer needed. Ordinary `run_host.py` receipts remain metadata only.
+
+
+## Optional semantic analysis and actual answers — v0.7.0
+
+Model calls are disabled by default. `--enable-models --model MODEL` enables explicit workspace actions. An analysis sends only the 1–20 checked excerpts and safe confirmed preferences in the current/global context to the signed-in Codex account. A comparison sends the task, conditions, temporary choices and selected confirmed preferences. Imports, refreshes and ordinary MCP reads do not trigger these calls. The provider may retain transmitted data under its own policy; pausing cannot retract a request already sent.
+
+Up to20 actual answer pairs are stored in the same subject-bound SQLite profile, along with model/client metadata, task hash, exact preference versions, randomized A/B identity and explicit feedback history. Raw tasks and private subprocess transport logs are not saved by these workflows. Answers can contain private task details even though the task itself is not retained. The normal profile export includes private comparisons, including while paused.
+
+Pause hides ordinary answer reads. Revision or pause changes discard in-flight results, with no partial pair saved. `profile_comparison_forget` removes both answers, execution metadata and feedback; forgetting a supporting source, rule or prepared plan also removes dependent pairs. Reset clears comparisons with the rest of the profile. Replay-suppression hashes remain. Local deletion does not remove provider copies or external exports.

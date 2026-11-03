@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0
+
+- Analyze selected conversation excerpts through an explicitly enabled Codex account. Keep exact source quotes and stage suggestions for review.
+- Apply confirmed preferences by task type, audience and stage through one resolver. Preserve conditions in corrections and abstain on tied typed conflicts.
+- Generate two actual responses with the same model and fixed evidence policy. Randomize A/B identity, persist reveal state, and record preference separately from reported correctness.
+- Keep private answers bounded and deletable with their source evidence. Cancel stale results after pause, deletion or profile changes; expose asynchronous local jobs without blocking profile controls.
+- Add bilingual workflows, current browser captures and synthetic provider receipts. Earlier lexical misses, provider failures and judgment results remain available.
+
 ## 0.6.0 — Real model checks and evidence scope
 
 - Restore CLI requests in the tested macOS proxy environment with an opt-in child-process proxy setting. Keep system configuration, authentication and TLS checks intact.

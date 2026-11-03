@@ -1,8 +1,8 @@
-# Host integration — v0.6.0
+# Host integration — v0.7.0
 
 [English](host-integration.md) · [中文](host-integration.zh-CN.md)
 
-The browser workspace, CLI, and MCP stdio share the same local adapter and [25 tools](tools.en.md). The subject and private root are bound when the process starts. A tool call cannot select another user.
+The browser workspace, CLI, and MCP stdio share the same local adapter and [30 tools](tools.en.md). The subject and private root are bound when the process starts. A tool call cannot select another user.
 
 ## Start with the local workspace
 
@@ -25,7 +25,7 @@ Reload the configured server in the host and inspect its tool list. Test reading
 
 Host instruction mechanisms remain separate. Codex discovers scoped `AGENTS.md` files; Cursor project rules use `.cursor/rules/*.mdc`. Installing this server does not rewrite those instructions or force a call every turn. See the official [Codex guide](https://developers.openai.com/codex/guides/agents-md) and [Cursor rules](https://cursor.com/docs/rules).
 
-Run the v0.5.1 scripts from the package you actually installed. An older copied skill or an MCP entry pointing to an older directory will keep using its old implementation. Install into a new directory, inspect and update the existing server entry to that path, then restart the workspace or reload the MCP server. The installer does not silently overwrite an existing copy or duplicate server. Check `--help` on that installed `build_context.py` or `run_host.py` for the temporary override options.
+Run the v0.7.0 scripts from the package you actually installed. An older copied skill or an MCP entry pointing to an older directory will keep using its old implementation. Install into a new directory, inspect and update the existing server entry to that path, then restart the workspace or reload the MCP server. The installer does not silently overwrite an existing copy or duplicate server. Check `--help` on that installed `build_context.py` or `run_host.py` for the temporary override options.
 
 ## Use one resolver for preview and execution
 
@@ -56,3 +56,12 @@ Daily schedules, account-history export, OS isolation, multi-device synchronizat
 ## Actual response checks
 
 [Model checks](model-checks.en.md) covers the optional `--system-proxy` child environment, reproducible Codex runs, and response-bound reviews. The evaluation path uses synthetic cases and retains raw outputs; normal task receipts still retain metadata only.
+
+
+## Opt into semantic learning and paired inference
+
+The [v0.7.0 workflow](semantic-learning.en.md) adds explicit model calls to the local workspace. Start it with `--enable-conversations --enable-models --model YOUR_MODEL`; the default command above remains offline. Use an authenticated compatible Codex CLI. `--system-proxy` opts into an existing fixed macOS loopback proxy for child processes only; `--model-timeout` bounds each call. On Windows, these optional model workflows require Python 3.12+ for cancellable nonblocking pipes; the offline adapter still supports 3.11+.
+
+For a task file, use `python3 scripts/model_workflows.py compare --root ../private-profile --subject owner --context writing --model YOUR_MODEL --task-file /path/to/task.txt --task-type writing --audience client --stage draft`. Add `--system-proxy` only when appropriate to the existing Mac setup. The same conditions can be supplied to `build_context.py` and `run_host.py`. Analyze selected stored source keys with the `learn` subcommand and `--enable-conversations --source-key MESSAGE_KEY`; all results remain pending for review.
+
+These actual calls use the configured Codex account. No native DeepSeek provider call or complete Cursor host session is claimed by this workspace path. Broader native host coverage remains a separate roadmap item.
