@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc"><title id="title">How feedback becomes a preference</title><desc id="desc">v0.3.0 architecture diagram · local storage · traceable evidence · user choice</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#52647d"/></marker></defs>
+<rect width="1200" height="760" rx="20" fill="#f5f7fa"/><rect width="1200" height="128" rx="20" fill="#171c25"/><rect y="100" width="1200" height="28" fill="#171c25"/>
+<g font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+<text x="42" y="57" font-size="30" font-weight="700" fill="#fff">How feedback becomes a preference</text>
+<text x="42" y="94" font-size="17" fill="#becadb">v0.3.0 architecture diagram · local storage · traceable evidence · user choice</text>
+<rect x="42" y="167" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="62" y="202" font-size="16" font-weight="700" fill="#50779c">01</text>
+<text x="62" y="237" font-size="21" font-weight="650" fill="#182638">Authorized feedback</text>
+<text x="62" y="273" font-size="16" fill="#3f5166">An explicit request or evaluation</text>
+<text x="62" y="299" font-size="16" fill="#3f5166">The host binds identity and source</text>
+<text x="62" y="325" font-size="16" fill="#3f5166">No inference from silence or quotes</text>
+<rect x="424" y="167" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="444" y="202" font-size="16" font-weight="700" fill="#50779c">02</text>
+<text x="444" y="237" font-size="21" font-weight="650" fill="#182638">Structured observations</text>
+<text x="444" y="273" font-size="16" fill="#3f5166">Context, dimension, support / oppose</text>
+<text x="444" y="299" font-size="16" fill="#3f5166">Latest evidence per session</text>
+<text x="444" y="325" font-size="16" fill="#3f5166">No full chats or psychological labels</text>
+<rect x="806" y="167" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="826" y="202" font-size="16" font-weight="700" fill="#50779c">03</text>
+<text x="826" y="237" font-size="21" font-weight="650" fill="#182638">Evidence review</text>
+<text x="826" y="273" font-size="16" fill="#3f5166">90-day window / 30-day half-life</text>
+<text x="826" y="299" font-size="16" fill="#3f5166">At least 3 supporting sessions</text>
+<text x="826" y="325" font-size="16" fill="#3f5166">Conflict or low evidence → abstain</text>
+<rect x="42" y="409" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="62" y="444" font-size="16" font-weight="700" fill="#50779c">06</text>
+<text x="62" y="479" font-size="21" font-weight="650" fill="#182638">The next task</text>
+<text x="62" y="515" font-size="16" fill="#3f5166">Recall rules for the matching context</text>
+<text x="62" y="541" font-size="16" fill="#3f5166">Current instructions take precedence</text>
+<text x="62" y="567" font-size="16" fill="#3f5166">Collect actual feedback again</text>
+<rect x="424" y="409" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="444" y="444" font-size="16" font-weight="700" fill="#50779c">05</text>
+<text x="444" y="479" font-size="21" font-weight="650" fill="#182638">Local confirmed profile</text>
+<text x="444" y="515" font-size="16" fill="#3f5166">Rules + sources + revision checks</text>
+<text x="444" y="541" font-size="16" fill="#3f5166">Codex / Cursor / request payload</text>
+<text x="444" y="567" font-size="16" fill="#3f5166">No additional execution authority</text>
+<rect x="806" y="409" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="826" y="444" font-size="16" font-weight="700" fill="#50779c">04</text>
+<text x="826" y="479" font-size="21" font-weight="650" fill="#182638">User reviews the candidate</text>
+<text x="826" y="515" font-size="16" fill="#3f5166">Inspect sources, age, counterevidence</text>
+<text x="826" y="541" font-size="16" fill="#3f5166">Accept to apply; reject to dismiss</text>
+<text x="826" y="567" font-size="16" fill="#3f5166">Support is not prediction accuracy</text>
+<path d="M394 262H420" fill="none" stroke="#52647d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M776 262H802" fill="none" stroke="#52647d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M982 359V405" fill="none" stroke="#52647d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M806 504H780" fill="none" stroke="#52647d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M424 504H398" fill="none" stroke="#52647d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="42" y="641" width="1116" height="58" rx="12" fill="#e4ecf5"/>
+<text x="63" y="677" font-size="20" font-weight="600" fill="#243d5b">Your controls: pause · inspect / export · forget evidence and derived rules · reset and pause</text>
+<text x="42" y="732" font-size="14" fill="#53657b">This diagram shows the workflow, not a UI screenshot. Suggestions do not execute actions; model behavior needs separate validation.</text>
+</g></svg>

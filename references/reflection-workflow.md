@@ -1,5 +1,8 @@
 # Reflection and Update Workflow
 
+> Portable host contract. These Markdown formats describe a host-managed workflow; the v0.3.0 SQLite adapter does not maintain these files or install a scheduler. For executable tools, use the [current tutorial](../docs/tutorial.en.md) / [中文教程](../docs/tutorial.zh-CN.md).
+
+
 Read this reference for a session-end review, daily reflection, next-session catch-up, or a recovery from an interrupted update.
 
 ## 1. Establish the Batch

@@ -1,5 +1,8 @@
 # Profile Format and Evidence
 
+> Portable host contract. These Markdown formats describe a host-managed workflow; the v0.3.0 SQLite adapter does not maintain these files or install a scheduler. For executable tools, use the [current tutorial](../docs/tutorial.en.md) / [中文教程](../docs/tutorial.zh-CN.md).
+
+
 Read this reference when creating a user guide, adding or correcting a preference, resolving a conflict, or inspecting a stored rule.
 
 ## Files and Authority

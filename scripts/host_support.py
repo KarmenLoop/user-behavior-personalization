@@ -3,7 +3,7 @@
 import sys
 if sys.version_info < (3, 11):
     raise SystemExit('The host adapter requires Python 3.11 or newer.')
-import argparse,datetime,hashlib,json,os,secrets,sqlite3,tempfile,tomllib
+import argparse,datetime,hashlib,json,os,secrets,sqlite3,tempfile,tomllib,shutil
 from pathlib import Path
 
 class Problem(ValueError):
@@ -23,13 +23,25 @@ def content(value,name='text',limit=4000):
     return value.strip()
 
 def atomic(path,value):
-    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    path=Path(path);need(not path.is_symlink(),'UNSAFE_PATH','Refusing a symbolic-link output.');path.parent.mkdir(parents=True,exist_ok=True)
     temporary=path.parent/('.'+path.name+'.'+secrets.token_hex(8)+'.tmp')
     try:
         with temporary.open('x',encoding='utf-8') as f:os.chmod(temporary,0o600);f.write(value);f.flush();os.fsync(f.fileno())
         os.replace(temporary,path)
     finally:
         if temporary.exists():temporary.unlink()
+
+def purge_subject_files(root,subject):
+    """Remove controlled exports and current subject-bound, metadata-only receipts."""
+    root=Path(root)
+    export=root/(identifier(subject)+'-profile-export.json')
+    need(not export.is_symlink(),'UNSAFE_PATH','Refusing a symbolic-link export.')
+    if export.exists():export.unlink()
+    runs=root/'host-runs'
+    need(not runs.is_symlink(),'UNSAFE_PATH','Refusing a symbolic-link receipt directory.')
+    owned=runs/hashlib.sha256(subject.encode()).hexdigest()
+    need(not owned.is_symlink(),'UNSAFE_PATH','Refusing a symbolic-link subject directory.')
+    if owned.is_dir():shutil.rmtree(owned)
 
 def under(root,value):
     root=Path(root).resolve();p=(root/value).resolve()
@@ -41,9 +53,24 @@ def file_record(root,value):
     need(p.stat().st_size<=8*1024*1024,'EVIDENCE_TOO_LARGE','Evidence exceeds 8 MiB.')
     raw=p.read_bytes();return {'path':p.relative_to(Path(root).resolve()).as_posix(),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
 
+def private_root(root):
+    requested=Path(root).expanduser()
+    need(not requested.is_symlink(),'UNSAFE_PATH','Use a private directory, not a symbolic link.')
+    result=requested.resolve()
+    package=Path(__file__).resolve().parents[1]
+    need(result!=package and package not in result.parents,'PRIVATE_ROOT_REQUIRED','Keep personal data outside the public package.')
+    need(result!=Path.home() and result!=Path(result.anchor),'PRIVATE_ROOT_REQUIRED','Choose a dedicated private subdirectory.')
+    need(not result.exists() or result.is_dir(),'PRIVATE_ROOT_REQUIRED','Choose a private directory.')
+    for name in ('host.sqlite','host.sqlite-wal','host.sqlite-shm','host.sqlite-journal'):
+        need(not (result/name).is_symlink(),'UNSAFE_PATH','Refusing a symbolic-link database file.')
+    return result
+
+
 class Database:
     def __init__(self,root):
-        self.root=Path(root).resolve();self.root.mkdir(parents=True,exist_ok=True,mode=0o700);os.chmod(self.root,0o700)
+        self.root=private_root(root)
+        self.root.mkdir(parents=True,exist_ok=True,mode=0o700)
+        os.chmod(self.root,0o700)
         self.db=sqlite3.connect(self.root/'host.sqlite',timeout=5,isolation_level=None);os.chmod(self.root/'host.sqlite',0o600)
         self.db.execute('PRAGMA journal_mode=WAL');self.db.execute('PRAGMA secure_delete=ON');self.db.execute('CREATE TABLE IF NOT EXISTS objects(key TEXT PRIMARY KEY,payload TEXT NOT NULL)')
         self.db.execute('CREATE TABLE IF NOT EXISTS events(seq INTEGER PRIMARY KEY,at TEXT NOT NULL,kind TEXT NOT NULL,payload TEXT NOT NULL)')
@@ -72,14 +99,16 @@ def validate(value,s):
     if typ=='array':
         need(len(value)<=s.get('maxItems',100),'INVALID_INPUT','Too many items.')
         for v in value:validate(v,s['items'])
-    if typ=='string':need(s.get('minLength',0)<=len(value)<=s.get('maxLength',100000),'INVALID_INPUT','Text is empty or too long.')
+    if typ=='string':need(s.get('minLength',0)<=len(value)<=s.get('maxLength',100000) and bool(value.strip()),'INVALID_INPUT','Text is empty or too long.')
     if typ=='integer':need(value>=s.get('minimum',0),'INVALID_INPUT','Integer is below the minimum.')
     if 'enum' in s:need(value in s['enum'],'INVALID_INPUT','Choose one of the listed values.')
 
 def install(args,name,script):
+    need(args.subject,'SUBJECT_REQUIRED','Bind --subject before installing a profile server.');identifier(args.subject)
     workspace=Path(args.workspace).resolve();need(workspace.is_dir(),'WORKSPACE_MISSING','Create the workspace first.')
-    argv=[str(script),'--root',str(Path(args.root).resolve()),'--workspace',str(workspace),'--host-id',args.install_host]
+    argv=[str(script),'--root',str(private_root(args.root)),'--workspace',str(workspace),'--host-id',args.install_host]
     if args.subject:argv+=['--subject',args.subject]
+    if getattr(args,'enable_observations',False):argv+=['--enable-observations']
     argv+=['mcp'];entry={'command':sys.executable,'args':argv}
     if args.install_host=='cursor':
         path=workspace/'.cursor/mcp.json';value=json.loads(path.read_text()) if path.exists() else {};value.setdefault('mcpServers',{})
@@ -121,6 +150,7 @@ def serve(name,version,tools,dispatch,args):
 def main(name,version,tools,dispatch):
     parser=argparse.ArgumentParser(description='Private local host adapter with CLI and MCP stdio entry points.')
     parser.add_argument('--root',required=True);parser.add_argument('--workspace',default='.');parser.add_argument('--host-id',default='local');parser.add_argument('--subject')
+    parser.add_argument('--enable-observations',action='store_true',help='Allow authorized structured user feedback to be recorded; disabled by default.')
     parser.add_argument('--install-host',choices=['codex','cursor']);parser.add_argument('command',choices=['call','mcp','install']);parser.add_argument('tool',nargs='?');parser.add_argument('--input',default='-')
     args=parser.parse_args()
     try:

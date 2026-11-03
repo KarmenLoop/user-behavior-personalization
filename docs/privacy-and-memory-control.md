@@ -1,59 +1,51 @@
-# Privacy and Memory Control
+# Privacy and memory control — v0.3.0
 
-Profiles describe how to assist a person. They are private user data, not public skill documentation or a source of extra execution authority.
+[English](privacy-and-memory-control.md) · [中文](privacy-and-memory-control.zh-CN.md)
 
-## Authorization and Minimum Necessary Data
+Profiles are private collaboration data. They do not authorize actions or reveal a person's inner state.
 
-Use only conversations available under the host's authorization. Make the memory setting visible and honor changes to it. Analyze the current user, not people mentioned in quoted material.
+## Collection and consent
 
-Store a compact preference with a source reference and minimal supporting excerpt or summary. Avoid full conversation copies when a short record is sufficient. Never store credentials, tokens, API keys, passwords, or unrelated private material in a guide.
+Observation is disabled unless the operator enables `--enable-observations`. The host must obtain the user's permission, bind the right subject, and pass only authorized feedback. A flag is a technical setting, not proof of legal consent. The adapter accepts bounded dimensions and values; it does not scrape conversations, monitor a screen, read keystrokes, or collect browsing history.
 
-Do not infer sensitive attributes or health diagnoses from language, mood, habits, or interests. If a user explicitly requests storing a necessary sensitive fact, follow the host's authorization and retention rules and minimize its scope.
+Do not create evidence from assistant messages, third-party quotes, silence, inferred mood, or fabricated sessions. Do not infer health diagnoses or sensitive identity attributes. Never put credentials or unrelated private text in source IDs, contexts, rule statements, or summaries. Structured fields reduce unnecessary storage but do not make user-provided strings harmless.
 
-## Storage and Exposure
+## Storage and host exposure
 
-Place live memory outside the public repository. The repository's `.gitignore` patterns are a fallback, not an access-control system or a complete secret scanner.
+Keep `--root` outside public repositories. Local files use restricted modes where the OS supports them; Windows permissions still require appropriate account and ACL configuration. SQLite is not an encryption layer. A shared local account can access files that account can read; subject namespaces are not a substitute for OS isolation.
 
-Filesystem permissions, encryption, backups, model-provider retention, and synchronized copies are the host operator's responsibilities. The skill does not independently guarantee them. Use synthetic fixtures in public reports and evaluations.
+`profile_read` supplies selected confirmed rules to the host. A remote model may receive those rules and the task under the host/provider's own network and retention policy. `build_context.py` sends nothing, but its stdout contains private request content if you redirect it. Review the destination before sending anything.
 
-## Inspection and Correction
+The v0.3.0 wrapper streams model output to the terminal and retains metadata receipts. It does not persist prompt or raw output files. Terminal capture, host logs, external exports, provider history, and backups remain separate copies. v0.2.0 `host-runs` directories can contain unbound raw output; review and remove those manually after checking ownership and any records you need to keep.
 
-For "What do you remember about me?", show the actual saved guide, distinguishing confirmed rules, tentative patterns, temporary instructions, and explicit background facts.
+## Inspect and correct
 
-For a correction, change the current behavior immediately. Persist through the supported update mechanism, remove the incompatible active rule, and report whether the write actually succeeded.
+Use `profile_export` to inspect the actual profile, including while paused. Use `profile_insights` to distinguish observations and candidates from confirmed rules. It is better to say “three sessions support this style in code review” than to assign a personality label.
 
-## Pause and Disable
+A correction uses the current revision and a new genuine source. Explicit instructions outrank inferred preferences. A free-text rule without structured dimensions may still need manual conflict review; no semantic diagnosis is performed.
 
-For "Stop analyzing my habits" or "Stop remembering my preferences", determine the requested scope. Disable ordinary analysis and profile access for that scope through the host's supported controls. Do not silently continue writing daily observations.
+## Pause
 
-An explicitly requested export or deletion can still be performed as an authorized memory-maintenance operation. Disabling ordinary personalization does not require denying the user control of their stored data.
+`profile_pause` stops ordinary recall, observations, and candidate adoption. Export and deletion remain available. Pause does not delete saved content; reset and forget are separate operations. Removing the observation flag prevents future collection but does not itself erase older observations.
 
-## Forgetting and Deletion
+## Delete and prevent replay
 
-Apply a forget request to all controlled copies containing the affected content:
+| Operation | Controlled content removed |
+|---|---|
+| `profile_forget` | Selected rule and history, linked learned evidence, managed export, and subject receipts. For a typed rule, evidence in that context/dimension is removed so an older same-session observation cannot recreate it; a global typed rule covers that dimension across contexts. |
+| `profile_forget_observations` | Selected observations and dependent learned rules/history; affected learned context/dimension evidence is cleared as part of preventing resurrection. |
+| `profile_reset` | Profile content and managed artifacts; the resulting profile is paused. |
 
-- The current guide.
-- Previous profile versions.
-- Reflection records and exported copies under the host's control.
-- Search indexes or caches maintained by an adapter.
-- Synchronized replicas where the host supports propagation.
+The adapter retains minimal source hashes to suppress replay. These markers are still user-associated metadata; they are not the forgotten text and are not an anonymization guarantee. Do not re-import a forgotten source under a new ID. If you need to remove the entire data root, stop all writers and decide how your host will prevent old histories being ingested again.
 
-Do not reconstruct a deleted preference by replaying an older conversation. Where supported and permitted, retain only the minimum content-free source or record identifiers needed to suppress that replay. Such markers are still subject to the user's deletion requirements and the host's retention policy.
+Deletion does not promise physical SSD erasure or deletion from external copies. It cannot erase a provider's conversation, a screenshot someone took, a copied export, or an unrelated backup it never controlled.
 
-If the user requests deletion of all memory, explain any supported choice between retaining a minimal suppression marker and disabling future analysis of the old source range. Do not retain the forgotten fact inside a tombstone.
+## Shared and synchronized use
 
-Original chat records, provider logs, or backups may be outside this skill's control. State exactly which stores were changed and which remain subject to other systems. Do not promise deletion from systems that were not actually accessed.
+A common machine can share a store only with appropriate filesystem permissions and a trusted mapping for each subject. A group chat may use a style preference without disclosing its private source; the host must decide what is appropriate. Similar names do not prove two accounts belong to the same person. This release supplies no cross-device synchronization service.
 
-## Export
+Use profiles to reduce friction, preserve factual disagreement, and support the user's choices. Do not use them to exploit vulnerability, encourage dependency, or hide consequential decisions.
 
-Export only data owned by the requesting user and within their access scope. Include clear evidence categories and timestamps. Avoid including third-party private source text simply because a preference references it.
+## Local process visibility
 
-## Shared Conversations
-
-The host determines whether a private preference can be used in a group. It separately determines whether its source evidence may be disclosed. A response can adopt a preferred concise style without telling the group what the user said in a private chat.
-
-Cross-device or cross-channel use requires verified identity and an explicit storage or sharing policy. The skill does not link accounts based on similar names.
-
-## Limits of Personalization
-
-Use personalization to improve collaboration. Preserve factual accuracy and the ability to disagree with a claim when evidence warrants it. Do not use the profile to pressure the user, exploit vulnerabilities, create emotional dependence, or hide consequential choices.
+Codex receives the composed prompt on stdin. The current Cursor CLI path accepts it as a positional argument, so other tools running as the same local user may be able to inspect it in process arguments. Use the MCP path or an appropriate local account boundary when that exposure is unacceptable. Streaming output can still be captured by your terminal or host; metadata-only adapter receipts do not erase those separate copies.

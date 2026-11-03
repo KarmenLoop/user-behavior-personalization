@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc"><title id="title">偏好怎样从反馈中形成</title><desc id="desc">v0.3.0 架构图 · 本地存储 · 有据可查 · 用户决定</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#52647d"/></marker></defs>
+<rect width="1200" height="760" rx="20" fill="#f5f7fa"/><rect width="1200" height="128" rx="20" fill="#171c25"/><rect y="100" width="1200" height="28" fill="#171c25"/>
+<g font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+<text x="42" y="57" font-size="30" font-weight="700" fill="#fff">偏好怎样从反馈中形成</text>
+<text x="42" y="94" font-size="17" fill="#becadb">v0.3.0 架构图 · 本地存储 · 有据可查 · 用户决定</text>
+<rect x="42" y="167" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="62" y="202" font-size="16" font-weight="700" fill="#50779c">01</text>
+<text x="62" y="237" font-size="21" font-weight="650" fill="#182638">已授权的反馈</text>
+<text x="62" y="273" font-size="16" fill="#3f5166">用户明确请求或评价</text>
+<text x="62" y="299" font-size="16" fill="#3f5166">宿主绑定身份和来源</text>
+<text x="62" y="325" font-size="16" fill="#3f5166">不采集旁人的话或沉默</text>
+<rect x="424" y="167" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="444" y="202" font-size="16" font-weight="700" fill="#50779c">02</text>
+<text x="444" y="237" font-size="21" font-weight="650" fill="#182638">结构化观察</text>
+<text x="444" y="273" font-size="16" fill="#3f5166">场景、维度、支持或反对</text>
+<text x="444" y="299" font-size="16" fill="#3f5166">同一会话只取最新一条</text>
+<text x="444" y="325" font-size="16" fill="#3f5166">不保存完整聊天或心理标签</text>
+<rect x="806" y="167" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="826" y="202" font-size="16" font-weight="700" fill="#50779c">03</text>
+<text x="826" y="237" font-size="21" font-weight="650" fill="#182638">证据审查</text>
+<text x="826" y="273" font-size="16" fill="#3f5166">90 天窗口 / 30 天半衰期</text>
+<text x="826" y="299" font-size="16" fill="#3f5166">至少 3 个支持会话</text>
+<text x="826" y="325" font-size="16" fill="#3f5166">冲突或不足 → 暂不判断</text>
+<rect x="42" y="409" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="62" y="444" font-size="16" font-weight="700" fill="#50779c">06</text>
+<text x="62" y="479" font-size="21" font-weight="650" fill="#182638">下一次任务</text>
+<text x="62" y="515" font-size="16" fill="#3f5166">只检索相符场景的规则</text>
+<text x="62" y="541" font-size="16" fill="#3f5166">当前要求优先于旧偏好</text>
+<text x="62" y="567" font-size="16" fill="#3f5166">记录新的真实反馈</text>
+<rect x="424" y="409" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="444" y="444" font-size="16" font-weight="700" fill="#50779c">05</text>
+<text x="444" y="479" font-size="21" font-weight="650" fill="#182638">本地确认档案</text>
+<text x="444" y="515" font-size="16" fill="#3f5166">明确规则 + 来源 + 版本</text>
+<text x="444" y="541" font-size="16" fill="#3f5166">Codex / Cursor / 请求内容</text>
+<text x="444" y="567" font-size="16" fill="#3f5166">不会扩大执行权限</text>
+<rect x="806" y="409" width="352" height="192" rx="14" fill="#fff" stroke="#c8d1de"/>
+<text x="826" y="444" font-size="16" font-weight="700" fill="#50779c">04</text>
+<text x="826" y="479" font-size="21" font-weight="650" fill="#182638">用户审查候选</text>
+<text x="826" y="515" font-size="16" fill="#3f5166">看到来源、时间和反对证据</text>
+<text x="826" y="541" font-size="16" fill="#3f5166">接受才生效；拒绝可撤回</text>
+<text x="826" y="567" font-size="16" fill="#3f5166">支持度不是预测准确率</text>
+<path d="M394 262H420" fill="none" stroke="#52647d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M776 262H802" fill="none" stroke="#52647d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M982 359V405" fill="none" stroke="#52647d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M806 504H780" fill="none" stroke="#52647d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M424 504H398" fill="none" stroke="#52647d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="42" y="641" width="1116" height="58" rx="12" fill="#e4ecf5"/>
+<text x="63" y="677" font-size="20" font-weight="600" fill="#243d5b">随时控制：暂停 · 查看 / 导出 · 删除观察与派生规则 · 重置并暂停</text>
+<text x="42" y="732" font-size="14" fill="#53657b">图示说明流程，不是界面截图。下一步建议不会自行执行，模型效果需另行验收。</text>
+</g></svg>

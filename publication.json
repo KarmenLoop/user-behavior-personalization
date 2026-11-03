@@ -1,17 +1,41 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "documents": [
     "README.md",
     "README.zh-CN.md",
+    "docs/architecture.md",
+    "docs/architecture.zh-CN.md",
+    "docs/evaluation.md",
+    "docs/evaluation.zh-CN.md",
+    "docs/faq.en.md",
+    "docs/faq.zh-CN.md",
+    "docs/host-integration.md",
+    "docs/host-integration.zh-CN.md",
+    "docs/privacy-and-memory-control.md",
+    "docs/privacy-and-memory-control.zh-CN.md",
+    "docs/quickstart.md",
+    "docs/quickstart.zh-CN.md",
+    "docs/research.en.md",
+    "docs/research.zh-CN.md",
     "docs/tutorial.en.md",
     "docs/tutorial.zh-CN.md"
   ],
   "media_files": {
+    "docs/images/learning-loop-v0.3.0.en.svg": "3f6d0390d61cd97f973c30a9ea248c787efb3bb64c940cb3cb274050d0fbb985",
+    "docs/images/learning-loop-v0.3.0.zh-CN.svg": "81de24cb630a50b7ba030dda7f9025158f380f86414e3ced4b5dd49fbfa323b3",
+    "docs/images/workflow-v0.1.1.svg": "4a3f2b45afd64cee03e2f019ba7122c02586f5829b430f04a4c2b0bfb902236e",
     "docs/images/workflow-v0.2.0.svg": "e80c958e605a2b652c409d470d26bd6d5ce682af2dee0766d15ed82cf20e75b5"
   },
   "source_files": {
-    "scripts/host_support.py": "9930321db57fb3427bd98e65d44a920bc8634046b125e7fc0f117ccfb7c1a36e",
-    "scripts/host.py": "65bef078caa374d5af864b446f134a6dcc29452ee4156e703195186d335dbcd2",
-    "scripts/run_host.py": "8c9b9d02dbfc6da213067c244f2dc11c70d9c67840d9b8172127578be130facf"
+    "scripts/build_context.py": "9e2e3f9892b2b0bba14c752d53bc2d262527089ab8cf446d43684bdeae571df7",
+    "scripts/check_package.py": "df74392c0e98a5f89682ceab1c6726405b4830bbdcbf8f5c8f0eb1d5d8a690b7",
+    "scripts/check_publication.py": "1cc01268fd8e82785b5513e3b2e82383f7d73c18ce433aa121d8cb45461ba5ea",
+    "scripts/demo_learning.py": "2d6a54f87bcf8090e11c454afee4eca8ecfba21a295787c9e1c0aabb125c829c",
+    "scripts/host.py": "910b14912e6c19ae167515aff1b8030b3c9b2cc5bd21188c38a2f95676ec1684",
+    "scripts/host_support.py": "2b32715061da85c983e2b25ef906baf14171653855638b8e951305f785c9ba3f",
+    "scripts/install_skill.py": "0c16d13fd6e8cddf93fdeff2b0fbf5bf0be871f543f546e9463b730e404c557d",
+    "scripts/learning.py": "b35aaba7bea5bbcbfaf8156861868216969d3a6a1dab13d644cecdd7cb38daae",
+    "scripts/package_release.py": "7469dca90c3ae1dfba71a33eac5efef0b3f1ca0a5f71be13f28b1f763d2bf83c",
+    "scripts/run_host.py": "dc2da909c2dc26b0c81a4e2218a837004b787218aabecf9f9f895729bdb9a967"
   }
 }
